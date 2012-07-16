@@ -223,8 +223,10 @@ article{padding: 0.2em;}
 header h1, header p {margin-left: 0.5%; float:left; clear:left;}
 header h1 {margin-bottom: 0;}
 header h1 img {margin-right:0.2em;}
-header a#blogLink {color:#333; font-size:1.5em; padding:1em; background-color:#63b9d4; font-weight: bold; border-left: 1em solid #111; float:right; margin: 2% 2% 0 0;}
-header a#blogLink:hover {background:#eee;}
+#blogLink {color:#333; font-size:1.5em; padding:1em; background-color:#63b9d4; font-weight: bold; border-left: 1em solid #111; float:right; margin: 2% 2% 0 0;}
+#blogLink:hover {background:#eee;}
+.new {text-align: center; display: block; font-style:italic; font-size: 0.7em;}
+
 
 /* Portrait */
 img#CotyBeasleyPortrait {width:50%; float:right;}
@@ -288,11 +290,13 @@ footer span{margin:1em 0.5% 0.5em 0;}
 
 @media only screen and (max-width: 768px) {
   /* Style adjustments for viewports 768px and under go here */
+  header h1, header p {float:none;}
 	img#CotyBeasleyPortrait {width:100%; float:none; display:block;}
 	#navWrap {margin-top:1%; float:none; display:block; width:100%;}
 	header, footer{text-align:center;}
 	footer{background:#000;}
   .title{text-align:center!important;}
+  #blogLink {float: none; margin: 0 0 0.2em; display: block; border:none;}
 }
 
 @media only screen and (max-width: 480px) {
