@@ -1,22 +1,62 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,400,300,700);
+/* Font Stacks */
+/* Global Variables / Definitions */
+/* Colors */
+/* Global Styles */
+body {
+  font: 16px "Roboto", Helvetica, sans-serif;
+  color: #111111;
+  letter-spacing: 0.1em;
+  font-weight: 300;
+  background: #e4cfa2 url("../img/bkTile.png") fixed; }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto", Helvetica, sans-serif;
+  font-weight: 300; }
 
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
+/* General Container Styles */
+.container {
+  min-width: 250px; }
 
+.contentBlock {
+  padding: 2em 1em;
+  margin: 1em 0; }
 
+/* Section Styles */
+header {
+  background: #f8e3b6 url("../img/hero_face2.jpg") no-repeat left center;
+  color: primary-color; }
+  header h1, header p {
+    background-color: rgba(248, 227, 182, 0.75);
+    padding: 0.25em;
+    opacity: 1; }
+  header h1 {
+    font-size: 4em; }
+  header p {
+    font-size: 1.25em; }
+  header .container {
+    padding-top: 25%;
+    padding-bottom: 25%; }
 
+@media (max-width: 800px) {
+  header {
+    background-size: cover; } }
+.contentBlocks {
+  margin-top: 1em; }
+  .contentBlocks .contentBlock {
+    color: #cccccc;
+    font-weight: 100;
+    background: #0a0a0a;
+    /* The Fallback */
+    background: rgba(10, 10, 10, 0.6);
+    overflow: hidden; }
+    .contentBlocks .contentBlock p {
+      font-size: 2.5em; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.externalLinks {
+  color: #cccccc;
+  background: #111111;
+  padding-bottom: 0.25em; }
+  .externalLinks a {
+    color: #cccccc;
+    margin-top: 0.25em; }
