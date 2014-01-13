@@ -5,16 +5,21 @@
 /* Global Styles */
 body {
   font: 16px "Roboto", Helvetica, sans-serif;
-  color: #111111;
+  color: #00003c;
   letter-spacing: 0.1em;
   font-weight: 300;
-  background: #e4cfa2 url("../img/bkTile.png") fixed; }
+  background: #0a0a1e url("../img/bkTile-site.png") fixed; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", Helvetica, sans-serif;
   font-weight: 300; }
 
 /* General Container Styles */
+.sheet-global {
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #e4cfa2 url("../img/bkTile.png") fixed; }
+
 .container {
   min-width: 250px; }
 
@@ -25,15 +30,16 @@ h1, h2, h3, h4, h5, h6 {
 /* Section Styles */
 header {
   background: #f8e3b6 url("../img/hero_face2.jpg") no-repeat left center;
-  color: primary-color; }
+  color: #00003c; }
   header h1, header p {
-    background-color: rgba(248, 227, 182, 0.75);
-    padding: 0.25em;
+    background-color: rgba(191, 214, 175, 0.75);
+    padding: 0.1em 0.25em;
     opacity: 1; }
   header h1 {
     font-size: 4em; }
   header p {
-    font-size: 1.25em; }
+    font-size: 1.25em;
+    font-weight: 400; }
   header .container {
     padding-top: 25%;
     padding-bottom: 25%; }
@@ -44,19 +50,17 @@ header {
 .contentBlocks {
   margin-top: 1em; }
   .contentBlocks .contentBlock {
-    color: #cccccc;
+    color: #f0f0f0;
     font-weight: 100;
-    background: #0a0a0a;
-    /* The Fallback */
-    background: rgba(10, 10, 10, 0.6);
+    background: rgba(0, 0, 60, 0.95);
     overflow: hidden; }
     .contentBlocks .contentBlock p {
       font-size: 2.5em; }
 
 .externalLinks {
-  color: #cccccc;
-  background: #111111;
+  color: #f0f0f0;
+  background: #00003c;
   padding-bottom: 0.25em; }
   .externalLinks a {
-    color: #cccccc;
+    color: #f0f0f0;
     margin-top: 0.25em; }
