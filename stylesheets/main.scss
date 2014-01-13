@@ -16,6 +16,7 @@ $font-stack: 'Roboto', Helvetica, sans-serif;
 /* Colors */
 $color-offBlack: rgb(10, 10, 30);
 $color-offWhite: rgb(240, 240, 240);
+$color-offWhite-bg: rgba(240, 240, 240, 0.5);
 $color-sepia: rgb(248, 227, 182);
 $color-sepia-darker: rgb(228, 207, 162);
 $color-sepia-bg: rgba(248, 227, 182, 0.75);
@@ -61,11 +62,11 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Section Styles */
 header{ 
-  background: $color-sepia url('../img/hero_face2.jpg') no-repeat left center;
+  background: $color-sepia url('../img/hero_face4.jpg') no-repeat left center;
   color: $color-navy;
-  h1, p { background-color: $color-seafoam-bg; padding: 0.1em 0.25em; opacity: 1;}
+  h1, p { background-color: $color-offWhite-bg; padding: 0.1em 0.25em; opacity: 1;}
   h1{ font-size: 4em; }
-  p { font-size: 1.25em; font-weight: 400; }
+  p { font-size: 1.25em; font-weight: 300; }
   .container {
     padding-top: 25%;
     padding-bottom: 25%;

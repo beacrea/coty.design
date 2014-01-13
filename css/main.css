@@ -29,17 +29,17 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Section Styles */
 header {
-  background: #f8e3b6 url("../img/hero_face2.jpg") no-repeat left center;
+  background: #f8e3b6 url("../img/hero_face4.jpg") no-repeat left center;
   color: #00003c; }
   header h1, header p {
-    background-color: rgba(191, 214, 175, 0.75);
+    background-color: rgba(240, 240, 240, 0.5);
     padding: 0.1em 0.25em;
     opacity: 1; }
   header h1 {
     font-size: 4em; }
   header p {
     font-size: 1.25em;
-    font-weight: 400; }
+    font-weight: 300; }
   header .container {
     padding-top: 25%;
     padding-bottom: 25%; }
