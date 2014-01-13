@@ -1,0 +1,90 @@
+/* Font Stacks */
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,400,300,700);
+
+
+
+
+
+/* Global Variables / Definitions */
+$font-stack: 'Roboto', Helvetica, sans-serif;
+
+
+
+
+
+
+/* Colors */
+$primary-color: #111;
+$secondary-color: #ccc;
+$color-sepia: rgb(248, 227, 182);
+$color-sepia-darker: rgb(228, 207, 162);
+$color-sepia-bg: rgba(248, 227, 182, 0.75);
+
+
+
+
+
+
+/* Global Styles */
+body {
+  font: 16px $font-stack;
+  color: $primary-color;
+  letter-spacing: 0.1em;
+  font-weight: 300;
+  background: $color-sepia-darker url('../img/bkTile.png') fixed;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-stack;
+  font-weight: 300;
+}
+
+
+
+
+
+
+/* General Container Styles */
+.container { min-width: 250px; }
+.contentBlock{ padding: 2em 1em; margin: 1em 0; }
+
+
+
+
+
+/* Section Styles */
+header{ 
+  background: $color-sepia url('../img/hero_face2.jpg') no-repeat left center;
+  color: primary-color;
+  h1, p { background-color: $color-sepia-bg; padding: 0.25em; opacity: 1;}
+  h1{ font-size: 4em; }
+  p { font-size: 1.25em; }
+  .container {
+    padding-top: 25%;
+    padding-bottom: 25%;
+  }
+}
+@media (max-width: 800px) {
+  header {
+    background-size: cover;
+  }
+}
+.contentBlocks { 
+  margin-top: 1em;
+  .contentBlock{
+    color: $secondary-color;
+    font-weight: 100;
+    background: rgb(10, 10, 10); /* The Fallback */
+    background: rgba(10, 10, 10, 0.60);
+    overflow: hidden;
+    p { font-size: 2.5em; }
+  }
+}
+.externalLinks {
+  color: $secondary-color;
+  background: $primary-color;
+  padding-bottom: 0.25em;
+  a {
+    color: $secondary-color;
+    margin-top: 0.25em;
+  }
+}
