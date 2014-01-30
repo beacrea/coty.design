@@ -35,7 +35,7 @@ body {
     color: $color-navy;
     letter-spacing: 0.1em;
     font-weight: 300;
-    background: $color-offBlack url('../img/bkTile-site.png') fixed;
+    background: #eaeaea;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: $font-stack;
@@ -52,6 +52,7 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 1400px;
     margin: 0 auto;
     background: $color-sepia-darker url('../img/bkTile.png') fixed;
+    box-shadow: 0 0 20px $color-offBlack;
 }
 .container { min-width: 250px; }
 .contentBlock{ padding: 2em 1em; margin: 1em 0; }
