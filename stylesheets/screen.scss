@@ -34,6 +34,11 @@
   @return #{$pixels/$context}em
 }
 
+@mixin background-opacity($color, $opacity: 0.3) {
+    background: $color; /* The Fallback */
+    background: rgba($color, $opacity);
+}
+
 
 
 
@@ -61,12 +66,13 @@ $font-stack: 'Roboto', Helvetica, sans-serif;
 $color-offBlack: rgb(10, 10, 30);
 $color-offWhite: rgb(240, 240, 240);
 $color-offWhite-bg: rgba(240, 240, 240, 0.5);
+$color-gainsboro: rgb(20,220,220); 
 $color-sepia: rgb(248, 227, 182);
 $color-sepia-darker: rgb(228, 207, 162);
 $color-sepia-bg: rgba(248, 227, 182, 0.75);
 $color-seafoam-bg: rgba(191, 214, 175, 0.75);
 $color-navy: rgb(0, 0, 60);
-$color-navy-bg: rgba(0, 0, 60, 0.95);
+$color-navy-bg: rgba(0, 0, 60, 0.6);
 
 
 
@@ -104,7 +110,7 @@ h1, h2, h3, h4, h5, h6 {
 .sheet-global {
     max-width: 1280px;
     margin: 0 auto;
-    background: $color-sepia-darker url('../img/bkTile.png') fixed;
+    background: $color-gainsboro url('../img/bkTile.png') fixed;
     box-shadow: 0 0 4px darken($color-offWhite, 40%);
 }
 .container { min-width: 250px; }
@@ -132,7 +138,7 @@ header {
     padding-bottom: 25%;
   }
 }
-@media (max-width: 800px) {
+@media (max-width: em(800)) {
   header {
     background-size: cover;
   }
@@ -140,11 +146,17 @@ header {
 .contentBlocks { 
 	padding: 8em 0;
  	.contentBlock{
-    	color: $color-offWhite;
+    	color: $color-offBlack;
     	font-weight: 100;
-    	background: $color-navy-bg;
+    	border: 1px solid darken($color-offBlack, 10%);
     	overflow: hidden;
     	p { font-size: 2.5em; }
+      &:hover {
+        cursor: pointer;
+        background-color: $color-offWhite;
+        color: $color-offBlack;
+
+      }
   }
 }
 .externalLinks {
@@ -186,7 +198,7 @@ footer {
 	padding: 1em;
 	font-size: 0.75em;
 	color: darken($color-offWhite, 30%);
-	background-color: darken($color-navy-bg, 6%); }
+	background-color: darken($color-navy, 6%); }
 
 
 
