@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,400,300,700);
 /* Welcome to Compass.
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
@@ -7,7 +8,6 @@
  *  $_Font Stacks
  * -------------------------------------------
  */
-@import url(http://fonts.googleapis.com/css?family=Roboto:100,400,300,700);
 /*
  * -------------------------------------------
  *  $_Mixins
@@ -30,7 +30,7 @@
  *  $_Global Styles
  * -------------------------------------------
  */
-/* line 88, ../stylesheets/screen.scss */
+/* line 121, ../stylesheets/screen.scss */
 body {
   font: 16px "Roboto", Helvetica, sans-serif;
   color: #00003c;
@@ -39,7 +39,7 @@ body {
   background: #e1e1d5;
 }
 
-/* line 95, ../stylesheets/screen.scss */
+/* line 128, ../stylesheets/screen.scss */
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", Helvetica, sans-serif;
   font-weight: 300;
@@ -50,7 +50,7 @@ h1, h2, h3, h4, h5, h6 {
  *  $_General Containers
  * -------------------------------------------
  */
-/* line 111, ../stylesheets/screen.scss */
+/* line 144, ../stylesheets/screen.scss */
 .sheet-global {
   max-width: 1280px;
   margin: 0 auto;
@@ -58,12 +58,12 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0 4px #8a8a8a;
 }
 
-/* line 117, ../stylesheets/screen.scss */
+/* line 150, ../stylesheets/screen.scss */
 .container {
   min-width: 250px;
 }
 
-/* line 118, ../stylesheets/screen.scss */
+/* line 151, ../stylesheets/screen.scss */
 .contentBlock {
   padding: 1em;
   margin: 1em 0;
@@ -74,44 +74,44 @@ h1, h2, h3, h4, h5, h6 {
  *  $_Section Styles
  * -------------------------------------------
  */
-/* line 130, ../stylesheets/screen.scss */
+/* line 163, ../stylesheets/screen.scss */
 header {
   background: floralwhite url("../img/hero_face4.jpg") no-repeat left center;
   color: #00003c;
   max-height: 645px;
 }
-/* line 134, ../stylesheets/screen.scss */
+/* line 167, ../stylesheets/screen.scss */
 header h1, header p {
   background-color: rgba(240, 240, 240, 0.5);
   padding: 0.1em 0.25em;
   opacity: 1;
 }
-/* line 135, ../stylesheets/screen.scss */
+/* line 168, ../stylesheets/screen.scss */
 header h1 {
   font-size: 4em;
 }
-/* line 136, ../stylesheets/screen.scss */
+/* line 169, ../stylesheets/screen.scss */
 header p {
   font-size: 1.25em;
   font-weight: 300;
 }
-/* line 137, ../stylesheets/screen.scss */
+/* line 170, ../stylesheets/screen.scss */
 header .container {
   padding-top: 25%;
   padding-bottom: 25%;
 }
 
 @media (max-width: 50em) {
-  /* line 143, ../stylesheets/screen.scss */
+  /* line 176, ../stylesheets/screen.scss */
   header {
     background-size: cover;
   }
 }
-/* line 147, ../stylesheets/screen.scss */
+/* line 180, ../stylesheets/screen.scss */
 .contentBlocks {
   padding: 5em 0;
 }
-/* line 149, ../stylesheets/screen.scss */
+/* line 182, ../stylesheets/screen.scss */
 .contentBlocks .contentBlock {
   color: #0a0a1e;
   font-weight: 100;
@@ -121,11 +121,11 @@ header .container {
   overflow: hidden;
   border-radius: 0.25em;
 }
-/* line 157, ../stylesheets/screen.scss */
+/* line 190, ../stylesheets/screen.scss */
 .contentBlocks .contentBlock p {
   font-size: 2.5em;
 }
-/* line 158, ../stylesheets/screen.scss */
+/* line 191, ../stylesheets/screen.scss */
 .contentBlocks .contentBlock:hover {
   cursor: pointer;
   background-color: #00003c;
@@ -133,72 +133,81 @@ header .container {
   border-bottom-width: 4px;
   border-left-width: 1px;
   color: #f0f0f0;
+  -moz-transition: border-width 0.5s ease, background-color 0.25s ease;
+  -o-transition: border-width 0.5s ease, background-color 0.25s ease;
   -webkit-transition: border-width 0.5s ease, background-color 0.25s ease;
+  transition: border-width 0.5s ease, background-color 0.25s ease;
 }
-/* line 166, ../stylesheets/screen.scss */
+/* line 199, ../stylesheets/screen.scss */
 .contentBlocks .contentBlock:hover p {
   margin-left: 0.5em;
+  -moz-transition: margin 0.5s ease;
+  -o-transition: margin 0.5s ease;
   -webkit-transition: margin 0.5s ease;
+  transition: margin 0.5s ease;
 }
 
-/* line 173, ../stylesheets/screen.scss */
+/* line 206, ../stylesheets/screen.scss */
 .externalLinks {
   color: #f0f0f0;
   background: #000028;
 }
-/* line 176, ../stylesheets/screen.scss */
+/* line 209, ../stylesheets/screen.scss */
 .externalLinks a {
   color: #f0f0f0;
   padding: 0.5em 0;
   overflow: visible;
   text-align: center;
 }
-/* line 181, ../stylesheets/screen.scss */
+/* line 214, ../stylesheets/screen.scss */
 .externalLinks a:hover {
   text-decoration: none;
   font-weight: 400;
   letter-spacing: 0.25em;
   background-position-y: 30%;
   background-position-x: 20%;
+  -moz-transition: background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease;
+  -o-transition: background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease;
   -webkit-transition: background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease;
+  transition: background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease;
 }
-/* line 190, ../stylesheets/screen.scss */
+/* line 223, ../stylesheets/screen.scss */
 .externalLinks .nav-bk {
   background-position: 0 50%;
   background-repeat: no-repeat;
 }
-/* line 194, ../stylesheets/screen.scss */
+/* line 227, ../stylesheets/screen.scss */
 .externalLinks .nav-dribbble {
   background-image: url(../img/nav/dribbble.png);
 }
-/* line 195, ../stylesheets/screen.scss */
+/* line 228, ../stylesheets/screen.scss */
 .externalLinks .nav-twitter {
   background-image: url(../img/nav/twitter.png);
 }
-/* line 196, ../stylesheets/screen.scss */
+/* line 229, ../stylesheets/screen.scss */
 .externalLinks .nav-spotify {
   background-image: url(../img/nav/spotify.png);
 }
-/* line 197, ../stylesheets/screen.scss */
+/* line 230, ../stylesheets/screen.scss */
 .externalLinks .nav-linkedin {
   background-image: url(../img/nav/linkedin.png);
 }
-/* line 198, ../stylesheets/screen.scss */
+/* line 231, ../stylesheets/screen.scss */
 .externalLinks .nav-codepen {
   background-image: url(../img/nav/codepen.png);
 }
-/* line 199, ../stylesheets/screen.scss */
+/* line 232, ../stylesheets/screen.scss */
 .externalLinks .nav-github {
   background-image: url(../img/nav/github.png);
 }
 
 @media (max-width: 30em) {
-  /* line 203, ../stylesheets/screen.scss */
+  /* line 236, ../stylesheets/screen.scss */
   .externalLinks {
     display: none;
   }
 }
-/* line 206, ../stylesheets/screen.scss */
+/* line 239, ../stylesheets/screen.scss */
 footer {
   text-align: center;
   font-style: italic;
