@@ -1,0 +1,143 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* Font Stacks */
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,400,300,700);
+/* Global Variables / Definitions */
+/* Colors */
+/* Global Styles */
+/* line 43, ../stylesheets/screen.scss */
+body {
+  font: 16px "Roboto", Helvetica, sans-serif;
+  color: #00003c;
+  letter-spacing: 0.1em;
+  font-weight: 300;
+  background: #eaeaea;
+}
+
+/* line 50, ../stylesheets/screen.scss */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto", Helvetica, sans-serif;
+  font-weight: 300;
+}
+
+/* General Container Styles */
+/* line 61, ../stylesheets/screen.scss */
+.sheet-global {
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #e4cfa2 url("../img/bkTile.png") fixed;
+  box-shadow: 0 0 20px #0a0a1e;
+}
+
+/* line 67, ../stylesheets/screen.scss */
+.container {
+  min-width: 250px;
+}
+
+/* line 68, ../stylesheets/screen.scss */
+.contentBlock {
+  padding: 2em 1em;
+  margin: 1em 0;
+}
+
+/* Section Styles */
+/* line 75, ../stylesheets/screen.scss */
+header {
+  background: #f8e3b6 url("../img/hero_face4.jpg") no-repeat left center;
+  color: #00003c;
+}
+/* line 78, ../stylesheets/screen.scss */
+header h1, header p {
+  background-color: rgba(240, 240, 240, 0.5);
+  padding: 0.1em 0.25em;
+  opacity: 1;
+}
+/* line 79, ../stylesheets/screen.scss */
+header h1 {
+  font-size: 4em;
+}
+/* line 80, ../stylesheets/screen.scss */
+header p {
+  font-size: 1.25em;
+  font-weight: 300;
+}
+/* line 81, ../stylesheets/screen.scss */
+header .container {
+  padding-top: 25%;
+  padding-bottom: 25%;
+}
+
+@media (max-width: 800px) {
+  /* line 87, ../stylesheets/screen.scss */
+  header {
+    background-size: cover;
+  }
+}
+/* line 91, ../stylesheets/screen.scss */
+.contentBlocks {
+  margin-top: 1em;
+}
+/* line 93, ../stylesheets/screen.scss */
+.contentBlocks .contentBlock {
+  color: #f0f0f0;
+  font-weight: 100;
+  background: rgba(0, 0, 60, 0.95);
+  overflow: hidden;
+}
+/* line 98, ../stylesheets/screen.scss */
+.contentBlocks .contentBlock p {
+  font-size: 2.5em;
+}
+
+/* line 101, ../stylesheets/screen.scss */
+.externalLinks {
+  color: #f0f0f0;
+  background: #00003c;
+}
+/* line 104, ../stylesheets/screen.scss */
+.externalLinks a {
+  color: #f0f0f0;
+  padding: 1em 0;
+  overflow: visible;
+  text-align: center;
+}
+/* line 109, ../stylesheets/screen.scss */
+.externalLinks a:hover {
+  text-decoration: none;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  background-position-y: 30%;
+  background-position-x: 20%;
+  -webkit-transition: background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease;
+}
+/* line 118, ../stylesheets/screen.scss */
+.externalLinks .nav-bk {
+  background-position: 0 50%;
+  background-repeat: no-repeat;
+}
+/* line 122, ../stylesheets/screen.scss */
+.externalLinks .nav-dribbble {
+  background-image: url(../img/nav/dribbble.png);
+}
+/* line 123, ../stylesheets/screen.scss */
+.externalLinks .nav-twitter {
+  background-image: url(../img/nav/twitter.png);
+}
+/* line 124, ../stylesheets/screen.scss */
+.externalLinks .nav-spotify {
+  background-image: url(../img/nav/spotify.png);
+}
+/* line 125, ../stylesheets/screen.scss */
+.externalLinks .nav-linkedin {
+  background-image: url(../img/nav/linkedin.png);
+}
+/* line 126, ../stylesheets/screen.scss */
+.externalLinks .nav-codepen {
+  background-image: url(../img/nav/codepen.png);
+}
+/* line 127, ../stylesheets/screen.scss */
+.externalLinks .nav-github {
+  background-image: url(../img/nav/github.png);
+}
