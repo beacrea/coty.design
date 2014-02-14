@@ -1,4 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:100,400,300,700);
 /* Welcome to Compass.
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
@@ -8,6 +7,7 @@
  *  $_Font Stacks
  * -------------------------------------------
  */
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,400,300,700);
 /*
  * -------------------------------------------
  *  $_Mixins
@@ -30,16 +30,16 @@
  *  $_Global Styles
  * -------------------------------------------
  */
-/* line 87, ../stylesheets/screen.scss */
+/* line 88, ../stylesheets/screen.scss */
 body {
   font: 16px "Roboto", Helvetica, sans-serif;
   color: #00003c;
   letter-spacing: 0.1em;
   font-weight: 300;
-  background: #eaeaea;
+  background: #e1e1d5;
 }
 
-/* line 94, ../stylesheets/screen.scss */
+/* line 95, ../stylesheets/screen.scss */
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", Helvetica, sans-serif;
   font-weight: 300;
@@ -50,22 +50,22 @@ h1, h2, h3, h4, h5, h6 {
  *  $_General Containers
  * -------------------------------------------
  */
-/* line 110, ../stylesheets/screen.scss */
+/* line 111, ../stylesheets/screen.scss */
 .sheet-global {
   max-width: 1280px;
   margin: 0 auto;
-  background: #14dcdc url("../img/bkTile.png") fixed;
+  background: floralwhite url("../img/bkTile.png") fixed;
   box-shadow: 0 0 4px #8a8a8a;
 }
 
-/* line 116, ../stylesheets/screen.scss */
+/* line 117, ../stylesheets/screen.scss */
 .container {
   min-width: 250px;
 }
 
-/* line 117, ../stylesheets/screen.scss */
+/* line 118, ../stylesheets/screen.scss */
 .contentBlock {
-  padding: 2em 1em;
+  padding: 1em;
   margin: 1em 0;
 }
 
@@ -74,74 +74,86 @@ h1, h2, h3, h4, h5, h6 {
  *  $_Section Styles
  * -------------------------------------------
  */
-/* line 129, ../stylesheets/screen.scss */
+/* line 130, ../stylesheets/screen.scss */
 header {
-  background: #f8e3b6 url("../img/hero_face4.jpg") no-repeat left center;
+  background: floralwhite url("../img/hero_face4.jpg") no-repeat left center;
   color: #00003c;
   max-height: 645px;
 }
-/* line 133, ../stylesheets/screen.scss */
+/* line 134, ../stylesheets/screen.scss */
 header h1, header p {
   background-color: rgba(240, 240, 240, 0.5);
   padding: 0.1em 0.25em;
   opacity: 1;
 }
-/* line 134, ../stylesheets/screen.scss */
+/* line 135, ../stylesheets/screen.scss */
 header h1 {
   font-size: 4em;
 }
-/* line 135, ../stylesheets/screen.scss */
+/* line 136, ../stylesheets/screen.scss */
 header p {
   font-size: 1.25em;
   font-weight: 300;
 }
-/* line 136, ../stylesheets/screen.scss */
+/* line 137, ../stylesheets/screen.scss */
 header .container {
   padding-top: 25%;
   padding-bottom: 25%;
 }
 
 @media (max-width: 50em) {
-  /* line 142, ../stylesheets/screen.scss */
+  /* line 143, ../stylesheets/screen.scss */
   header {
     background-size: cover;
   }
 }
-/* line 146, ../stylesheets/screen.scss */
+/* line 147, ../stylesheets/screen.scss */
 .contentBlocks {
-  padding: 8em 0;
+  padding: 5em 0;
 }
-/* line 148, ../stylesheets/screen.scss */
+/* line 149, ../stylesheets/screen.scss */
 .contentBlocks .contentBlock {
   color: #0a0a1e;
   font-weight: 100;
-  border: 1px solid black;
+  border: 1px solid #00003c;
+  border-bottom-width: 8px;
+  border-left-width: 3px;
   overflow: hidden;
+  border-radius: 0.25em;
 }
-/* line 153, ../stylesheets/screen.scss */
+/* line 157, ../stylesheets/screen.scss */
 .contentBlocks .contentBlock p {
   font-size: 2.5em;
 }
-/* line 154, ../stylesheets/screen.scss */
+/* line 158, ../stylesheets/screen.scss */
 .contentBlocks .contentBlock:hover {
   cursor: pointer;
-  background-color: #f0f0f0;
-  color: #0a0a1e;
+  background-color: #00003c;
+  border-color: #00003c;
+  border-bottom-width: 4px;
+  border-left-width: 1px;
+  color: #f0f0f0;
+  -webkit-transition: border-width 0.5s ease, background-color 0.25s ease;
+}
+/* line 166, ../stylesheets/screen.scss */
+.contentBlocks .contentBlock:hover p {
+  margin-left: 0.5em;
+  -webkit-transition: margin 0.5s ease;
 }
 
-/* line 162, ../stylesheets/screen.scss */
+/* line 173, ../stylesheets/screen.scss */
 .externalLinks {
   color: #f0f0f0;
   background: #000028;
 }
-/* line 165, ../stylesheets/screen.scss */
+/* line 176, ../stylesheets/screen.scss */
 .externalLinks a {
   color: #f0f0f0;
   padding: 0.5em 0;
   overflow: visible;
   text-align: center;
 }
-/* line 170, ../stylesheets/screen.scss */
+/* line 181, ../stylesheets/screen.scss */
 .externalLinks a:hover {
   text-decoration: none;
   font-weight: 400;
@@ -150,43 +162,43 @@ header .container {
   background-position-x: 20%;
   -webkit-transition: background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease;
 }
-/* line 179, ../stylesheets/screen.scss */
+/* line 190, ../stylesheets/screen.scss */
 .externalLinks .nav-bk {
   background-position: 0 50%;
   background-repeat: no-repeat;
 }
-/* line 183, ../stylesheets/screen.scss */
+/* line 194, ../stylesheets/screen.scss */
 .externalLinks .nav-dribbble {
   background-image: url(../img/nav/dribbble.png);
 }
-/* line 184, ../stylesheets/screen.scss */
+/* line 195, ../stylesheets/screen.scss */
 .externalLinks .nav-twitter {
   background-image: url(../img/nav/twitter.png);
 }
-/* line 185, ../stylesheets/screen.scss */
+/* line 196, ../stylesheets/screen.scss */
 .externalLinks .nav-spotify {
   background-image: url(../img/nav/spotify.png);
 }
-/* line 186, ../stylesheets/screen.scss */
+/* line 197, ../stylesheets/screen.scss */
 .externalLinks .nav-linkedin {
   background-image: url(../img/nav/linkedin.png);
 }
-/* line 187, ../stylesheets/screen.scss */
+/* line 198, ../stylesheets/screen.scss */
 .externalLinks .nav-codepen {
   background-image: url(../img/nav/codepen.png);
 }
-/* line 188, ../stylesheets/screen.scss */
+/* line 199, ../stylesheets/screen.scss */
 .externalLinks .nav-github {
   background-image: url(../img/nav/github.png);
 }
 
 @media (max-width: 30em) {
-  /* line 192, ../stylesheets/screen.scss */
+  /* line 203, ../stylesheets/screen.scss */
   .externalLinks {
     display: none;
   }
 }
-/* line 195, ../stylesheets/screen.scss */
+/* line 206, ../stylesheets/screen.scss */
 footer {
   text-align: center;
   font-style: italic;

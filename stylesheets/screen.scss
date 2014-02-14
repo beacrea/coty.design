@@ -66,11 +66,12 @@ $font-stack: 'Roboto', Helvetica, sans-serif;
 $color-offBlack: rgb(10, 10, 30);
 $color-offWhite: rgb(240, 240, 240);
 $color-offWhite-bg: rgba(240, 240, 240, 0.5);
-$color-gainsboro: rgb(20,220,220); 
+$color-floralWhite: rgb(255, 250, 240);
+$color-gainsboro: rgb(225,225,213);
+$color-mandarin: rgb(209,65,54);
 $color-sepia: rgb(248, 227, 182);
 $color-sepia-darker: rgb(228, 207, 162);
 $color-sepia-bg: rgba(248, 227, 182, 0.75);
-$color-seafoam-bg: rgba(191, 214, 175, 0.75);
 $color-navy: rgb(0, 0, 60);
 $color-navy-bg: rgba(0, 0, 60, 0.6);
 
@@ -89,7 +90,7 @@ body {
     color: $color-navy;
     letter-spacing: 0.1em;
     font-weight: 300;
-    background: #eaeaea;
+    background: $color-gainsboro;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: $font-stack;
@@ -110,11 +111,11 @@ h1, h2, h3, h4, h5, h6 {
 .sheet-global {
     max-width: 1280px;
     margin: 0 auto;
-    background: $color-gainsboro url('../img/bkTile.png') fixed;
+    background: $color-floralWhite url('../img/bkTile.png') fixed;
     box-shadow: 0 0 4px darken($color-offWhite, 40%);
 }
 .container { min-width: 250px; }
-.contentBlock{ padding: 2em 1em; margin: 1em 0; }
+.contentBlock{ padding: 1em; margin: 1em 0; }
 
 
 
@@ -127,7 +128,7 @@ h1, h2, h3, h4, h5, h6 {
  */
 
 header { 
-  background: $color-sepia url('../img/hero_face4.jpg') no-repeat left center;
+  background: $color-floralWhite url('../img/hero_face4.jpg') no-repeat left center;
   color: $color-navy;
   max-height: 645px;
   h1, p { background-color: $color-offWhite-bg; padding: 0.1em 0.25em; opacity: 1;}
@@ -144,18 +145,28 @@ header {
   }
 }
 .contentBlocks { 
-	padding: 8em 0;
+	padding: 5em 0;
  	.contentBlock{
     	color: $color-offBlack;
     	font-weight: 100;
-    	border: 1px solid darken($color-offBlack, 10%);
+    	border: 1px solid $color-navy;
+    	border-bottom-width: 8px;
+    	border-left-width: 3px;
     	overflow: hidden;
+    	border-radius: 0.25em;
     	p { font-size: 2.5em; }
       &:hover {
         cursor: pointer;
-        background-color: $color-offWhite;
-        color: $color-offBlack;
-
+        background-color: $color-navy;
+        border-color: $color-navy;
+        border-bottom-width: 4px;
+        border-left-width: 1px;
+        color: $color-offWhite;
+        -webkit-transition:border-width 0.5s ease, background-color 0.25s ease;
+        p { 
+        	margin-left: 0.5em;
+        	-webkit-transition:margin 0.5s ease;
+        }
       }
   }
 }
