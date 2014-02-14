@@ -9,14 +9,42 @@
 
 
 
-/* Font Stacks */
+/*
+ * -------------------------------------------
+ *  $_Font Stacks
+ * -------------------------------------------
+ */
+
 @import url(http://fonts.googleapis.com/css?family=Roboto:100,400,300,700);
 
 
 
 
 
-/* Global Variables / Definitions */
+/*
+ * -------------------------------------------
+ *  $_Mixins
+ *  
+ *  These are essentially SASS formulas.
+ * -------------------------------------------
+ */
+
+// Px -> EM Conversion
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em
+}
+
+
+
+
+
+/*
+ * -------------------------------------------
+ *  $_Global Variables / Definitions
+ * -------------------------------------------
+ */
+
+$browser-context: 16;
 $font-stack: 'Roboto', Helvetica, sans-serif;
 
 
@@ -24,7 +52,12 @@ $font-stack: 'Roboto', Helvetica, sans-serif;
 
 
 
-/* Colors */
+/*
+ * -------------------------------------------
+ *  $_Colors
+ * -------------------------------------------
+ */
+
 $color-offBlack: rgb(10, 10, 30);
 $color-offWhite: rgb(240, 240, 240);
 $color-offWhite-bg: rgba(240, 240, 240, 0.5);
@@ -39,7 +72,12 @@ $color-navy-bg: rgba(0, 0, 60, 0.95);
 
 
 
-/* Global Styles */
+/*
+ * -------------------------------------------
+ *  $_Global Styles
+ * -------------------------------------------
+ */
+
 body {
     font: 16px $font-stack;
     color: $color-navy;
@@ -57,7 +95,12 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-/* General Container Styles */
+/*
+ * -------------------------------------------
+ *  $_General Containers
+ * -------------------------------------------
+ */
+
 .sheet-global {
     max-width: 1280px;
     margin: 0 auto;
@@ -71,7 +114,12 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-/* Section Styles */
+/*
+ * -------------------------------------------
+ *  $_Section Styles
+ * -------------------------------------------
+ */
+
 header { 
   background: $color-sepia url('../img/hero_face4.jpg') no-repeat left center;
   color: $color-navy;
@@ -101,7 +149,7 @@ header {
 }
 .externalLinks {
   color: $color-offWhite;
-  background: $color-offBlack;
+  background: darken($color-navy, 4%);
   a {
     color: $color-offWhite;
     padding: 0.5em 0;
@@ -126,6 +174,10 @@ header {
   .nav-linkedin { background-image: url(../img/nav/linkedin.png); }
   .nav-codepen { background-image: url(../img/nav/codepen.png); }
   .nav-github { background-image: url(../img/nav/github.png); }
+}
+
+@media (max-width: em(480)) {
+  .externalLinks { display: none; }
 }
 
 footer { 
