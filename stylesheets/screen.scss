@@ -34,9 +34,42 @@
   @return #{$pixels/$context}em
 }
 
+// RGB -> RGBa
 @mixin background-opacity($color, $opacity: 0.3) {
     background: $color; /* The Fallback */
     background: rgba($color, $opacity);
+}
+
+// Cross-Browser Transition
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}
+@mixin transition-property($property...) {
+    -moz-transition-property:    $property;
+    -o-transition-property:      $property;
+    -webkit-transition-property: $property;
+    transition-property:         $property;
+}
+@mixin transition-duration($duration...) {
+    -moz-transition-property:    $duration;
+    -o-transition-property:      $duration;
+    -webkit-transition-property: $duration;
+    transition-property:         $duration;
+}
+@mixin transition-timing-function($timing...) {
+    -moz-transition-timing-function:    $timing;
+    -o-transition-timing-function:      $timing;
+    -webkit-transition-timing-function: $timing;
+    transition-timing-function:         $timing;
+}
+@mixin transition-delay($delay...) {
+    -moz-transition-delay:    $delay;
+    -o-transition-delay:      $delay;
+    -webkit-transition-delay: $delay;
+    transition-delay:         $delay;
 }
 
 
@@ -162,10 +195,10 @@ header {
         border-bottom-width: 4px;
         border-left-width: 1px;
         color: $color-offWhite;
-        -webkit-transition:border-width 0.5s ease, background-color 0.25s ease;
+        @include transition(border-width 0.5s ease, background-color 0.25s ease);
         p { 
         	margin-left: 0.5em;
-        	-webkit-transition:margin 0.5s ease;
+        	@include transition(margin 0.5s ease);
         }
       }
   }
@@ -184,7 +217,7 @@ header {
     	letter-spacing: 0.25em;
     	background-position-y: 30%;
     	background-position-x: 20%;
-    	-webkit-transition:background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease;
+    	@include transition(background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease);
     }
   }
   .nav-bk { 
