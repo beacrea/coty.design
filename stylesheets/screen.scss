@@ -89,13 +89,13 @@ header{
   }
 }
 .contentBlocks { 
-  margin-top: 1em;
-  .contentBlock{
-    color: $color-offWhite;
-    font-weight: 100;
-    background: $color-navy-bg;
-    overflow: hidden;
-    p { font-size: 2.5em; }
+	padding: 8em 0;
+ 	.contentBlock{
+    	color: $color-offWhite;
+    	font-weight: 100;
+    	background: $color-navy-bg;
+    	overflow: hidden;
+    	p { font-size: 2.5em; }
   }
 }
 .externalLinks {
@@ -126,3 +126,15 @@ header{
   .nav-codepen { background-image: url(../img/nav/codepen.png); }
   .nav-github { background-image: url(../img/nav/github.png); }
 }
+
+footer { 
+	text-align: center;
+	font-style: italic;
+	padding: 1em;
+	font-size: 0.75em;
+	color: darken($color-offWhite, 30%);
+	background-color: darken($color-navy-bg, 6%); }
+
+
+
+

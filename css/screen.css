@@ -77,7 +77,7 @@ header .container {
 }
 /* line 91, ../stylesheets/screen.scss */
 .contentBlocks {
-  margin-top: 1em;
+  padding: 8em 0;
 }
 /* line 93, ../stylesheets/screen.scss */
 .contentBlocks .contentBlock {
@@ -140,4 +140,14 @@ header .container {
 /* line 127, ../stylesheets/screen.scss */
 .externalLinks .nav-github {
   background-image: url(../img/nav/github.png);
+}
+
+/* line 130, ../stylesheets/screen.scss */
+footer {
+  text-align: center;
+  font-style: italic;
+  padding: 1em;
+  font-size: 0.75em;
+  color: #a3a3a3;
+  background-color: rgba(0, 0, 29, 0.95);
 }
