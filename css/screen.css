@@ -1,9 +1,9 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,400,300,700);
 /* Welcome to Compass.
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 /* Font Stacks */
-@import url(http://fonts.googleapis.com/css?family=Roboto:100,400,300,700);
 /* Global Variables / Definitions */
 /* Colors */
 /* Global Styles */
@@ -25,10 +25,10 @@ h1, h2, h3, h4, h5, h6 {
 /* General Container Styles */
 /* line 61, ../stylesheets/screen.scss */
 .sheet-global {
-  max-width: 1400px;
+  max-width: 1280px;
   margin: 0 auto;
   background: #e4cfa2 url("../img/bkTile.png") fixed;
-  box-shadow: 0 0 20px #0a0a1e;
+  box-shadow: 0 0 4px #8a8a8a;
 }
 
 /* line 67, ../stylesheets/screen.scss */
@@ -47,63 +47,64 @@ h1, h2, h3, h4, h5, h6 {
 header {
   background: #f8e3b6 url("../img/hero_face4.jpg") no-repeat left center;
   color: #00003c;
+  max-height: 645px;
 }
-/* line 78, ../stylesheets/screen.scss */
+/* line 79, ../stylesheets/screen.scss */
 header h1, header p {
   background-color: rgba(240, 240, 240, 0.5);
   padding: 0.1em 0.25em;
   opacity: 1;
 }
-/* line 79, ../stylesheets/screen.scss */
+/* line 80, ../stylesheets/screen.scss */
 header h1 {
   font-size: 4em;
 }
-/* line 80, ../stylesheets/screen.scss */
+/* line 81, ../stylesheets/screen.scss */
 header p {
   font-size: 1.25em;
   font-weight: 300;
 }
-/* line 81, ../stylesheets/screen.scss */
+/* line 82, ../stylesheets/screen.scss */
 header .container {
   padding-top: 25%;
   padding-bottom: 25%;
 }
 
 @media (max-width: 800px) {
-  /* line 87, ../stylesheets/screen.scss */
+  /* line 88, ../stylesheets/screen.scss */
   header {
     background-size: cover;
   }
 }
-/* line 91, ../stylesheets/screen.scss */
+/* line 92, ../stylesheets/screen.scss */
 .contentBlocks {
   padding: 8em 0;
 }
-/* line 93, ../stylesheets/screen.scss */
+/* line 94, ../stylesheets/screen.scss */
 .contentBlocks .contentBlock {
   color: #f0f0f0;
   font-weight: 100;
   background: rgba(0, 0, 60, 0.95);
   overflow: hidden;
 }
-/* line 98, ../stylesheets/screen.scss */
+/* line 99, ../stylesheets/screen.scss */
 .contentBlocks .contentBlock p {
   font-size: 2.5em;
 }
 
-/* line 101, ../stylesheets/screen.scss */
+/* line 102, ../stylesheets/screen.scss */
 .externalLinks {
   color: #f0f0f0;
-  background: #00003c;
+  background: #0a0a1e;
 }
-/* line 104, ../stylesheets/screen.scss */
+/* line 105, ../stylesheets/screen.scss */
 .externalLinks a {
   color: #f0f0f0;
-  padding: 1em 0;
+  padding: 0.5em 0;
   overflow: visible;
   text-align: center;
 }
-/* line 109, ../stylesheets/screen.scss */
+/* line 110, ../stylesheets/screen.scss */
 .externalLinks a:hover {
   text-decoration: none;
   font-weight: 400;
@@ -112,37 +113,37 @@ header .container {
   background-position-x: 20%;
   -webkit-transition: background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease;
 }
-/* line 118, ../stylesheets/screen.scss */
+/* line 119, ../stylesheets/screen.scss */
 .externalLinks .nav-bk {
   background-position: 0 50%;
   background-repeat: no-repeat;
 }
-/* line 122, ../stylesheets/screen.scss */
+/* line 123, ../stylesheets/screen.scss */
 .externalLinks .nav-dribbble {
   background-image: url(../img/nav/dribbble.png);
 }
-/* line 123, ../stylesheets/screen.scss */
+/* line 124, ../stylesheets/screen.scss */
 .externalLinks .nav-twitter {
   background-image: url(../img/nav/twitter.png);
 }
-/* line 124, ../stylesheets/screen.scss */
+/* line 125, ../stylesheets/screen.scss */
 .externalLinks .nav-spotify {
   background-image: url(../img/nav/spotify.png);
 }
-/* line 125, ../stylesheets/screen.scss */
+/* line 126, ../stylesheets/screen.scss */
 .externalLinks .nav-linkedin {
   background-image: url(../img/nav/linkedin.png);
 }
-/* line 126, ../stylesheets/screen.scss */
+/* line 127, ../stylesheets/screen.scss */
 .externalLinks .nav-codepen {
   background-image: url(../img/nav/codepen.png);
 }
-/* line 127, ../stylesheets/screen.scss */
+/* line 128, ../stylesheets/screen.scss */
 .externalLinks .nav-github {
   background-image: url(../img/nav/github.png);
 }
 
-/* line 130, ../stylesheets/screen.scss */
+/* line 131, ../stylesheets/screen.scss */
 footer {
   text-align: center;
   font-style: italic;

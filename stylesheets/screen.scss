@@ -59,10 +59,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* General Container Styles */
 .sheet-global {
-    max-width: 1400px;
+    max-width: 1280px;
     margin: 0 auto;
     background: $color-sepia-darker url('../img/bkTile.png') fixed;
-    box-shadow: 0 0 20px $color-offBlack;
+    box-shadow: 0 0 4px darken($color-offWhite, 40%);
 }
 .container { min-width: 250px; }
 .contentBlock{ padding: 2em 1em; margin: 1em 0; }
@@ -72,9 +72,10 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* Section Styles */
-header{ 
+header { 
   background: $color-sepia url('../img/hero_face4.jpg') no-repeat left center;
   color: $color-navy;
+  max-height: 645px;
   h1, p { background-color: $color-offWhite-bg; padding: 0.1em 0.25em; opacity: 1;}
   h1{ font-size: 4em; }
   p { font-size: 1.25em; font-weight: 300; }
@@ -100,10 +101,10 @@ header{
 }
 .externalLinks {
   color: $color-offWhite;
-  background: $color-navy;
+  background: $color-offBlack;
   a {
     color: $color-offWhite;
-    padding: 1em 0;
+    padding: 0.5em 0;
     overflow: visible;
     text-align: center;
     &:hover { 
