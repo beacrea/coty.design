@@ -192,8 +192,6 @@ header {
         cursor: pointer;
         background-color: $color-navy;
         border-color: $color-navy;
-        border-bottom-width: 4px;
-        border-left-width: 1px;
         color: $color-offWhite;
         @include transition(border-width 0.5s ease, background-color 0.25s ease);
         p { 
