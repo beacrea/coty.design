@@ -187,7 +187,7 @@ header {
     	border-left-width: 3px;
     	overflow: hidden;
     	border-radius: 0.25em;
-    	p { font-size: 2.5em; }
+    	p { font-size: 2.5em; margin-bottom: 0; }
       &:hover {
         cursor: pointer;
         background-color: $color-navy;
