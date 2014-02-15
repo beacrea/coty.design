@@ -9,7 +9,7 @@ var heroText = [
 		p: "Have you ever watched a robot try to use photoshop? Its pretty awful."
 	}, {
 		h1: "Did You Refresh the Page?",
-		p: "Don't be a werido. Shouldn't you be working anyway?"
+		p: "Don't be a weirdo. Shouldn't you be working anyway?"
 	}, {
 		h1: "Life Should Be Fun, Right?",
 		p: "If you answered yes, we totally just became besties."
