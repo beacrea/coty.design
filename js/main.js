@@ -5,7 +5,7 @@ function pickRandomProperty(obj) {
 // Hero Text Data
 var heroText = [
 	{ 
-		h1: "UX Design is Distinctly Human",
+		h1: "UX Design Is Distinctly Human",
 		p: "Have you ever watched a robot try to use photoshop? Its pretty awful."
 	}, {
 		h1: "Did You Refresh the Page?",
@@ -14,14 +14,14 @@ var heroText = [
 		h1: "Life Should Be Fun, Right?",
 		p: "If you answered yes, we totally just became besties."
 	}, {
-		h1: "I Totally should A/B Test This",
+		h1: "I Totally Should A/B Test This",
 		p: "Future-me and Science thanks you for participating in this refreshing header."
 	}, {
 		h1: "Makin' Websites Since the 90's",
 		p: "First rule of web design fight club? Don't talk about tables."
 	}, {
 		h1: "Will Work for Bitcoins",
-		p: "Likely the world's most worst retirement plan."
+		p: "Likely the world's worst retirement plan."
 	}, {
 		h1: "I'm a UX Designer",
 		p: "But only beacause all the astronaut jobs were taken."
