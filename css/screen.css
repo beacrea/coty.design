@@ -124,6 +124,7 @@ header .container {
 /* line 190, ../stylesheets/screen.scss */
 .contentBlocks .contentBlock p {
   font-size: 2.5em;
+  margin-bottom: 0;
 }
 /* line 191, ../stylesheets/screen.scss */
 .contentBlocks .contentBlock:hover {
