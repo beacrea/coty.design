@@ -76,7 +76,7 @@ h1, h2, h3, h4, h5, h6 {
  */
 /* line 130, ../stylesheets/screen.scss */
 header {
-  background: floralwhite url("../img/hero_face4.jpg") no-repeat left center;
+  background: floralwhite no-repeat left center;
   color: #00003c;
   max-height: 645px;
 }
