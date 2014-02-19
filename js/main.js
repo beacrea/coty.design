@@ -1,7 +1,30 @@
+/*
+ * -------------------------------------------
+ *  $_Functions
+ * -------------------------------------------
+ */
+
 // Randomizer Function
 function pickRandomProperty(obj) {
 	return obj[Math.floor(Math.random() * obj.length)]
 }
+
+// Set Time Dynamically
+function SetCopyYear() {
+	var thisDate = new Date();
+	var thisYear = thisDate.getFullYear();
+	$('.copyright').prepend("&copy; " + thisYear + ' ');
+}
+
+
+
+
+
+/*
+ * -------------------------------------------
+ *  $_Data Models
+ * -------------------------------------------
+ */
 
 // Hero Text Data
 var heroText = [
@@ -32,8 +55,26 @@ var heroText = [
 // Hero Image Data
 var heroImgs = ['hero_face1.jpg', 'hero_face2.jpg'];
 
-// Hero Random Content Write
+
+
+
+
+/*
+ * -------------------------------------------
+ *  $_Heavy Lifting
+ * -------------------------------------------
+ */
+
+// Hero - Random Content Write
 var heroRandom = pickRandomProperty(heroText);
 $('.mainHero h1').html(heroRandom.h1);
 $('.mainHero p').html(heroRandom.p);
 $('header').css({'background-image': 'url(img/' + pickRandomProperty(heroImgs) + ')'});
+
+
+// Copyright - Set Time
+SetCopyYear();
+
+
+
+

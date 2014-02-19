@@ -160,7 +160,7 @@ h1, h2, h3, h4, h5, h6 {
  * -------------------------------------------
  */
 
-header { 
+.mainHero { 
   background: $color-floralWhite no-repeat left center;
   color: $color-navy;
   max-height: 645px;
@@ -174,12 +174,23 @@ header {
   }
 }
 @media (max-width: em(800)) {
-  header {
+  .mainHero {
     background-size: cover;
   }
 }
+
+.intro { 
+	margin-top: 3em;
+	h1 { line-height: 150%; }	
+	aside { 
+		font-size: 2em;
+		color: $color-mandarin; 
+		font-weight: 300;
+	}
+}
+
 .contentBlocks { 
-	padding: 5em 0;
+	padding: 3em 0 5em;
  	.contentBlock{
     	color: $color-offBlack;
     	font-weight: 100;
