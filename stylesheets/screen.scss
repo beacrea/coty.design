@@ -182,6 +182,7 @@ h1, h2, h3, h4, h5, h6 {
 .externalLinks {
   color: $color-offWhite;
   background: darken($color-navy, 4%);
+  position: relative;
   h1 { display: none; }
   a {
     color: $color-offWhite;
@@ -209,7 +210,7 @@ h1, h2, h3, h4, h5, h6 {
   .nav-github { background-image: url(../img/nav/github.png); }
 }
 
-@media (max-width: em(500)) {
+@media (max-width: em(800)) {
   .externalLinks {
   	margin: 0 auto;
   	h1 { 
