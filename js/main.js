@@ -1,3 +1,4 @@
+// Randomizer Function
 function pickRandomProperty(obj) {
 	return obj[Math.floor(Math.random() * obj.length)]
 }
@@ -28,12 +29,11 @@ var heroText = [
 	}
 ];
 
+// Hero Image Data
+var heroImgs = ['hero_face1.jpg', 'hero_face2.jpg'];
+
+// Hero Random Content Write
 var heroRandom = pickRandomProperty(heroText);
 $('.mainHero h1').html(heroRandom.h1);
 $('.mainHero p').html(heroRandom.p);
-
-// Jumbotron Image Randomizer
-$(function() {
-    var images = ['hero_face1.jpg', 'hero_face2.jpg'];
-    $('header').css({'background-image': 'url(img/' + images[Math.floor(Math.random() * images.length)] + ')'});
-});
+$('header').css({'background-image': 'url(img/' + pickRandomProperty(heroImgs) + ')'});
