@@ -112,72 +112,22 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 /* line 182, ../stylesheets/screen.scss */
-.intro {
-  margin-top: 3em;
-}
-/* line 184, ../stylesheets/screen.scss */
-.intro h1 {
-  line-height: 150%;
-}
-/* line 185, ../stylesheets/screen.scss */
-.intro aside {
-  font-size: 2em;
-  color: #d14136;
-  font-weight: 300;
-}
-
-/* line 192, ../stylesheets/screen.scss */
-.contentBlocks {
-  padding: 3em 0 5em;
-}
-/* line 194, ../stylesheets/screen.scss */
-.contentBlocks .contentBlock {
-  color: #0a0a1e;
-  font-weight: 100;
-  border: 1px solid #00003c;
-  border-bottom-width: 8px;
-  border-left-width: 3px;
-  overflow: hidden;
-  border-radius: 0.25em;
-}
-/* line 202, ../stylesheets/screen.scss */
-.contentBlocks .contentBlock p {
-  font-size: 2.5em;
-  margin-bottom: 0;
-}
-/* line 203, ../stylesheets/screen.scss */
-.contentBlocks .contentBlock:hover {
-  cursor: pointer;
-  background-color: #00003c;
-  border-color: #00003c;
-  color: #f0f0f0;
-  -moz-transition: border-width 0.5s ease, background-color 0.25s ease;
-  -o-transition: border-width 0.5s ease, background-color 0.25s ease;
-  -webkit-transition: border-width 0.5s ease, background-color 0.25s ease;
-  transition: border-width 0.5s ease, background-color 0.25s ease;
-}
-/* line 209, ../stylesheets/screen.scss */
-.contentBlocks .contentBlock:hover p {
-  margin-left: 0.5em;
-  -moz-transition: margin 0.5s ease;
-  -o-transition: margin 0.5s ease;
-  -webkit-transition: margin 0.5s ease;
-  transition: margin 0.5s ease;
-}
-
-/* line 216, ../stylesheets/screen.scss */
 .externalLinks {
   color: #f0f0f0;
   background: #000028;
 }
-/* line 219, ../stylesheets/screen.scss */
+/* line 185, ../stylesheets/screen.scss */
+.externalLinks h1 {
+  display: none;
+}
+/* line 186, ../stylesheets/screen.scss */
 .externalLinks a {
   color: #f0f0f0;
   padding: 0.5em 0;
   overflow: visible;
   text-align: center;
 }
-/* line 224, ../stylesheets/screen.scss */
+/* line 191, ../stylesheets/screen.scss */
 .externalLinks a:hover {
   text-decoration: none;
   font-weight: 400;
@@ -189,43 +139,151 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-transition: background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease;
   transition: background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease;
 }
-/* line 233, ../stylesheets/screen.scss */
+/* line 200, ../stylesheets/screen.scss */
 .externalLinks .nav-bk {
   background-position: 0 50%;
   background-repeat: no-repeat;
 }
-/* line 237, ../stylesheets/screen.scss */
+/* line 204, ../stylesheets/screen.scss */
 .externalLinks .nav-dribbble {
   background-image: url(../img/nav/dribbble.png);
 }
-/* line 238, ../stylesheets/screen.scss */
+/* line 205, ../stylesheets/screen.scss */
 .externalLinks .nav-twitter {
   background-image: url(../img/nav/twitter.png);
 }
-/* line 239, ../stylesheets/screen.scss */
+/* line 206, ../stylesheets/screen.scss */
 .externalLinks .nav-spotify {
   background-image: url(../img/nav/spotify.png);
 }
-/* line 240, ../stylesheets/screen.scss */
+/* line 207, ../stylesheets/screen.scss */
 .externalLinks .nav-linkedin {
   background-image: url(../img/nav/linkedin.png);
 }
-/* line 241, ../stylesheets/screen.scss */
+/* line 208, ../stylesheets/screen.scss */
 .externalLinks .nav-codepen {
   background-image: url(../img/nav/codepen.png);
 }
-/* line 242, ../stylesheets/screen.scss */
+/* line 209, ../stylesheets/screen.scss */
 .externalLinks .nav-github {
   background-image: url(../img/nav/github.png);
 }
 
-@media (max-width: 30em) {
-  /* line 246, ../stylesheets/screen.scss */
+@media (max-width: 31.25em) {
+  /* line 213, ../stylesheets/screen.scss */
   .externalLinks {
+    margin: 0 auto;
+  }
+  /* line 215, ../stylesheets/screen.scss */
+  .externalLinks h1 {
+    display: block;
+    font-size: 1.25em;
+    margin: 0 0 0.25em;
+    background-color: #d14136;
+    padding: 0.2em;
+  }
+  /* line 222, ../stylesheets/screen.scss */
+  .externalLinks .nav-bk {
+    display: block;
+    background-position: left;
+    background-size: contain;
+    text-align: left;
+    padding-left: 3em;
+  }
+  /* line 228, ../stylesheets/screen.scss */
+  .externalLinks .nav-bk:hover {
+    background-position-x: 5%;
+  }
+}
+/* line 235, ../stylesheets/screen.scss */
+.intro {
+  margin-top: 3em;
+}
+/* line 237, ../stylesheets/screen.scss */
+.intro h1 {
+  line-height: 150%;
+}
+/* line 238, ../stylesheets/screen.scss */
+.intro aside {
+  font-size: 2em;
+  color: #d14136;
+  font-weight: 300;
+}
+/* line 243, ../stylesheets/screen.scss */
+.intro b {
+  color: #d14136;
+}
+/* line 244, ../stylesheets/screen.scss */
+.intro hr {
+  border-top: 1px solid #d14136;
+  margin: 2em 0 1em;
+}
+/* line 245, ../stylesheets/screen.scss */
+.intro p {
+  margin-top: 1em;
+  font-size: 1.5em;
+  color: #24246b;
+}
+
+@media (max-width: 30em) {
+  /* line 249, ../stylesheets/screen.scss */
+  .intro {
+    margin-top: 0;
+    background: floralwhite;
+    border-bottom: 1px solid #ccccb7;
+    padding-bottom: 1em;
+  }
+  /* line 254, ../stylesheets/screen.scss */
+  .intro hr {
     display: none;
   }
 }
-/* line 249, ../stylesheets/screen.scss */
+/* line 258, ../stylesheets/screen.scss */
+.mainSections {
+  padding: 1em 0 5em;
+}
+/* line 260, ../stylesheets/screen.scss */
+.mainSections .contentBlock {
+  color: #0a0a1e;
+  font-weight: 100;
+  border: 1px solid #00003c;
+  border-bottom-width: 8px;
+  border-left-width: 3px;
+  overflow: hidden;
+  border-radius: 0.25em;
+}
+/* line 268, ../stylesheets/screen.scss */
+.mainSections .contentBlock p {
+  font-size: 2.5em;
+  margin-bottom: 0;
+}
+/* line 269, ../stylesheets/screen.scss */
+.mainSections .contentBlock:hover {
+  cursor: pointer;
+  background-color: #00003c;
+  border-color: #00003c;
+  color: #f0f0f0;
+  -moz-transition: border-width 0.5s ease, background-color 0.25s ease;
+  -o-transition: border-width 0.5s ease, background-color 0.25s ease;
+  -webkit-transition: border-width 0.5s ease, background-color 0.25s ease;
+  transition: border-width 0.5s ease, background-color 0.25s ease;
+}
+/* line 275, ../stylesheets/screen.scss */
+.mainSections .contentBlock:hover p {
+  margin-left: 0.5em;
+  -moz-transition: margin 0.5s ease;
+  -o-transition: margin 0.5s ease;
+  -webkit-transition: margin 0.5s ease;
+  transition: margin 0.5s ease;
+}
+
+@media (max-width: 30em) {
+  /* line 284, ../stylesheets/screen.scss */
+  .mainSections {
+    padding: 1em 0 2em;
+  }
+}
+/* line 289, ../stylesheets/screen.scss */
 footer {
   text-align: center;
   font-style: italic;
