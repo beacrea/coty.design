@@ -1,6 +1,24 @@
+/*
+ * -------------------------------------------
+ *	$_Randomizer Function
+ * -------------------------------------------
+ */
+
 function pickRandomProperty(obj) {
 	return obj[Math.floor(Math.random() * obj.length)]
 }
+
+
+
+
+
+
+
+/*
+ * -------------------------------------------
+ *	$_Hero/Banner Interaction
+ * -------------------------------------------
+ */
 
 // Hero Text Data
 var heroText = [
@@ -37,3 +55,17 @@ $(function() {
     var images = ['hero_face1.jpg', 'hero_face2.jpg'];
     $('header').css({'background-image': 'url(img/' + images[Math.floor(Math.random() * images.length)] + ')'});
 });
+
+
+
+
+
+
+
+/*
+ * -------------------------------------------
+ *	$_Application Interactions
+ * -------------------------------------------
+ */
+
+// Hero Text Data
