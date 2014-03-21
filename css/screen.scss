@@ -1,9 +1,4 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
-@import "compass";
 
 
 
@@ -181,21 +176,26 @@ header {
 .contentBlocks { 
 	padding: 5em 0;
  	.contentBlock{
-    	color: $color-offBlack;
     	font-weight: 100;
+	  	color: $color-offBlack;
     	border: 1px solid $color-navy;
     	border-bottom-width: 8px;
     	border-left-width: 3px;
     	overflow: hidden;
     	border-radius: 0.25em;
-    	p { font-size: 2.5em; margin-bottom: 0; }
+    	a {
+		  font-size: 2.5em;
+		  margin-bottom: 0;
+		  color: inherit;
+		  text-decoration: none;
+		}
       &:hover {
         cursor: pointer;
         background-color: $color-navy;
         border-color: $color-navy;
         color: $color-offWhite;
         @include transition(border-width 0.5s ease, background-color 0.25s ease);
-        p { 
+        a {
         	margin-left: 0.5em;
         	@include transition(margin 0.5s ease);
         }
