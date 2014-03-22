@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-=======
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
->>>>>>> a999c6ae4785f0fd1a7e821efd5281da5ba32b24
 /*
  * -------------------------------------------
  *  $_Font Stacks
@@ -33,16 +26,11 @@
  *  $_Global Styles
  * -------------------------------------------
  */
-<<<<<<< HEAD
-=======
-/* line 121, ../stylesheets/screen.scss */
->>>>>>> a999c6ae4785f0fd1a7e821efd5281da5ba32b24
 body {
   font: 16px "Roboto", Helvetica, sans-serif;
   color: #00003c;
   letter-spacing: 0.1em;
   font-weight: 300;
-<<<<<<< HEAD
   background: #e1e1d5; }
 
 h1, h2, h3, h4, h5, h6 {
@@ -88,31 +76,34 @@ blockquote {
  *  $_Section Styles
  * -------------------------------------------
  */
-header {
+.mainHero {
   background: floralwhite no-repeat left center;
   color: #00003c;
   max-height: 645px; }
-  header section {
+  .mainHero section {
     cursor: help; }
-  header h1, header p {
+  .mainHero h1, .mainHero p {
     background-color: rgba(240, 240, 240, 0.5);
     padding: 0.1em 0.25em;
     opacity: 1; }
-  header h1 {
+  .mainHero h1 {
     font-size: 4em; }
-  header p {
+  .mainHero p {
     font-size: 1.25em;
     font-weight: 300; }
-  header .container {
+  .mainHero .container {
     padding-top: 25%;
     padding-bottom: 25%; }
 
 @media (max-width: 50em) {
-  header {
+  .mainHero {
     background-size: cover; } }
 .externalLinks {
   color: #f0f0f0;
-  background: #000028; }
+  background: #000028;
+  position: relative; }
+  .externalLinks h1 {
+    display: none; }
   .externalLinks a {
     color: #f0f0f0;
     padding: 0.5em 0;
@@ -144,267 +135,79 @@ header {
   .externalLinks .nav-github {
     background-image: url(../img/nav/github.png); }
 
-@media (max-width: 30em) {
-  .externalLinks {
-    display: none; } }
-=======
-  background: #e1e1d5;
-}
-
-/* line 128, ../stylesheets/screen.scss */
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Roboto", Helvetica, sans-serif;
-  font-weight: 300;
-}
-
-/*
- * -------------------------------------------
- *  $_General Containers
- * -------------------------------------------
- */
-/* line 144, ../stylesheets/screen.scss */
-.sheet-global {
-  max-width: 1280px;
-  margin: 0 auto;
-  background: floralwhite url("../img/bkTile.png") fixed;
-  box-shadow: 0 0 4px #8a8a8a;
-}
-
-/* line 150, ../stylesheets/screen.scss */
-.container {
-  min-width: 250px;
-}
-
-/* line 151, ../stylesheets/screen.scss */
-.contentBlock {
-  padding: 1em;
-  margin: 1em 0;
-}
-
-/*
- * -------------------------------------------
- *  $_Section Styles
- * -------------------------------------------
- */
-/* line 163, ../stylesheets/screen.scss */
-.mainHero {
-  background: floralwhite no-repeat left center;
-  color: #00003c;
-  max-height: 645px;
-}
-/* line 167, ../stylesheets/screen.scss */
-.mainHero section {
-  cursor: help;
-}
-/* line 168, ../stylesheets/screen.scss */
-.mainHero h1, .mainHero p {
-  background-color: rgba(240, 240, 240, 0.5);
-  padding: 0.1em 0.25em;
-  opacity: 1;
-}
-/* line 169, ../stylesheets/screen.scss */
-.mainHero h1 {
-  font-size: 4em;
-}
-/* line 170, ../stylesheets/screen.scss */
-.mainHero p {
-  font-size: 1.25em;
-  font-weight: 300;
-}
-/* line 171, ../stylesheets/screen.scss */
-.mainHero .container {
-  padding-top: 25%;
-  padding-bottom: 25%;
-}
-
 @media (max-width: 50em) {
-  /* line 177, ../stylesheets/screen.scss */
-  .mainHero {
-    background-size: cover;
-  }
-}
-/* line 182, ../stylesheets/screen.scss */
-.externalLinks {
-  color: #f0f0f0;
-  background: #000028;
-  position: relative;
-}
-/* line 186, ../stylesheets/screen.scss */
-.externalLinks h1 {
-  display: none;
-}
-/* line 187, ../stylesheets/screen.scss */
-.externalLinks a {
-  color: #f0f0f0;
-  padding: 0.5em 0;
-  overflow: visible;
-  text-align: center;
-}
-/* line 192, ../stylesheets/screen.scss */
-.externalLinks a:hover {
-  text-decoration: none;
-  font-weight: 400;
-  letter-spacing: 0.25em;
-  background-position-y: 30%;
-  background-position-x: 20%;
-  -moz-transition: background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease;
-  -o-transition: background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease;
-  -webkit-transition: background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease;
-  transition: background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease;
-}
-/* line 201, ../stylesheets/screen.scss */
-.externalLinks .nav-bk {
-  background-position: 0 50%;
-  background-repeat: no-repeat;
-}
-/* line 205, ../stylesheets/screen.scss */
-.externalLinks .nav-dribbble {
-  background-image: url(../img/nav/dribbble.png);
-}
-/* line 206, ../stylesheets/screen.scss */
-.externalLinks .nav-twitter {
-  background-image: url(../img/nav/twitter.png);
-}
-/* line 207, ../stylesheets/screen.scss */
-.externalLinks .nav-spotify {
-  background-image: url(../img/nav/spotify.png);
-}
-/* line 208, ../stylesheets/screen.scss */
-.externalLinks .nav-linkedin {
-  background-image: url(../img/nav/linkedin.png);
-}
-/* line 209, ../stylesheets/screen.scss */
-.externalLinks .nav-codepen {
-  background-image: url(../img/nav/codepen.png);
-}
-/* line 210, ../stylesheets/screen.scss */
-.externalLinks .nav-github {
-  background-image: url(../img/nav/github.png);
-}
-
-@media (max-width: 50em) {
-  /* line 214, ../stylesheets/screen.scss */
   .externalLinks {
-    margin: 0 auto;
-  }
-  /* line 216, ../stylesheets/screen.scss */
-  .externalLinks h1 {
-    display: block;
-    font-size: 1.25em;
-    margin: 0 0 0.25em;
-    background-color: #d14136;
-    padding: 0.2em;
-  }
-  /* line 223, ../stylesheets/screen.scss */
-  .externalLinks .nav-bk {
-    display: block;
-    background-position: left;
-    background-size: contain;
-    text-align: left;
-    padding-left: 3em;
-  }
-  /* line 229, ../stylesheets/screen.scss */
-  .externalLinks .nav-bk:hover {
-    background-position-x: 5%;
-  }
-}
-/* line 236, ../stylesheets/screen.scss */
+    margin: 0 auto; }
+    .externalLinks h1 {
+      display: block;
+      font-size: 1.25em;
+      margin: 0 0 0.25em;
+      background-color: #d14136;
+      padding: 0.2em; }
+    .externalLinks .nav-bk {
+      display: block;
+      background-position: left;
+      background-size: contain;
+      text-align: left;
+      padding-left: 3em; }
+      .externalLinks .nav-bk:hover {
+        background-position-x: 5%; } }
 .intro {
-  margin-top: 3em;
-}
-/* line 238, ../stylesheets/screen.scss */
-.intro h1 {
-  line-height: 150%;
-}
-/* line 239, ../stylesheets/screen.scss */
-.intro aside {
-  font-size: 2em;
-  color: #d14136;
-  font-weight: 300;
-}
-/* line 244, ../stylesheets/screen.scss */
-.intro b {
-  color: #d14136;
-}
-/* line 245, ../stylesheets/screen.scss */
-.intro hr {
-  border-top: 1px solid #d14136;
-  margin: 2em 0 1em;
-}
-/* line 246, ../stylesheets/screen.scss */
-.intro p {
-  margin-top: 1em;
-  font-size: 1.5em;
-  color: #24246b;
-}
-
-@media (max-width: 30em) {
-  /* line 250, ../stylesheets/screen.scss */
-  .intro {
-    margin-top: 0;
-    background: floralwhite;
-    border-bottom: 1px solid #ccccb7;
-    padding-bottom: 1em;
-  }
-  /* line 255, ../stylesheets/screen.scss */
+  margin-top: 3em; }
+  .intro h1 {
+    line-height: 150%; }
+  .intro aside {
+    font-size: 2em;
+    color: #d14136;
+    font-weight: 300; }
+  .intro b {
+    color: #d14136; }
   .intro hr {
-    display: none;
-  }
-}
-/* line 259, ../stylesheets/screen.scss */
+    border-top: 1px solid #d14136;
+    margin: 2em 0 1em; }
+  .intro p {
+    margin-top: 1em;
+    font-size: 1.5em;
+    color: #24246b; }
+
 .mainSections {
-  padding: 1em 0 5em;
-}
-/* line 261, ../stylesheets/screen.scss */
-.mainSections .contentBlock {
-  color: #0a0a1e;
-  font-weight: 100;
-  border: 1px solid #00003c;
-  border-bottom-width: 8px;
-  border-left-width: 3px;
-  overflow: hidden;
-  border-radius: 0.25em;
-}
-/* line 269, ../stylesheets/screen.scss */
-.mainSections .contentBlock p {
-  font-size: 2.5em;
-  margin-bottom: 0;
-}
-/* line 270, ../stylesheets/screen.scss */
-.mainSections .contentBlock:hover {
-  cursor: pointer;
-  background-color: #00003c;
-  border-color: #00003c;
-  color: #f0f0f0;
-  -moz-transition: border-width 0.5s ease, background-color 0.25s ease;
-  -o-transition: border-width 0.5s ease, background-color 0.25s ease;
-  -webkit-transition: border-width 0.5s ease, background-color 0.25s ease;
-  transition: border-width 0.5s ease, background-color 0.25s ease;
-}
-/* line 276, ../stylesheets/screen.scss */
-.mainSections .contentBlock:hover p {
-  margin-left: 0.5em;
-  -moz-transition: margin 0.5s ease;
-  -o-transition: margin 0.5s ease;
-  -webkit-transition: margin 0.5s ease;
-  transition: margin 0.5s ease;
-}
+  padding: 1em 0 5em; }
+  .mainSections .contentBlock {
+    color: #0a0a1e;
+    font-weight: 100;
+    border: 1px solid #00003c;
+    border-bottom-width: 8px;
+    border-left-width: 3px;
+    overflow: hidden;
+    border-radius: 0.25em; }
+    .mainSections .contentBlock p {
+      font-size: 2.5em;
+      margin-bottom: 0; }
+    .mainSections .contentBlock:hover {
+      cursor: pointer;
+      background-color: #00003c;
+      border-color: #00003c;
+      color: #f0f0f0;
+      -moz-transition: border-width 0.5s ease, background-color 0.25s ease;
+      -o-transition: border-width 0.5s ease, background-color 0.25s ease;
+      -webkit-transition: border-width 0.5s ease, background-color 0.25s ease;
+      transition: border-width 0.5s ease, background-color 0.25s ease; }
+      .mainSections .contentBlock:hover p {
+        margin-left: 0.5em;
+        -moz-transition: margin 0.5s ease;
+        -o-transition: margin 0.5s ease;
+        -webkit-transition: margin 0.5s ease;
+        transition: margin 0.5s ease; }
 
 @media (max-width: 30em) {
-  /* line 285, ../stylesheets/screen.scss */
   .mainSections {
-    padding: 1em 0 2em;
-  }
-}
-/* line 290, ../stylesheets/screen.scss */
->>>>>>> a999c6ae4785f0fd1a7e821efd5281da5ba32b24
+    padding: 1em 0 2em; } }
 footer {
   text-align: center;
   font-style: italic;
   padding: 1em;
   font-size: 0.75em;
   color: #a3a3a3;
-<<<<<<< HEAD
   background-color: #00001d; }
 
 .navBlocks {
@@ -458,7 +261,3 @@ section.aboutMe {
     text-align: center; }
   section.aboutMe blockquote {
     color: rgba(255, 255, 255, 0.8); }
-=======
-  background-color: #00001d;
-}
->>>>>>> a999c6ae4785f0fd1a7e821efd5281da5ba32b24

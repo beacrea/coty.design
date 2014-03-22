@@ -260,16 +260,6 @@ blockquote {
 	p { margin-top: 1em; font-size: 1.5em; color: lighten($color-offBlack, 20%); }
 }
 
-@media (max-width: em(480)) {
-	.intro {
-		margin-top: 0;
-		background: $color-floralWhite;
-		border-bottom: 1px solid darken($color-gainsboro, 10%);
-		padding-bottom: 1em;
-		hr { display: none; }
-	}
-}
-
 .mainSections { 
 	padding: 1em 0 5em;
  	.contentBlock{

@@ -1,31 +1,14 @@
 /*
  * -------------------------------------------
-<<<<<<< HEAD
  *	$_Randomizer Function
  * -------------------------------------------
  */
 
-=======
- *  $_Functions
- * -------------------------------------------
- */
-
-// Randomizer Function
->>>>>>> a999c6ae4785f0fd1a7e821efd5281da5ba32b24
 function pickRandomProperty(obj) {
 	return obj[Math.floor(Math.random() * obj.length)]
 }
 
-<<<<<<< HEAD
 
-=======
-// Set Time Dynamically
-function SetCopyYear() {
-	var thisDate = new Date();
-	var thisYear = thisDate.getFullYear();
-	$('.copyright').prepend("&copy; " + thisYear + ' ');
-}
->>>>>>> a999c6ae4785f0fd1a7e821efd5281da5ba32b24
 
 
 
@@ -33,17 +16,13 @@ function SetCopyYear() {
 
 /*
  * -------------------------------------------
-<<<<<<< HEAD
  *	$_Hero/Banner Interaction
-=======
- *  $_Data Models
->>>>>>> a999c6ae4785f0fd1a7e821efd5281da5ba32b24
  * -------------------------------------------
  */
 
 // Hero Text Data
 var heroText = [
-	{ 
+	{
 		h1: "UX Design Is Distinctly Human",
 		p: "Have you ever watched a robot try to use photoshop? It's pretty awful."
 	}, {
@@ -67,33 +46,10 @@ var heroText = [
 	}
 ];
 
-// Hero Image Data
-var heroImgs = ['hero_face1.jpg', 'hero_face2.jpg'];
-
-
-
-
-
-/*
- * -------------------------------------------
- *  $_Heavy Lifting
- * -------------------------------------------
- */
-
-// Hero - Random Content Write
 var heroRandom = pickRandomProperty(heroText);
 $('.mainHero h1').html(heroRandom.h1);
 $('.mainHero p').html(heroRandom.p);
-$('header').css({'background-image': 'url(img/' + pickRandomProperty(heroImgs) + ')'});
 
-
-// Copyright - Set Time
-SetCopyYear();
-
-
-
-
-<<<<<<< HEAD
 // Jumbotron Image Randomizer
 $(function() {
     var images = ['hero_face1.jpg', 'hero_face2.jpg'];
@@ -113,5 +69,3 @@ $(function() {
  */
 
 // Hero Text Data
-=======
->>>>>>> a999c6ae4785f0fd1a7e821efd5281da5ba32b24
