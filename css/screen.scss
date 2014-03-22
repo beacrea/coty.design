@@ -120,9 +120,28 @@ body {
     font-weight: 300;
     background: $color-gainsboro;
 }
+
 h1, h2, h3, h4, h5, h6 {
     font-family: $font-stack;
     font-weight: 300;
+}
+
+a, a:hover { text-decoration: none; }
+
+blockquote {
+  border: none;
+  color: $color-navy-bg;
+  font-size: 4em;
+  font-style: italic;
+  font-weight: 100;
+  cite {
+	text-align: right;
+	font-size: 50%;
+	display: block;
+	&:before {
+	  content: '- ';
+	}
+  }
 }
 
 
@@ -173,35 +192,7 @@ header {
     background-size: cover;
   }
 }
-.contentBlocks { 
-	padding: 5em 0;
- 	.contentBlock{
-    	font-weight: 100;
-	  	color: $color-offBlack;
-    	border: 1px solid $color-navy;
-    	border-bottom-width: 8px;
-    	border-left-width: 3px;
-    	overflow: hidden;
-    	border-radius: 0.25em;
-    	a {
-		  font-size: 2.5em;
-		  margin-bottom: 0;
-		  color: inherit;
-		  text-decoration: none;
-		}
-      &:hover {
-        cursor: pointer;
-        background-color: $color-navy;
-        border-color: $color-navy;
-        color: $color-offWhite;
-        @include transition(border-width 0.5s ease, background-color 0.25s ease);
-        a {
-        	margin-left: 0.5em;
-        	@include transition(margin 0.5s ease);
-        }
-      }
-  }
-}
+
 .externalLinks {
   color: $color-offWhite;
   background: darken($color-navy, 4%);
@@ -241,7 +232,63 @@ footer {
 	padding: 1em;
 	font-size: 0.75em;
 	color: darken($color-offWhite, 30%);
-	background-color: darken($color-navy, 6%); }
+	background-color: darken($color-navy, 6%);
+}
+
+.navBlocks {
+  padding: 5em 0;
+  .contentBlock{
+	font-weight: 100;
+	color: $color-offBlack;
+	border: 1px solid $color-navy;
+	border-bottom-width: 8px;
+	border-left-width: 3px;
+	overflow: hidden;
+	border-radius: 0.25em;
+	a {
+	  font-size: 2.5em;
+	  margin-bottom: 0;
+	  color: inherit;
+	  text-decoration: none;
+	}
+	&:hover {
+	  cursor: pointer;
+	  background-color: $color-navy;
+	  border-color: $color-navy;
+	  color: $color-offWhite;
+	  @include transition(border-width 0.5s ease, background-color 0.25s ease);
+	  a {
+		margin-left: 0.5em;
+		@include transition(margin 0.5s ease);
+	  }
+	}
+  }
+}
+
+.backToMain {
+  background: $color-navy;
+  a {
+	font-size: 2em;
+	padding: 0.5em 0;
+	&:before {
+	  content: '< ';
+	}
+  }
+}
+
+section.aboutMe {
+  position: relative;
+  padding: 5em 0;
+  background: $color-navy-bg;
+  background: rgba($color-navy, 0.8);
+  color: $color-floralWhite;
+  font-weight: 100;
+  letter-spacing: 0.1em;
+  h1 {
+	text-align: center;
+  }
+  blockquote { color: lighten(rgba($color-offWhite, 0.8), 32%); }
+}
 
 
 
