@@ -37,6 +37,22 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", Helvetica, sans-serif;
   font-weight: 300; }
 
+a, a:hover {
+  text-decoration: none; }
+
+blockquote {
+  border: none;
+  color: rgba(0, 0, 60, 0.6);
+  font-size: 4em;
+  font-style: italic;
+  font-weight: 100; }
+  blockquote cite {
+    text-align: right;
+    font-size: 50%;
+    display: block; }
+    blockquote cite:before {
+      content: '- '; }
+
 /*
  * -------------------------------------------
  *  $_General Containers
@@ -82,37 +98,6 @@ header {
 @media (max-width: 50em) {
   header {
     background-size: cover; } }
-.contentBlocks {
-  padding: 5em 0; }
-  .contentBlocks .contentBlock {
-    font-weight: 100;
-    color: #0a0a1e;
-    border: 1px solid #00003c;
-    border-bottom-width: 8px;
-    border-left-width: 3px;
-    overflow: hidden;
-    border-radius: 0.25em; }
-    .contentBlocks .contentBlock a {
-      font-size: 2.5em;
-      margin-bottom: 0;
-      color: inherit;
-      text-decoration: none; }
-    .contentBlocks .contentBlock:hover {
-      cursor: pointer;
-      background-color: #00003c;
-      border-color: #00003c;
-      color: #f0f0f0;
-      -moz-transition: border-width 0.5s ease, background-color 0.25s ease;
-      -o-transition: border-width 0.5s ease, background-color 0.25s ease;
-      -webkit-transition: border-width 0.5s ease, background-color 0.25s ease;
-      transition: border-width 0.5s ease, background-color 0.25s ease; }
-      .contentBlocks .contentBlock:hover a {
-        margin-left: 0.5em;
-        -moz-transition: margin 0.5s ease;
-        -o-transition: margin 0.5s ease;
-        -webkit-transition: margin 0.5s ease;
-        transition: margin 0.5s ease; }
-
 .externalLinks {
   color: #f0f0f0;
   background: #000028; }
@@ -157,3 +142,55 @@ footer {
   font-size: 0.75em;
   color: #a3a3a3;
   background-color: #00001d; }
+
+.navBlocks {
+  padding: 5em 0; }
+  .navBlocks .contentBlock {
+    font-weight: 100;
+    color: #0a0a1e;
+    border: 1px solid #00003c;
+    border-bottom-width: 8px;
+    border-left-width: 3px;
+    overflow: hidden;
+    border-radius: 0.25em; }
+    .navBlocks .contentBlock a {
+      font-size: 2.5em;
+      margin-bottom: 0;
+      color: inherit;
+      text-decoration: none; }
+    .navBlocks .contentBlock:hover {
+      cursor: pointer;
+      background-color: #00003c;
+      border-color: #00003c;
+      color: #f0f0f0;
+      -moz-transition: border-width 0.5s ease, background-color 0.25s ease;
+      -o-transition: border-width 0.5s ease, background-color 0.25s ease;
+      -webkit-transition: border-width 0.5s ease, background-color 0.25s ease;
+      transition: border-width 0.5s ease, background-color 0.25s ease; }
+      .navBlocks .contentBlock:hover a {
+        margin-left: 0.5em;
+        -moz-transition: margin 0.5s ease;
+        -o-transition: margin 0.5s ease;
+        -webkit-transition: margin 0.5s ease;
+        transition: margin 0.5s ease; }
+
+.backToMain {
+  background: #00003c; }
+  .backToMain a {
+    font-size: 2em;
+    padding: 0.5em 0; }
+    .backToMain a:before {
+      content: '< '; }
+
+section.aboutMe {
+  position: relative;
+  padding: 5em 0;
+  background: rgba(0, 0, 60, 0.6);
+  background: rgba(0, 0, 60, 0.8);
+  color: floralwhite;
+  font-weight: 100;
+  letter-spacing: 0.1em; }
+  section.aboutMe h1 {
+    text-align: center; }
+  section.aboutMe blockquote {
+    color: rgba(255, 255, 255, 0.8); }
