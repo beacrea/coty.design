@@ -30,7 +30,7 @@
 }
 
 // RGB -> RGBa
-@mixin background-opacity($color, $opacity: 0.3) {
+@mixin background-opacity($color, $opacity) {
     background: $color; /* The Fallback */
     background: rgba($color, $opacity);
 }
@@ -125,6 +125,8 @@ h1, h2, h3, h4, h5, h6 {
     font-family: $font-stack;
     font-weight: 300;
 }
+
+p { line-height: 150%; font-size: 1.25em; margin-bottom: 1em; }
 
 a, a:hover { text-decoration: none; }
 
@@ -345,8 +347,7 @@ footer {
 section.aboutMe {
   position: relative;
   padding: 5em 0;
-  background: $color-navy-bg;
-  background: rgba($color-navy, 0.8);
+  background: rgba($color-navy, 0.75);
   color: $color-floralWhite;
   font-weight: 100;
   letter-spacing: 0.1em;
