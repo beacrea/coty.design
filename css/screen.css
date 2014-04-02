@@ -37,6 +37,11 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", Helvetica, sans-serif;
   font-weight: 300; }
 
+p {
+  line-height: 150%;
+  font-size: 1.25em;
+  margin-bottom: 1em; }
+
 a, a:hover {
   text-decoration: none; }
 
@@ -253,8 +258,7 @@ footer {
 section.aboutMe {
   position: relative;
   padding: 5em 0;
-  background: rgba(0, 0, 60, 0.6);
-  background: rgba(0, 0, 60, 0.8);
+  background: rgba(0, 0, 60, 0.75);
   color: floralwhite;
   font-weight: 100;
   letter-spacing: 0.1em; }
