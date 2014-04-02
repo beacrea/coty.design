@@ -192,6 +192,7 @@ blockquote {
 @media (max-width: em(800)) {
   .mainHero {
     background-size: cover;
+	max-height: em(800);
   }
 }
 
@@ -359,7 +360,7 @@ section.aboutMe {
 
 @media (max-width: em(800)) {
   section.aboutMe {
-	h1 { font-size: 1.5em; }
+	h1 { font-size: 1.25em; }
 	blockquote, cite { text-align: center; }
 	blockquote { font-size: 2.5em; }
 	cite {
