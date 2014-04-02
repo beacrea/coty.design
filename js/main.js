@@ -68,4 +68,5 @@ $(function() {
  * -------------------------------------------
  */
 
-// Hero Text Data
+// TODO This disables the application menu.
+$('section.navBlocks, .backToMain').hide();
