@@ -1,4 +1,4 @@
-
+// TODO Add table of contents.
 
 
 
@@ -229,6 +229,7 @@ blockquote {
   	margin: 0 auto;
   	h1 { 
   		display: block;
+	  	text-align: center;
   		font-size: 1.25em;
   		margin: 0 0 0.25em;
   		background-color: $color-mandarin;
@@ -355,6 +356,42 @@ section.aboutMe {
   blockquote { color: lighten(rgba($color-offWhite, 0.8), 32%); }
 }
 
+@media (max-width: em(800)) {
+  section.aboutMe {
+	h1 { font-size: 1.5em; }
+	blockquote, cite { text-align: center; }
+	blockquote { font-size: 2.5em; }
+	cite {
+	  font-size: 0.5em;
+	  &:before {
+		content: '';
+	  }
+	}
+  }
+}
 
 
 
+
+
+/*
+ * -------------------------------------------
+ *  $_Temp Styles
+ * -------------------------------------------
+ */
+
+.temp-resumeBar {
+  background: darken($color-gainsboro, 0%);
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  text-align: center;
+  a {
+	color: $color-navy;
+	font-weight: bold;
+	font-size: 1.5em;
+  }
+}
+
+@media (max-width: em(800)) {
+  .temp-resumeBar { font-size: 0.75em; }
+}

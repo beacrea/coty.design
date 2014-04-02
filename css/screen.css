@@ -140,6 +140,7 @@ blockquote {
     margin: 0 auto; }
     .externalLinks h1 {
       display: block;
+      text-align: center;
       font-size: 1.25em;
       margin: 0 0 0.25em;
       background-color: #d14136;
@@ -261,3 +262,33 @@ section.aboutMe {
     text-align: center; }
   section.aboutMe blockquote {
     color: rgba(255, 255, 255, 0.8); }
+
+@media (max-width: 50em) {
+  section.aboutMe h1 {
+    font-size: 1.5em; }
+  section.aboutMe blockquote, section.aboutMe cite {
+    text-align: center; }
+  section.aboutMe blockquote {
+    font-size: 2.5em; }
+  section.aboutMe cite {
+    font-size: 0.5em; }
+    section.aboutMe cite:before {
+      content: ''; } }
+/*
+ * -------------------------------------------
+ *  $_Temp Styles
+ * -------------------------------------------
+ */
+.temp-resumeBar {
+  background: #e1e1d5;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  text-align: center; }
+  .temp-resumeBar a {
+    color: #00003c;
+    font-weight: bold;
+    font-size: 1.5em; }
+
+@media (max-width: 50em) {
+  .temp-resumeBar {
+    font-size: 0.75em; } }
