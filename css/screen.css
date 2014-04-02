@@ -79,7 +79,7 @@ blockquote {
 .mainHero {
   background: floralwhite no-repeat left center;
   color: #00003c;
-  max-height: 645px; }
+  max-height: 35.9375em; }
   .mainHero section {
     cursor: help; }
   .mainHero h1, .mainHero p {
@@ -279,16 +279,28 @@ section.aboutMe {
  *  $_Temp Styles
  * -------------------------------------------
  */
-.temp-resumeBar {
-  background: #e1e1d5;
+.temp-resumeBar, .temp-promise {
   padding-top: 0.25em;
   padding-bottom: 0.25em;
   text-align: center; }
+
+.temp-resumeBar {
+  background: #e1e1d5; }
   .temp-resumeBar a {
     color: #00003c;
     font-weight: bold;
-    font-size: 1.5em; }
+    font-size: 1.25em; }
+
+.temp-promise {
+  background: #d14136;
+  color: #f0f0f0;
+  font-size: 1.25em; }
+  .temp-promise a {
+    color: #f0f0f0; }
 
 @media (max-width: 50em) {
   .temp-resumeBar {
-    font-size: 0.75em; } }
+    font-size: 1em; }
+
+  .temp-promise a {
+    display: block; } }
