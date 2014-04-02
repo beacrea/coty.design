@@ -177,7 +177,7 @@ blockquote {
 .mainHero { 
   background: $color-floralWhite no-repeat left center;
   color: $color-navy;
-  max-height: 645px;
+  max-height: em(575);
   section { cursor: help }
   h1, p { background-color: $color-offWhite-bg; padding: 0.1em 0.25em; opacity: 1;}
   h1{ font-size: 4em; }
@@ -380,18 +380,27 @@ section.aboutMe {
  * -------------------------------------------
  */
 
-.temp-resumeBar {
-  background: darken($color-gainsboro, 0%);
+.temp-resumeBar, .temp-promise {
   padding-top: 0.25em;
   padding-bottom: 0.25em;
   text-align: center;
+}
+.temp-resumeBar {
+  background: darken($color-gainsboro, 0%);
   a {
 	color: $color-navy;
 	font-weight: bold;
-	font-size: 1.5em;
+	font-size: 1.25em;
   }
+}
+.temp-promise {
+  background: $color-mandarin;
+  color: $color-offWhite;
+  font-size: 1.25em;
+  a { color: $color-offWhite; }
 }
 
 @media (max-width: em(800)) {
-  .temp-resumeBar { font-size: 0.75em; }
+  .temp-resumeBar { font-size: 1em; }
+  .temp-promise a { display: block; }
 }
