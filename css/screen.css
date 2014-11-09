@@ -89,13 +89,14 @@ blockquote {
     cursor: help; }
   .mainHero h1, .mainHero p {
     background-color: rgba(240, 240, 240, 0.65);
-    padding: 0.1em 0.25em;
     opacity: 1; }
   .mainHero h1 {
-    font-size: 4em; }
+    font-size: 4em;
+    padding: 0.1em 0.25em; }
   .mainHero p {
     font-size: 1.25em;
-    font-weight: 300; }
+    font-weight: 300;
+    padding: 0.25em 1em; }
   .mainHero .container {
     padding-top: 25%;
     padding-bottom: 25%; }

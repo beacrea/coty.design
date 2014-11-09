@@ -181,9 +181,9 @@ blockquote {
   color: $color-navy;
   max-height: em(575);
   section { cursor: help }
-  h1, p { background-color: $color-offWhite-bg; padding: 0.1em 0.25em; opacity: 1;}
-  h1{ font-size: 4em; }
-  p { font-size: 1.25em; font-weight: 300; }
+  h1, p { background-color: $color-offWhite-bg; opacity: 1;}
+  h1{ font-size: 4em; padding: 0.1em 0.25em; }
+  p { font-size: 1.25em; font-weight: 300; padding: 0.25em 1em;  }
   .container {
     padding-top: 25%;
     padding-bottom: 25%;
