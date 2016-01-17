@@ -209,7 +209,7 @@ blockquote {
     &:hover { 
     	text-decoration: none;
     	font-weight: 400;
-    	letter-spacing: 0.25em;
+    	letter-spacing: 0.15em;
     	background-position-y: 30%;
     	background-position-x: 20%;
     	@include transition(background-position-y 0.5s ease, background-position-x 1s ease, letter-spacing 0.5s ease);
@@ -234,10 +234,19 @@ blockquote {
   		display: block;
 	  	text-align: center;
   		font-size: 1.25em;
-  		margin: 0 0 0.25em;
+  		margin: 0;
   		background-color: $color-mandarin;
   		padding: 0.2em;
   	}
+    .linkList {
+      padding: 1rem;
+	  & > .row {
+		margin: 0;
+	  }
+	  a {
+		margin: 1rem 0;
+	  }
+    }
   	.nav-bk { 
 	  	display: block;
 	  	background-position: left;
@@ -383,16 +392,15 @@ section.aboutMe {
  */
 
 .temp-resumeBar, .temp-promise {
-  padding-top: 0.25em;
-  padding-bottom: 0.25em;
   text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .temp-resumeBar {
   background: darken($color-gainsboro, 0%);
   a {
 	color: $color-navy;
-	font-weight: bold;
-	font-size: 1.25em;
+	font-size: 2em;
   }
 }
 .temp-promise {
