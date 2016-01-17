@@ -24,25 +24,19 @@ function pickRandomProperty(obj) {
 var heroText = [
 	{
 		h1: "UX Design Is Distinctly Human",
-		p: "Have you ever watched a robot try to use photoshop? It's pretty awful."
+		p: "Have you ever watched a robot try to make wireframes? It's pretty awful."
 	}, {
-		h1: "Did You Refresh the Page?",
-		p: "Don't be a weirdo. Shouldn't you be working anyway?"
-	}, {
-		h1: "Life Should Be Fun, Right?",
-		p: "If you answered yes, we totally just became besties."
-	}, {
-		h1: "I Totally Should A/B Test This",
+		h1: "I'm Totally A/B Testing This Site",
 		p: "Future-Me and Science thank you for participating in this refreshing header."
 	}, {
 		h1: "Makin' Websites Since the 90's",
 		p: "First rule of web design fight club? Don't talk about tables."
 	}, {
 		h1: "Will Work for Bitcoins",
-		p: "Likely the world's worst retirement plan."
+		p: "AKA: the world's worst retirement plan."
 	}, {
 		h1: "I'm a UX Designer",
-		p: "..because all the astronaut jobs were taken."
+		p: "..but only because all the astronaut jobs were taken."
 	}
 ];
 
