@@ -25,15 +25,12 @@ var heroText = [
 	{
 		h1: "UX Design Is Distinctly Human",
 		p: "Have you ever watched a robot try to make wireframes? It's pretty awful."
-	}, {
-		h1: "I'm Totally A/B Testing This Site",
-		p: "Future-Me and Science thank you for participating in this refreshing header."
-	}, {
+	},{
 		h1: "Makin' Websites Since the 90's",
 		p: "First rule of web design fight club? Don't talk about tables."
 	}, {
 		h1: "Will Work for Bitcoins",
-		p: "AKA: the world's worst retirement plan."
+		p: "AKA: best retirement plan?"
 	}, {
 		h1: "I'm a UX Designer",
 		p: "..but only because all the astronaut jobs were taken."
