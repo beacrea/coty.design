@@ -21,6 +21,20 @@
         "slug": "contact",
         "purpose": "Links to social media, a contact form, and a SMS reminder button."
       }
-    ]
+    ],
+    "content": {
+      "about": {
+        "header_main": {
+          "label": "My name is:",
+          "text": "Coty Beasley",
+          "purpose": "My name."
+        },
+        "header_sub": {
+          "label": "What I am:",
+          "text": "I'm a product designer based in San Francisco specializing in digital product strategy and interaction.",
+          "purpose": "The type of designer I am and where I'm located."
+        }
+      }
+    }
   }
 ]
