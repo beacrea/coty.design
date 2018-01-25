@@ -1,0 +1,26 @@
+[
+  {
+    "navigation": [
+      {
+        "name": "About",
+        "slug": "about",
+        "purpose": "A sort of AMA about myself and what opportunities I'm looking for."
+      },
+      {
+        "name": "Work",
+        "slug": "work",
+        "purpose": "A showcase of various projects I've been involved in through the years."
+      },
+      {
+        "name": "Resume",
+        "slug": "resume",
+        "purpose": "A link to a PDF of my resume and to my LinkedIn profile."
+      },
+      {
+        "name": "Contact",
+        "slug": "contact",
+        "purpose": "Links to social media, a contact form, and a SMS reminder button."
+      }
+    ]
+  }
+]
