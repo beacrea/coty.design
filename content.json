@@ -35,7 +35,7 @@
           "purpose": "The type of designer I am and where I'm located."
         },
         "titles": {
-          "label": "Titles I've been known by:",
+          "label": "Design titles can change. What titles have fit you in the past?",
           "list": [
             {
               "text": "Product Designer"
@@ -72,16 +72,16 @@
           ]
         },
         "productCycle": {
-          "label": "Where I typically fit into the product cycle:",
-          "text": "I'm typically involved end-to-end, usually at the beginning of the process, in research cycles or even business development, then see the product through design, implementation, and retrospective assessment. I see my role as holistic and often the glue between the other contributors."
+          "label": "Where do you typically fit into the product cycle?",
+          "text": "I’m typically involved end-to-end. I often begin at the beginning of the process, during research cycles or early business development, then see the product through design, development, and later analysis."
         },
         "indivContrib": {
-          "label": "Management vs production:",
-          "text": "I prefer being a senior/lead/principal-level individual contributor, often leading product vision or project initiatives."
+          "label": "Do you see yourself as a manager or an individual contributor?",
+          "text": "I prefer being a principal-level individual contributor, often guiding product vision or project initiatives."
         },
         "companySize": {
-          "label": "The size of team/company I prefer:",
-          "text": "It depends. The size of the company doesn't matter as much as the team size. Because I tend to be end-to-end, I tend to work on early-stage initiatives where a lot of the answers haven't been figured out yet and the product vision is still maturing."
+          "label": "What size company or team do you like working with?",
+          "text": "It depends. Since I tend to be end-to-end, I prefer to work on early-stage initiatives where most answers haven't been discovered and the vision is maturing. The company size doesn’t matter as much as the team and the initiative."
         },
         "opportunityTypes": [
           {
