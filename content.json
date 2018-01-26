@@ -50,7 +50,7 @@
               "text": "Front-End Engineer"
             },
             {
-              "text": "Prototyper"
+              "text": "Prototype Designer"
             },
             {
               "text": "UX Designer"
@@ -70,8 +70,58 @@
               "alt": "(Blame Don Norman)"
             }
           ]
-        }
+        },
+        "productCycle": {
+          "label": "Where I typically fit into the product cycle:",
+          "text": "I'm typically involved end-to-end, usually at the beginning of the process, in research cycles or even business development, then see the product through design, implementation, and retrospective assessment. I see my role as holistic and often the glue between the other contributors."
+        },
+        "indivContrib": {
+          "label": "Management vs production:",
+          "text": "I prefer being a senior/lead/principal-level individual contributor, often leading product vision or project initiatives."
+        },
+        "companySize": {
+          "label": "The size of team/company I prefer:",
+          "text": "It depends. The size of the company doesn't matter as much as the team size. Because I tend to be end-to-end, I tend to work on early-stage initiatives where a lot of the answers haven't been figured out yet and the product vision is still maturing."
+        },
+        "opportunityTypes": [
+          {
+            "text": "Small, cohesive design team"
+          },
+          {
+            "text": "Strong leadership support for design value"
+          },
+          {
+            "text": "Some research support or resources to pursue insights"
+          },
+          {
+            "text": "‎Compelling mission and scale"
+          },
+          {
+            "text": "Industry-first problem spaces"
+          },
+          {
+            "text": "Flexible work environment/limited remote infrastructure"
+          }
+        ]
       }
-    }
+    },
+    "socialLinks": [
+      {
+        "name": "LinkedIn",
+        "url": "https://www.linkedin.com/in/cbeasley0/"
+      },
+      {
+        "name": "Dribbble",
+        "url": "http://dribbble.com/beacrea"
+      },
+      {
+        "name": "Github",
+        "url": "https://github.com/beacrea"
+      },
+      {
+        "name": "Codepen",
+        "url": "https://codepen.io/beacrea/"
+      }
+    ]
   }
 ]
