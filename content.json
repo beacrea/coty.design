@@ -33,6 +33,43 @@
           "label": "What I am:",
           "text": "I'm a product designer based in San Francisco specializing in digital product strategy and interaction.",
           "purpose": "The type of designer I am and where I'm located."
+        },
+        "titles": {
+          "label": "Titles I've been known by:",
+          "list": [
+            {
+              "text": "Product Designer"
+            },
+            {
+              "text": "Design Technologist"
+            },
+            {
+              "text": "Design Engineer"
+            },
+            {
+              "text": "Front-End Engineer"
+            },
+            {
+              "text": "Prototyper"
+            },
+            {
+              "text": "UX Designer"
+            },
+            {
+              "text": "Interface Designer"
+            },
+            {
+              "text": "Product Manager"
+            },
+            {
+              "text": "Consultant"
+            },
+            {
+              "text": "Cognitive Designer",
+              "link": "https://www.nngroup.com/videos/cognitive-designer",
+              "alt": "(Blame Don Norman)"
+            }
+          ]
         }
       }
     }
