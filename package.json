@@ -1,0 +1,27 @@
+{
+  "name": "cotybeasley.name",
+  "description": "The personal website of Coty Beasley",
+  "version": "1.0.0",
+  "author": "Coty Beasley",
+  "private": true,
+  "scripts": {
+    "dev": "webpack-dev-server --inline --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "predeploy": "npm run build"
+  },
+  "dependencies": {
+    "vue": "^2.3.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.6.1",
+    "cross-env": "^4.0.0",
+    "css-loader": "^0.28.1",
+    "file-loader": "^0.11.1",
+    "vue-loader": "^12.0.3",
+    "vue-template-compiler": "^2.3.3",
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.4.5"
+  }
+}
