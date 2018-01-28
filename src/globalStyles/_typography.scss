@@ -3,13 +3,18 @@
 * Lol self-explanatory
 **********************/
 
-// Defaults
+/* - - - - -
+Base styles
+- - - - - */
 html, body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 10px;
 }
 
-// Font sizes (default)
+
+/* - - - - - - - - -
+Font sizes (default)
+- - - - - - - - - */
 /* Vars */
 $h1_size: 6.4rem;
 $h2_size: 3.2rem;
@@ -20,9 +25,12 @@ h1, h2 { font-weight: bold; }
 h1 { font-size: $h1_size; }
 h1 { font-size: $h2_size; }
 h3 { font-size: $h3_size; }
-p { font-size: $p_size; }
+p, span, a { font-size: $p_size; }
 
-// Fonts sizes (large screen | > 768px)
+
+/* - - - - - - - - - - - - - - -
+Font sizes (lg screen | > 786px)
+- - - - - - - - - - - - - - - */
 @media only screen and (min-width: 76.8rem) {
   /* Vars */
   $h1_size: 6.4rem;
@@ -34,9 +42,12 @@ p { font-size: $p_size; }
   h1 { font-size: $h1_size; }
   h1 { font-size: $h2_size; }
   h3 { font-size: $h3_size; }
-  p { font-size: $p_size; }
+  p, span, a { font-size: $p_size; }
 }
 
-// Default spacing
+
+/* - - - - -
+Base margins
+- - - - - */
 p, h1, h2, h3 { margin-bottom: 1rem; }
 p:last-child { margin-bottom: 0; }
