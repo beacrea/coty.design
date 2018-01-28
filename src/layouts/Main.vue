@@ -24,10 +24,12 @@
   #app {
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
 
   main {
     padding: $padding_side;
     background: #f9f7f5;
+    flex: 1 1 auto;
   }
 </style>
