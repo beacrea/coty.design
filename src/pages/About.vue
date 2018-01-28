@@ -7,7 +7,7 @@
           <h2>I'm a product designer based in San Francisco.</h2>
           <h3>I specialize in digital product strategy and interaction.</h3>
         </header>
-        <img src="/static/img/arrow-down.png" alt="">
+        <img src="/static/img/arrow-down.png" class="downArrow" alt="">
       </section>
       <section id="qa1">
         <header>
@@ -15,7 +15,7 @@
           <h2>I'm a product designer based in San Francisco.</h2>
           <h3>I specialize in digital product strategy and interaction.</h3>
         </header>
-        <img src="/static/img/arrow-down.png" alt="">
+        <img src="/static/img/arrow-down.png" class="downArrow" alt="">
       </section>
     </div>
   </main-layout>
@@ -64,15 +64,90 @@
       justify-content: center;
     }
     &#intro {
-      img {
+      .downArrow {
+        display: inline-block;
         width: 5.8rem;
         height: 4.1rem;
-        display: inline-block;
+        animation: bounce ease-in 1s;
+        animation-iteration-count: infinite;
+        transform-origin: 50% 100%;
+        -webkit-animation: bounce ease-in 1s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-transform-origin: 50% 100%;
+        -moz-animation: bounce ease-in 1s;
+        -moz-animation-iteration-count: infinite;
+        -moz-transform-origin: 50% 100%;
+        -o-animation: bounce ease-in 1s;
+        -o-animation-iteration-count: infinite;
+        -o-transform-origin: 50% 100%;
+        -ms-animation: bounce ease-in 1s;
+        -ms-animation-iteration-count: infinite;
+        -ms-transform-origin: 50% 100%;
       }
     }
   }
   header {
     margin-bottom: 25%;
     padding-right: 3.2rem;
+  }
+
+  @keyframes bounce{
+    0% {
+      transform:  translate(0px,0px)  ;
+    }
+    50% {
+      transform:  translate(0px,-16px)  ;
+    }
+    100% {
+      transform:  translate(0px,0px)  ;
+    }
+  }
+
+  @-moz-keyframes bounce{
+    0% {
+      -moz-transform:  translate(0px,0px)  ;
+    }
+    50% {
+      -moz-transform:  translate(0px,-16px)  ;
+    }
+    100% {
+      -moz-transform:  translate(0px,0px)  ;
+    }
+  }
+
+  @-webkit-keyframes bounce {
+    0% {
+      -webkit-transform:  translate(0px,0px)  ;
+    }
+    50% {
+      -webkit-transform:  translate(0px,-16px)  ;
+    }
+    100% {
+      -webkit-transform:  translate(0px,0px)  ;
+    }
+  }
+
+  @-o-keyframes bounce {
+    0% {
+      -o-transform:  translate(0px,0px)  ;
+    }
+    50% {
+      -o-transform:  translate(0px,-16px)  ;
+    }
+    100% {
+      -o-transform:  translate(0px,0px)  ;
+    }
+  }
+
+  @-ms-keyframes bounce {
+    0% {
+      -ms-transform:  translate(0px,0px)  ;
+    }
+    50% {
+      -ms-transform:  translate(0px,-16px)  ;
+    }
+    100% {
+      -ms-transform:  translate(0px,0px)  ;
+    }
   }
 </style>
