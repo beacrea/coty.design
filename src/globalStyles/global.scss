@@ -5,3 +5,15 @@
 @import "vars";
 @import "reset";
 @import "typography";
+
+/* - - - - -
+Base styles
+- - - - - */
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+}
