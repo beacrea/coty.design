@@ -1,21 +1,18 @@
 <template>
-  <div class="container">
-    <ul>
-      <li>
-        <v-link href="/">Home</v-link>
-        <v-link href="/about">About</v-link>
-      </li>
-    </ul>
-    <slot></slot>
+  <div id="app">
+    <Nav></Nav>
+    <main>
+      <slot></slot>
+    </main>
   </div>
 </template>
 
 <script>
-  import VLink from '../components/VLink.vue'
+  import Nav from '../components/Navigation.vue'
 
   export default {
     components: {
-      VLink
+      Nav
     }
   }
 </script>
@@ -24,10 +21,13 @@
   // Imports
   @import "../globalStyles/global";
 
-  .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 15px 30px;
+  #app {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    padding: $padding_side;
     background: #f9f7f5;
   }
 </style>
