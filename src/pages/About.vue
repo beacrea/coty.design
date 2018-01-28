@@ -1,11 +1,22 @@
 <template>
   <main-layout>
     <div id="about">
-      <header>
-        <h1>Coty Beasley</h1>
-        <h2>I'm a product designer based in San Francisco.</h2>
-        <h3>I specialize in digital product strategy and interaction.</h3>
-      </header>
+      <section id="intro">
+        <header>
+          <h1>Coty Beasley</h1>
+          <h2>I'm a product designer based in San Francisco.</h2>
+          <h3>I specialize in digital product strategy and interaction.</h3>
+        </header>
+        <img src="/static/img/arrow-down.png" alt="">
+      </section>
+      <section id="qa1">
+        <header>
+          <h1>Coty Beasley</h1>
+          <h2>I'm a product designer based in San Francisco.</h2>
+          <h3>I specialize in digital product strategy and interaction.</h3>
+        </header>
+        <img src="/static/img/arrow-down.png" alt="">
+      </section>
     </div>
   </main-layout>
 </template>
@@ -34,7 +45,31 @@
     background: url('/static/img/about-bg.png') no-repeat top left;
     background-size: cover;
     display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 100%;
+  }
+  section {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
     align-items: center;
+    header {
+      text-align: left;
+      align-self: flex-start;
+      flex-direction: column;
+      flex: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    &#intro {
+      img {
+        width: 5.8rem;
+        height: 4.1rem;
+        display: inline-block;
+      }
+    }
   }
   header {
     margin-bottom: 25%;
