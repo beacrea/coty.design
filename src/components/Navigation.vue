@@ -28,15 +28,27 @@
   @import "../globalStyles/global";
 
   #navigation {
-    background: black;
-    color: white;
-    padding: ($padding_side/2);
+    background: $color_dark;
+    color: $color_light;
+    padding: 1.2rem $padding_side;
+    * {
+      box-sizing: border-box;
+    }
   }
   a {
-    margin: 0 ($padding_side/2);
+    display: inline-block;
     text-decoration: none;
-    &:active, &:visited {
-      color: orange;
+    padding: 0.4rem 1.6rem;
+    margin-right: $padding_side/3;
+    border-radius: 1.2rem;
+    border: 1px solid $color_grey;
+    background: $color_dark;
+    color: $color_grey;
+    &.active {
+      color: $color_light;
+      background: $color_blue-base;
+      border-color: rgba(255,255,255,0.23);
+      box-shadow: 0 0 4px 0 rgba(121,178,235,0.62), 0 0 20px 0 rgba(121,178,235,0.20), 0 0 4px 0 rgba(0,0,0,0.50), inset 0 2px 3px 0 rgba(0,0,0,0.03);
     }
   }
 </style>
