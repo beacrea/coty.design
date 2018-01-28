@@ -1,6 +1,8 @@
 <template>
   <main-layout>
-    <span>{{msg}}</span>
+    <div id="about">
+      <span>{{msg}}</span>
+    </div>
   </main-layout>
 </template>
 
@@ -18,3 +20,14 @@
     }
   }
 </script>
+
+<style lang="scss">
+  // Imports
+  @import "../globalStyles/global";
+
+  #about {
+    padding: $padding_side;
+    background: url('/static/img/about-bg.png') no-repeat top center;
+    background-size: cover;
+  }
+</style>
