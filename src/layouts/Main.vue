@@ -6,7 +6,6 @@
         <v-link href="/about">About</v-link>
       </li>
     </ul>
-
     <slot></slot>
   </div>
 </template>
@@ -21,7 +20,10 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss">
+  // Imports
+  @import "../globalStyles/global";
+
   .container {
     max-width: 600px;
     margin: 0 auto;
