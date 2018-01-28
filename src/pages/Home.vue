@@ -1,6 +1,8 @@
 <template>
   <main-layout>
-    <p>Welcome home</p>
+    <div id="home">
+      <span>{{msg}}</span>
+    </div>
   </main-layout>
 </template>
 
@@ -10,6 +12,11 @@
   export default {
     components: {
       MainLayout
+    },
+    data() {
+      return {
+        msg: 'This is the home page.'
+      }
     }
   }
 </script>

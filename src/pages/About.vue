@@ -1,6 +1,6 @@
 <template>
   <main-layout>
-    <p>About page</p>
+    <span>{{msg}}</span>
   </main-layout>
 </template>
 
@@ -10,6 +10,11 @@
   export default {
     components: {
       MainLayout
+    },
+    data() {
+      return {
+        msg: 'This is the about page.'
+      }
     }
   }
 </script>
