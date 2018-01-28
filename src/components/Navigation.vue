@@ -1,8 +1,8 @@
 <template>
   <div id="navigation">
     <nav>
-      <v-link href="/">Home</v-link>
-      <v-link href="/about">About</v-link>
+      <v-link href="/">About</v-link>
+      <v-link href="/work">Work</v-link>
     </nav>
   </div>
 </template>

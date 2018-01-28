@@ -1,6 +1,6 @@
 <template>
   <main-layout>
-    <div id="home">
+    <div id="work">
       <span>{{msg}}</span>
     </div>
   </main-layout>
@@ -15,8 +15,18 @@
     },
     data() {
       return {
-        msg: 'This is the home page.'
+        msg: 'This is the work page.'
       }
     }
   }
 </script>
+
+<style lang="scss">
+  // Imports
+  @import "../globalStyles/global";
+
+  #work {
+    padding: $padding_side;
+    background: $color_blue-shade;
+  }
+</style>
