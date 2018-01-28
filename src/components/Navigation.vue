@@ -28,10 +28,14 @@
   @import "../globalStyles/global";
 
   #navigation {
+    $height: 6.4rem;
+
     background: $color_dark;
     color: $color_light;
     padding: 1.2rem $padding_side;
-    max-height: 6.4rem;
+    max-height: $height;
+    min-height: $height;
+    height: $height;
     display: flex;
     align-items: center;
     * {
