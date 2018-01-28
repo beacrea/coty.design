@@ -31,6 +31,9 @@
     background: $color_dark;
     color: $color_light;
     padding: 1.2rem $padding_side;
+    max-height: 6.4rem;
+    display: flex;
+    align-items: center;
     * {
       box-sizing: border-box;
     }
