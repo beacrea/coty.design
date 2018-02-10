@@ -1,0 +1,98 @@
+{
+  "_class": "group",
+  "do_objectID": "BD9609C9-5E50-4660-B98E-5B4066EC4238",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 200,
+    "width": 782,
+    "x": 24.04258155010211,
+    "y": 0.8796262487514923
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": true,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "C985DE6E-9DBD-4D41-800F-C1816CBBFA77"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "5359BACE-4710-4C65-9F45-F6FF8E018A40"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "8984A8D0-A166-4F28-98F5-416F14FC4398"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "997851AF-8F08-47FC-8C16-75840BE28BEA"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "87F4F982-35B2-4338-9265-3B615CA2A33F"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "F956BF0C-668A-4FB5-9C73-77533EC61826"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "3D37C723-61FC-4CD6-AF00-765B3F5D1708"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "4892CAEC-7507-4F97-8669-4E2E1080ADEA"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "C2EDBF50-6C69-4F0A-98BE-4ABD18B0B198"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "AC52FB30-C40D-41DA-AC82-D951DFCB680D"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "E7B88C01-1363-4B25-A902-55BBC8DAB63B"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "BF4B2BEC-F787-456D-90F8-96CC1AF4F2E6"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "43D27CE2-008E-4B97-AB9C-BC6D5C29FC10"
+    }
+  ],
+  "name": "vert",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "contextSettings": {
+      "_class": "graphicsContextSettings",
+      "blendMode": 0,
+      "opacity": 0.7317708333333334
+    },
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}
