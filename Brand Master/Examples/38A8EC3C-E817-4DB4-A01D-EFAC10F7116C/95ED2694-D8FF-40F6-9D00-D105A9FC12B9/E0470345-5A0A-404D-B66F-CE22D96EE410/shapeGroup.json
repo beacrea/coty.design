@@ -1,0 +1,45 @@
+{
+  "_class": "shapeGroup",
+  "clippingMaskMode": 0,
+  "do_objectID": "E0470345-5A0A-404D-B66F-CE22D96EE410",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 477.0948531154052,
+    "width": 565.6360469831368,
+    "x": 265.1819765084316,
+    "y": 262.7598191331978
+  },
+  "hasClickThrough": false,
+  "hasClippingMask": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 1,
+  "layers": [
+    {
+      "class": "oval",
+      "id": "DCDE63E5-F188-4E60-BD82-D451800D9427"
+    }
+  ],
+  "name": "Oval",
+  "nameIsFixed": false,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": -4,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "sharedObjectID": "08C683FB-3AEA-4FBC-9FCB-D8D0B0291B40"
+  },
+  "windingRule": 1
+}
