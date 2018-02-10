@@ -32,8 +32,12 @@
     "version": 97
   },
   "pages": [
+    "Colors",
     "Icons",
     "Portraits",
+    "UI",
+    "Examples",
+    "Typography",
     "Symbols"
   ],
   "userInfo": {
