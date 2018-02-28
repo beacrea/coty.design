@@ -4,6 +4,8 @@
       <v-link href="/">About</v-link>
       <v-link href="/work">Work</v-link>
       <v-link href="/stats">Stats</v-link>
+      <v-link href="/resume">Resume</v-link>
+      <v-link href="/contact">Contact</v-link>
     </nav>
   </div>
 </template>

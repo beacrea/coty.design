@@ -1,6 +1,6 @@
 <template>
   <main-layout>
-    <div id="stats">
+    <div id="contact">
       <span>{{msg}}</span>
     </div>
   </main-layout>
@@ -15,7 +15,7 @@
     },
     data() {
       return {
-        msg: 'This is the stats page.'
+        msg: 'This is the contact page.'
       }
     }
   }
@@ -25,7 +25,7 @@
   // Imports
   @import "../globalStyles/global";
 
-  #stats {
+  #contact {
     padding: $padding_side;
     background: $color_blue-shade;
   }
