@@ -31,7 +31,7 @@
   #navigation {
     $height: 6.4rem;
 
-    background: $color_dark;
+    background: black;
     color: $color_light;
     padding: 1.2rem $padding_side;
     max-height: $height;
@@ -44,6 +44,8 @@
     }
   }
   a {
+    $inactiveColor: rgba(white, 0.4);
+
     display: inline-block;
     text-decoration: none;
     padding: 0.4rem 0.8rem;
@@ -52,9 +54,8 @@
     text-align: center;
     margin-right: $padding_side/3;
     border-radius: 1.2rem;
-    border: 1px solid $color_grey;
-    background: $color_dark;
-    color: $color_grey;
+    border: 1px solid $inactiveColor;
+    color: $inactiveColor;
     &.active {
       color: $color_light;
       background: $color_accent1;
