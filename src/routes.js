@@ -1,4 +1,5 @@
 export default {
   '/': 'About',
-  '/work': 'Work'
+  '/work': 'Work',
+  '/stats': 'Stats'
 }

@@ -3,6 +3,7 @@
     <nav>
       <v-link href="/">About</v-link>
       <v-link href="/work">Work</v-link>
+      <v-link href="/stats">Stats</v-link>
     </nav>
   </div>
 </template>
@@ -53,9 +54,9 @@
     color: $color_grey;
     &.active {
       color: $color_light;
-      background: $color_blue-base;
+      background: $color_accent1;
       border-color: rgba(255,255,255,0.23);
-      box-shadow: 0 0 4px 0 rgba(121,178,235,0.62), 0 0 20px 0 rgba(121,178,235,0.20), 0 0 4px 0 rgba(0,0,0,0.50), inset 0 2px 3px 0 rgba(0,0,0,0.03);
+      box-shadow: 0 0 4px 0 rgba(240,96,103,0.62), 0 0 20px 0 rgba(240,96,103,0.20), 0 0 4px 0 rgba(0,0,0,0.50), inset 0 2px 3px 0 rgba(0,0,0,0.03);
     }
   }
 </style>
