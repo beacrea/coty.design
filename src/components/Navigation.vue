@@ -1,13 +1,11 @@
 <template>
-  <div id="navigation">
-    <nav>
-      <v-link href="/">About</v-link>
-      <v-link href="/work">Work</v-link>
-      <v-link href="/stats">Stats</v-link>
-      <v-link href="/resume">Resume</v-link>
-      <v-link href="/contact">Contact</v-link>
-    </nav>
-  </div>
+  <nav id="navigation">
+    <v-link href="/">About</v-link>
+    <v-link href="/work">Work</v-link>
+    <v-link href="/stats">Stats</v-link>
+    <v-link href="/resume">Resume</v-link>
+    <v-link href="/contact">Contact</v-link>
+  </nav>
 </template>
 
 
@@ -41,6 +39,8 @@
     height: $height;
     display: flex;
     align-items: center;
+    overflow-y: hidden;
+    overflow-x: scroll;
     * {
       box-sizing: border-box;
     }
