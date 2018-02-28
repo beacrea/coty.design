@@ -1,9 +1,9 @@
 <template>
   <nav id="navigation">
-    <v-link href="/">About</v-link>
+    <v-link href="/">Intro</v-link>
     <v-link href="/work">Work</v-link>
     <v-link href="/stats">Stats</v-link>
-    <v-link href="/resume">Resume</v-link>
+    <v-link href="/resume">CV</v-link>
     <v-link href="/contact">Contact</v-link>
   </nav>
 </template>
@@ -39,8 +39,6 @@
     height: $height;
     display: flex;
     align-items: center;
-    overflow-y: hidden;
-    overflow-x: scroll;
     * {
       box-sizing: border-box;
     }
@@ -48,7 +46,10 @@
   a {
     display: inline-block;
     text-decoration: none;
-    padding: 0.4rem 1.6rem;
+    padding: 0.4rem 0.8rem;
+    flex: 1 auto;
+    font-size: 1.4rem;
+    text-align: center;
     margin-right: $padding_side/3;
     border-radius: 1.2rem;
     border: 1px solid $color_grey;
