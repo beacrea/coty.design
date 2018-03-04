@@ -1,0 +1,58 @@
+/**********************
+* TYPOGRAPHY-SPECIFIC
+* Lol self-explanatory
+**********************/
+
+
+/* - - - - -
+Base styles
+- - - - - */
+html, body {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 10px;
+}
+
+
+/* - - - - - - - - -
+Font sizes (default)
+- - - - - - - - - */
+/* Vars */
+$h1_size: 6.4rem;
+$h2_size: 2.4rem;
+$h3_size: 1.8rem;
+$p_size: 1.6rem;
+
+h1 {
+  font-size: $h1_size;
+  font-family: 'Vollkorn', serif;
+  color: $color_accent1;
+  font-weight: 600;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(240,96,103,0.32);
+}
+h2 {
+  font-size: $h2_size;
+  font-weight: 300;
+  line-height: 1.2;
+  text-shadow: 0 0 10px rgba(240,234,227,0.24);
+}
+h3 {
+  font-size: $h3_size;
+  font-weight: 300;
+  line-height: 1.2;
+  opacity: 0.75;
+}
+p, span, a { font-size: $p_size; }
+
+
+/* - - - - -
+Base margins
+- - - - - */
+h1 {
+  margin-bottom: 1.2rem;
+}
+h2, h3 {
+  margin-bottom: 1.6rem;
+}
+p { margin-bottom: 1.4rem; }
+p:last-child { margin-bottom: 0; }

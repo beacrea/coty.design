@@ -1,0 +1,127 @@
+[
+  {
+    "navigation": [
+      {
+        "name": "About",
+        "slug": "about",
+        "purpose": "A sort of AMA about myself and what opportunities I'm looking for."
+      },
+      {
+        "name": "Work",
+        "slug": "work",
+        "purpose": "A showcase of various projects I've been involved in through the years."
+      },
+      {
+        "name": "Resume",
+        "slug": "resume",
+        "purpose": "A link to a PDF of my resume and to my LinkedIn profile."
+      },
+      {
+        "name": "Contact",
+        "slug": "contact",
+        "purpose": "Links to social media, a contact form, and an SMS reminder button."
+      }
+    ],
+    "content": {
+      "about": {
+        "header_main": {
+          "label": "My name is:",
+          "text": "Coty Beasley",
+          "purpose": "My name."
+        },
+        "header_sub": {
+          "label": "What I am:",
+          "text": "I'm a product designer based in San Francisco specializing in digital product strategy and interaction.",
+          "purpose": "The type of designer I am and where I'm located."
+        },
+        "titles": {
+          "label": "Design titles can change. What titles have fit you in the past?",
+          "list": [
+            {
+              "text": "Product Designer"
+            },
+            {
+              "text": "Design Technologist"
+            },
+            {
+              "text": "Design Engineer"
+            },
+            {
+              "text": "Front-End Engineer"
+            },
+            {
+              "text": "Prototype Designer"
+            },
+            {
+              "text": "UX Designer"
+            },
+            {
+              "text": "Interface Designer"
+            },
+            {
+              "text": "Product Manager"
+            },
+            {
+              "text": "Consultant"
+            },
+            {
+              "text": "Cognitive Designer",
+              "link": "https://www.nngroup.com/videos/cognitive-designer",
+              "alt": "(Blame Don Norman)"
+            }
+          ]
+        },
+        "productCycle": {
+          "label": "Where do you typically fit into the product cycle?",
+          "text": "I’m typically involved end-to-end. I often begin at the beginning of the process, during research cycles or early business development, then see the product through design, development, and later analysis."
+        },
+        "indivContrib": {
+          "label": "Do you see yourself as a manager or an individual contributor?",
+          "text": "I prefer being a principal-level individual contributor, often guiding product vision or project initiatives."
+        },
+        "companySize": {
+          "label": "What size company or team do you like working with?",
+          "text": "It depends. Since I tend to be end-to-end, I prefer to work on early-stage initiatives where most answers haven't been discovered and the vision is maturing. The company size doesn’t matter as much as the team and the initiative."
+        },
+        "opportunityTypes": [
+          {
+            "text": "Small, cohesive design team"
+          },
+          {
+            "text": "Strong leadership support for design value"
+          },
+          {
+            "text": "Some research support or resources to pursue insights"
+          },
+          {
+            "text": "‎Compelling mission and scale"
+          },
+          {
+            "text": "Industry-first problem spaces"
+          },
+          {
+            "text": "Flexible work environment/limited remote infrastructure"
+          }
+        ]
+      }
+    },
+    "socialLinks": [
+      {
+        "name": "LinkedIn",
+        "url": "https://www.linkedin.com/in/cbeasley0/"
+      },
+      {
+        "name": "Dribbble",
+        "url": "http://dribbble.com/beacrea"
+      },
+      {
+        "name": "Github",
+        "url": "https://github.com/beacrea"
+      },
+      {
+        "name": "Codepen",
+        "url": "https://codepen.io/beacrea/"
+      }
+    ]
+  }
+]
