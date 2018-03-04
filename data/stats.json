@@ -1,6 +1,19 @@
 {
   "id": "stats-model",
-  "stats": ["Luck", "Sleep", "Tea"],
+  "stats": [
+    {
+      "name": "Luck",
+      "value": 10
+    },
+    {
+      "name": "Sleep",
+      "value": 20
+    },
+    {
+      "name": "Tea",
+      "value": 60
+    }
+  ],
   "items": [
     {
       "icon": "icon-framer",
