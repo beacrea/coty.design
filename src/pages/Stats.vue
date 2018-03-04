@@ -4,7 +4,7 @@
       <section class="statsGroup">
         <header>
           <h1>Current Stats</h1>
-          <span class="dice" :style="{ backgroundImage: `url('${diceImage}')` }" ontouchstart="" alt="Roll the dice!"></span>
+          <span class="dice" :style="{ backgroundImage: `url('${diceImage}')` }" v-on:click="setRandom" alt="Roll the dice!"></span>
         </header>
         <div class="gaugeGroup">
           <div class="stat" v-for="stat in stats" :key="stat.name">
@@ -51,6 +51,11 @@
       // Random Number Generator
       getRandom: function () {
         return Math.floor(Math.random() * 80) + 20
+      },
+      setRandom: function () {
+        this.stats.forEach((stat, index) => {
+          stat.value = this.getRandom()
+        });
       }
     }
   }
@@ -58,6 +63,7 @@
 
 <style lang="scss" scoped>
   // Imports
+  @import "../globalStyles/imports";
   @import "../globalStyles/vars";
 
   #stats {
@@ -75,11 +81,12 @@
     }
   }
   h1 {
+    font-family: 'Open Sans', Arial, sans-serif;
     font-size: 2.4rem;
     color: $color_light;
     letter-spacing: 0;
-    line-height: 32px;
-    text-shadow: 0 0 10px rgba(240, 234, 227, 0.24);
+    line-height: 1.2;
+    text-shadow: 0 0 4px rgba(240, 234, 227, 0.10);
   }
   .statsGroup {
     border-bottom: 1px solid rgba(255, 255, 255, 0.32);
@@ -94,12 +101,12 @@
     opacity: 0.5;
     height: 2.4rem;
     width: 2.4rem;
-    transition-duration: 0.5s;
+    transition-duration: 1s;
     cursor: pointer;
     background-repeat: no-repeat;
     &:active {
-      transform: rotate(360deg);
-      -webkit-transform: rotate(360deg);
+      transform: rotate(720deg);
+      -webkit-transform: rotate(720deg);
     }
   }
   .label {
@@ -117,11 +124,12 @@
 
   .guage {
     margin-top: 8px;
-    overflow: hidden;
+    overflow-x: hidden;
     width: 100%;
     height: 16px;
     background: #0b0e1f;
     border-radius: 8px;
+    z-index: 1;
     position: relative;
     .fill {
       position: absolute;
