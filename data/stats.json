@@ -1,0 +1,43 @@
+{
+  "id": "stats-model",
+  "stats": [
+    {
+      "name": "Luck",
+      "value": 10
+    },
+    {
+      "name": "Sleep",
+      "value": 20
+    },
+    {
+      "name": "Tea",
+      "value": 60
+    }
+  ],
+  "items": [
+    {
+      "icon": "icon-framer",
+      "name": "Framer",
+      "type": "Prototyping",
+      "desc": "For interaction design, especially complex motion and flows."
+    },
+    {
+      "icon": "icon-sketch",
+      "name": "Sketch",
+      "type": "UI Design",
+      "desc": "Interface design and component system master files. Where I live most days."
+    },
+    {
+      "icon": "icon-vcs",
+      "name": "Git/Abstract",
+      "type": "Versioning",
+      "desc": "Code and design asset versioning for maximum time machine status."
+    },
+    {
+      "icon": "icon-adobecc",
+      "name": "Creative Cloud",
+      "type": "Multimedia",
+      "desc": "Motion design, production, illustration, audio engineering, photo editing."
+    }
+  ]
+}
