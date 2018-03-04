@@ -46,6 +46,12 @@
         stats: model.stats,
         items: model.items
       }
+    },
+    methods: {
+      // Random Number Generator
+      getRandom: function () {
+        return Math.floor(Math.random() * 80) + 20
+      }
     }
   }
 </script>
