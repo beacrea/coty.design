@@ -135,7 +135,7 @@
   }
 
   .equipGroup {
-    $itemHeight: 5.6rem;
+    $itemHeight: 6.4rem;
     .item {
       background: rgba(255, 255, 255, 0.1);
       height: $itemHeight;
@@ -155,12 +155,14 @@
       justify-content: center;
       align-items: center;
       font-size: 3.2rem;
-      margin-right: 8px;
     }
     .content {
       display: block;
+      padding: 8px;
+      header, span {
+        font-size: 1.4rem;
+      }
       header {
-        font-size: 1.6rem;
         font-weight: bold;
         margin-bottom: 4px;
       }
@@ -168,6 +170,11 @@
         opacity: 0.5;
         font-weight: normal;
         margin-left: 4px;
+      }
+      .text {
+        font-size: 1.2rem;
+        line-height: 1.2;
+        color: rgba(white, 0.5)
       }
     }
   }
