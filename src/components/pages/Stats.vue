@@ -63,8 +63,6 @@ export default {
 @import "../../globalStyles/vars";
 
 #stats {
-  background: url('/static/img/stats-bg.jpg') no-repeat top left;
-  background-size: cover;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
