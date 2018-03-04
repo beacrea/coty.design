@@ -8,9 +8,7 @@
         </header>
         <div class="gaugeGroup">
           <div class="stat" v-for="stat in stats" :key="stat.name">
-            <div class="label">
-              {{stat.name}}
-            </div>
+            <div class="label">{{stat.name}}</div>
             <div class="guage">
               <div class="fill" v-bind:style="{width: stat.value + '%'}"></div>
             </div>
@@ -21,14 +19,10 @@
         <h1>Equipment List</h1>
         <div class="equipGroup">
           <div class="item" v-for="item in items" :key="item.name">
-            <div class="itemBox">
-              A
-            </div>
+            <div class="itemBox">A</div>
             <div class="content">
               <header>{{item.name}}<span>({{item.type}})</span></header>
-              <div class="text">
-                {{item.desc}}
-              </div>
+              <div class="text">{{item.desc}}</div>
             </div>
           </div>
         </div>
@@ -121,7 +115,7 @@
     width: 100%;
     height: 16px;
     background: #0b0e1f;
-    border-radius: 7px;
+    border-radius: 8px;
     position: relative;
     .fill {
       position: absolute;
