@@ -1,13 +1,16 @@
 <template>
   <main-layout>
     <div id="stats">
-      <span>{{msg}}</span>
+      <li v-for="item in stats" :key="item.name">
+        {{ item.name }}
+      </li>
     </div>
   </main-layout>
 </template>
 
 <script>
   import MainLayout from '../layouts/Main.vue'
+  import model from '../../data/stats'
 
   export default {
     components: {
@@ -15,7 +18,8 @@
     },
     data() {
       return {
-        msg: 'This is the stats page.'
+        msg: 'This is the stats page.',
+        stats: model.items
       }
     }
   }
