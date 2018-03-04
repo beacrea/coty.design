@@ -1,5 +1,5 @@
 {
-  "id": "stats",
+  "id": "stats-model",
   "stats": ["Luck", "Sleep", "Tea"],
   "items": [
     {
