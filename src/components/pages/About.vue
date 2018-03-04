@@ -36,8 +36,6 @@ export default {
 
 #about {
   padding: $padding_side;
-  background: url('/static/img/about-bg.png') no-repeat top left;
-  background-size: cover;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
