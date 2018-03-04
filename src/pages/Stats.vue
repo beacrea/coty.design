@@ -1,10 +1,10 @@
 <template>
   <main-layout>
     <div id="stats">
-      <section class="stats">
+      <section class="statsGroup">
         <header>
           <h1>Current Stats</h1>
-          <span class="dice" ontouchstart="" alt="Roll the dice!"></span>
+          <span class="dice" :style="{ backgroundImage: `url('${diceImage}')` }" ontouchstart="" alt="Roll the dice!"></span>
         </header>
         <div class="gaugeGroup">
           <div class="stat" v-for="stat in stats" :key="stat.name">
@@ -12,9 +12,7 @@
               {{stat.name}}
             </div>
             <div class="guage">
-              <div class="fill">
-                {{statValue(stat.value)}}
-              </div>
+              <div class="fill" v-bind:style="{width: stat.value + '%'}"></div>
             </div>
           </div>
         </div>
@@ -50,29 +48,127 @@
     data() {
       return {
         msg: 'This is the stats page.',
+        diceImage: '../../static/img/dice.svg',
         stats: model.stats,
         items: model.items
-      }
-    },
-    methods: {
-      statValue: function (value) {
-        return value + '%'
       }
     }
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   // Imports
-  @import "../globalStyles/global";
+  @import "../globalStyles/vars";
 
   #stats {
-    padding: $padding_side;
     background: url('/static/img/stats-bg.jpg') no-repeat top left;
     background-size: cover;
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
     height: 100%;
+    * {
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+    section {
+      padding: $padding_side;
+    }
+  }
+  h1 {
+    font-size: 2.4rem;
+    color: $color_light;
+    letter-spacing: 0;
+    line-height: 32px;
+    text-shadow: 0 0 10px rgba(240, 234, 227, 0.24);
+  }
+  .statsGroup {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.32);
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+  }
+  .dice {
+    opacity: 0.5;
+    height: 2.4rem;
+    width: 2.4rem;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    &:active {
+      transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  .label {
+    font-size: 16px;
+    margin-top: 14px;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 0;
+    line-height: 14px;
+  }
+  .gaugeGroup {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 16px;
+  }
+
+  .guage {
+    margin-top: 8px;
+    overflow: hidden;
+    width: 100%;
+    height: 16px;
+    background: #0b0e1f;
+    border-radius: 7px;
+    position: relative;
+    .fill {
+      position: absolute;
+      transition-duration: 0.25s;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 60%;
+      background-color: #f06067;
+    }
+  }
+
+  .equipGroup {
+    $itemHeight: 5.6rem;
+    .item {
+      background: rgba(255, 255, 255, 0.1);
+      height: $itemHeight;
+      border-radius: 8px;
+      display: flex;
+      overflow: hidden;
+      align-items: center;
+      margin-top: 1.6rem;
+      color: rgba(255, 255, 255, 0.75);
+    }
+    .itemBox {
+      width: $itemHeight;
+      min-width: $itemHeight;
+      height: $itemHeight;
+      background: rgba(255, 255, 255, 0.25);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3.2rem;
+      margin-right: 8px;
+    }
+    .content {
+      display: block;
+      header {
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+      span {
+        opacity: 0.5;
+        font-weight: normal;
+        margin-left: 4px;
+      }
+    }
   }
 </style>
