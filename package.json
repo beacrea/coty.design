@@ -1,7 +1,7 @@
 {
-  "name": "router-app",
+  "name": "cotybeasley.name",
+  "description": "The personal website of Coty Beasley",
   "version": "1.0.0",
-  "description": "A Vue.js project",
   "author": "Coty Beasley <coty@cotybeasley.name>",
   "private": true,
   "scripts": {
