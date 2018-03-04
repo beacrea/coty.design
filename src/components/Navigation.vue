@@ -1,7 +1,10 @@
 <template>
   <nav id="navigation">
-    <router-link to="intro">Intro</router-link>
-    <router-link to="stats">Stats</router-link>
+    <router-link to="intro" v-on:click.native="changeBg">Intro</router-link>
+    <a>Work</a>
+    <router-link to="stats" v-on:click.native="changeBg">Stats</router-link>
+    <a>Contact</a>
+    <a class="icon">★</a>
   </nav>
 </template>
 
@@ -11,6 +14,11 @@ export default {
   data () {
     return {
       msg: 'This is a message'
+    }
+  },
+  methods: {
+    changeBg: function () {
+      this.$emit('pageChange')
     }
   }
 }
@@ -48,6 +56,13 @@ a {
   border-radius: 1.2rem;
   border: 1px solid $inactiveColor;
   color: $inactiveColor;
+  cursor: pointer;
+  transition-duration: 1s;
+  &.icon {
+    text-align: center;
+    font-family: Arial;
+    max-width: 6.4rem;
+  }
   &.router-link-active {
     color: $color_light;
     background: $color_accent1;

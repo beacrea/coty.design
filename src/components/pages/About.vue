@@ -2,9 +2,9 @@
   <div id="about">
     <section id="intro">
       <header>
-        <h1>Coty Beasley</h1>
-        <h2>I'm a product designer based in San Francisco.</h2>
-        <h3>I specialize in digital product strategy and interaction.</h3>
+        <h1>I’ve seen things you people wouldn’t believe.</h1>
+        <p>Overclocked Pentiums on fire in suburban basements. I watched gif text glitter in Netscape before the great wars.</p>
+        <p>All of these moments will be lost, like tears in rain.</p>
       </header>
       <img src="/static/img/arrow-down.png" class="downArrow" alt="">
     </section>
@@ -47,16 +47,25 @@ section {
   flex-direction: column;
   min-height: 100%;
   align-items: center;
+  justify-content: center;
+  position: relative;
   header {
     text-align: left;
-    align-self: flex-start;
-    flex-direction: column;
-    flex: 100%;
-    display: flex;
-    justify-content: center;
+    margin: 0;
+    height: 100%;
+    h1 {
+      margin: 0;
+      color: white;
+    }
+    p {
+      font-size: 1.8rem;
+      margin-bottom: 0;
+    }
   }
   &#intro {
     .downArrow {
+      top: calc(100% - 32px);
+      position: absolute;
       display: inline-block;
       width: 5.8rem;
       height: 4.1rem;
