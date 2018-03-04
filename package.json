@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --hot",
+    "dev-bs": "browser-sync start --server",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "predeploy": "npm run build"
   },
