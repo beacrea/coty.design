@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" v-bind:class="activeBg">
     <transition name="fade" mode="out-in" v-on:after-enter="afterEnter" appear>
       <router-view/>
     </transition>
-    <Navigation></Navigation>
+    <Navigation v-on:pageChange="changeBG"></Navigation>
   </div>
 </template>
 
@@ -12,7 +12,20 @@ import Navigation from './components/Navigation'
 
 export default {
   components: {Navigation},
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      activeBg: 'pg-' + this.$route.name
+    }
+  },
+  methods: {
+    changeBG: function (e) {
+      this.activeBg = 'pg-' + this.$route.name
+    },
+    afterEnter: function (el, done) {
+      console.log('Page changed to: ' + this.$route.name)
+    }
+  }
 }
 </script>
 
@@ -25,11 +38,18 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: url('/static/img/stats-bg.jpg') no-repeat top left;
+  background: #0B0E1F no-repeat top center;
   background-size: cover;
   color: $color_light;
+  transition-duration: 1s;
   > div {
     flex: 1 1 auto;
+  }
+  &.pg-intro {
+    background-image: url('/static/img/bg-about-sm.jpg');
+  }
+  &.pg-stats {
+    background-image: url('/static/img/bg-stats.jpg');
   }
 }
 
