@@ -3,8 +3,10 @@
     <section id="intro">
       <header>
         <h1>I’ve seen things you people wouldn’t believe.</h1>
-        <p>Overclocked Pentiums on fire in suburban basements. I watched gif text glitter in Netscape before the great wars.</p>
-        <p>All of these moments will be lost, like tears in rain.</p>
+        <p>Overclocked Pentiums on fire in suburban basements.
+          <span class="lg">I watched gif text glitter in Netscape before the great browser wars.</span>
+        </p>
+        <p>All of these moments will be lost, <a href="https://youtu.be/NoAzpa1x7jU?t=1m45s" target="_blank">like tears in rain</a>.</p>
       </header>
       <img src="/static/img/arrow-down.png" class="downArrow" alt="">
     </section>
@@ -99,8 +101,13 @@ section {
 
 /* Tablets+ */
 @media screen and (min-width: 76rem) {
-  section p {
-    font-size: ($p_size * 1.4);
+  section header {
+    p, span {
+      font-size: ($p_size * 1.2);
+    }
+  }
+  .lg {
+    display: block;
   }
 }
 
