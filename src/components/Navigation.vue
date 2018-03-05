@@ -29,7 +29,7 @@ export default {
 @import "../globalStyles/global";
 
 #navigation {
-  $height: 6.4rem;
+  $height: $navHeight;
 
   background: black;
   color: $color_light;
