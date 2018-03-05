@@ -14,7 +14,7 @@
       "value": 60
     }
   ],
-  "items": [
+  "tools": [
     {
       "icon": "icon-framer",
       "name": "Framer",
@@ -38,6 +38,14 @@
       "name": "Creative Cloud",
       "type": "Multimedia",
       "desc": "Motion design, production, illustration, audio engineering, photo editing."
+    }
+  ],
+  "gear": [
+    {
+      "icon": "icon-mac",
+      "name": "Macbook Pro",
+      "type": "Computing",
+      "desc": "My go-to processing machine. Where all my work gets done."
     }
   ]
 }

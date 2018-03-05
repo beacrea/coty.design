@@ -1,6 +1,6 @@
 <template>
   <div id="stats">
-    <section class="statsGroup">
+    <section id="statsGroup">
       <header>
         <h1>Current Stats</h1>
         <span class="dice" :style="{ backgroundImage: `url('${diceImage}')` }" v-on:click="setRandom" alt="Roll the dice!"></span>
@@ -14,10 +14,22 @@
         </div>
       </div>
     </section>
-    <section>
-      <h1>Equipment List</h1>
-      <div class="equipGroup">
-        <div class="item" v-for="item in items" :key="item.name">
+    <section id="toolGroup">
+      <h1>Tool List</h1>
+      <div>
+        <div class="item" v-for="item in tools" :key="item.name">
+          <div class="itemBox">A</div>
+          <div class="content">
+            <header>{{item.name}}<span>({{item.type}})</span></header>
+            <div class="text">{{item.desc}}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="gearGroup">
+      <h1>Gear List</h1>
+      <div>
+        <div class="item" v-for="item in gear" :key="item.name">
           <div class="itemBox">A</div>
           <div class="content">
             <header>{{item.name}}<span>({{item.type}})</span></header>
@@ -39,7 +51,8 @@ export default {
       msg: 'This is the stats page.',
       diceImage: '../../static/img/dice.svg',
       stats: model.stats,
-      items: model.items
+      tools: model.tools,
+      gear: model.gear
     }
   },
   methods: {
@@ -70,8 +83,11 @@ export default {
   * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
-  section {
-    padding: $padding_side;
+}
+section {
+  padding: $padding_side;
+  &:last-child {
+    margin-bottom: $navHeight/2;
   }
 }
 h1 {
@@ -82,7 +98,7 @@ h1 {
   line-height: 1.2;
   text-shadow: 0 0 4px rgba(240, 234, 227, 0.10);
 }
-.statsGroup {
+#statsGroup {
   border-bottom: 1px solid rgba(255, 255, 255, 0.32);
   header {
     display: flex;
@@ -136,7 +152,7 @@ h1 {
   }
 }
 
-.equipGroup {
+#gearGroup, #toolGroup {
   $itemHeight: 6.4rem;
   .item {
     background: rgba(255, 255, 255, 0.1);
@@ -179,5 +195,8 @@ h1 {
       color: rgba(white, 0.5)
     }
   }
+}
+#gearGroup {
+  padding: 0 $padding_side $padding_side;
 }
 </style>
