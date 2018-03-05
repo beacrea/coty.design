@@ -12,6 +12,8 @@ Base styles
 - - - - - */
 * {
   box-sizing: border-box;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-text-stroke: 1px transparent;
 }
 
 body, html {
