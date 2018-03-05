@@ -55,7 +55,7 @@ a {
   margin-right: $padding_side/3;
   border-radius: 1.2rem;
   border: 1px solid $inactiveColor;
-  color: $inactiveColor;
+  color: $inactiveColor !important;
   cursor: pointer;
   transition-duration: 1s;
   &.icon {
