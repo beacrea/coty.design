@@ -10,11 +10,18 @@
     </section>
     <section id="qa1">
       <header>
-        <h1>Coty Beasley</h1>
-        <h2>I'm a product designer based in San Francisco.</h2>
-        <h3>I specialize in digital product strategy and interaction.</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequuntur debitis deleniti deserunt doloribus eligendi eos impedit iusto magnam nemo neque nobis nostrum perspiciatis quas ratione rem sed, unde vitae.</p>
       </header>
-      <img src="/static/img/arrow-down.png" class="downArrow" alt="">
+    </section>
+    <section id="qa2">
+      <header>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequuntur debitis deleniti deserunt doloribus eligendi eos impedit iusto magnam nemo neque nobis nostrum perspiciatis quas ratione rem sed, unde vitae.</p>
+      </header>
+    </section>
+    <section id="qa3">
+      <header>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequuntur debitis deleniti deserunt doloribus eligendi eos impedit iusto magnam nemo neque nobis nostrum perspiciatis quas ratione rem sed, unde vitae.</p>
+      </header>
     </section>
   </div>
 </template>
@@ -45,7 +52,7 @@ section {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  min-height: calc(100% + 64px);
   align-items: center;
   justify-content: center;
   position: relative;
@@ -63,8 +70,10 @@ section {
     }
   }
   &#intro {
+    min-height: calc(100% - 64px);
     .downArrow {
-      top: calc(100% - 32px);
+      top: calc(100% - 2.4rem);
+      left: calc(50% - 2.9rem);
       position: absolute;
       display: inline-block;
       width: 5.8rem;
@@ -87,6 +96,14 @@ section {
     }
   }
 }
+
+/* Tablets+ */
+@media screen and (min-width: 76rem) {
+  section p {
+    font-size: ($p_size * 1.4);
+  }
+}
+
 header {
   margin-bottom: 25%;
   padding-right: 3.2rem;
