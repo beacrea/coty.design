@@ -53,6 +53,13 @@ export default {
   }
 }
 
+/* Tablets+ */
+@media screen and (min-width: 76rem) {
+  #app > div:not(#navigation) {
+    padding: 0 $padding_side*2 !important;
+  }
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.3s
 }
