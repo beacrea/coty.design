@@ -44,6 +44,18 @@ h3 {
 }
 p, span, a { font-size: $p_size; }
 
+a {
+  $color: $color_accent2;
+
+  color: $color;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 1px dashed $color;
+  &:active, &:visited {
+    color: $color;
+  }
+}
+
 /* High resolution devices */
 @media (-webkit-min-device-pixel-ratio: 1.5),
 (-o-min-device-pixel-ratio: 3/2),
