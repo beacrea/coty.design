@@ -13,7 +13,7 @@
     <section id="qa1">
       <header>
         <h1>My name is Coty Beasley</h1>
-        <h2>I'm a product designer based in San Francisco, CA.</h2>
+        <h2>I'm a product designer based in San Francisco.</h2>
         <h2>I specialize in digital product strategy and interaction.</h2>
       </header>
     </section>

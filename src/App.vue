@@ -1,6 +1,6 @@
 <template>
   <div id="app" v-bind:class="activeBg">
-    <div id="overlay" v-bind:style="{ opacity: blurAbout }"></div>
+    <span id="overlay" v-bind:style="{ opacity: blurAbout }"></span>
     <transition name="fade" mode="out-in" v-on:after-enter="afterEnter" appear>
       <router-view v-on:introStatus="introBlurred" v-on:pageChange="changeBG" />
     </transition>
@@ -52,6 +52,7 @@ export default {
   > div {
     flex: 1 1 auto;
     z-index: 2;
+    -webkit-transform:translateZ(0px);
   }
   &.pg-intro {
     background-image: url('/static/img/bg-about-sm.jpg');
@@ -74,13 +75,14 @@ export default {
 // Overlay
 #overlay {
   position: absolute;
+  display: block;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
   opacity: 0;
   transition-duration: 2s;
-  z-index: 1;
+  z-index: 0 !important;
   background-image: url('/static/img/bg-about-sm-blurred.jpg');
 }
 
