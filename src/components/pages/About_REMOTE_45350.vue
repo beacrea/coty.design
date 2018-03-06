@@ -1,67 +1,41 @@
 <template>
-  <div id="about" v-on:scroll="reportPosition">
+  <div id="about">
     <section id="intro">
       <header>
         <h1>I’ve seen things you people wouldn’t believe.</h1>
-        <p>Overclocked Pentiums on fire in suburban basements.
-          <span class="lg">I watched gif text glitter in Netscape before the great browser wars.</span>
-        </p>
-        <p>All of these moments will be lost, <a href="https://youtu.be/NoAzpa1x7jU?t=1m45s" target="_blank">like tears in rain</a>.</p>
+        <p>Overclocked Pentiums on fire in suburban basements. I watched gif text glitter in Netscape before the great wars.</p>
+        <p>All of these moments will be lost, like tears in rain.</p>
       </header>
       <img src="/static/img/arrow-down.png" id="downArrow" alt="">
     </section>
     <section id="qa1">
       <header>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequuntur debitis deleniti deserunt doloribus eligendi eos impedit iusto magnam nemo neque nobis nostrum perspiciatis quas ratione rem sed, unde vitae.</p>
+        <h1>Coty Beasley</h1>
+        <h2>I'm a product designer based in San Francisco.</h2>
+        <h3>I specialize in digital product strategy and interaction.</h3>
       </header>
-    </section>
-    <section id="qa2">
-      <header>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequuntur debitis deleniti deserunt doloribus eligendi eos impedit iusto magnam nemo neque nobis nostrum perspiciatis quas ratione rem sed, unde vitae.</p>
-      </header>
-    </section>
-    <section id="qa3">
-      <header>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequuntur debitis deleniti deserunt doloribus eligendi eos impedit iusto magnam nemo neque nobis nostrum perspiciatis quas ratione rem sed, unde vitae.</p>
-      </header>
+      <img src="/static/img/arrow-down.png" class="downArrow" alt="">
     </section>
   </div>
 </template>
 
 <script>
-let offsetEl = 'downArrow'
-
 export default {
   components: {},
   data () {
     return {
       msg: 'This is the about page.',
-      initOffset: 0,
-      currentOffset: 0
+      scrollThreshhold: this.calculateThreshold()
     }
   },
   mounted: function () {
-    let el = document.getElementById(offsetEl)
-    this.initOffset = this.calcOffset(el).top
-    this.currentOffset = this.calcOffset(el).top
+    let element = document.getElementById('#about')
+    console.log(element.offsetTop)
   },
   methods: {
-    reportPosition: function () {
-      let el = document.getElementById(offsetEl)
-      let elOffset = this.calcOffset(el).top
-      this.currentOffset = elOffset
-
-      let threshold = this.initOffset - (this.currentOffset / 6)
-      if (this.currentOffset >= threshold) {
-        console.log('Untriggered')
-      } else if (this.currentOffset < threshold) {
-        console.log('Triggered')
-      }
-    },
-    calcOffset: function (el) {
-      let rect = el.getBoundingClientRect()
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop
-      return { top: rect.top + scrollTop }
+    calculateThreshold: function () {
+      let element = document.getElementById('downArrow')
+      this.scrollThreshhold = element.scrollHeight
     }
   }
 }
@@ -82,7 +56,7 @@ section {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  min-height: calc(100% + 64px);
+  min-height: 100%;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -99,12 +73,8 @@ section {
       margin-bottom: 0;
     }
   }
-  &#intro {
-    min-height: calc(100% - 64px);
-  }
   #downArrow {
-    top: calc(100% - 2.4rem);
-    left: calc(50% - 2.9rem);
+    top: calc(100% - 32px);
     position: absolute;
     display: inline-block;
     width: 5.8rem;
@@ -126,19 +96,6 @@ section {
     -ms-transform-origin: 50% 100%;
   }
 }
-
-/* Tablets+ */
-@media screen and (min-width: 76rem) {
-  section header {
-    p, span {
-      font-size: ($p_size * 1.2);
-    }
-  }
-  .lg {
-    display: block;
-  }
-}
-
 header {
   margin-bottom: 25%;
   padding-right: 3.2rem;
