@@ -108,6 +108,8 @@ section {
   min-height: calc(100% + 64px);
   justify-content: center;
   position: relative;
+  padding-left: $padding_side;
+  padding-right: $padding_side;
   header {
     text-align: left;
     margin: 0;
@@ -163,7 +165,6 @@ section {
 
 header {
   margin-bottom: 25%;
-  padding-right: 3.2rem;
 }
 
 @keyframes bounce{
