@@ -48,8 +48,10 @@ export default {
   color: $color_light;
   transition-duration: 1s;
   position: relative;
+  z-index: 0;
   > div {
     flex: 1 1 auto;
+    z-index: 2;
   }
   &.pg-intro {
     background-image: url('/static/img/bg-about-sm.jpg');
@@ -78,6 +80,7 @@ export default {
   width: 100%;
   opacity: 0;
   transition-duration: 2s;
+  z-index: 1;
   background-image: url('/static/img/bg-about-sm-blurred.jpg');
 }
 

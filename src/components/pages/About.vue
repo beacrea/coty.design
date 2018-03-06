@@ -33,7 +33,7 @@
     <section id="qa4">
       <header>
         <h1>"Do you see yourself as a manager or an individual contributor?"</h1>
-        <h2>I prefer being a principal-level individual contributor, often guiding the product vision of new initiatives or features.</h2>
+        <h2>I prefer being a senior-level individual contributor, often guiding the product vision of new initiatives or features.</h2>
       </header>
     </section>
     <section id="qa5">
