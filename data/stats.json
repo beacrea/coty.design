@@ -3,15 +3,15 @@
   "stats": [
     {
       "name": "Luck",
-      "value": 10
+      "value": 90
     },
     {
       "name": "Sleep",
-      "value": 20
+      "value": 75
     },
     {
       "name": "Tea",
-      "value": 60
+      "value": 80
     }
   ],
   "tools": [
@@ -46,6 +46,30 @@
       "name": "Macbook Pro",
       "type": "Computing",
       "desc": "My go-to processing machine. Where all my work gets done."
+    },
+    {
+      "icon": "icon-oculus",
+      "name": "Oculus",
+      "type": "VR",
+      "desc": "A little immersion to pass the time."
+    },
+    {
+      "icon": "icon-ipad",
+      "name": "iPad Pro + Pencil",
+      "type": "Concepting",
+      "desc": "I've given up paper for Paper by FiftyThree. Life-changing."
+    },
+    {
+      "icon": "icon-ps4",
+      "name": "Playstation 4",
+      "type": "Gaming",
+      "desc": "My chill-out with a little Portal or Dark Souls"
+    },
+    {
+      "icon": "icon-pebble",
+      "name": "Pebble Watch",
+      "type": "HUD",
+      "desc": "The little important things that need my attention. RIP."
     }
   ]
 }
