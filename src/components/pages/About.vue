@@ -53,11 +53,11 @@ export default {
 
       let threshold = this.initOffset - (this.currentOffset / 6)
       if (this.currentOffset >= threshold) {
-        console.log('Untriggered')
-        this.$emit('scrollTrigger', 'intro')
+        // console.log('Untriggered')
+        this.$emit('scrollTrigger', 0)
       } else if (this.currentOffset < threshold) {
-        console.log('Triggered')
-        this.$emit('scrollTrigger', 'intro-blurred')
+        // console.log('Triggered')
+        this.$emit('scrollTrigger', 1)
       }
     },
     calcOffset: function (el) {

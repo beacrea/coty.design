@@ -1,5 +1,6 @@
 <template>
   <div id="app" v-bind:class="activeBg">
+    <div id="overlay" v-bind:style="{ opacity: blurAbout }"></div>
     <transition name="fade" mode="out-in" v-on:after-enter="afterEnter" appear>
       <router-view v-on:scrollTrigger="introBlurred" />
     </transition>
@@ -15,7 +16,8 @@ export default {
   name: 'App',
   data () {
     return {
-      activeBg: 'pg-' + this.$route.name
+      activeBg: 'pg-' + this.$route.name,
+      blurAbout: 0
     }
   },
   methods: {
@@ -23,7 +25,7 @@ export default {
       this.activeBg = 'pg-' + this.$route.name
     },
     introBlurred: function (trigger) {
-      this.activeBg = 'pg-' + trigger
+      this.blurAbout = trigger
     },
     afterEnter: function (el, done) {
       console.log('Page changed to: ' + this.$route.name)
@@ -44,7 +46,8 @@ export default {
   background: #0B0E1F no-repeat top center;
   background-size: cover;
   color: $color_light;
-  transition-duration: 2.25s;
+  transition-duration: 1s;
+  position: relative;
   > div {
     flex: 1 1 auto;
   }
@@ -66,6 +69,19 @@ export default {
   }
 }
 
+// Overlay
+#overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition-duration: 2s;
+  background-image: url('/static/img/bg-about-sm-blurred.jpg');
+}
+
+// Transitions
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.3s
 }
