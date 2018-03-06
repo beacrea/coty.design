@@ -1,5 +1,5 @@
 <template>
-  <div id="about" v-on:scroll="reportPosition">
+  <div id="about">
     <section id="intro">
       <header>
         <h1>I’ve seen things you people wouldn’t believe.</h1>
@@ -8,7 +8,7 @@
         </p>
         <p>All of these moments will be lost, <a href="https://youtu.be/NoAzpa1x7jU?t=1m45s" target="_blank">like tears in rain</a>.</p>
       </header>
-      <img src="/static/img/arrow-down.png" id="downArrow" alt="">
+      <img src="/static/img/arrow-down.png" class="downArrow" alt="">
     </section>
     <section id="qa1">
       <header>
@@ -29,39 +29,11 @@
 </template>
 
 <script>
-let offsetEl = 'downArrow'
-
 export default {
   components: {},
   data () {
     return {
-      msg: 'This is the about page.',
-      initOffset: 0,
-      currentOffset: 0
-    }
-  },
-  mounted: function () {
-    let el = document.getElementById(offsetEl)
-    this.initOffset = this.calcOffset(el).top
-    this.currentOffset = this.calcOffset(el).top
-  },
-  methods: {
-    reportPosition: function () {
-      let el = document.getElementById(offsetEl)
-      let elOffset = this.calcOffset(el).top
-      this.currentOffset = elOffset
-
-      let threshold = this.initOffset - (this.currentOffset / 6)
-      if (this.currentOffset >= threshold) {
-        console.log('Untriggered')
-      } else if (this.currentOffset < threshold) {
-        console.log('Triggered')
-      }
-    },
-    calcOffset: function (el) {
-      let rect = el.getBoundingClientRect()
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop
-      return { top: rect.top + scrollTop }
+      msg: 'This is the about page.'
     }
   }
 }
@@ -101,29 +73,29 @@ section {
   }
   &#intro {
     min-height: calc(100% - 64px);
-  }
-  #downArrow {
-    top: calc(100% - 2.4rem);
-    left: calc(50% - 2.9rem);
-    position: absolute;
-    display: inline-block;
-    width: 5.8rem;
-    height: 4.1rem;
-    animation: bounce ease-in 1s;
-    animation-iteration-count: infinite;
-    transform-origin: 50% 100%;
-    -webkit-animation: bounce ease-in 1s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-transform-origin: 50% 100%;
-    -moz-animation: bounce ease-in 1s;
-    -moz-animation-iteration-count: infinite;
-    -moz-transform-origin: 50% 100%;
-    -o-animation: bounce ease-in 1s;
-    -o-animation-iteration-count: infinite;
-    -o-transform-origin: 50% 100%;
-    -ms-animation: bounce ease-in 1s;
-    -ms-animation-iteration-count: infinite;
-    -ms-transform-origin: 50% 100%;
+    .downArrow {
+      top: calc(100% - 2.4rem);
+      left: calc(50% - 2.9rem);
+      position: absolute;
+      display: inline-block;
+      width: 5.8rem;
+      height: 4.1rem;
+      animation: bounce ease-in 1s;
+      animation-iteration-count: infinite;
+      transform-origin: 50% 100%;
+      -webkit-animation: bounce ease-in 1s;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-transform-origin: 50% 100%;
+      -moz-animation: bounce ease-in 1s;
+      -moz-animation-iteration-count: infinite;
+      -moz-transform-origin: 50% 100%;
+      -o-animation: bounce ease-in 1s;
+      -o-animation-iteration-count: infinite;
+      -o-transform-origin: 50% 100%;
+      -ms-animation: bounce ease-in 1s;
+      -ms-animation-iteration-count: infinite;
+      -ms-transform-origin: 50% 100%;
+    }
   }
 }
 
