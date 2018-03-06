@@ -2,9 +2,9 @@
   <div id="app" v-bind:class="activeBg">
     <div id="overlay" v-bind:style="{ opacity: blurAbout }"></div>
     <transition name="fade" mode="out-in" v-on:after-enter="afterEnter" appear>
-      <router-view v-on:scrollTrigger="introBlurred" />
+      <router-view v-on:introStatus="introBlurred" v-on:pageChange="changeBG" />
     </transition>
-    <Navigation v-on:pageChange="changeBG"></Navigation>
+    <Navigation v-on:pageChange="changeBG" v-on:introStatus="introBlurred"></Navigation>
   </div>
 </template>
 

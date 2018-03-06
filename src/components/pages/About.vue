@@ -12,17 +12,34 @@
     </section>
     <section id="qa1">
       <header>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequuntur debitis deleniti deserunt doloribus eligendi eos impedit iusto magnam nemo neque nobis nostrum perspiciatis quas ratione rem sed, unde vitae.</p>
+        <h1>My name is Coty Beasley</h1>
+        <h2>I'm a product designer based in San Francisco, CA.</h2>
+        <h2>I specialize in digital product strategy and interaction.</h2>
       </header>
     </section>
     <section id="qa2">
       <header>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequuntur debitis deleniti deserunt doloribus eligendi eos impedit iusto magnam nemo neque nobis nostrum perspiciatis quas ratione rem sed, unde vitae.</p>
+        <h1>I began designing over ten years ago so I could one day help build the future.</h1>
+        <h2>Here are some questions you might be asking:</h2>
       </header>
     </section>
     <section id="qa3">
       <header>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequuntur debitis deleniti deserunt doloribus eligendi eos impedit iusto magnam nemo neque nobis nostrum perspiciatis quas ratione rem sed, unde vitae.</p>
+        <h1>"Where do you typically fit into the product cycle?"</h1>
+        <h2>I’m an end-to-end product designer.</h2>
+        <h3>I'm usually brought into the process as the business team and product managers have come up with their goals, then see things to the end of development and beyond.</h3>
+      </header>
+    </section>
+    <section id="qa4">
+      <header>
+        <h1>"Do you see yourself as a manager or an individual contributor?"</h1>
+        <h2>I prefer being a principal-level individual contributor, often guiding the product vision of new initiatives or features.</h2>
+      </header>
+    </section>
+    <section id="qa5">
+      <header>
+        <h1>I’m happy to answer more questions over some tea, but for now…</h1>
+        <router-link to="stats" v-on:click.native="changeBg">Stats</router-link>
       </header>
     </section>
   </div>
@@ -54,16 +71,20 @@ export default {
       let threshold = this.initOffset - (this.currentOffset / 6)
       if (this.currentOffset >= threshold) {
         // console.log('Untriggered')
-        this.$emit('scrollTrigger', 0)
+        this.$emit('introStatus', 0)
       } else if (this.currentOffset < threshold) {
         // console.log('Triggered')
-        this.$emit('scrollTrigger', 1)
+        this.$emit('introStatus', 1)
       }
     },
     calcOffset: function (el) {
       let rect = el.getBoundingClientRect()
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop
       return { top: rect.top + scrollTop }
+    },
+    changeBg: function () {
+      this.$emit('pageChange')
+      this.$emit('introStatus', 0)
     }
   }
 }
