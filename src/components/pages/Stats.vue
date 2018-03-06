@@ -3,7 +3,7 @@
     <section id="statsGroup">
       <header>
         <h1>Current Stats</h1>
-        <span class="dice" :style="{ backgroundImage: `url('${diceImage}')` }" v-on:click="setRandom" alt="Roll the dice!"></span>
+        <span class="dice" :style="{ backgroundImage: `url('${diceImage}')` }" v-on:click="setRandom" v-bind:class="{ active: diceSpin }" alt="Roll the dice!"></span>
       </header>
       <div class="gaugeGroup">
         <div class="stat" v-for="stat in stats" :key="stat.name">
@@ -50,6 +50,8 @@ export default {
     return {
       msg: 'This is the stats page.',
       diceImage: '../../static/img/dice.svg',
+      diceSpin: false,
+      diceTimer: {},
       stats: model.stats,
       tools: model.tools,
       gear: model.gear
@@ -61,9 +63,31 @@ export default {
       return Math.floor(Math.random() * 80) + 20
     },
     setRandom: function () {
+      // Clear previous dice state
+      this.diceSpin = false
+      clearTimeout(this.diceTimer)
+
+      // Randomizes stat values
       this.stats.forEach((stat, index) => {
         stat.value = this.getRandom()
       })
+
+      // Adds class to make dice spin
+      this.diceSpin = true
+
+      // Resets dice class and timer
+      this.diceTimer = this.delayDiceClear()
+      this.delayDiceClear()
+    },
+    clearDice: function () {
+      this.diceSpin = false
+      this.diceTimer = 0
+    },
+    delayDiceClear: function () {
+      let self = this
+      setTimeout(function () {
+        self.clearDice()
+      }, 500)
     }
   }
 }
@@ -111,14 +135,40 @@ h1 {
   opacity: 0.5;
   height: 2.4rem;
   width: 2.4rem;
-  transition-duration: 1s;
   cursor: pointer;
   background-repeat: no-repeat;
-  &:active {
-    transform: rotate(720deg);
-    -webkit-transform: rotate(720deg);
+  &.active {
+    transition-duration: 0.5s;
+    transform: translate3d(0, 0, 0) rotate(0);
+    -webkit-transform: translate3d(0, 0, 0) rotate(0);
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    backface-visibility: hidden;
+    perspective: 1000px;
   }
 }
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, -1px, 0) rotate(180deg);
+    -webkit-transform: translate3d(-1px, -1px, 0) rotate(180deg);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, -1px, 0) rotate(360deg);
+    -webkit-transform: translate3d(2px, -1px, 0) rotate(360deg);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 2px, 0) rotate(540deg);
+    -webkit-transform: translate3d(-4px, 2px, 0) rotate(540deg);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0px, 0) rotate(720deg);
+    -webkit-transform: translate3d(4px, 0px, 0) rotate(720deg);
+  }
+}
+
 .label {
   font-size: 16px;
   margin-top: 14px;
