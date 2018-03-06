@@ -40,7 +40,7 @@ export default {
   height: $height;
   display: flex;
   align-items: center;
-  z-index: 1;
+  z-index: 3;
   * {
     box-sizing: border-box;
   }

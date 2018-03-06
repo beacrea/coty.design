@@ -102,7 +102,7 @@ export default {
 #stats {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow: scroll;
   height: 100%;
   * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
