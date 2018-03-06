@@ -114,6 +114,16 @@ section {
     margin-bottom: $navHeight/2;
   }
 }
+
+/* Tablets+ */
+@media screen and (min-width: 76rem) {
+  #statsGroup, #toolGroup, #gearGroup {
+    padding: $padding_side $padding_side*3;
+  }
+  #gearGroup {
+    padding-top: 0;
+  }
+}
 h1 {
   font-family: 'Open Sans', Arial, sans-serif;
   font-size: 2.4rem;
@@ -245,8 +255,5 @@ h1 {
       color: rgba(white, 0.5)
     }
   }
-}
-#gearGroup {
-  padding: 0 $padding_side $padding_side;
 }
 </style>
