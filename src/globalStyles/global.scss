@@ -16,15 +16,10 @@ Base styles
   -webkit-text-stroke: 1px transparent;
 }
 
-body, html {
+html, body {
+  background-color: darken($color_grey, 35%);
   height: 100%;
   width: 100%;
-}
-
-// Prototype
-// TODO: Remove this for prod
-html, body {
-  background-color: darken($color_grey, 30%);
 }
 #app {
   max-width: 800px;
