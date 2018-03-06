@@ -106,7 +106,6 @@ section {
   display: flex;
   flex-direction: column;
   min-height: calc(100% + 64px);
-  align-items: center;
   justify-content: center;
   position: relative;
   header {
