@@ -27,7 +27,7 @@
       <header>
         <h1>"Where do you typically fit into the product cycle?"</h1>
         <h2>I’m an end-to-end product designer.</h2>
-        <h3>I'm usually brought into the process as the business team and product managers have come up with their goals, then see things to the end of development and beyond.</h3>
+        <h2>I'm usually brought into the process as the business team and product managers have come up with their goals, then see things to the end of development.</h2>
       </header>
     </section>
     <section id="qa4">
@@ -38,7 +38,7 @@
     </section>
     <section id="qa5">
       <header>
-        <h1>I’m happy to answer more questions over some tea, but for now…</h1>
+        <h2>Let's chat more over some tea.</h2>
         <div class="linkBox">
           <router-link class="aboutCta" to="contact" v-on:click.native="changeBg">Contact me <img src="../../../static/img/rightArrow.svg" alt=""></router-link>
         </div>
@@ -112,6 +112,9 @@ section {
   position: relative;
   padding-left: $padding_side;
   padding-right: $padding_side;
+  &:last-child {
+    min-height: 100%;
+  }
   header {
     text-align: left;
     margin: 0;
@@ -165,15 +168,20 @@ section {
   }
 }
 
+#qa5 {
+  h2, .linkBox {
+    text-align: center;
+  }
+}
 .linkBox {
   display: flex;
   width: 100%;
-  margin-top: 1rem;
-  justify-content: flex-end;
+  margin-top: 2.4rem;
+  justify-content: center;
 }
 
 .aboutCta {
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   padding: 0.8rem;
   flex: 1 auto;
   display: flex;
@@ -183,7 +191,6 @@ section {
   text-align: center;
   border: 2px solid rgba(white, 0.5);
   border-radius: 2.4rem;
-  align-self: flex-end;
   color: white;
   &:visited, &:active {
     color: white;
