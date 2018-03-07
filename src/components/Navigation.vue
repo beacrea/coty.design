@@ -66,7 +66,7 @@ a {
     max-width: 6.4rem;
   }
   &.router-link-active {
-    color: $color_light;
+    color: white !important;
     background: $color_accent1;
     border-color: rgba(255,255,255,0.23);
     box-shadow: 0 0 4px 0 rgba(240,96,103,0.62), 0 0 20px 0 rgba(240,96,103,0.20), 0 0 4px 0 rgba(0,0,0,0.50), inset 0 2px 3px 0 rgba(0,0,0,0.03);
