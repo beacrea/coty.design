@@ -123,8 +123,10 @@ section {
       margin: 0;
       color: white;
     }
-    p {
+    p, a {
       font-size: 1.8rem;
+    }
+    p {
       margin-bottom: 0;
     }
   }
