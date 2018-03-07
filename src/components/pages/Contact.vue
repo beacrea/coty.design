@@ -89,6 +89,8 @@ export default {
   }
 }
 .grid {
+  margin-top: 2.4rem;
+  max-width: 250px;
   display: grid;
   text-align: center;
   grid-template-columns: 1fr 1fr 1fr;
