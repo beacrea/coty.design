@@ -1,10 +1,10 @@
 <template>
   <nav id="navigation">
     <router-link to="intro" v-on:click.native="changeBg">Intro</router-link>
-    <a>Work</a>
+    <!--<a>Work</a>-->
     <router-link to="stats" v-on:click.native="changeBg">Stats</router-link>
-    <a>Contact</a>
-    <a class="icon">★</a>
+    <router-link to="contact" v-on:click.native="changeBg">Contact</router-link>
+    <!--<a class="icon">★</a>-->
   </nav>
 </template>
 
