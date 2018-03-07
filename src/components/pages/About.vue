@@ -39,7 +39,9 @@
     <section id="qa5">
       <header>
         <h1>I’m happy to answer more questions over some tea, but for now…</h1>
-        <router-link to="stats" v-on:click.native="changeBg">Stats</router-link>
+        <div class="linkBox">
+          <router-link class="aboutCta" to="contact" v-on:click.native="changeBg">Contact me <img src="../../../static/img/rightArrow.svg" alt=""></router-link>
+        </div>
       </header>
     </section>
   </div>
@@ -160,6 +162,35 @@ section {
   }
   .lg {
     display: block;
+  }
+}
+
+.linkBox {
+  display: flex;
+  width: 100%;
+  margin-top: 1rem;
+  justify-content: flex-end;
+}
+
+.aboutCta {
+  font-size: 2.4rem;
+  padding: 0.8rem;
+  flex: 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 200px;
+  text-align: center;
+  border: 2px solid rgba(white, 0.5);
+  border-radius: 2.4rem;
+  align-self: flex-end;
+  color: white;
+  &:visited, &:active {
+    color: white;
+  }
+  img {
+    margin-left: 1.6rem;
+    height: 1.6rem;
   }
 }
 

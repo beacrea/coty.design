@@ -63,6 +63,9 @@ export default {
   &.pg-stats {
     background-image: url('/static/img/bg-stats.jpg');
   }
+  &.pg-contact {
+    background-image: url('/static/img/bg-contact.jpg');
+  }
 }
 
 // Overlay
