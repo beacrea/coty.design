@@ -38,7 +38,7 @@
     </section>
     <section id="qa5">
       <header>
-        <h2>Let's chat more over some tea.</h2>
+        <h2>Let's chat more over tea.</h2>
         <div class="linkBox">
           <router-link class="aboutCta" to="contact" v-on:click.native="changeBg">Contact me <img src="../../../static/img/rightArrow.svg" alt=""></router-link>
         </div>
@@ -113,7 +113,7 @@ section {
   padding-left: $padding_side;
   padding-right: $padding_side;
   &:last-child {
-    min-height: 100%;
+    padding-bottom: $navHeight/2;
   }
   header {
     text-align: left;
