@@ -26,6 +26,7 @@ export default {
   align-items: center;
   padding: $padding_side;
   text-align: center;
+  color: $color_dark;
   * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
