@@ -57,7 +57,7 @@ export default {
   &.pg-intro {
     background-image: url('/static/img/bg-about-sm.jpg');
   }
-  &.pg-intro-blurred {
+  &.pg-intro-blurred, .pg-work {
     background-image: url('/static/img/bg-about-sm-blurred.jpg');
   }
   &.pg-stats {
