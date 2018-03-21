@@ -1,7 +1,6 @@
 <template>
   <div id="work">
-    <h3>This page is currently being designed.</h3>
-    <h4>Cobblers children and all that.</h4>
+    <h3>Cobblers children and all that.</h3>
     <p>I am literally <a href="https://github.com/beacrea/cotybeasley.name/issues/13" target="_blank">working on this</a> right now.</p>
   </div>
 </template>
@@ -30,13 +29,16 @@ export default {
   align-items: center;
   padding: $padding_side;
   text-align: center;
-  color: $color_dark;
+  color: $color_light;
   font-size: 1.6rem;
   * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
+  h3 {
+    font-size: 1.8rem;
+  }
   h4, p {
-    color: rgba(black, 0.6)
+    color: $color_light;
   }
   p, a {
     font-size: 1.4rem;
