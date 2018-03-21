@@ -34,6 +34,7 @@
       <header>
         <h1>"Do you see yourself as a manager or an individual contributor?"</h1>
         <h2>I prefer being a senior-level individual contributor, often guiding the product vision of new initiatives or features.</h2>
+        <h3>I've managed a handful of small teams in the past, acting as the product manager and/or owner. In the right situations, I'm happy to take on the responsibility.</h3>
       </header>
     </section>
     <section id="qa5">
