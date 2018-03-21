@@ -27,7 +27,7 @@
       <header>
         <h1>"Where do you typically fit into the product cycle?"</h1>
         <h2>I’m an end-to-end product designer.</h2>
-        <h2>I'm usually brought into the process as the business team and product managers have come up with their goals, then see things to the end of development.</h2>
+        <h3>I'm usually brought into the process while the business team and product managers are coming up with their goals. From there, I'll often guide things from the interface designs to the end of development.</h3>
       </header>
     </section>
     <section id="qa4">
