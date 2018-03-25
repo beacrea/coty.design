@@ -9,7 +9,7 @@
       "duration": "3 Weeks",
       "shipped": true,
       "shortDesc": "",
-      "summary": "",
+      "summary": ""
     },
     "technologies": [
       {
@@ -23,8 +23,58 @@
     ],
     "background": {
       "summary": "",
-      "users": [""],
-      "pain": [""],
+      "users": ["", ""],
+      "pain": ["", ""],
+      "goal": ""
+    },
+    "personalContext": {
+      "p1": "Yo, this is a story all",
+      "p2": "all about how",
+      "p3": "my life got flipped turned upside down"
+    },
+    "assets": {
+      "thumbnail": "",
+      "hero": "",
+      "assetDir": ""
+    },
+    "company": {
+      "name": "Neighborly",
+      "location": "San Francisco, CA",
+      "shortDescription": "Positioned at the intersection of technology, finance and government, Neighborly develops technologies to radically modernize public finance, the $1 billion per day, 200 year-old market that powers vital public projects like schools, parks, and next-generation infrastructure.",
+      "logo": ""
+    },
+    "team": {
+      "involved": ["Engineering", "Marketing", "Design"],
+      "roles": ["Product Owner", "Designer"],
+      "noInvolved": "Team of 4"
+    }
+  },
+  {
+    "id": "nly0",
+    "tags": ["DesOps", "DevOps", "Content", "Infrastructure"],
+    "project": {
+      "title": "A Content Platform For Public Finance",
+      "exposure": "internal/public",
+      "year": "2017",
+      "duration": "3 Weeks",
+      "shipped": true,
+      "shortDesc": "",
+      "summary": ""
+    },
+    "technologies": [
+      {
+        "name": "Ghost",
+        "url": "https://ghost.org/"
+      },
+      {
+        "name": "Foundation for Emails",
+        "url": "https://foundation.zurb.com/emails.html"
+      }
+    ],
+    "background": {
+      "summary": "",
+      "users": ["", ""],
+      "pain": ["", ""],
       "goal": ""
     },
     "personalContext": {

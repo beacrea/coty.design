@@ -71,8 +71,8 @@ export default {
     background-image: url('/static/img/bg-contact.jpg');
   }
   &.pg-work {
-    /*background-image: url('/static/img/bg-work-light.jpg');*/
-    background-image: linear-gradient(-187deg, #BA7CE9 0%, #019DE4 100%);
+    // background-image: linear-gradient(-187deg, #BA7CE9 0%, #019DE4 100%);
+    background-color: $color_dark;
   }
 }
 
