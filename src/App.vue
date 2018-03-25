@@ -9,7 +9,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import VueResource from 'vue-resource'
 import Navigation from './components/Navigation'
+
+Vue.use(VueResource)
 
 export default {
   components: {Navigation},
