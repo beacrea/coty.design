@@ -1,12 +1,13 @@
 <template>
   <div id="about" v-on:scroll="reportPosition">
     <section id="intro">
+      <a :href="latestVersion.url" class="version" v-show="latestVersion.updated" target="_blank">{{latestVersion.name}}</a>
       <header>
-        <h1>I’ve seen things you people wouldn’t believe.</h1>
+        <h1><span>I’ve seen things</span> <span>you people</span> <span>wouldn’t believe.</span></h1>
         <p>Overclocked Pentiums on fire in suburban basements.
           <span class="lg">I watched gif text glitter in Netscape before the great browser wars.</span>
         </p>
-        <p>All of these moments will be lost, <a href="https://youtu.be/NoAzpa1x7jU?t=1m45s" target="_blank">like tears in rain</a>.</p>
+        <p>All of these moments will be lost, <a class="tears" href="https://youtu.be/NoAzpa1x7jU?t=1m45s" target="_blank">like tears in rain</a>.</p>
       </header>
       <img src="/static/img/arrow-down.png" id="downArrow" alt="">
     </section>
@@ -56,9 +57,23 @@ export default {
   data () {
     return {
       msg: 'This is the about page.',
+      latestVersion: {
+        updated: false,
+        name: '',
+        url: ''
+      },
       initOffset: 0,
       currentOffset: 0
     }
+  },
+  created: function () {
+    this.$http.get('https://api.github.com/repos/beacrea/coty.design/releases/latest').then(response => {
+      this.latestVersion.updated = true
+      this.latestVersion.name = response.data.tag_name
+      this.latestVersion.url = response.data.html_url
+    }, response => {
+      console.log('Error fetching latest version from Github repo.')
+    })
   },
   mounted: function () {
     let el = document.getElementById(offsetEl)
@@ -103,6 +118,9 @@ export default {
   flex-direction: column;
   overflow-y: scroll;
   height: 100%;
+  .tears {
+    white-space: pre;
+  }
 }
 section {
   flex: 1 1 auto;
@@ -133,6 +151,20 @@ section {
   }
   &#intro {
     min-height: calc(100% - 64px);
+    position: relative;
+    h1 span {
+      white-space: pre;
+      font-size: inherit;
+      font-weight: inherit;
+    }
+    .version {
+      position: absolute;
+      top: 24px;
+      color: rgba(white, 0.5);
+      text-decoration: none;
+      border: 0;
+      font-size: 1.4rem;
+    }
   }
   #downArrow {
     top: calc(100% - 2.4rem);
@@ -156,6 +188,13 @@ section {
     -ms-animation: bounce ease-in 1s;
     -ms-animation-iteration-count: infinite;
     -ms-transform-origin: 50% 100%;
+  }
+}
+
+/* Hide version on short screens */
+@media screen and (max-height: 700px) {
+  #intro .version {
+    display: none;
   }
 }
 
