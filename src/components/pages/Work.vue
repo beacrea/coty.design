@@ -1,7 +1,10 @@
 <template>
   <div id="work">
-    <h3>Cobblers children and all that.</h3>
-    <p>I am literally <a href="https://github.com/beacrea/cotybeasley.name/issues/13" target="_blank">working on this</a> right now.</p>
+    <header>
+      <h1>Here's a bit of my work.</h1>
+      <p>Through the years I’ve worked on everything from bobbleheads, robotics, health outcomes, sports tech, chatbots, and more.</p>
+      <p>A common thread in all my projects is a desire to solve complex problems with emerging technologies that have a chance to improve the world around me.</p>
+    </header>
   </div>
 </template>
 
@@ -20,28 +23,24 @@ export default {
 // Imports
 @import "../../globalStyles/imports";
 @import "../../globalStyles/vars";
+@import "../../globalStyles/typography";
 
 #work {
-  display: flex;
-  flex-direction: column;
   overflow: scroll;
-  justify-content: center;
-  align-items: center;
-  padding: $padding_side;
-  text-align: center;
-  color: $color_light;
   font-size: 1.6rem;
+  background-color: $color_dark;
   * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  }
-  h3 {
-    font-size: 1.8rem;
-  }
-  h4, p {
     color: $color_light;
   }
-  p, a {
-    font-size: 1.4rem;
+}
+header {
+  padding: (3.2rem + $padding_side) $padding_side*2 3.2rem;
+  /* Rectangle 5: */
+  background-image: linear-gradient(-42deg, $color_accent3 0%, $color_blue-base 100%);
+  h1 {
+    margin: 0;
+    font-size: $h2_size;
   }
 }
 </style>
