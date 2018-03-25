@@ -42,7 +42,10 @@ h3 {
   line-height: 1.2;
   opacity: 0.75;
 }
-p, span, a { font-size: $p_size; }
+p, span, a {
+  font-size: $p_size;
+  line-height: 1.2;
+}
 
 a {
   $color: $color_accent2;
