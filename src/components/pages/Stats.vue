@@ -18,7 +18,7 @@
       <h1>Tool List</h1>
       <div>
         <div class="item" v-for="item in tools" :key="item.name">
-          <div class="itemBox"><img :src="itemPH" alt=""></div>
+          <div class="itemBox"><img :src="getStatImg(item.icon)" alt="item.desc"></div>
           <div class="content">
             <header>{{item.name}}<span>({{item.type}})</span></header>
             <div class="text">{{item.desc}}</div>
@@ -30,7 +30,7 @@
       <h1>Gear List</h1>
       <div>
         <div class="item" v-for="item in gear" :key="item.name">
-          <div class="itemBox"><img :src="itemPH" alt=""></div>
+          <div class="itemBox"><img :src="getStatImg(item.icon)" alt="item.desc"></div>
           <div class="content">
             <header>{{item.name}}<span>({{item.type}})</span></header>
             <div class="text">{{item.desc}}</div>
@@ -50,6 +50,7 @@ export default {
     return {
       msg: 'This is the stats page.',
       diceImage: '../../static/img/dice.svg',
+      itemPath: '../../static/img/statIcons/',
       itemPH: '../../static/img/cube.svg',
       diceSpin: false,
       diceTimer: {},
@@ -89,6 +90,9 @@ export default {
       setTimeout(function () {
         self.clearDice()
       }, 500)
+    },
+    getStatImg: function (imgName) {
+      return this.itemPath + imgName + '.svg'
     }
   }
 }
@@ -235,8 +239,8 @@ h1 {
     align-items: center;
     font-size: 3.2rem;
     img {
-      max-width: 50%;
-      opacity: 0.2;
+      max-width: 90%;
+      opacity: 0.8;
     }
   }
   .content {
