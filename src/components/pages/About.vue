@@ -3,11 +3,11 @@
     <section id="intro">
       <a :href="latestVersion.url" class="version" v-show="latestVersion.updated" target="_blank">{{latestVersion.name}}</a>
       <header>
-        <h1>I’ve seen things you people wouldn’t believe.</h1>
+        <h1><span>I’ve seen things</span> <span>you people</span> <span>wouldn’t believe.</span></h1>
         <p>Overclocked Pentiums on fire in suburban basements.
           <span class="lg">I watched gif text glitter in Netscape before the great browser wars.</span>
         </p>
-        <p>All of these moments will be lost, <a href="https://youtu.be/NoAzpa1x7jU?t=1m45s" target="_blank">like tears in rain</a>.</p>
+        <p>All of these moments will be lost, <a class="tears" href="https://youtu.be/NoAzpa1x7jU?t=1m45s" target="_blank">like tears in rain</a>.</p>
       </header>
       <img src="/static/img/arrow-down.png" id="downArrow" alt="">
     </section>
@@ -118,6 +118,9 @@ export default {
   flex-direction: column;
   overflow-y: scroll;
   height: 100%;
+  .tears {
+    white-space: pre;
+  }
 }
 section {
   flex: 1 1 auto;
@@ -149,6 +152,11 @@ section {
   &#intro {
     min-height: calc(100% - 64px);
     position: relative;
+    h1 span {
+      white-space: pre;
+      font-size: inherit;
+      font-weight: inherit;
+    }
     .version {
       position: absolute;
       top: 24px;
