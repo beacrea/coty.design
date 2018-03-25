@@ -50,7 +50,7 @@ export default {
     return {
       msg: 'This is the stats page.',
       diceImage: '../../static/img/dice.svg',
-      itemPath: '../../static/img/statIcons/',
+      itemPath: '../../static/icons/stats/',
       itemPH: '../../static/img/cube.svg',
       diceSpin: false,
       diceTimer: {},
