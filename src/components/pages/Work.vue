@@ -79,14 +79,9 @@ section {
     grid-row-end: 7;
     background: grey center bottom;
     background-size: cover;
-    max-height: 400px;
+    max-height: 450px;
   }
   .content {
-    cursor: pointer;
-    transition: all 0.5s;
-    &:hover {
-      transform: scale(1.02);
-    }
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -131,7 +126,12 @@ section {
       margin: 3.2rem auto 8.4rem;
     }
     .content {
+      cursor: pointer;
+      transition: all 0.5s;
       max-height: 17rem;
+      &:hover {
+        transform: scale(1.02);
+      }
       // Limited to 240 characters
       .text {
         -webkit-line-clamp: 3 !important;
