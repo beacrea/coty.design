@@ -7,11 +7,9 @@
     </header>
     <section>
       <div class="item" v-for="item in workItems" :key="item.id">
-        <div class="preview" :style="{ backgroundImage: 'url(' + item.assets.thumbnail + ')'}">
-          <div class="tags">
-            <span>tag</span>
-            <span>tag</span>
-            <span>tag</span>
+        <div class="preview" :style="{ backgroundImage: 'url(' + item.assets.thumbnail.name + ')'}">
+          <div class="tags" :class="item.assets.thumbnail.color">
+            <span v-for="tag in item.tags" :key="tag.name">{{tag.name}}</span>
           </div>
         </div>
         <div class="content">
@@ -79,14 +77,26 @@ section {
     width: 100%;
     top: 0;
     left: 0;
-    background: rgba(red, 0.2);
-    padding: 1.6rem;
+    padding: 1.6rem 1.2rem;
+    &.light {
+      span {
+        background: rgba(white, 0.8);
+        color: $denim;
+      }
+    },
+    &.dark {
+      span {
+        background: rgba($denim, 0.9);
+        color: white;
+      }
+    }
     span {
-      background: red;
       padding: 0.4rem 1.2rem;
+      margin: 0 0.4rem;
       border-radius: 4rem;
-      font-size: 1.2rem;
+      font-size: 1rem;
       line-height: 1;
+      box-shadow: 0 0 8px rgba(black, 0.2);
     }
   }
   .preview, .content {
@@ -104,6 +114,7 @@ section {
     max-height: 450px;
   }
   .content {
+    position: relative;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -121,7 +132,7 @@ section {
     }
     .text {
       opacity: 0.75;
-      line-height: 1.2;
+      line-height: 1.3;
       overflow: hidden;
       -webkit-box-orient: vertical;
       display: -webkit-box;
@@ -150,7 +161,7 @@ section {
     .content {
       cursor: pointer;
       transition: all 0.5s;
-      max-height: 17rem;
+      max-height: 20rem;
       &:hover {
         transform: scale(1.02);
       }
@@ -158,6 +169,17 @@ section {
       .text {
         -webkit-line-clamp: 3 !important;
       }
+    }
+  }
+}
+/* High resolution devices */
+@media (-webkit-min-device-pixel-ratio: 1.5),
+(-o-min-device-pixel-ratio: 3/2),
+(min--moz-device-pixel-ratio: 1.5),
+(min-device-pixel-ratio: 1.5) {
+  #work {
+    .content:hover {
+      transform: none;
     }
   }
 }
