@@ -9,8 +9,11 @@
       <div class="item" v-for="item in workItems" :key="item.id">
         <div class="preview"></div>
         <div class="content">
-          <h1>{{item.projectTitle}}</h1>
-          <div class="text">{{item.company.shortDescription}}</div>
+          <h1>{{item.project.title}}</h1>
+          <div class="text">{{item.project.shortDesc}}</div>
+          <div class="cta">
+            <span>READ MORE</span>
+          </div>
         </div>
       </div>
 
@@ -40,6 +43,7 @@ export default {
 #work {
   overflow: scroll;
   font-size: 1.6rem;
+  padding-bottom: 6.4rem;
   * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     color: $color_light;
@@ -47,7 +51,6 @@ export default {
 }
 header {
   padding: (3.2rem + $padding_side) $padding_side*2 3.2rem;
-  /* Rectangle 5: */
   background-image: linear-gradient(-42deg, $color_accent3 0%, $color_blue-base 100%);
   h1 {
     margin: 0;
@@ -55,12 +58,13 @@ header {
   }
 }
 section {
-  padding: 0 $padding_side*2 6.4rem;
+  padding: 0 $padding_side;
 }
-.item {
+#work .item {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  cursor: pointer;
   margin: 6.4rem auto 0;
   .preview, .content {
     border-radius: 0.25rem;
@@ -71,24 +75,45 @@ section {
     grid-column-end: 12;
     grid-row-start: 1;
     grid-row-end: 7;
-    background: pink;
+    background-image: linear-gradient(-20deg, #666 0%, #999 100%);
   }
   .content {
+    transition: all 0.5s;
+    &:hover {
+      transform: scale(1.02);
+    }
     display: flex;
+    justify-content: center;
+    flex-direction: column;
     padding: 1.6rem;
     grid-column-start: 2;
     grid-column-end: 13;
     grid-row-start: 5;
     grid-row-end: 10;
-    background: red;
+    background: $denim;
+    h1 {
+      margin-top: 0;
+      font-size: $h3_size;
+    }
+    .text {
+      opacity: 0.75;
+    }
+    .cta {
+      margin-top: 1.6rem;
+      text-align: right;
+      font-weight: bold;
+    }
   }
 }
 
 /* Tablets+ */
 @media screen and (min-width: 35rem) {
+  section {
+    padding: 6.4rem $padding_side*2 0;
+  }
   .item {
     height: 400px;
-    margin-bottom: 3.2rem;
+    margin: 3.2rem auto;
   }
   .content {
     max-height: 15rem;
