@@ -1,7 +1,12 @@
 [
   {
     "id": "nly0",
-    "tags": ["DesOps", "DevOps", "Content", "Infrastructure"],
+    "tags": [
+      { "name": "DesOps" },
+      { "name": "DevOps" },
+      { "name": "Content" },
+      { "name": "Infrastructure" }
+    ],
     "project": {
       "title": "A Content Platform For Public Finance",
       "exposure": "internal/public",
@@ -33,7 +38,10 @@
       "p3": "my life got flipped turned upside down"
     },
     "assets": {
-      "thumbnail": "https://c1.staticflickr.com/4/3779/9207750867_e2e4971838_n.jpg",
+      "thumbnail": {
+        "color": "light",
+        "name": "https://c1.staticflickr.com/4/3779/9207750867_e2e4971838_n.jpg"
+      },
       "hero": "",
       "assetDir": ""
     },
@@ -51,7 +59,12 @@
   },
   {
     "id": "nly0",
-    "tags": ["DesOps", "DevOps", "Content", "Infrastructure"],
+    "tags": [
+      { "name": "DesOps" },
+      { "name": "DevOps" },
+      { "name": "Content" },
+      { "name": "Infrastructure" }
+    ],
     "project": {
       "title": "A Content Platform For Public Finance",
       "exposure": "internal/public",
@@ -83,7 +96,10 @@
       "p3": "my life got flipped turned upside down"
     },
     "assets": {
-      "thumbnail": "https://c1.staticflickr.com/8/7296/9448140924_253205b2fa_c.jpg",
+      "thumbnail": {
+        "color": "dark",
+        "name": "https://c1.staticflickr.com/8/7296/9448140924_253205b2fa_c.jpg"
+      },
       "hero": "",
       "assetDir": ""
     },
