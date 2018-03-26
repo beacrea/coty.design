@@ -7,12 +7,12 @@
     </header>
     <section>
       <div class="item" v-for="item in workItems" :key="item.id">
-        <div class="preview"></div>
+        <div class="preview" :style="{ backgroundImage: 'url(' + item.assets.thumbnail + ')'}"></div>
         <div class="content">
           <h1>{{item.project.title}}</h1>
           <div class="text">{{item.project.shortDesc}}</div>
           <div class="cta">
-            <span>READ MORE</span>
+            <span>COMING SOON</span>
           </div>
         </div>
       </div>
@@ -44,9 +44,12 @@ export default {
   overflow: scroll;
   font-size: 1.6rem;
   padding-bottom: 6.4rem;
+  color: $color_light;
+  h1 {
+    color: $color_light;
+  }
   * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    color: $color_light;
   }
 }
 header {
@@ -74,7 +77,9 @@ section {
     grid-column-end: 12;
     grid-row-start: 1;
     grid-row-end: 7;
-    background-image: linear-gradient(-20deg, #666 0%, #999 100%);
+    background: grey center bottom;
+    background-size: cover;
+    max-height: 400px;
   }
   .content {
     cursor: pointer;
@@ -87,15 +92,14 @@ section {
     flex-direction: column;
     padding: 1.6rem;
     grid-column-start: 2;
-    grid-column-end: 13;
-    grid-row-start: 5;
+    grid-column-end: 14;
+    grid-row-start: 6;
     grid-row-end: 10;
     background: $denim;
     * {
       user-select: none;
     }
     h1 {
-      margin-top: 0;
       font-size: $h3_size;
     }
     .text {
@@ -104,13 +108,14 @@ section {
       overflow: hidden;
       -webkit-box-orient: vertical;
       display: -webkit-box;
-      -webkit-line-clamp: 8;
+      -webkit-line-clamp: 5;
       max-height: 15.5rem;
     }
     .cta {
       margin-top: 1.6rem;
       text-align: right;
       font-weight: bold;
+      color: $strawberry;
     }
   }
 }
@@ -122,11 +127,11 @@ section {
       padding: 6.4rem $padding_side*2 0;
     }
     .item {
-      height: 400px;
+      height: 500px;
       margin: 3.2rem auto;
     }
     .content {
-      max-height: 15.75rem;
+      max-height: 17rem;
       // Limited to 240 characters
       .text {
         -webkit-line-clamp: 3 !important;
