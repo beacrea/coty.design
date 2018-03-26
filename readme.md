@@ -1,4 +1,4 @@
-# router-app
+# Coty.Design
 
 > A Vue.js project
 
