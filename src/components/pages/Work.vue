@@ -9,7 +9,7 @@
       <div class="item" v-for="item in workItems" :key="item.id">
         <div class="preview" :style="{ backgroundImage: 'url(' + item.assets.thumbnail.name + ')'}">
           <div class="tags" :class="item.assets.thumbnail.color">
-            <span v-for="tag in item.tags" :key="tag.name">{{tag.name}}</span>
+            <span v-for="tag in item.tags.slice(0,5)" :key="tag.name">{{tag.name}}</span>
           </div>
         </div>
         <div class="content">
