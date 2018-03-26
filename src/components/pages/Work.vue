@@ -64,7 +64,6 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  cursor: pointer;
   margin: 6.4rem auto 0;
   .preview, .content {
     border-radius: 0.25rem;
@@ -78,6 +77,7 @@ section {
     background-image: linear-gradient(-20deg, #666 0%, #999 100%);
   }
   .content {
+    cursor: pointer;
     transition: all 0.5s;
     &:hover {
       transform: scale(1.02);
@@ -91,12 +91,21 @@ section {
     grid-row-start: 5;
     grid-row-end: 10;
     background: $denim;
+    * {
+      user-select: none;
+    }
     h1 {
       margin-top: 0;
       font-size: $h3_size;
     }
     .text {
       opacity: 0.75;
+      line-height: 1.2;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: 8;
+      max-height: 15.5rem;
     }
     .cta {
       margin-top: 1.6rem;
@@ -108,15 +117,21 @@ section {
 
 /* Tablets+ */
 @media screen and (min-width: 35rem) {
-  section {
-    padding: 6.4rem $padding_side*2 0;
-  }
-  .item {
-    height: 400px;
-    margin: 3.2rem auto;
-  }
-  .content {
-    max-height: 15rem;
+  #work {
+    section {
+      padding: 6.4rem $padding_side*2 0;
+    }
+    .item {
+      height: 400px;
+      margin: 3.2rem auto;
+    }
+    .content {
+      max-height: 15.75rem;
+      // Limited to 240 characters
+      .text {
+        -webkit-line-clamp: 3 !important;
+      }
+    }
   }
 }
 </style>
