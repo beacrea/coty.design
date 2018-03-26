@@ -66,7 +66,7 @@ section {
 #work .item {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin: 6.4rem auto 0;
   .preview, .content {
     border-radius: 0.25rem;
@@ -115,7 +115,7 @@ section {
       margin-top: 1.6rem;
       text-align: right;
       font-weight: bold;
-      color: $strawberry;
+      color: $cerulean;
     }
   }
 }
@@ -128,7 +128,7 @@ section {
     }
     .item {
       height: 500px;
-      margin: 3.2rem auto;
+      margin: 3.2rem auto 8.4rem;
     }
     .content {
       max-height: 17rem;
