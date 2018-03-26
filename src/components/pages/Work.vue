@@ -57,7 +57,7 @@ export default {
   }
 }
 header {
-  padding: (3.2rem + $padding_side) $padding_side*2 3.2rem;
+  padding: 5.6rem $padding_side*2;
   background-image: linear-gradient(-42deg, $color_accent3 0%, $color_blue-base 100%);
   h1 {
     margin: 0;
