@@ -6,13 +6,14 @@
       <p>A common thread in all my projects is a desire to solve complex problems with emerging technologies that have a chance to improve the world around me.</p>
     </header>
     <section>
+      <!-- TODO: Turn this into a component -->
       <div class="item" v-for="item in workItems" :key="item.id">
-        <div class="preview" :style="{ backgroundImage: 'url(' + item.assets.thumbnail.name + ')'}">
+        <div class="preview" :style="{ backgroundImage: 'url(' + '../../static/img/' + item.assets.assetDir + '/' + item.assets.thumbnail.name + ')'}">
           <div class="tags" :class="item.assets.thumbnail.color">
-            <span v-for="tag in item.tags.slice(0,5)" :key="tag.name">{{tag.name}}</span>
+            <span v-for="tag in item.tags.slice(0,3)" :key="tag.name">{{tag.name}}</span>
           </div>
         </div>
-        <div class="content">
+        <div class="content" :class="item.assets.thumbnail.color">
           <h1>{{item.project.title}}</h1>
           <div class="text">{{item.project.shortDesc}}</div>
           <div class="cta">
@@ -20,7 +21,6 @@
           </div>
         </div>
       </div>
-
     </section>
   </div>
 </template>
@@ -69,8 +69,8 @@ section {
 }
 #work .item {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin: 6.4rem auto 0;
   .tags {
     position: absolute;
@@ -80,14 +80,26 @@ section {
     padding: 1.6rem 1.2rem;
     &.light {
       span {
-        background: rgba(white, 0.8);
-        color: $denim;
+        background: $cerulean;
+        color: rgba(white, 0.8);
       }
     },
     &.dark {
       span {
         background: rgba($denim, 0.9);
-        color: white;
+        color: rgba(white, 0.6);
+      }
+    },
+    &.pink {
+      span {
+        background: $strawberry;
+        color: rgba(white, 0.8);
+      }
+    },
+    &.purple {
+      span {
+        background: $outrun;
+        color: rgba(white, 0.8);
       }
     }
     span {
@@ -96,7 +108,8 @@ section {
       border-radius: 4rem;
       font-size: 1rem;
       line-height: 1;
-      box-shadow: 0 0 8px rgba(black, 0.2);
+      box-shadow: 0 0 4px rgba(black, 0.8);
+      font-weight: bold;
     }
   }
   .preview, .content {
@@ -106,10 +119,10 @@ section {
   .preview {
     position: relative;
     grid-column-start: 1;
-    grid-column-end: 12;
+    grid-column-end: 14;
     grid-row-start: 1;
     grid-row-end: 7;
-    background: grey center bottom;
+    background: grey center;
     background-size: cover;
     max-height: 450px;
   }
@@ -120,9 +133,37 @@ section {
     flex-direction: column;
     padding: 1.6rem;
     grid-column-start: 2;
-    grid-column-end: 14;
+    grid-column-end: 15;
     grid-row-start: 6;
     grid-row-end: 10;
+    &.light {
+      background: $cerulean;
+      color: white;
+      .cta {
+        color: white;
+      }
+    },
+    &.dark {
+      background: $denim;
+      color: white;
+      .cta {
+        color: $cerulean;
+      }
+    }
+    &.pink {
+      background: $strawberry;
+      color: white;
+      .cta {
+        color: white;
+      }
+    },
+    &.purple {
+      background: $outrun;
+      color: white;
+      .cta {
+        color: white;
+      }
+    }
     background: $denim;
     * {
       user-select: none;
@@ -136,8 +177,8 @@ section {
       overflow: hidden;
       -webkit-box-orient: vertical;
       display: -webkit-box;
-      -webkit-line-clamp: 5;
-      max-height: 15.5rem;
+      -webkit-line-clamp: 8;
+      max-height: 20rem;
     }
     .cta {
       margin-top: 1.6rem;
@@ -167,16 +208,13 @@ section {
       }
       // Limited to 240 characters
       .text {
-        -webkit-line-clamp: 3 !important;
+        -webkit-line-clamp: 4 !important;
       }
     }
   }
 }
-/* High resolution devices */
-@media (-webkit-min-device-pixel-ratio: 1.5),
-(-o-min-device-pixel-ratio: 3/2),
-(min--moz-device-pixel-ratio: 1.5),
-(min-device-pixel-ratio: 1.5) {
+/* Tablets- */
+@media screen and (max-width: 90rem) {
   #work {
     .content:hover {
       transform: none;
