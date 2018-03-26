@@ -70,7 +70,7 @@ section {
 #work .item {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin: 6.4rem auto 0;
   .tags {
     position: absolute;
@@ -121,7 +121,7 @@ section {
     grid-column-start: 1;
     grid-column-end: 14;
     grid-row-start: 1;
-    grid-row-end: 7;
+    grid-row-end: 8;
     background: grey center;
     background-size: cover;
     max-height: 450px;
@@ -185,6 +185,36 @@ section {
       text-align: right;
       font-weight: bold;
       color: $cerulean;
+    }
+  }
+}
+
+/* Tiny Phones */
+@media screen and (max-width: 40rem) {
+  #work {
+    section {
+      padding: 0 1.6rem !important;
+    }
+    .item {
+      margin-top: 6.4rem !important;
+      height: auto !important;
+    }
+    .preview {
+      grid-row-end: 7 !important;
+      max-height: 350px;
+    }
+    .content {
+      max-height: 12rem !important;
+      h1 {
+        margin-bottom: 0;
+        color: white;
+      }
+    }
+    .cta {
+      opacity: 0.75;
+    }
+    .text {
+      display: none !important;
     }
   }
 }
