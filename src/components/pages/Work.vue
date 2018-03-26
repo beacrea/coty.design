@@ -7,7 +7,13 @@
     </header>
     <section>
       <div class="item" v-for="item in workItems" :key="item.id">
-        <div class="preview" :style="{ backgroundImage: 'url(' + item.assets.thumbnail + ')'}"></div>
+        <div class="preview" :style="{ backgroundImage: 'url(' + item.assets.thumbnail + ')'}">
+          <div class="tags">
+            <span>tag</span>
+            <span>tag</span>
+            <span>tag</span>
+          </div>
+        </div>
         <div class="content">
           <h1>{{item.project.title}}</h1>
           <div class="text">{{item.project.shortDesc}}</div>
@@ -68,11 +74,27 @@ section {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin: 6.4rem auto 0;
+  .tags {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(red, 0.2);
+    padding: 1.6rem;
+    span {
+      background: red;
+      padding: 0.4rem 1.2rem;
+      border-radius: 4rem;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+  }
   .preview, .content {
     border-radius: 0.25rem;
     box-shadow: 0.25rem 0.25rem 1rem rgba(black, 0.5);
   }
   .preview {
+    position: relative;
     grid-column-start: 1;
     grid-column-end: 12;
     grid-row-start: 1;
