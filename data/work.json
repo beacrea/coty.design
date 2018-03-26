@@ -1,19 +1,75 @@
 [
   {
-    "id": "nly0",
+    "id": "nly_ostrom",
     "tags": [
-      { "name": "DesOps" },
-      { "name": "DevOps" },
-      { "name": "Content" },
-      { "name": "Infrastructure" }
+      { "name": "UI" },
+      { "name": "Dev" },
+      { "name": "Strategy" }
     ],
     "project": {
-      "title": "A Content Platform For Public Finance",
+      "title": "A Communications Platform For Public Finance",
       "exposure": "internal/public",
       "year": "2017",
       "duration": "3 Weeks",
       "shipped": true,
-      "shortDesc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma.",
+      "shortDesc": "Neighborly needed to create a communications strategy in order to connect with communities around the world. Project Ostrom became an overarching initiative that included infrastructure, tooling, and thought leadership.",
+      "summary": ""
+    },
+    "technologies": [
+      {
+        "name": "Ghost",
+        "url": "https://ghost.org/"
+      },
+      {
+        "name": "Foundation for Emails",
+        "url": "https://foundation.zurb.com/emails.html"
+      }
+    ],
+    "background": {
+      "summary": "",
+      "users": ["", ""],
+      "pain": ["", ""],
+      "goal": ""
+    },
+    "personalContext": {
+      "p1": "Yo, this is a story all",
+      "p2": "all about how",
+      "p3": "my life got flipped turned upside down"
+    },
+    "assets": {
+      "thumbnail": {
+        "color": "purple",
+        "name": "ostrom_thumb.png"
+      },
+      "hero": "",
+      "assetDir": "work"
+    },
+    "company": {
+      "name": "Neighborly",
+      "location": "San Francisco, CA",
+      "shortDescription": "Positioned at the intersection of technology, finance and government, Neighborly develops technologies to radically modernize public finance, the $1 billion per day, 200 year-old market that powers vital public projects like schools, parks, and next-generation infrastructure.",
+      "logo": ""
+    },
+    "team": {
+      "involved": ["Engineering", "Marketing", "Design"],
+      "roles": ["Product Owner", "Designer"],
+      "noInvolved": "Team of 4"
+    }
+  },
+  {
+    "id": "eus_gen",
+    "tags": [
+      { "name": "UI" },
+      { "name": "Dev" },
+      { "name": "Strategy" }
+    ],
+    "project": {
+      "title": "Measuring Human Performance",
+      "exposure": "internal/public",
+      "year": "2017",
+      "duration": "3 Weeks",
+      "shipped": true,
+      "shortDesc": "Football players are some of the most measured individuals in the world. Edge Up took a look at traditional metrics and supplemented them with new ones like unstructured NLP, vocal tonality, microexpression analysis, and more.",
       "summary": ""
     },
     "technologies": [
@@ -40,10 +96,10 @@
     "assets": {
       "thumbnail": {
         "color": "light",
-        "name": "https://c1.staticflickr.com/4/3779/9207750867_e2e4971838_n.jpg"
+        "name": "brady_thumb.jpg"
       },
       "hero": "",
-      "assetDir": ""
+      "assetDir": "work"
     },
     "company": {
       "name": "Neighborly",
@@ -58,20 +114,76 @@
     }
   },
   {
-    "id": "nly0",
+    "id": "sora_triage",
     "tags": [
-      { "name": "DesOps" },
-      { "name": "DevOps" },
-      { "name": "Content" },
-      { "name": "Infrastructure" }
+      { "name": "UI" },
+      { "name": "Dev" },
+      { "name": "Strategy" }
     ],
     "project": {
-      "title": "A Content Platform For Public Finance",
+      "title": "Improving Medical Diagnosis",
       "exposure": "internal/public",
       "year": "2017",
       "duration": "3 Weeks",
       "shipped": true,
-      "shortDesc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma. Tdolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.um sociis natoque penatibus et ma. Tdolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
+      "shortDesc": "Sora sought to improve outcomes for Code Blues, Stroke, and Sepsis after seeing a 12-20% survival rate for critical events, nurses writing on their pants while keeping track of drug timers, and everyone spending hours writing documentation.",
+      "summary": ""
+    },
+    "technologies": [
+      {
+        "name": "Ghost",
+        "url": "https://ghost.org/"
+      },
+      {
+        "name": "Foundation for Emails",
+        "url": "https://foundation.zurb.com/emails.html"
+      }
+    ],
+    "background": {
+      "summary": "",
+      "users": ["", ""],
+      "pain": ["", ""],
+      "goal": ""
+    },
+    "personalContext": {
+      "p1": "Yo, this is a story all",
+      "p2": "all about how",
+      "p3": "my life got flipped turned upside down"
+    },
+    "assets": {
+      "thumbnail": {
+        "color": "pink",
+        "name": "sora_thumb.jpg"
+      },
+      "hero": "",
+      "assetDir": "work"
+    },
+    "company": {
+      "name": "Neighborly",
+      "location": "San Francisco, CA",
+      "shortDescription": "Positioned at the intersection of technology, finance and government, Neighborly develops technologies to radically modernize public finance, the $1 billion per day, 200 year-old market that powers vital public projects like schools, parks, and next-generation infrastructure.",
+      "logo": ""
+    },
+    "team": {
+      "involved": ["Engineering", "Marketing", "Design"],
+      "roles": ["Product Owner", "Designer"],
+      "noInvolved": "Team of 4"
+    }
+  },
+  {
+    "id": "ccam_gen",
+    "tags": [
+      { "name": "Design" },
+      { "name": "Strategy" },
+      { "name": "Marketing" }
+    ],
+    "project": {
+      "title": "Flying Robotic Cameras",
+      "exposure": "internal/public",
+      "year": "2017",
+      "duration": "3 Weeks",
+      "shipped": true,
+      "shortDesc": "Before drones came on the scene, serious filmmakers were trying to get sophisticated shots that were programmable and repeatable, especially for CGI and post-production work on a budget.",
       "summary": ""
     },
     "technologies": [
@@ -98,10 +210,10 @@
     "assets": {
       "thumbnail": {
         "color": "dark",
-        "name": "https://c1.staticflickr.com/8/7296/9448140924_253205b2fa_c.jpg"
+        "name": "ccam_thumb.jpg"
       },
       "hero": "",
-      "assetDir": ""
+      "assetDir": "work"
     },
     "company": {
       "name": "Neighborly",
