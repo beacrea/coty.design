@@ -1,6 +1,6 @@
 <template>
   <nav id="workitem">
-    {{projectData}}
+    {{projectData.id}}
   </nav>
 </template>
 
@@ -26,6 +26,6 @@ export default {
     overflow: scroll;
     font-size: 1.6rem;
     padding-bottom: 6.4rem;
-    color: $color_light;
+    color: $color_dark;
   }
 </style>
