@@ -4,7 +4,7 @@ const proxy = require('http-proxy-middleware')
 const app = express()
 
 // Table Options
-const options_projects = {
+const optionsProjects = {
   target: 'https://api.airtable.com/v0/' + process.env.AIRTABLE_ID + '/Projects',
   logLevel: 'debug',
   changeOrigin: true,
@@ -14,13 +14,13 @@ const options_projects = {
   },
   secure: false,
   pathRewrite: {
-    '^/projects' : ''
+    '^/projects': ''
   },
   ssl: {
     rejectUnauthorized: false
   }
 }
-const options_companies = {
+const optionsCompanies = {
   target: 'https://api.airtable.com/v0/' + process.env.AIRTABLE_ID + '/Companies',
   logLevel: 'debug',
   changeOrigin: true,
@@ -30,7 +30,7 @@ const options_companies = {
   },
   secure: false,
   pathRewrite: {
-    '^/companies' : ''
+    '^/companies': ''
   },
   ssl: {
     rejectUnauthorized: false
@@ -53,8 +53,8 @@ let filter = function (pathname, req) {
 app.get('/', function(req, res) {
   res.send('Yo! This is the backend server of Coty Beasley. (https://coty.design)')
 })
-app.use('/projects', proxy(filter, options_projects))
-app.use('/companies', proxy(filter, options_companies))
+app.use('/projects', proxy(filter, optionsProjects))
+app.use('/companies', proxy(filter, optionsCompanies))
 
 // Port listener
 app.listen(80, () => console.log('Example app listening on port 80!'))
