@@ -6,6 +6,7 @@
       <p>A common thread in all my projects is a desire to solve complex problems with emerging technologies that have a chance to improve the world around me.</p>
     </header>
     <section>
+      <WorkItem name="Pickles"></WorkItem>
       <!-- TODO: Turn this into a component -->
       <div class="item" v-for="item in workItems" :key="item.id">
         <div class="preview" :style="{ backgroundImage: 'url(' + '../../static/img/' + item.assets.assetDir + '/' + item.assets.thumbnail.name + ')'}">
@@ -27,9 +28,10 @@
 
 <script>
 import work from '../../../data/work'
+import WorkItem from '../WorkItem'
 
 export default {
-  components: {},
+  components: {WorkItem},
   data () {
     return {
       workItems: work
