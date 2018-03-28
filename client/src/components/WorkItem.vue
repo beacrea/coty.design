@@ -1,5 +1,5 @@
 <template>
-  <nav id="workitem">
+  <div id="workitem">
     <div class="preview" :style="{ backgroundImage: 'url(' + '../../static/img/' + projectData.assets.assetDir + '/' + projectData.assets.thumbnail.name + ')'}">
       <div class="tags" :class="projectData.assets.thumbnail.color">
         <span v-for="tag in projectData.tags.slice(0,3)" :key="tag.name">{{tag.name}}</span>
@@ -12,7 +12,7 @@
         <span>COMING SOON</span>
       </div>
     </div>
-  </nav>
+  </div>
 </template>
 
 <script>
