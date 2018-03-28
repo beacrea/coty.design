@@ -4,6 +4,7 @@ import About from '../components/pages/About'
 import Stats from '../components/pages/Stats'
 import Contact from '../components/pages/Contact'
 import Work from '../components/pages/Work'
+import WorkDetail from '../components/WorkDetail'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/work',
       name: 'work',
       component: Work
+    },
+    {
+      path: '/workdetail',
+      name: 'workdetail',
+      component: WorkDetail
     }
   ]
 })
