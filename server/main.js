@@ -49,6 +49,6 @@ app.use('/projects', proxy(options_projects))
 app.use('/companies', proxy(options_companies))
 
 // Port listener
-app.listen(9000, () => console.log('Example app listening on port 9000!'))
+app.listen(80, () => console.log('Example app listening on port 80!'))
 
 module.exports = app
