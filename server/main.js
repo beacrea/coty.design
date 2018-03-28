@@ -41,12 +41,20 @@ const options_companies = {
 app.use(cors())
 app.set('json spaces', 40)
 
+// Check request type
+/**
+ * @return {Boolean}
+ */
+let filter = function (pathname, req) {
+  return (req.method === 'GET')
+}
+
 // Route handler
 app.get('/', function(req, res) {
   res.send('Yo! This is the backend server of Coty Beasley. (https://coty.design)')
 })
-app.use('/projects', proxy(options_projects))
-app.use('/companies', proxy(options_companies))
+app.use('/projects', proxy(filter, options_projects))
+app.use('/companies', proxy(filter, options_companies))
 
 // Port listener
 app.listen(80, () => console.log('Example app listening on port 80!'))
