@@ -1,17 +1,13 @@
 <template>
   <nav id="workitem">
-    {{name}}
-    {{name}}
-    {{name}}
-    {{name}}
-    {{name}}
+    {{projectData}}
   </nav>
 </template>
 
 <script>
 export default {
   components: {},
-  props: ['name'],
+  props: ['projectData'],
   data () {
     return {
       msg: 'This is a message'
