@@ -29,11 +29,10 @@
   <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
 </head>
 <body style='margin : 0; overflow: hidden;'>
-<a-scene stats embedded arjs='sourceType: webcam; detectionMode: mono; maxDetectionRate: 30; canvasWidth: 240; canvasHeight: 180'>
-  <a-marker preset='hiro'>
-    <a-box position='0 0.5 0' material='opacity: 0.5;'></a-box>
-  </a-marker>
-  <a-entity camera></a-entity>
+<a-scene stats embedded>
+    <a-marker-camera type='pattern' patternUrl='brandmarker.patt'>
+      <a-box position="0 0.5 0" material="opacity: 0.75" color="yellow"></a-box>
+    </a-marker-camera>
 </a-scene>
 </body>
 </html>
