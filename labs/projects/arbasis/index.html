@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <meta name="theme-color" content="#BA7CE9">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" href="../../icons/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="../../icons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../icons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="../../icons/icon_white-chrome-128x128.png" sizes="128x128">
+  <link rel="icon" type="image/png" href="../../icons/icon_white-chrome-196x196.png" sizes="196x196">
+  <link rel="apple-touch-icon" href="../../icons/icon_white-ios-120x120.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../icons/icon_white-ios-180x180.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="../../icons/icon_white-ios-152x152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="../../icons/icon_white-ios-167x167.png">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:600|Open+Sans" rel="stylesheet">
+
+  <script
+    src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/examples/vendor/aframe/build/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
+</head>
+<body style='margin : 0; overflow: hidden;'>
+<a-scene stats embedded arjs='sourceType: webcam; detectionMode: mono; maxDetectionRate: 30; canvasWidth: 240; canvasHeight: 180'>
+  <a-marker preset='hiro'>
+    <a-box position='0 0.5 0' material='opacity: 0.5;'></a-box>
+  </a-marker>
+  <a-entity camera></a-entity>
+</a-scene>
+</body>
+</html>
