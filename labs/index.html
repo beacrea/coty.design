@@ -24,6 +24,9 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:600|Open+Sans" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
     html, body {
       font-family: 'Open Sans', sans-serif;
       display: flex;
@@ -65,15 +68,32 @@
       background: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3Eicon%3C/title%3E%3Cdesc%3ECreated using Figma%3C/desc%3E%3Cg id='Canvas' transform='translate%28-62 230%29'%3E%3CclipPath id='clip-0' clip-rule='evenodd'%3E%3Cpath d='M 62 -230L 126 -230L 126 -166L 62 -166L 62 -230Z' fill='%23FFFFFF'/%3E%3C/clipPath%3E%3Cg id='icon' clip-path='url%28%23clip-0%29'%3E%3Cg id='hat'%3E%3Cuse xlink:href='%23path0_fill' transform='translate%2880.4278 -229%29' fill='%23FFFFFF'/%3E%3C/g%3E%3Cg id='frame'%3E%3Cuse xlink:href='%23path1_fill' transform='translate%2863 -222.583%29' fill='%23FFFFFF'/%3E%3C/g%3E%3Cg id='core'%3E%3Cuse xlink:href='%23path2_fill' transform='translate%2897.7037 -203.343%29' fill='%23FFFFFF'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3Cdefs%3E%3Cpath id='path0_fill' fill-rule='evenodd' d='M 15.698 0L 6.52965e-08 5.07971L 10.2276 8.40274L 25.8168 3.27513L 15.698 0Z'/%3E%3Cpath id='path1_fill' fill-rule='evenodd' d='M 37.3963 5.14864L 51.4448 9.71304L 51.4448 38.0493L 28.7756 45.4L 28.6481 45.3601L 28.5965 17.118L 43.8376 12.2131L 9.76928 1.13945L 1.36545e-12 4.3274L 1.36545e-12 46.2427L 28.7756 55.5833L 61.1143 45.0928L 61.1143 2.6447L 52.9433 -1.79934e-07L 37.3963 5.14864ZM 9.64364 39.1983L 9.64364 11.2964L 18.542 14.182L 18.542 42.0823L 9.64364 39.1983Z'/%3E%3Cpath id='path2_fill' fill-rule='evenodd' d='M -1.42267e-06 3.44736L 10.6332 -5.78374e-07L 10.6332 13.1883L 0.0244854 16.5906L -1.42267e-06 3.44736Z'/%3E%3C/defs%3E%3C/svg%3E%0A") no-repeat center;
       background-size: contain;
     }
+    a, a:visited, a:active {
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 4px;
+      padding: 12px 16px;
+      display: block;
+      margin-top: 1rem;
+      text-decoration: none;
+      color: #111;
+    }
+    .projects {
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="mark"></div>
-    <h1>Welcome to the Lab</h1>
-    <p>
-      Tomfoolery, mistakes, and explorations.
-    </p>
+    <section>
+      <h1>Welcome to the Lab</h1>
+      <p>
+        Tomfoolery, mistakes, and explorations.
+      </p>
+    </section>
+    <section class="projects">
+      <a href="./projects/arbasis/index.html" target="_blank">AR Basis Test</a>
+    </section>
   </div>
 </body>
 </html>
