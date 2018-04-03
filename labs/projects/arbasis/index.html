@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,9 +28,37 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>
   <script src="aframe-ar.min.js"></script>
   <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.0.0/dist/aframe-extras.min.js"></script>
+
+  <style>
+    html, body {
+      font-family: sans-serif;
+    }
+    .banner {
+      position: sticky;
+      display: inline-block;
+      background: black;
+      color: white;
+      text-align: center;
+      z-index: 1;
+      position: fixed;
+      padding: 16px;
+      bottom: 0;
+      left: 0;
+      border-radius: 0 4px 0 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 0;
+      border-left: 0;
+    }
+    a, a:hover, a:visited, a:active {
+      text-decoration: none;
+      color: orange;
+      border-bottom: 1px dotted orange;
+    }
+  </style>
 </head>
 <body style="margin : 0; overflow: hidden;">
 <a-scene stats embedded arjs="trackingMethod: best; debugUIEnabled: false;">
+  <div class="banner">No <a href="marker.pdf" target="_blank">marker</a>? <a href="https://www.youtube.com/watch?v=ASAj5No0Uaw" target="_blank">Watch a video.</a></div>
   <a-assets>
     <a-asset-item id="blob" src="./model/AnimatedMorphSphere.gltf"></a-asset-item>
   </a-assets>
