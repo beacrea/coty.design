@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://coty.design/</loc>
+    <lastmod>2018-03-24</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://coty.design/#/intro</loc>
+    <lastmod>2018-03-24</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://coty.design/#/work</loc>
+    <lastmod>2018-03-24</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://coty.design/#/stats</loc>
+    <lastmod>2018-03-24</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://coty.design/#/contact</loc>
+    <lastmod>2018-03-24</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+</urlset>

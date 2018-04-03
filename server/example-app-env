@@ -1,0 +1,3 @@
+# Get keys at https://airtable.com/api
+export AIRTABLE_ID=""
+export AIRTABLE_KEY=""
