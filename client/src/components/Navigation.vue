@@ -4,7 +4,7 @@
     <router-link to="work" v-on:click.native="changeBg">Work</router-link>
     <router-link to="stats" v-on:click.native="changeBg">Stats</router-link>
     <router-link to="contact" v-on:click.native="changeBg">Contact</router-link>
-    <!--<a class="icon">★</a>-->
+    <a href="https://labs.coty.design" target="_blank">Labs</a>
   </nav>
 </template>
 
@@ -61,9 +61,12 @@ a {
   cursor: pointer;
   transition-duration: 1s;
   &.icon {
+    $size: 4.8rem;
     text-align: center;
-    font-family: Arial;
-    max-width: 6.4rem;
+    width: $size;
+    max-width: $size;
+    max-height: 2.4rem;
+    height: $size/2;
   }
   &.router-link-active {
     color: white !important;
