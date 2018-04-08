@@ -34,6 +34,12 @@
       "desc": "Code and design asset versioning for maximum time machine status."
     },
     {
+      "icon": "i-airtable",
+      "name": "Airtable",
+      "type": "Data",
+      "desc": "A next-level database for data modeling/structure."
+    },
+    {
       "icon": "i-adobe",
       "name": "Creative Cloud",
       "type": "Multimedia",
