@@ -173,21 +173,21 @@ section {
     display: inline-block;
     width: 5.8rem;
     height: 4.1rem;
-    animation: bounce ease-in 1s;
+    animation: bounce ease-in 2.5s;
     animation-iteration-count: infinite;
-    transform-origin: 50% 100%;
-    -webkit-animation: bounce ease-in 1s;
+    transform-origin: 50% 200%;
+    -webkit-animation: bounce ease-in 2.5s;
     -webkit-animation-iteration-count: infinite;
-    -webkit-transform-origin: 50% 100%;
-    -moz-animation: bounce ease-in 1s;
+    -webkit-transform-origin: 50% 200%;
+    -moz-animation: bounce ease-in 2.5s;
     -moz-animation-iteration-count: infinite;
-    -moz-transform-origin: 50% 100%;
-    -o-animation: bounce ease-in 1s;
+    -moz-transform-origin: 50% 200%;
+    -o-animation: bounce ease-in 2.5s;
     -o-animation-iteration-count: infinite;
-    -o-transform-origin: 50% 100%;
-    -ms-animation: bounce ease-in 1s;
+    -o-transform-origin: 50% 200%;
+    -ms-animation: bounce ease-in 2.5s;
     -ms-animation-iteration-count: infinite;
-    -ms-transform-origin: 50% 100%;
+    -ms-transform-origin: 50% 200%;
   }
 }
 
@@ -249,61 +249,61 @@ header {
 
 @keyframes bounce{
   0% {
-    transform:  translate(0px,0px)  ;
+    transform:  translate(0px,0px);
   }
   50% {
-    transform:  translate(0px,-16px)  ;
+    transform:  translate(0px,-14px);
   }
   100% {
-    transform:  translate(0px,0px)  ;
+    transform:  translate(0px,0px);
   }
 }
 
 @-moz-keyframes bounce{
   0% {
-    -moz-transform:  translate(0px,0px)  ;
+    -moz-transform:  translate(0px,0px);
   }
   50% {
-    -moz-transform:  translate(0px,-16px)  ;
+    -moz-transform:  translate(0px,-14px);
   }
   100% {
-    -moz-transform:  translate(0px,0px)  ;
+    -moz-transform:  translate(0px,0px);
   }
 }
 
 @-webkit-keyframes bounce {
   0% {
-    -webkit-transform:  translate(0px,0px)  ;
+    -webkit-transform:  translate(0px,0px);
   }
   50% {
-    -webkit-transform:  translate(0px,-16px)  ;
+    -webkit-transform:  translate(0px,-14px);
   }
   100% {
-    -webkit-transform:  translate(0px,0px)  ;
+    -webkit-transform:  translate(0px,0px);
   }
 }
 
 @-o-keyframes bounce {
   0% {
-    -o-transform:  translate(0px,0px)  ;
+    -o-transform:  translate(0px,0px);
   }
   50% {
-    -o-transform:  translate(0px,-16px)  ;
+    -o-transform:  translate(0px,-14px);
   }
   100% {
-    -o-transform:  translate(0px,0px)  ;
+    -o-transform:  translate(0px,0px);
   }
 }
 
 @-ms-keyframes bounce {
   0% {
-    -ms-transform:  translate(0px,0px)  ;
+    -ms-transform:  translate(0px,0px);
   }
   50% {
-    -ms-transform:  translate(0px,-16px)  ;
+    -ms-transform:  translate(0px,-14px);
   }
   100% {
-    -ms-transform:  translate(0px,0px)  ;
+    -ms-transform:  translate(0px,0px);
   }
 }
 </style>
