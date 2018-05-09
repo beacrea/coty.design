@@ -195,7 +195,8 @@ export default {
     transition: all 0.5s;
     max-height: 20rem;
     &:hover {
-      transform: scale(1.02);
+      /* TODO: Reenable cursor hover */
+      /*transform: scale(1.02);*/
     }
     // Limited to 240 characters
     .text {
