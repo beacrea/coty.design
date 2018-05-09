@@ -9,7 +9,7 @@
       <h1>{{projectData.project.title}}</h1>
       <div class="text">{{projectData.project.shortDesc}}</div>
       <div class="cta">
-        <span>COMING SOON</span>
+        <!--<span>COMING SOON</span>-->
       </div>
     </div>
   </div>
@@ -190,7 +190,8 @@ export default {
     margin: 3.2rem auto 8.4rem;
   }
   .content {
-    cursor: pointer;
+    /* TODO: Reenable cursor hover */
+    /*cursor: pointer;*/
     transition: all 0.5s;
     max-height: 20rem;
     &:hover {
