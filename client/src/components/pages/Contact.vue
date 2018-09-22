@@ -5,21 +5,21 @@
      <div class="grid">
         <div class="icon">
           <a :href="icon.dribbble.link" target="_blank">
-            <img :src="setIcon(icon.dribbble.asset)" />
+            <i class="fab fa-dribbble"></i>
+            <span>{{icon.dribbble.title}}</span>
           </a>
-          <span>{{icon.dribbble.title}}</span>
         </div>
         <div class="icon">
           <a :href="icon.github.link" target="_blank">
-            <img :src="setIcon(icon.github.asset)" />
+            <i class="fab fa-github"></i>
+            <span>{{icon.github.title}}</span>
           </a>
-          <span>{{icon.github.title}}</span>
         </div>
         <div class="icon">
           <a :href="icon.linkedin.link" target="_blank">
-            <img :src="setIcon(icon.linkedin.asset)" />
+            <i class="fab fa-linkedin"></i>
+            <span>{{icon.linkedin.title}}</span>
           </a>
-          <span>{{icon.linkedin.title}}</span>
         </div>
      </div>
    </section>
@@ -97,12 +97,19 @@ export default {
   grid-column-gap: 1.6rem;
 }
 .icon {
+  i {
+    font-size: 4.0rem;
+    color: white;
+    margin-bottom: 1rem;
+  }
   img {
     max-height: 4.0rem;
     color: white;
   }
   a {
     border-bottom: none;
+    color: white;
+    font-weight: 300;
   }
   & > span {
     font-size: 1.4rem;
