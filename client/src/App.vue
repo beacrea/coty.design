@@ -75,6 +75,17 @@ export default {
   }
 }
 
+/* Tablets+ */
+@media screen and (min-width: 76rem) {
+  body {
+    padding: 4rem;
+  }
+  #app {
+    border-radius: 16px;
+    overflow: hidden;
+  }
+}
+
 // Overlay
 #overlay {
   position: absolute;
