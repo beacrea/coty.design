@@ -52,7 +52,7 @@
     <section id="qa6">
       <header>
         <h1>Sick site. How'd you make it?</h1>
-        <h3>A lot of planning, Sketch, <a href="https://www.pinterest.com/cbeasley0/2018-personal-brand-exploration-v4/">Pinterest</a>,
+        <h3>Some content strategy, Sketch, <a href="https://www.pinterest.com/cbeasley0/2018-personal-brand-exploration-v4/">Pinterest</a>,
           <a href="https://vuejs.org/" target="_blank">Vue.js</a>, and a lot of
           <a href="https://sass-lang.com/" target="_blank">SASS</a>. If you're a big nerd or super bored, check out the
           <a href="https://github.com/beacrea/coty.design" target="_blank">Github</a> repo. You can even check out my <a href="https://github.com/beacrea/coty.design/projects/1" target="_blank">project board</a>, where all my improvements will never get built out.</h3>
