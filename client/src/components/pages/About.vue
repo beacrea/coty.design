@@ -20,7 +20,7 @@
     </section>
     <section id="qa2">
       <header>
-        <h1>I began designing over ten years ago so I could one day help build the future.</h1>
+        <h1>I began designing over ten years ago so I could help build the future.</h1>
         <h2>Here are some questions you might be asking:</h2>
       </header>
     </section>
