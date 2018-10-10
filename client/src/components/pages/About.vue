@@ -35,9 +35,9 @@
     <section id="qa4">
       <header>
         <h1>"Are you a manager or an individual contributor?"</h1>
-        <h3>I'm currently the Director of Product Design at <a href="http://neighborly.com">Neighborly</a>, but I still like to roll up my sleeves. I've also been a product manager, front-end developer, and had several IC roles at the intersection of engineering and design.</h3>
-        <h3>My closest title might be <a href="https://medium.com/interactive-mind/the-rise-of-the-design-technologist-e9516aa821a0">Design</a> <a
-            href="https://blog.prototypr.io/your-ux-team-needs-a-design-technologist-heres-why-3426be8f78a">Technologist</a>.</h3>
+        <h3>I'm currently the Director of Product Design at <a href="http://neighborly.com" target="_blank">Neighborly</a>, but I still like to roll up my sleeves. I've also been a product manager, front-end developer, and had several IC roles at the intersection of engineering and design.</h3>
+        <h3>My closest title might be <a href="https://medium.com/interactive-mind/the-rise-of-the-design-technologist-e9516aa821a0" target="_blank">Design</a> <a
+            href="https://blog.prototypr.io/your-ux-team-needs-a-design-technologist-heres-why-3426be8f78a" target="_blank">Technologist</a>.</h3>
       </header>
     </section>
     <section id="qa5">
@@ -53,9 +53,9 @@
       <header>
         <h1>Sick site. How'd you make it?</h1>
         <h3>A lot of planning, Sketch, <a href="https://www.pinterest.com/cbeasley0/2018-personal-brand-exploration-v4/">Pinterest</a>,
-          <a href="https://vuejs.org/">Vue.js</a>, and a lot of
-          <a href="https://sass-lang.com/">SASS</a>. If you're a big nerd or super bored, check out the
-          <a href="https://github.com/beacrea/coty.design">Github</a> repo. You can even check out my <a href="https://github.com/beacrea/coty.design/projects/1">project board</a>, where all my improvements will never get built out.</h3>
+          <a href="https://vuejs.org/" target="_blank">Vue.js</a>, and a lot of
+          <a href="https://sass-lang.com/" target="_blank">SASS</a>. If you're a big nerd or super bored, check out the
+          <a href="https://github.com/beacrea/coty.design" target="_blank">Github</a> repo. You can even check out my <a href="https://github.com/beacrea/coty.design/projects/1" target="_blank">project board</a>, where all my improvements will never get built out.</h3>
       </header>
     </section>
     <section id="qa_end">
