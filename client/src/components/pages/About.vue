@@ -144,16 +144,21 @@ export default {
   }
 }
 section {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100% + 64px);
-  justify-content: center;
   position: relative;
-  padding-left: $padding_side;
-  padding-right: $padding_side;
+  padding: 20rem $padding_side;
   &:last-child {
     padding-bottom: $navHeight/2;
+  }
+  &#intro, &#qa_end {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100% + 64px);
+    justify-content: center;
+    margin-bottom: 20rem;
+  }
+  &#qa_end {
+    margin-bottom: 4.8rem;
   }
   header {
     text-align: left;
