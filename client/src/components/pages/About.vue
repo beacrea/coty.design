@@ -35,7 +35,7 @@
     <section id="qa4">
       <header>
         <h1>"Are you a manager or an individual contributor?"</h1>
-        <h3>I'm currently the Director of Product Design at <a href="http://neighborly.com" target="_blank">Neighborly</a>, but I still like to roll up my sleeves.</h3>
+        <h3>I'm currently the Director of Product Design at <a href="http://neighborly.com" target="_blank">Neighborly</a>.</h3>
         <h3>I've also been a product manager, front-end developer, and had several IC roles at the intersection of engineering and design.</h3>
         <h3>My favorite title is probably <a href="https://medium.com/interactive-mind/the-rise-of-the-design-technologist-e9516aa821a0" target="_blank">Design</a> <a
             href="https://blog.prototypr.io/your-ux-team-needs-a-design-technologist-heres-why-3426be8f78a" target="_blank">Technologist</a>.</h3>
