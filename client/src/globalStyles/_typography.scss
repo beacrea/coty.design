@@ -29,6 +29,9 @@ h1 {
   font-weight: 600;
   line-height: 1.2;
   //text-shadow: 0 0 10px rgba(240,96,103,0.32);
+  span {
+    line-height: 1.2;
+  }
 }
 h2 {
   font-size: $h2_size;
