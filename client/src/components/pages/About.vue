@@ -15,7 +15,7 @@
       <header>
         <h1>My name is Coty Beasley</h1>
         <h2>I'm a product designer based in San Francisco.</h2>
-        <h2>I specialize in product design and design systems.</h2>
+        <h2>I specialize in early-stage products and design systems.</h2>
       </header>
     </section>
     <section id="qa2">
@@ -27,35 +27,34 @@
     <section id="qa3">
       <header>
         <h1>"Where do you typically fit into the product cycle?"</h1>
-        <h2>I’m an end-to-end designer that builds scalable systems.</h2>
-        <h3>As a generalist designer, I can move into any part of the product lifecycle. Most commonly, I'm brought into the early stages of initiatives to help build the product vision, then curate the process from interface designs and into engineering implementation.</h3>
-        <h3>The role of design is never done and every release is an in opportunity to learn more about what's working and what isn't.</h3>
+        <h2>I’m an end-to-end designer.</h2>
+        <h3>As a generalist designer, I can move into any part of the product lifecycle. Most commonly, I'm brought into the early stages of initiatives to help build the product vision, then curate the process from interface designs through engineering implementation.</h3>
+        <h3>The role of design is never done. Every iteration is an opportunity to learn more about what's working.</h3>
       </header>
     </section>
     <section id="qa4">
       <header>
         <h1>"Are you a manager or an individual contributor?"</h1>
         <h3>I'm currently the Director of Product Design at <a href="http://neighborly.com" target="_blank">Neighborly</a>, but I still like to roll up my sleeves. I've also been a product manager, front-end developer, and had several IC roles at the intersection of engineering and design.</h3>
-        <h3>My closest title might be <a href="https://medium.com/interactive-mind/the-rise-of-the-design-technologist-e9516aa821a0" target="_blank">Design</a> <a
+        <h3>My best title is probably <a href="https://medium.com/interactive-mind/the-rise-of-the-design-technologist-e9516aa821a0" target="_blank">Design</a> <a
             href="https://blog.prototypr.io/your-ux-team-needs-a-design-technologist-heres-why-3426be8f78a" target="_blank">Technologist</a>.</h3>
       </header>
     </section>
     <section id="qa5">
       <header>
         <h1>That photo of you up top is pretty ridiculous. Are you serious business?</h1>
-        <h2>A designer's dreams of electric sheep</h2>
-        <h3>Yes, this is a joke, albeit a poorly crafted one. One of my favorite films of all time is Blade Runner, since it challenges the limits of what being human truly is - how technology can be involved in extending our humanity.</h3>
-        <h3>Ultimately, designers have a special role in influencing how we relate to the human experience, for better or ill.</h3>
-        <h3>I've always felt that we have a responsibility to understand how our decisions impact our lives and generations to come and that all too often, we're too short-sided in our decisions.</h3>
+        <h3>Yes, this is a joke, albeit a very narrow one. One of my favorite films of all time is Blade Runner, which challenges what it means to be human and how technology can be involved in extending that humanity.</h3>
+        <h3>Ultimately, designers have a special role in impacting society, for better or ill. I feel that we have a responsibility to understand how our decisions affect lives and that all too often we're too short-sided in our decisions.</h3>
       </header>
     </section>
     <section id="qa6">
       <header>
         <h1>Sick site. How'd you make it?</h1>
-        <h3>Some content strategy, Sketch, <a href="https://www.pinterest.com/cbeasley0/2018-personal-brand-exploration-v4/">Pinterest</a>,
-          <a href="https://vuejs.org/" target="_blank">Vue.js</a>, and a lot of
-          <a href="https://sass-lang.com/" target="_blank">SASS</a>. If you're a big nerd or super bored, check out the
-          <a href="https://github.com/beacrea/coty.design" target="_blank">Github</a> repo. You can even check out my <a href="https://github.com/beacrea/coty.design/projects/1" target="_blank">project board</a>, where all my improvements will never get built out.</h3>
+        <h2>Website:</h2>
+        <h3><a href="https://vuejs.org/" target="_blank">Vue.js</a> and a lot of <a href="https://sass-lang.com/" target="_blank">SASS</a>. If you're a big nerd or super bored, check out the <a href="https://github.com/beacrea/coty.design" target="_blank">Github</a> repo. You can even check out my <a href="https://github.com/beacrea/coty.design/projects/1" target="_blank">project board</a>, where I put things that I'll never actually get to, but I've lied to myself that I will.</h3>
+        <h2>General design:</h2>
+        <h3>Sketch via
+          <a href="https://goabstract.com" target="_blank">Abstract</a> for general UI and brand exploration with <a href="https://pasteapp.com/p/wd2tW2xdxuw" target="_blank">Paste</a> and <a href="https://www.pinterest.com/cbeasley0/2018-personal-brand-exploration-v4/" target="_blank">Pinterest</a>.</h3>
       </header>
     </section>
     <section id="qa_end">
