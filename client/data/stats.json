@@ -63,19 +63,19 @@
       "icon": "i-ipad",
       "name": "iPad Pro + Pencil",
       "type": "Concepting",
-      "desc": "I've given up paper for Paper by FiftyThree. Life-changing."
+      "desc": "I've given up paper for Paper by FiftyThree (and Procreate). Life-changing."
     },
     {
       "icon": "i-ps4",
       "name": "Playstation 4",
       "type": "Gaming",
-      "desc": "Chilling out with Horizon: Zero Dawn, Monster Hunter World, or Dark Souls III"
+      "desc": "Chilling out with Horizon: Zero Dawn, God of War, or Bloodborne"
     },
     {
       "icon": "i-pebble",
       "name": "Pebble Watch",
       "type": "HUD",
-      "desc": "The little important things that need my attention. RIP."
+      "desc": "The little important things that need my attention. Alive with Rebble.io."
     }
   ]
 }
