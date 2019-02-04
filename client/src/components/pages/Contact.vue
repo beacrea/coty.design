@@ -37,27 +37,27 @@ export default {
       icon: {
         dribbble: {
           title: 'Dribbble',
-          link: 'http://dribbble.com/beacrea',
+          link: 'https://dribbble.com/beacrea',
           asset: 'dribbble.svg'
         },
         twitter: {
           title: 'Twitter',
-          link: 'http://twitter.com/beacrea',
+          link: 'https://twitter.com/beacrea',
           asset: 'twitter.svg'
         },
         github: {
           title: 'Github',
-          link: 'http://github.com/beacrea',
+          link: 'https://github.com/beacrea',
           asset: 'github.svg'
         },
         codepen: {
           title: 'Codepen',
-          link: 'http://codepen.io/beacrea/',
+          link: 'https://codepen.io/beacrea/',
           asset: 'codepen.svg'
         },
         linkedin: {
           title: 'Linkedin',
-          link: 'http://linkedin.com/in/cbeasley0',
+          link: 'https://linkedin.com/in/cbeasley0',
           asset: 'linkedin-in.svg'
         }
       }
