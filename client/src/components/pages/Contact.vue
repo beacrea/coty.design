@@ -4,19 +4,19 @@
      <h2>Where I'm Found</h2>
      <div class="grid">
         <div class="icon">
-          <a :href="icon.dribbble.link" target="_blank">
+          <a :href="icon.dribbble.link" target="_blank" rel="me">
             <i class="fab fa-dribbble"></i>
             <span>{{icon.dribbble.title}}</span>
           </a>
         </div>
         <div class="icon">
-          <a :href="icon.github.link" target="_blank">
+          <a :href="icon.github.link" target="_blank" rel="me">
             <i class="fab fa-github"></i>
             <span>{{icon.github.title}}</span>
           </a>
         </div>
         <div class="icon">
-          <a :href="icon.linkedin.link" target="_blank">
+          <a :href="icon.linkedin.link" target="_blank" rel="me">
             <i class="fab fa-linkedin"></i>
             <span>{{icon.linkedin.title}}</span>
           </a>
