@@ -49,19 +49,19 @@ export default {
         background: $cerulean;
         color: rgba(white, 0.8);
       }
-    },
+    }
     &.dark {
       span {
         background: rgba($denim, 0.9);
         color: rgba(white, 0.6);
       }
-    },
+    }
     &.pink {
       span {
         background: $strawberry;
         color: rgba(white, 0.8);
       }
-    },
+    }
     &.purple {
       span {
         background: $outrun;
@@ -105,34 +105,6 @@ export default {
     h1 {
       color: white;
     }
-    &.light {
-      background: $cerulean;
-      color: white;
-      .cta {
-        color: white;
-      }
-    },
-  &.dark {
-    background: $denim;
-    color: white;
-    .cta {
-      color: $cerulean;
-    }
-  }
-    &.pink {
-      background: $strawberry;
-      color: white;
-      .cta {
-        color: white;
-      }
-    },
-  &.purple {
-    background: $outrun;
-    color: white;
-    .cta {
-      color: white;
-    }
-  }
     background: $denim;
     * {
       user-select: none;
