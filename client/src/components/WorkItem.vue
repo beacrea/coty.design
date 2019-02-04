@@ -53,7 +53,7 @@ export default {
     &.dark {
       span {
         background: rgba($denim, 0.9);
-        color: rgba(white, 0.6);
+        color: rgba(white, 0.8);
       }
     }
     &.pink {
@@ -102,6 +102,34 @@ export default {
     grid-column-end: 15;
     grid-row-start: 6;
     grid-row-end: 10;
+    &.light {
+      background: $cerulean;
+      color: white;
+      .cta {
+        color: black;
+      }
+    }
+    &.dark {
+      background: $denim;
+      color: white;
+      .cta {
+        color: black;
+      }
+    }
+    &.pink {
+      background: $strawberry;
+      color: white;
+      .cta {
+        color: black;
+      }
+    }
+    &.purple {
+      background: $outrun;
+      color: white;
+      .cta {
+        color: black;
+      }
+    }
     h1 {
       color: white;
     }
