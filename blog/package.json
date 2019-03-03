@@ -1,0 +1,21 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "Coty Beasley's Blog",
+  "keywords": [
+    "blog",
+    "harp"
+  ],
+  "author": "Coty Beasley",
+  "scripts": {
+    "serve": "harp server --port 2020",
+    "compile": "harp compile"
+  },
+  "devDependencies": {
+    "harp": "^0.29.0"
+  },
+  "engines": {
+    "node": ">= 6.9.4",
+    "npm": ">= 3.10.0"
+  }
+}
