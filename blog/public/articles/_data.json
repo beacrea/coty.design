@@ -1,12 +1,8 @@
 {
-  "hello": {
-    "title": "My awesome post, yo",
-    "description": "Sooo nice",
-    "date": "March 3, 2019"
-  },
-  "yo": {
-    "title": "My also awesome post!!!",
-    "description": "Posts are so hawt right now",
-    "date": "March 3, 2019"
+  "sawyers-toy": {
+    "title": "How a kitschy photo souvenir made the world smaller",
+    "description": "The next-generation of immersive technologies is built on the humble beginnings of a toy from 1939.",
+    "date": "March 3, 2019",
+    "tags": ["inspiration", "VR"]
   }
 }
