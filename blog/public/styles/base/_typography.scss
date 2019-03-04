@@ -22,11 +22,11 @@ $modularscale-base: 1rem;
 $modularscale-ratio: 1.25;
 
 /* Vars */
-$h1_size: 3.052rem;
-$h2_size: 2.441rem;
-$h3_size: 1.953rem;
-$p_size: 1.563rem;
-$caption_size: 1.25rem;
+$h1_size: 3.815rem;
+$h2_size: 3.052rem;
+$h3_size: 2.441rem;
+$p_size: 1.953rem;
+$caption_size: 1.563rem;
 
 h1 {
   font-size: $h1_size;
@@ -50,7 +50,7 @@ p, span, a {
 }
 
 a {
-  font-size: 1.4rem;
+  font-size: $p_size - 0.2rem;
   padding: 0.1rem 0.8rem;
   border-radius: 2px;
   color: $color-light;
