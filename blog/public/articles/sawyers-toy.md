@@ -1,4 +1,4 @@
-Every year, the Oakland Women’s Museum puts on a massive event in a block-long warehouse in my neighborhood called the White Elephant Sale.
+Every year, the Oakland Women’s Museum puts on a massive event in a block-long warehouse in my neighborhood called the [White Elephant Sale](https://www.whiteelephantsale.org) .
 
 People from all over the world come to the sale to prospect artwork, bric-a-brac, and really anything antique you can imagine.
 
@@ -12,12 +12,12 @@ I had found my little treasure. I instantly recognized it as the little device t
 
 ```Before the Internet, The World Was Much, Much Smaller```
 
-If you know your obscure audio-visual history, you’ll know I had just found an early-model View-Master, one in particularly pristine condition probably around the mid-50’s.
+If you know your obscure audio-visual history, you’ll know I had just found an early-model [View-Master](https://en.wikipedia.org/wiki/View-Master) , one in particularly pristine condition probably around the mid-50’s.
 
 ![View-Master Example Stills](/assets/images/sawyers-toy/vm-strip.jpg "View-Master Example Stills")
 *A couple frames from some photo discs I found*
 
-Before there was View-Master, there was Sawyer’s, who in 1939 introduced the world to the first model of it’s kind at the New York World’s Fair. The 7-pair photo disc setup was both a cheap and accessible way for the viewer to see a snapshot of a different place and a different time. Moreover, the photo disc standard really never changed, so your viewer could seamlessly look at photo discs made decades previously.
+Before there was View-Master, there was Sawyer’s, who in 1939 introduced the world to the first model of its kind at the New York World’s Fair. The 7-pair photo disc setup was both a cheap and accessible way for the viewer to see a snapshot of a different place and a different time. Moreover, the photo disc standard really never changed, so your viewer could seamlessly look at photo discs made decades previously.
 
 As a kid, I absolutely loved View-Masters. Growing up in a suburb of Kansas City, Missouri in the late 1980’s, few of the folks around me had ever traveling around the US in their entire lifetime, much less the world. I don’t remember how the View-Master got into my hands, but my family had acquired a ton of these discs. My lens into the rest of the world was basically though PBS, National Geographic, and that View-Master.
 
