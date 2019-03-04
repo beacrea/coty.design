@@ -9,9 +9,15 @@
     display: flex;
     flex-flow: column;
   }
-  a.item, a.item:hover, a.active {
-    all: unset;
-    width: 100%;
+  a.return {
+    margin-top: 0.8rem;
+    margin-bottom: 1.6rem;
+  }
+  .posts {
+    a.item, a.item:hover, a.active {
+      all: unset;
+      width: 100%;
+    }
   }
   .article {
     // Vars
