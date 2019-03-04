@@ -2,11 +2,11 @@ doctype
 html
     head
         link(rel="stylesheet" href="/main.css")
-        title= "BLAWWWGGS"
+        title= title
         meta(name="description" content="#{ description }")
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous">
     body
-        header.post-hero
+        header.post-hero(style='background-image: url(/assets/images/' + headerImage + ');')
             div.page_
                 a.breadcrumb(href="/")
                     i.fal.fa-home
