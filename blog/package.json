@@ -9,7 +9,7 @@
   "author": "Coty Beasley",
   "scripts": {
     "serve": "harp server --port 2020",
-    "compile": "harp compile src static"
+    "compile": "harp compile public static"
   },
   "devDependencies": {
     "harp": "^0.29.0"
