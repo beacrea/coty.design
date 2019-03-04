@@ -33,11 +33,12 @@
 }
 .post_ {
   p {
+    font-size: 1.6rem;
     margin-bottom: 2.4rem;
     & > code {
       display: block;
       font-size: $h2_size;
-      border-left: 4px solid $color_grey;
+      border-left: 4px solid $color_accent3;
       padding-left: 1.6rem;
       font-style: italic;
       margin: 4.8rem 0;
@@ -45,9 +46,17 @@
         content: '"';
       }
     }
-  }
-  img {
-    border-radius: 4px;
+    & img {
+      max-width: 100%;
+      width: 100%;
+      border-radius: 8px;
+    }
+    & img + em {
+      display: block;
+      font-style: italic;
+      font-size: $caption_size;
+      margin-bottom: 1.6rem;
+    }
   }
   hr {
     display: block;
