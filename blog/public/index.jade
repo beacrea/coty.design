@@ -1,6 +1,7 @@
 div.page_index
-    h1 My Articles
+    h1 Articles by Coty Beasley
     h3 Musings, notes, thoughts, and nonsense.
+    a.return(href="https://coty.design")="Return to main site"
     section.posts
         for post, slug in public.articles._data
             a.item(href="/articles/#{ slug }")
