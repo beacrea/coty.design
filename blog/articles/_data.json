@@ -2,5 +2,9 @@
   "hello": {
     "title": "My awesome post, yo",
     "description": "Sooo nice"
+  },
+  "yo": {
+    "title": "My also awesome post!!!",
+    "description": "Posts are so hawt right now"
   }
 }

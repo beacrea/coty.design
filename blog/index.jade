@@ -1,2 +1,5 @@
 h1 Welcome to Harp.
 h3 This is yours to own. Enjoy.
+section.posts
+    for post, slug in public.articles._data
+        div.post: a(href="/articles/#{ slug }")= post.title
