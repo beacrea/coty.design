@@ -38,6 +38,7 @@
     .title {
       font-size: $p_size;
       order: 1;
+      font-weight: bold;
     }
     .date {
       margin-top: 0.4rem;
@@ -54,20 +55,26 @@
 }
 
 /* Tablets+ */
-@media screen and (min-width: 76rem) {
+@media screen and (min-width: 50rem) {
   .page_index {
     .article {
       // Vars
       $padding: 1.6rem;
 
       // Styles
-
+      padding: 0;
+      overflow: hidden;
       width: inherit;
 
-      img.thumb {
+      .thumb {
         display: inline-block;
-        max-width: 4rem;
+        height: 7.2rem;
+        width: (7.2rem/(3/4));
         margin-right: $padding;
+        overflow: hidden;
+        background-color: rgba($color_dark, 0.25);
+        background-position: center;
+        background-size: cover;
       }
     }
   }
