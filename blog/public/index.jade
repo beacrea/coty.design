@@ -6,7 +6,7 @@ div.page_index
             a.item(href="/articles/#{ slug }")
                 div.article
                     div.container
-                        img.thumb(src="/assets/avatars/coty-blob-white.png")
+                        div.thumb(style='background-image: url(/assets/images/' + post.headerImage + ');')
                         div.text
                             span.title= post.title
                             span.date= post.date
