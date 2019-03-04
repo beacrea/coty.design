@@ -1,6 +1,7 @@
 .post-hero {
   background: $color_dark;
   color: $color-light;
+  padding: 3.2rem 0;
   margin-bottom: 3.2rem;
   h1, h4 {
     text-align: center;
@@ -12,5 +13,29 @@
   }
   a, a:hover, a:visited, a:active {
     background: $color-accent3;
+  }
+}
+.post_ {
+  p {
+    margin-bottom: 1.6rem;
+    & > code {
+      display: block;
+      font-size: $h2_size;
+      border-left: 4px solid $color_grey;
+      padding-left: 1.6rem;
+      font-style: italic;
+      margin: 4.8rem 0;
+      &:before, &:after {
+        content: '"';
+      }
+    }
+  }
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    padding: 0;
+    border-top: 1px solid #ccc;
+    margin: 3.2rem 0;
   }
 }
