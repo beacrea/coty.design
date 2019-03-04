@@ -1,8 +1,20 @@
 .post-hero {
-  background: $color_dark;
+  background: $color_dark center;
+  background-size: cover;
   color: $color-light;
   padding: 3.2rem 0;
   margin-bottom: 3.2rem;
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(black, 0.5);
+    z-index: 1;
+  }
   h1, h4 {
     text-align: center;
   }
@@ -14,10 +26,14 @@
   a, a:hover, a:visited, a:active {
     background: $color-accent3;
   }
+  .page_ {
+    position: relative;
+    z-index: 2;
+  }
 }
 .post_ {
   p {
-    margin-bottom: 1.6rem;
+    margin-bottom: 2.4rem;
     & > code {
       display: block;
       font-size: $h2_size;
@@ -29,6 +45,9 @@
         content: '"';
       }
     }
+  }
+  img {
+    border-radius: 4px;
   }
   hr {
     display: block;
