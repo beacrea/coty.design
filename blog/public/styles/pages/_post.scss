@@ -1,0 +1,16 @@
+.post-hero {
+  background: $color_dark;
+  color: $color-light;
+  margin-bottom: 3.2rem;
+  h1, h4 {
+    text-align: center;
+  }
+  h4 {
+    font-size: $p_size;
+    margin-top: 0.8rem;
+    opacity: 0.75;
+  }
+  a, a:hover, a:visited, a:active {
+    background: $color-accent3;
+  }
+}

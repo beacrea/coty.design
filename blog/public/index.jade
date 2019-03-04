@@ -1,6 +1,12 @@
 div.page_index
-    h1 Welcome to Harp.
-    h3 This is yours to own. Enjoy.
+    h1 My Articles
+    h3 Musings, notes, thoughts, and nonsense.
     section.posts
         for post, slug in public.articles._data
-            div.post: a(href="/articles/#{ slug }")= post.title
+            a.item(href="/articles/#{ slug }")
+                div.article
+                    div.container
+                        img.thumb(src="/assets/avatars/coty-blob-white.png")
+                        div.text
+                            span.title= post.title
+                            span.date= post.date

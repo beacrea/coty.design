@@ -1,10 +1,12 @@
 {
   "hello": {
     "title": "My awesome post, yo",
-    "description": "Sooo nice"
+    "description": "Sooo nice",
+    "date": "March 3, 2019"
   },
   "yo": {
     "title": "My also awesome post!!!",
-    "description": "Posts are so hawt right now"
+    "description": "Posts are so hawt right now",
+    "date": "March 3, 2019"
   }
 }

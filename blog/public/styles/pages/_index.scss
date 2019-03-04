@@ -6,8 +6,69 @@
 .page_index {
   section.posts {
     margin-top: 1.6rem;
+    display: flex;
+    flex-flow: column;
   }
-  .post {
+  a.item, a.item:hover, a.active {
+    all: unset;
+    width: 100%;
+  }
+  .article {
+    // Vars
+    $padding: 1.6rem;
+
+    // Styles
+    width: 100%;
     margin-bottom: 0.8rem;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all ease-in-out 0.2s;
+    box-shadow: 2px 2px 4px rgba(black, 0.05);
+    padding: $padding;
+    cursor: pointer;
+    display: inline-block;
+    .container {
+      display: flex;
+      align-items: center;
+    }
+    img.thumb {
+      display: none;
+    }
+    .title {
+      font-size: $p_size;
+      order: 1;
+    }
+    .date {
+      margin-top: 0.4rem;
+      display: block;
+      font-size: $caption_size;
+      opacity: 0.75;
+      font-style: italic;
+      order: 2;
+    }
+    &:hover {
+      transform: translate(2px,-4px);
+    }
+  }
+}
+
+/* Tablets+ */
+@media screen and (min-width: 76rem) {
+  .page_index {
+    .article {
+      // Vars
+      $padding: 1.6rem;
+
+      // Styles
+
+      width: inherit;
+
+      img.thumb {
+        display: inline-block;
+        max-width: 4rem;
+        margin-right: $padding;
+      }
+    }
   }
 }
