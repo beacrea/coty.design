@@ -16,11 +16,16 @@ html, body {
 /* - - - - - - - - -
 Font sizes (default)
 - - - - - - - - - */
+
+// https://www.modularscale.com/?10&px&1.25
+$modularscale-base: 1rem;
+$modularscale-ratio: 1.25;
+
 /* Vars */
-$h1_size: 3.6rem;
-$h2_size: 2.4rem;
-$h3_size: 1.8rem;
-$p_size: 1.6rem;
+$h1_size: 3.052rem;
+$h2_size: 2.441rem;
+$h3_size: 1.953rem;
+$p_size: 1.563rem;
 
 h1 {
   font-size: $h1_size;
