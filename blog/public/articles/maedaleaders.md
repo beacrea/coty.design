@@ -1,9 +1,9 @@
 # Context
-`Original Article by John Maeda:`
+**Original Article by John Maeda:**
 https://www.fastcompany.com/90320120/john-maeda-in-reality-design-is-not-that-important
 
 
-`Responses from Mike Monteiro:`
+**Responses from Mike Monteiro:**
 https://twitter.com/monteiro/status/1109844113635991553?s=12
 
 # My Thoughts
