@@ -8,7 +8,7 @@
 
 # My Thoughts
 
-I've included Mike's response because it's fairly close to my own. In recent years he's had some [interesting discourse](https://medium.com/@monteiro/designs-lost-generation-ac7289549017) on elevating the state of design instead of shrinking responsibilities back toward the traditional origins in graphic design.
+I've included Mike's response because it's fairly close to my own. In recent years he's had some [promising discourse](https://medium.com/@monteiro/designs-lost-generation-ac7289549017) on elevating the state of design instead of shrinking responsibilities back toward the traditional origins in graphic design.
 
 To me, Maeda has been a contributor to developing aesthetic foundations into design and he's now realizing that a narrow view through that lens isn't a great way to run companies.
 
