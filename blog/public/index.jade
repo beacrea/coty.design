@@ -10,4 +10,7 @@ div.page_index
                         div.thumb(style='background-image: url(/assets/images/' + post.headerImage + ');')
                         div.text
                             span.title= post.title
-                            span.date= post.date
+                            div.details
+                                span(class= "_" + post.type.toLowerCase()).type= post.type
+                                span= "from "
+                                span.date= post.date
