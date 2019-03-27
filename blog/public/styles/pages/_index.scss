@@ -17,6 +17,7 @@
     a.item, a.item:hover, a.active {
       all: unset;
       width: 100%;
+      cursor: pointer;
     }
   }
   .article {
@@ -32,11 +33,11 @@
     transition: all ease-in-out 0.2s;
     box-shadow: 2px 2px 4px rgba(black, 0.05);
     padding: $padding;
-    cursor: pointer;
     display: inline-block;
     .container {
       display: flex;
       align-items: center;
+
     }
     img.thumb {
       display: none;
