@@ -32,10 +32,10 @@ html
     body
         header.post-hero(style='background-image: url(/assets/images/' + headerImage + ');')
             div.page_
-                a.breadcrumb(href="/")
+                a.breadcrumb(href="/")._main
                     i.fal.fa-home
                     span=" Back"
-                h1=title
+                h1._title=title
                 h4=type + " from " + date + " by Coty Beasley"
         div.page_.post_
             != yield

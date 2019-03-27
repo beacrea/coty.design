@@ -28,9 +28,20 @@ $h3_size: 2.441rem;
 $p_size: 1.953rem;
 $caption_size: 1.563rem;
 
+
+/* - - - - - - - - -
+Header Styles
+- - - - - - - - - */
+
 h1, h2, h3 {
   margin: 4.8rem 0 1rem;
   &:first-child {
+    margin-top: 1rem;
+  }
+  &._title {
+    margin-top: 0;
+  }
+  &._subhead {
     margin-top: 1rem;
   }
 }
@@ -40,6 +51,11 @@ h1 {
   font-family: 'Vollkorn', serif;
   font-weight: 600;
   line-height: 1.2;
+
+  /* Tablets+ */
+  @media screen and (min-width: 76rem) {
+    font-size: ($h1_size * 1.5);
+  }
 }
 h2 {
   font-size: $h2_size;
@@ -51,6 +67,10 @@ h3 {
   font-weight: 300;
   line-height: 1.5;
 }
+
+/* - - - - - - - - -
+General Text Styles
+- - - - - - - - - */
 p, span, a {
   font-size: $p_size;
   line-height: 1.5;
@@ -59,19 +79,35 @@ p, span, a {
 a {
   font-size: $p_size - 0.2rem;
   padding: 0.1rem 0.8rem;
-  border-radius: 2px;
-  color: $color-light;
-  background: $color_blue-shade;
+  color: $color-dark;
+  background: rgba($color_blue-base, 0.3);
   text-decoration: none;
   font-weight: bold;
-  display: inline-block;
+  display: inline;
+  white-space: nowrap;
   transition: all ease-in-out 0.2s;
   &:active, &:visited {
-    color: $color-light;
+    color: $color-dark;
   }
   &:hover {
     transform: translate(2px,-4px);
+    background: rgba($color_blue-base, 0.7);
   }
+  &._main {
+    border-radius: 4px;
+  }
+}
+
+li {
+  list-style: circle inside;
+  margin-bottom: 1rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+strong {
+  font-weight: bold;
 }
 
 /* High resolution devices */
@@ -81,12 +117,5 @@ a {
 (min-device-pixel-ratio: 1.5) {
   * {
     -moz-osx-font-smoothing: grayscale;
-  }
-}
-
-/* Tablets+ */
-@media screen and (min-width: 76rem) {
-  h1 {
-    font-size: ($h1_size * 1.5);
   }
 }
