@@ -18,6 +18,7 @@
       all: unset;
       width: 100%;
       cursor: pointer;
+      display: block;
     }
   }
   .article {
@@ -26,37 +27,63 @@
 
     // Styles
     width: 100%;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
     background: white;
     border-radius: 4px;
     overflow: hidden;
     transition: all ease-in-out 0.2s;
     box-shadow: 2px 2px 4px rgba(black, 0.05);
-    padding: $padding;
     display: inline-block;
     .container {
       display: flex;
+      flex-flow: column;
       align-items: center;
 
     }
-    img.thumb {
-      display: none;
+    .thumb {
+      display: block;
+      height: 200px;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+    .text {
+      padding: $padding;
+      width: 100%;
     }
     .title {
       font-size: $p_size;
       order: 1;
       font-weight: bold;
     }
-    .date {
+    .details {
       margin-top: 0.4rem;
-      display: block;
-      font-size: $caption_size;
-      opacity: 0.75;
-      font-style: italic;
       order: 2;
-    }
-    &:hover {
-      transform: translate(2px,-4px);
+      display: block;
+      font-style: italic;
+      span {
+        font-size: $caption_size;
+        opacity: 0.75;
+      }
+      .type {
+        font-weight: bold;
+        opacity: 1;
+        color: $color_light;
+        font-size: $caption_size * 0.8;
+        background-color: $color_dark;
+        padding: 2px 6px;
+        line-height: 1;
+        border-radius: 2px;
+        font-style: normal;
+        margin-right: 4px;
+
+        &._post {
+          background-color: $color_dark;
+        }
+        &._response {
+          background-color: $color_accent3;
+        }
+      }
     }
   }
 }
@@ -73,9 +100,22 @@
       overflow: hidden;
       width: inherit;
 
+      &:hover {
+        transform: translate(2px,-4px);
+      }
+
+      .container {
+        flex-flow: row;
+      }
+
+      .text {
+        padding: 0 $padding 0 0;
+      }
+
       .thumb {
         display: inline-block;
-        height: 7.2rem;
+        min-height: 7.2rem;
+        height: 100%;
         width: (7.2rem/(3/4));
         margin-right: $padding;
         overflow: hidden;
