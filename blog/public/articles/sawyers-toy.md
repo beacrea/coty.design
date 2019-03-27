@@ -28,7 +28,7 @@ To this day, looking through those dumb little binoculars gives me a lot of joy.
 
 Now, I have a little collection of the things ranging over about 60 years and I’ve often wondering why a simple little photography trick could have such a huge impact on the way a child sees the world.
 
-`The View-Master of Today`
+## The View-Master of Today
 
 My obsessions with multimedia led me to a career path as a product designer. There’s also little wonder why I have a room dedicated to my Oculus Rift as an adult.
 
