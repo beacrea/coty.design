@@ -3,9 +3,37 @@
 * index.html
 **********************/
 
+.wrapper_index {
+  min-height: 100vh;
+  background: $color_light url("/assets/images/app/graph.svg") no-repeat center bottom 3rem;
+  background-size: contain;
+  transition: background-size 1s;
+  &:after {
+    position: absolute;
+    height: 3.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: 'This site was created by Coty Beasley.';
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    font-size: 1.4rem;
+    background: $color_dark;
+    color: $color_light;
+  }
+  @media screen and (min-width: $screen_tablet){
+    background-size: 60% auto;
+  }
+  @media screen and (min-width: $screen_desktop-hd){
+    background-size: 40% auto;
+  }
+}
+
 .page_index {
   section.posts {
-    margin-top: 1.6rem;
+    margin-top: 3.2rem;
     display: flex;
     flex-flow: column;
   }
