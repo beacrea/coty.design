@@ -4,6 +4,15 @@ html
         link(rel="stylesheet" href="/main.css")
         title #{ title }
         meta(name="description" content="#{ description }")
+        meta(name="twitter:title" content="#{ title }")
+        meta(name="twitter:description" content="#{ description }")
+        meta(name="twitter:image" content="https://coty.blog/assets/images/#{headerImage}")
+        meta(name="twitter:author" content="beacrea")
+        meta(name="twitter:card" content="summary_large_image")
+        meta(name="og:title" content="#{ title }")
+        meta(name="og:description" content="#{ description }")
+        meta(name="og:image" content="https://coty.blog/assets/images/#{headerImage}")
+        meta(name="og:url" content="https://coty.blog/articles/#{slug}")
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,10 +34,11 @@ html
         <link rel="apple-touch-icon" sizes="167x167" href="/assets/icons/icon_white-ios-167x167.png">
 
         <!-- Rel=Me Links-->
-        <link href="https://github.com/beacrea" rel="me">
-        <link href="https://twitter.com/beacrea" rel="me">
-        <link href="https://codepen.io/beacrea" rel="me">
-        <link href="https://linkedin.com/in/cbeasley0" rel="me">
+        link(href="https://mastodon.technology/@beasles" rel="me")
+        link(href="https://github.com/beacrea" rel="me")
+        link(href="https://twitter.com/beacrea" rel="me")
+        link(href="https://codepen.io/beacrea" rel="me")
+        link(href="https://linkedin.com/in/cbeasley0" rel="me")
     body
         header.post-hero(style='background-image: url(/assets/images/' + headerImage + ');')
             div.page_

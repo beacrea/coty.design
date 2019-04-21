@@ -1,16 +1,16 @@
-div.page_index
-    h1 Thoughts by Coty Beasley
-    h3._subhead Musings, notes, and nonsense.
-    a.return._main(href="https://coty.design")="Return to main site"
-    section.posts
-        for post, slug in public.articles._data
-            a.item(href="/articles/#{ slug }")
-                div.article
-                    div.container
-                        div.thumb(style='background-image: url(/assets/images/' + post.headerImage + ');')
-                        div.text
-                            span.title= post.title
-                            div.details
-                                span(class= "_" + post.type.toLowerCase()).type= post.type
-                                span= "from "
-                                span.date= post.date
+div.wrapper_index
+    div.page_index
+        h1 Thoughts by Coty Beasley
+        h3._subhead Musings, notes, and nonsense.
+        section.posts
+            for post, slug in public.articles._data
+                a.item(href="/articles/#{ slug }")
+                    div.article
+                        div.container
+                            div.thumb(style='background-image: url(/assets/images/' + post.headerImage + ');')
+                            div.text
+                                span.title= post.title
+                                div.details
+                                    span(class= "_" + post.type.toLowerCase()).type= post.type
+                                    span= "from "
+                                    span.date= post.date
