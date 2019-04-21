@@ -1,0 +1,20 @@
+{
+  "maedaleaders": {
+    "title": "Re: John Maeda - Design's importance in business",
+    "description": "John Maeda argues that designers should be business leaders because they focus too much on beauty.",
+    "date": "March 26, 2019",
+    "type": "Response",
+    "slug": "maedaleaders",
+    "headerImage": "maedaleaders/cover.jpg",
+    "tags": ["industry"]
+  },
+  "sawyers-toy": {
+    "title": "How a kitschy photo souvenir made the world smaller",
+    "description": "The next-generation of immersive technologies is built on the humble beginnings of a toy from 1939.",
+    "date": "March 3, 2019",
+    "type": "Post",
+    "slug": "sawyers-toy",
+    "headerImage": "sawyers-toy/vm-cover.jpg",
+    "tags": ["inspiration", "VR"]
+  }
+}

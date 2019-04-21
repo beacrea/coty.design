@@ -1,0 +1,121 @@
+/**********************
+* IMPORTS
+* Lol self-explanatory
+**********************/
+@import url('https://fonts.googleapis.com/css?family=Domine|Open+Sans|Vollkorn:300,600');
+
+/* - - - - -
+Base styles
+- - - - - */
+html, body {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 10px;
+}
+
+
+/* - - - - - - - - -
+Font sizes (default)
+- - - - - - - - - */
+
+// https://www.modularscale.com/?10&px&1.25
+$modularscale-base: 1rem;
+$modularscale-ratio: 1.25;
+
+/* Vars */
+$h1_size: 3.815rem;
+$h2_size: 3.052rem;
+$h3_size: 2.441rem;
+$p_size: 1.953rem;
+$caption_size: 1.563rem;
+
+
+/* - - - - - - - - -
+Header Styles
+- - - - - - - - - */
+
+h1, h2, h3 {
+  margin: 4.8rem 0 1rem;
+  &:first-child {
+    margin-top: 1rem;
+  }
+  &._title {
+    margin-top: 0;
+  }
+  &._subhead {
+    margin-top: 1rem;
+  }
+}
+
+h1 {
+  font-size: $h1_size;
+  font-family: 'Vollkorn', serif;
+  font-weight: 600;
+  line-height: 1.2;
+
+  /* Tablets+ */
+  @media screen and (min-width: 76rem) {
+    font-size: ($h1_size * 1.5);
+  }
+}
+h2 {
+  font-size: $h2_size;
+  font-weight: 300;
+  line-height: 1.5;
+}
+h3 {
+  font-size: $h3_size;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/* - - - - - - - - -
+General Text Styles
+- - - - - - - - - */
+p, span, a {
+  font-size: $p_size;
+  line-height: 1.5;
+}
+
+a {
+  font-size: $p_size - 0.2rem;
+  padding: 0.1rem 0.8rem;
+  color: $color-dark;
+  background: rgba($color_blue-base, 0.3);
+  text-decoration: none;
+  font-weight: bold;
+  display: inline;
+  white-space: nowrap;
+  transition: all ease-in-out 0.2s;
+  &:active, &:visited {
+    color: $color-dark;
+  }
+  &:hover {
+    transform: translate(2px,-4px);
+    background: rgba($color_blue-base, 0.7);
+  }
+  &._main {
+    border-radius: 4px;
+  }
+}
+
+li {
+  list-style: circle inside;
+  margin-bottom: 1rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+strong {
+  font-weight: bold;
+}
+
+/* High resolution devices */
+@media (-webkit-min-device-pixel-ratio: 1.5),
+(-o-min-device-pixel-ratio: 3/2),
+(min--moz-device-pixel-ratio: 1.5),
+(min-device-pixel-ratio: 1.5) {
+  * {
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

@@ -1,21 +1,9 @@
 # Coty.Design
+This repository is the main codebase for [coty.design](https://coty.design), my personal web app.
 
-> A Vue.js project
+I've created subfolders in this repo to contain different applications that run at this domain. 
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+- Blog - Static blog content built with [Harp.js](http://harpjs.com)
+- Client - The main site at [coty.design](https://coty.design)
+- Labs - An experimental sandbox for various projects
+- Server - An [Express](https://expressjs.com/) API for various purposes
