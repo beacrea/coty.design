@@ -1,10 +1,11 @@
 <template>
   <nav id="navigation">
     <router-link to="intro" v-on:click.native="changeBg">Intro</router-link>
-    <router-link to="work" v-on:click.native="changeBg">Work</router-link>
+<!--    <router-link to="work" v-on:click.native="changeBg">Work</router-link>-->
     <router-link to="stats" v-on:click.native="changeBg">Stats</router-link>
     <router-link to="contact" v-on:click.native="changeBg">Contact</router-link>
-    <a href="https://labs.coty.design" target="_blank">Labs</a>
+<!--    <a href="https://labs.coty.design" target="_blank">Labs</a>-->
+    <a href="https://coty.blog" target="_blank">Blog</a>
   </nav>
 </template>
 
