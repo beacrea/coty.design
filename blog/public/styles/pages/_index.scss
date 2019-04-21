@@ -4,30 +4,53 @@
 **********************/
 
 .wrapper_index {
-  min-height: 100vh;
-  background: $color_light url("/assets/images/app/graph.svg") no-repeat center bottom 3rem;
-  background-size: contain;
-  transition: background-size 1s;
-  &:after {
-    position: absolute;
-    height: 3.2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .page_index, footer {
+    flex: 1 auto;
+  }
+
+  footer {
+    $height: 200px;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
-    content: 'This site was created by Coty Beasley.';
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    text-align: center;
-    font-size: 1.4rem;
-    background: $color_dark;
-    color: $color_light;
-  }
-  @media screen and (min-width: $screen_tablet){
-    background-size: 60% auto;
-  }
-  @media screen and (min-width: $screen_desktop-hd){
-    background-size: 40% auto;
+    max-height: $height;
+    height: $height;
+    min-height: $height;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: transparent url("/assets/images/app/graph.svg") no-repeat center bottom 3rem;
+    background-size: contain;
+    @media screen and (max-width: $screen_tablet){
+      max-height: $height * 0.9;
+      height: $height * 0.9;
+      min-height: $height * 0.9;
+    }
+    @media screen and (min-width: $screen_tablet){
+      background-size: 60% auto;
+    }
+    @media screen and (min-width: $screen_desktop-hd){
+      background-size: 40% auto;
+    }
+    .text {
+      height: 3.2rem;
+      background: $color_dark;
+      color: $color_light;
+      line-height: 3.2rem;
+      text-align: center;
+      a, a:active, a:visited {
+        all: unset;
+        cursor: pointer;
+        font-size: 1.4rem;
+        margin-left: 0.4rem;
+        color: $color_accent2;
+      }
+      span, a {
+        font-size: 1.4rem;
+      }
+    }
   }
 }
 
