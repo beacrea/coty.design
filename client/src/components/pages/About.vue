@@ -214,6 +214,9 @@ section {
     -ms-animation: bounce ease-in 2.5s;
     -ms-animation-iteration-count: infinite;
     -ms-transform-origin: 50% 200%;
+    @media screen and (max-height: 760px) {
+      display: none;
+    }
   }
 }
 
