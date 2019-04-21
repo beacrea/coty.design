@@ -1,0 +1,48 @@
+/**********************
+* COMMON VARIABLES
+* Foundational Values
+**********************/
+
+
+/* - - - - - -
+Common Spacing
+- - - - - - */
+$padding_side: 2.4rem;
+$body_bottomPad: 300px;
+
+
+/* - - - - -
+Brand Colors
+- - - - - */
+$denim: #0B0E1F;
+$salt: #F0EAE3;
+$fossil: #7B7775;
+$baby: #79B2EB;
+$cerulean: #009DE4;
+$spruce: #1F3751;
+$mustard: #E6BD09;
+$strawberry: #F06067;
+$outrun: #BB7CEA;
+
+
+/* - - - - -
+Site Colors
+- - - - - */
+$color_dark: $denim;
+$color_light: $salt;
+$color_grey: $fossil;
+$color_blue-base: $cerulean;
+$color_blue-light: $baby;
+$color_blue-shade: $spruce;
+$color_accent1: $strawberry;
+$color_accent2: $mustard;
+$color_accent3: $outrun;
+
+
+/* - - - - - -
+Screen Widths
+- - - - - - */
+$screen_mobile: 400px;
+$screen_tablet: 768px;
+$screen_desktop: 960px;
+$screen_desktop-hd: 1200px;

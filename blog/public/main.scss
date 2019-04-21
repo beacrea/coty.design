@@ -1,0 +1,16 @@
+/**********************
+* BASE IMPORTS
+* Foundational stuff
+**********************/
+@import "styles/base/vars";
+@import "styles/base/reset";
+@import "styles/base/typography";
+@import "styles/base/body";
+
+/**********************
+* PAGE STYLES
+* Individual pages
+**********************/
+@import "styles/pages/common";
+@import "styles/pages/index";
+@import "styles/pages/post";
