@@ -69,4 +69,11 @@
     border-top: 1px solid #ccc;
     margin: 3.2rem 0;
   }
+  a, a:visited, a:active {
+    border-bottom: 3px solid $color_accent2;
+    background: transparent;
+  }
+  a:hover {
+    background: rgba($color_blue-base, 0.2);
+  }
 }
