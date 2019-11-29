@@ -4,6 +4,11 @@
   margin: 0 auto;
 }
 
-.breadcrumb {
+a, a:hover, a:visited, a:active {
+  padding: 0.1rem 0.25rem;
+}
+
+a.breadcrumb {
   margin-bottom: 1.6rem;
+  padding: 0.5rem 1rem;
 }
