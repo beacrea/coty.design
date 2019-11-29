@@ -1,4 +1,13 @@
 {
+  "stadia-initial": {
+    "title": "Google Stadia: First Impressions and a Date with Destiny",
+    "description": "Google Stadia promises to be the console killer of a generation. How does it hold up on launch?",
+    "date": "November 28, 2019",
+    "type": "Review",
+    "slug": "stadia-initial",
+    "headerImage": "stadia-initial/cover.jpg",
+    "tags": ["gaming"]
+  },
   "maedaleaders": {
     "title": "Re: John Maeda - Design's importance in business",
     "description": "John Maeda argues that designers should be business leaders because they focus too much on beauty.",
@@ -16,14 +25,5 @@
     "slug": "sawyers-toy",
     "headerImage": "sawyers-toy/vm-cover.jpg",
     "tags": ["inspiration", "VR"]
-  },
-  "stadia-initial": {
-    "title": "Google Stadia: First Impressions and a Date with Destiny",
-    "description": "Google Stadia promises to be the console killer of a generation. How does it hold up on launch?",
-    "date": "November 28, 2019",
-    "type": "Post",
-    "slug": "stadia-initial",
-    "headerImage": "stadia-initial/cover.jpg",
-    "tags": ["gaming"]
   }
 }
