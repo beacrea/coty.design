@@ -18,7 +18,7 @@
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
-    "ajv": "^5.5.2",
+    "ajv": "^6.12.3",
     "ajv-keywords": "^3.0.0",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
