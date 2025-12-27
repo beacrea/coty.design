@@ -12,7 +12,7 @@ A pixel-perfect clone of coty.design portfolio built with Svelte + Vite. This pr
 - AI agent detection utilities ready
 
 ## Recent Changes
-- December 27, 2025: Initial project setup with all core components
+- December 27, 2025: Complete portfolio implementation with AI agent detection, DTCG token files, and variable font support
 
 ## Project Architecture
 
@@ -37,9 +37,14 @@ A pixel-perfect clone of coty.design portfolio built with Svelte + Vite. This pr
 │   │   └── Footer.svelte
 │   ├── lib/                 # Utilities
 │   │   ├── content.ts       # Site content data
-│   │   └── agent-detection.ts
-│   └── stores/              # Svelte stores
-│       └── theme.ts         # Theme state management
+│   │   └── agent-detection.ts  # AI crawler detection with enhanced JSON-LD
+│   ├── stores/              # Svelte stores
+│   │   └── theme.ts         # Theme state management
+│   └── tokens/              # DTCG v2025.10 design tokens
+│       ├── colors.tokens.json
+│       ├── typography.tokens.json
+│       ├── spacing.tokens.json
+│       └── components.tokens.json
 ├── public/
 │   ├── manifest.json        # PWA manifest
 │   └── favicon.svg
