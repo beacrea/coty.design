@@ -88,7 +88,6 @@
 
   .description {
     color: var(--semantic-caption);
-    margin-left: 0.25em;
     transition: color var(--transition-theme);
   }
 </style>
