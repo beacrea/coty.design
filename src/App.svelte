@@ -12,14 +12,19 @@
 
 <div class:dark={isDark}>
   <main class="page">
-    <ThemeToggle />
-    
     <div class="content">
-      <Opener 
-        name={siteContent.opener.name}
-        role={siteContent.opener.role}
-        summary={siteContent.opener.summary}
-      />
+      <header class="header">
+        <div class="opener-wrapper">
+          <Opener 
+            name={siteContent.opener.name}
+            role={siteContent.opener.role}
+            summary={siteContent.opener.summary}
+          />
+        </div>
+        <div class="toggle-wrapper">
+          <ThemeToggle />
+        </div>
+      </header>
       
       <Section 
         heading={siteContent.recentFocus.heading}
@@ -73,5 +78,39 @@
   .content {
     max-width: var(--content-max-width);
     margin: 0 auto;
+  }
+
+  .header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: var(--section-spacing);
+  }
+
+  .opener-wrapper {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .toggle-wrapper {
+    flex-shrink: 0;
+    padding-top: 0.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .toggle-wrapper {
+      position: fixed;
+      top: var(--page-padding-top);
+      right: var(--page-padding-x);
+      padding-top: 0;
+    }
+
+    .header {
+      display: block;
+    }
+
+    .opener-wrapper {
+      margin-bottom: 0;
+    }
   }
 </style>
