@@ -1,0 +1,446 @@
+Now I have comprehensive evidence from both my initial analysis and the alternative recommendation. Let me provide a thorough reevaluation.
+
+## Reevaluation: Best-Fitting Job Title
+
+After evaluating both the **Principal Design Technologist (Design Systems & AI Experiences)** recommendation and the **Head of Product Architecture (Experience + Platform)** alternative, I conclude that **Head of Product Architecture (Experience + Platform)** is the more accurate and strategically superior title for your actual scope of work.
+
+***
+
+## Why "Head of Product Architecture (Experience + Platform)" is Superior
+
+### The Core Difference: Semantic Control vs. Design Execution
+
+The fundamental insight from the alternative analysis is correct: **your differentiator is semantic control**—you prevent products from fracturing into contradictory workflows, statuses, contracts, and UI rules. This is architecture work, not primarily design execution.
+
+**Principal Design Technologist** positions you as someone who bridges design and engineering through prototyping and implementation. While accurate for *part* of your work, it undersells the **system semantics, schema design, integration surfaces, and operational platform work** you're doing.[1][2][3]
+
+**Head of Product Architecture** signals that you **define the conceptual and technical shape of a multi-system product** and drive it into reality—which is precisely what the evidence shows you do.
+
+***
+
+## Evidence Supporting "Product Architecture" Over "Design Technologist"
+
+### 1. Platform-Level Product & Systems Definition
+
+**Your Work:**
+- Defined requirements for "API as a product" platform with schema exploration, versioning, sandboxing, internal/external updates
+- Produced OpenAPI specs for endpoints and structured YAML object models (Invoice, InvoiceItem, enums)
+- Built multi-party service delivery workflows with components, statuses, and cross-party handoff expectations
+- Iterated on event naming conventions (hierarchy, tense, separators, simplification rules, status aggregation)
+
+**What This Requires:**
+Product architects "perform design, development and support of existing and new products" and "understand product vision and business needs to define product requirements and product architectural solutions". They "develop architectural and design principles to improve performance, capacity, and scalability".[4]
+
+API Product Managers are "responsible for developing and managing APIs throughout their lifecycle", including "defining the product's vision and ensuring it aligns with the organization's overall objectives".[5][6]
+
+**Design Technologist Scope:**
+Design technologists "execute concept development through prototyping and understanding about system architecture" but typically focus on front-end implementation and design system components, not multi-party workflow architecture or API schema governance.[2][3][1]
+
+**Verdict:** Your API-as-product work, schema governance, and multi-system integration architecture exceed design technologist scope. This is **product architecture**.[7][8][4]
+
+### 2. Multi-Party Service Delivery + Event Semantics
+
+**Your Work:**
+- Designed voice service order fulfillment workflow with components, statuses, and cross-party handoff expectations
+- Created support routing framework distinguishing internal support vs provider escalation with historical traceability
+- Built event naming conventions and status aggregation logic
+
+**What This Requires:**
+This is **system architecture** and **operational product building**. Product architects are responsible for "defining product validation policies so as to deliver products that meet system and project expectations" and "working with domain, product management and product engineering teams in the solution engineering efforts".[4]
+
+The focus on **workflow semantics, state management, and multi-party orchestration** aligns with how product operations "ensures cross-functional teams stay coordinated, aligned, and unblocked throughout the development process", but you're not just *operating* these systems—you're **architecting** them.[9][10]
+
+**Verdict:** You're architecting operational workflows and state semantics, not just designing interfaces. This is **platform architecture**.
+
+### 3. Billing/Zuora Migration as Product Work
+
+**Your Work:**
+- Managed invoice status mapping semantics and filtering constraints
+- Designed calculated statuses (e.g., AUTOPAID logic)
+- Worked with Zuora objects/tables, import field mappings, accounting code IDs
+
+**What This Requires:**
+Treating billing migration as product work (not "ops chores") demonstrates you approach operational systems as **product architecture**. This aligns with how product architects "maintain product roadmap and architectural standards that assure product development projects optimally align with business objectives".[4]
+
+**Design Technologist Scope:**
+Design technologists wouldn't typically touch billing semantics, database schema mapping, or financial object modeling. This is far outside the "design system implementation" and "prototyping" scope.[3][11][2]
+
+**Verdict:** Operational platform architecture, not design technologist work.
+
+### 4. Design Systems + Implementation Alignment
+
+**Your Work:**
+- Built dark/light design system strategy using Figma variables/modes
+- Structured design tokens (Token Studio usage), formal token categories, component schemas
+- Tied design libraries ↔ component libraries/storybook to reduce drift
+
+**What This Requires:**
+This is where **both** titles overlap. Design System Engineers "ensure seamless transition from visual concept to functional code, curate and maintain the design system". Design Technologists excel at "design systems and design engineering".[11][12][2][3]
+
+However, you're not just implementing design systems—you're **architecting the infrastructure** that enables design at scale across multiple products and systems. This is closer to how product architects "define product requirements that address market opportunities" and "develop broad knowledge about current and future product features".[4]
+
+**Verdict:** Your design systems work is a **component** of product architecture, not the primary scope.
+
+### 5. Internal Tools / Platform UX
+
+**Your Work:**
+- Driving major redesign of internal operations tool for multi-market and external partner use
+- Defined navigation groupings and admin area structures
+- Leading design for conversational AI interface for onboarding
+
+**What This Requires:**
+This demonstrates you treat **internal tools as product surfaces**, not afterthoughts. Product architects "facilitate the creation, review, and sign off of project deliverables" and ensure "products align with customer needs and company goals".[7][4]
+
+VPs of Product "oversee and direct the development and management of a company's product portfolio", which includes internal tooling when treated as product.[13]
+
+**Verdict:** Treating operational tools as first-class product architecture—not just UX design.
+
+***
+
+## Comparative Analysis: Product Architecture vs. Design Technologist
+
+### What "Product Architect" Communicates
+
+**Product Architect Definition:**
+"A Product Architect acts as a bridge between technology and business objectives, ensuring that products align with customer needs and company goals". They are "responsible for developing product architectures and overseeing the product development process".[8][7]
+
+**Key Responsibilities:**
+- "Mapping new product features and functions" through market research[8]
+- "Implementing their architectures, ensuring design and development teams follow the blueprint"[8]
+- "Defining and implementing the company's product strategy"[14]
+- "Overseeing the entire product lifecycle, from conception to launch and post-launch activities"[14]
+
+**This matches your work:** You architect API products, define multi-party workflows, establish schema conventions, and ensure operational systems are coherent product surfaces.
+
+### What "Design Technologist" Communicates
+
+**Design Technologist Definition:**
+"Design technologists are designers with front-end development skills who tackle front-end programming, design, and UX all at the same time". They "see beauty in code and engineers who appreciate impeccable UX".[3]
+
+**Key Focus:**
+- "Prototyping and understanding about system architecture"[1]
+- "Front-end development in the design system era"[15]
+- "Bridge design ↔ engineering" for implementation[2][3]
+
+**This undersells your work:** While you do this, you also architect APIs, billing semantics, multi-party workflows, and operational platforms—far beyond design implementation.
+
+### The "Head of" vs. "Principal" Distinction
+
+**Principal (IC Leadership):**
+- Individual contributor track with high technical authority[16]
+- Typically 8-10+ years experience[16]
+- "Act like design architect for the org/product, establishing design principles"[16]
+
+**Head of (Organizational Leadership):**
+- "Most senior position in the product team"[17]
+- "Oversee the development and management of the company's product portfolio"[17]
+- May or may not have direct reports, but owns strategic direction[18][17]
+
+**Your Context:**
+- Founded Underline Technologies (infrastructure/fiber network platform)
+- Multiple W-2 positions
+- Strategic technical presentations
+- Product strategy + PM execution
+
+**Verdict:** "Head of" accurately reflects your **ownership of product direction** across experience, platform, and operational systems, even if you're not managing a large team. The title signals you're the **accountable architect** for product coherence.
+
+***
+
+## Why the Alternative Recommendation is Right
+
+### 1. "Product = Experience + Systems + Operations" Reality
+
+The alternative analysis correctly identifies that in infrastructure/telecom reality, **"product" is a distributed system wearing a UI**[Alternative]. Your work spans:
+
+- **Experience:** Design systems, tokens, conversational AI interfaces, internal tools UX
+- **Platform:** API-as-product, schema governance, event semantics, integration contracts
+- **Operations:** Billing semantics, support routing, multi-party workflows, provisioning
+
+**Design Technologist** captures only the Experience layer. **Product Architect** captures all three.
+
+### 2. Semantic Control is Your Differentiator
+
+"You prevent the product from fracturing into contradictory workflows, statuses, contracts, and UI rules. That's architecture."[Alternative]
+
+This is the key insight. Look at your evidence:
+- Event naming conventions to prevent chaos[Alternative Evidence B]
+- Invoice status semantics and calculated statuses[Alternative Evidence D]
+- Support routing framework for traceability[Alternative Evidence C]
+- Design token taxonomy to reduce entropy[Alternative Evidence E]
+
+You're establishing **canonical interfaces** between systems—the definition of architecture work.[7][4]
+
+### 3. Your Work is "Product Coherence Across UX, APIs, Data, Ops Workflows"
+
+Product architects "ensure products align with customer needs and company goals" across all surfaces. Directors of Product "oversee the strategy and development of a company's product portfolio" and "define the product's vision and ensure it aligns with the organization's overall objectives".[19][7]
+
+Your Zuora work, API specs, workflow schemas, and design systems all serve **product coherence**—ensuring the distributed product behaves as one coherent system.
+
+**Design Technologist** wouldn't own billing semantics or API versioning. **Product Architect** does.
+
+***
+
+## Addressing the Design Technologist Strengths
+
+### What the Initial Analysis Got Right
+
+1. **Design Systems Expertise:** Your token work, Figma variables, OKLCH color strategy, and design infrastructure are exceptional
+2. **Context Engineering:** Your ontological strategies, knowledge base organization, and AI context work are unique[20][21]
+3. **Technical Implementation:** Vue.js, prototyping, dynamic UX—you build, not just specify
+
+### Why These Still Fit "Product Architecture"
+
+Product architects "understand product vision and business needs to define product requirements and product architectural solutions". They "work with Product Manager in planning and execution of new product releases".[4]
+
+Your design systems work becomes **product infrastructure architecture**—the foundation enabling coherent product delivery. Your context engineering becomes **platform architecture for AI-driven experiences**. Your technical implementation is **hands-on architecture validation**, not just strategy.
+
+**Chief Product Officers** (the executive version of product architecture) are "responsible for the strategic product direction, including product vision, product innovation, product design, product development". You're doing this work at the "Head of" level.[22][23]
+
+***
+
+## Market Positioning: How Titles are Understood
+
+### "Head of Product Architecture (Experience + Platform)"
+
+**Signals to Market:**
+- You own **strategic product shape** across UX and technical systems
+- You architect **multi-system coherence**, not just execute design
+- You're accountable for **platform + experience alignment**
+- You operate at **director/VP level** (strategic ownership)[19][17]
+
+**Comparable Titles:**
+- VP Product Design & Platform Strategy[Alternative]
+- Head of Product Experience (Platform)[Alternative]
+- Director of Product (if you owned full product org)[19]
+
+**Salary Range:**
+- Head of Product: £80,000-£150,000+ / $150,000-$250,000+[13][14][17]
+- Product Architect: $120,000-$200,000+[7][4]
+- With context engineering specialty: $250,000+[24]
+
+### "Principal Design Technologist"
+
+**Signals to Market:**
+- You're a **senior IC** bridging design and engineering[16]
+- Primary focus: **design systems implementation** and prototyping[11][2][3]
+- Technical depth in **front-end/design tooling**[12][15]
+- IC track, not organizational ownership[16]
+
+**Salary Range:**
+- Principal/Staff: £101,000-£150,000+ / $200,000-$300,000+[25]
+
+**Limitation:**
+Doesn't communicate your API architecture, workflow semantics, billing platforms, or operational product ownership.
+
+***
+
+## The Telecommunications/Infrastructure Context
+
+### Why Industry Matters
+
+Underline Technologies is a **fiber network platform**—infrastructure/telecommunications. In this domain:
+
+**Product is not software alone:** It's provisioning workflows, partner integrations, billing semantics, service delivery orchestration, and the experience layer on top[Alternative].
+
+**Telecommunications Product Roles:**
+- Telecommunications designers work on "installation, maintenance, and troubleshooting"[26]
+- Telecommunications product development engineers focus on hardware/network systems[27]
+- **Product architects** in this space define **end-to-end system coherence** across technology layers
+
+**Your fiber network work** inherently involves multi-party workflows (subscriber ↔ Underline ↔ provider), API contracts for partner integration, operational tooling, and experience design. This is **classic product architecture** in infrastructure.
+
+**Design Technologist** would be too narrow for this reality. The title doesn't communicate you architect **network service products**, not just design systems.
+
+***
+
+## Final Recommendation: Title Structure
+
+### Primary Title
+
+**Head of Product Architecture (Experience + Platform)**
+
+**Why:**
+- Accurately captures your **strategic ownership** of product coherence
+- Communicates you architect **both UX and technical systems**
+- Positions you at **director/VP level** for strategic impact
+- Works in infrastructure/telecom/SaaS contexts
+- Supports your founding role at Underline Technologies
+
+### Alternative Formulations by Context
+
+**If emphasizing leadership scope:**
+- **VP Product Design & Platform Strategy**
+- **Chief Product & Design Officer** (if you own both functions end-to-end)
+
+**If emphasizing IC expertise:**
+- **Principal Product Architect (Experience + Platform)**
+- **Staff Product Architect, Design Systems & APIs**
+
+**If audience is title-conservative:**
+- **Head of Product Experience (Platform)**
+- **Director of Product Design & Engineering**
+
+**If staying closer to design:**
+- **Head of Design Systems & Product Architecture**
+- **VP Design Infrastructure & Product Platform**
+
+### For Your Multi-W2 / Consulting Context
+
+Given your multiple part-time positions and ~$30k/year consulting goal:
+
+**LinkedIn/Portfolio Title:**
+Head of Product Architecture (Experience + Platform)
+
+**Consulting Positioning:**
+"Product architecture for design systems, API platforms, and operational workflows—ensuring multi-system coherence for infrastructure and SaaS companies"
+
+**Rate Justification:**
+- Product architects: $150-250/hour for strategic work[7][4]
+- With telecommunications/infrastructure specialty: premium rates
+- Design systems + API architecture: highly specialized, limited supply
+
+**Target Clients:**
+- Infrastructure/telecom companies building platform products
+- SaaS companies with API-as-product needs
+- Companies scaling design systems across operational platforms
+
+***
+
+## Why Not "Design Technologist" After All
+
+### The Titles Miss Different Parts of Your Work
+
+**Design Technologist misses:**
+- API architecture and schema governance
+- Multi-party workflow orchestration
+- Billing/operational platform semantics
+- Product strategy and roadmap ownership
+- System integration contracts
+
+**Product Architect could miss:**
+- Deep design systems expertise
+- Context engineering for AI
+- Visual/UX authority
+- Design token specialization
+
+### The Solution: "(Experience + Platform)"
+
+The **specialization descriptor** solves this. It explicitly states you architect **both layers**:
+
+- **Experience:** Design systems, tokens, UX, interfaces—your design technologist strengths
+- **Platform:** APIs, workflows, schemas, integrations—your product architecture strengths
+
+This makes it clear you're not a "pure" product architect who ignores design, nor a "pure" design technologist who doesn't touch APIs and operations.
+
+***
+
+## Addressing Your Original Question
+
+> "Given everything you know about me and the work that I do, what would be the best fitting job title, regardless of what my current job title is?"
+
+**Answer: Head of Product Architecture (Experience + Platform)**
+
+**Reasoning:**
+1. **Scope accuracy:** You architect product coherence across UX, APIs, operational workflows, and platform systems—the definition of product architecture[8][4][7]
+2. **Semantic control:** Your differentiator is preventing system fracturing through canonical interfaces, event conventions, schema governance, and design infrastructure—architecture work[Alternative]
+3. **Strategic ownership:** You founded Underline Technologies, deliver technical presentations, define product strategy, and own multi-system roadmaps—"Head of" level responsibility
+4. **Industry fit:** Infrastructure/telecommunications requires product architects who span technical systems and experience—"product as distributed system"[Alternative]
+5. **Market positioning:** Better communicates your value for consulting, hiring, and partnership opportunities than "Design Technologist"[14][4][7]
+
+**The alternative analysis was correct:** You're operating as the person who makes the product coherent across UX, APIs, data, ops workflows, and partner edges—i.e., **product architecture** (in the product sense, not "software architect who never talks to users")[Alternative].
+
+***
+
+## Conclusion: Both Analyses Converge on the Same Truth
+
+**What I got right initially:**
+- Your design systems expertise is exceptional
+- Your context engineering work is unique and emerging[21][20]
+- You bridge design and engineering at principal/staff level
+
+**What the alternative got right:**
+- Your scope exceeds design—it's product architecture[Alternative]
+- You own semantic control across distributed systems[Alternative]
+- "Design Technologist" undersells your platform/ops/API work[Alternative]
+- Infrastructure reality requires acknowledging "product = experience + systems + operations"[Alternative]
+
+**The synthesis:**
+**Head of Product Architecture (Experience + Platform)** accurately describes someone who:
+- Architects design systems infrastructure (tokens, components, design-code alignment)
+- Defines API products and schema governance (OpenAPI, YAML, versioning)[Alternative Evidence A]
+- Orchestrates multi-party workflows and operational semantics (billing, support, provisioning)[Alternative Evidence B,C,D]
+- Treats internal tools as product surfaces (ops tool redesign, admin UX)[Alternative Evidence G]
+- Pioneers AI-driven experiences (context engineering, conversational interfaces)[Alternative Evidence H]
+
+**This is your title.**
+
+Sources
+[1] What is a Design Technologist? https://designtechnologist.club/book/who-is-a-design-technologist/
+[2] Your UX Team Needs a Design Technologist. Here's Why. https://blog.prototypr.io/your-ux-team-needs-a-design-technologist-heres-why-3426be8f78a
+[3] What Is a Design Technologist? https://indeed.design/article/what-is-a-design-technologist/
+[4] List of Product Architect Responsibilities and Duties https://www.greatsampleresume.com/job-responsibilities/architecture/product-architect
+[5] What Is It? & What Do API Product Managers Do? https://www.orientsoftware.com/blog/api-product-management/
+[6] API Product Manager Job Description: Key Responsibilities ... https://www.launchnotes.com/blog/api-product-manager-job-description-key-responsibilities-and-skills
+[7] Product Architect Job Description: Key Responsibilities and ... https://www.launchnotes.com/blog/product-architect-job-description-key-responsibilities-and-skills
+[8] Product Architect Job Description Template - Revelo https://www.revelo.com/job-description/product-architect
+[9] Product Operations vs. Product Management: Key ... https://cpoclub.com/product-management/product-operations-vs-product-management/
+[10] Product Operations vs. Product Management https://fullscale.io/blog/product-operations-vs-product-management/
+[11] Design System Engineer: Role, Responsibilities, and Skills https://www.uxpin.com/studio/blog/design-system-engineer/
+[12] Job description - Design Technologist Handbook https://designtechnologist.club/book/job-market/
+[13] What Is A Vice President Product? https://www.intelligentpeople.co.uk/vp-product/
+[14] What Is A Chief Product Officer | Jobs, Salary, Job Description https://www.intelligentpeople.co.uk/chief-product-officer/
+[15] Design Technologists: Front-End Development in the ... https://blog.prototypr.io/design-technologists-front-end-development-in-the-design-system-era-5b0f1fa7b3de
+[16] Designers, how do you define the difference between a ... https://www.linkedin.com/posts/tomscottt_designers-how-do-you-define-the-difference-activity-7290386708120915968-fQIg
+[17] What Does a Head of Product Do? (vs. Product Manager) https://www.featurebase.app/blog/what-does-a-head-of-product-do
+[18] The VP Product Role https://www.svpg.com/the-vp-product-role/
+[19] Roles & Responsibilities of a Director of Product in 2025 https://www.edstellar.com/blog/director-of-product-roles-responsibilities
+[20] What is context engineering? https://www.cognizant.com/us/en/glossary/context-engineering
+[21] Understanding the Role of a Context Engineer https://momen.app/blogs/understanding-role-context-engineer-ai-systems/
+[22] What is a Chief Product Officer? | Definition & Overview https://www.productplan.com/glossary/chief-product-officer/
+[23] The Chief Product Officer Role: CPO Responsibilities ... https://www.splunk.com/en_us/blog/learn/chief-product-officer-cpo-role.html
+[24] Context Engineer - Master the Next Evolution Beyond Prompt ... https://contextengineer.org
+[25] [OFFICIAL] Salary Sharing thread for UX Professionals https://www.reddit.com/r/UXDesign/comments/1hqykdx/official_salary_sharing_thread_for_ux/
+[26] what is the difference? Pros and cons between both? Can a https://www.facebook.com/groups/333544787527923/posts/933103024238760/
+[27] Telecommunications product development engineer jobs https://www.indeed.com/q-telecommunications-product-development-engineer-jobs.html
+[28] Architectural Technologist vs. Architect: Key Differences https://ca.indeed.com/career-advice/finding-a-job/architectural-technologist-vs-architect
+[29] Adobe Experience Platform: Key Points | LeadsTech https://www.leads-technologies.com/en/blogs/adobe-experience-platform-all-you-need-to-know/
+[30] Architectural Technologist vs Architect https://www.draw-architecture.co.uk/post/architectural-technologist-vs-architect
+[31] Adobe Experience Platform and applications architecture ... https://experienceleague.adobe.com/en/docs/blueprints-learn/architecture/architecture-overview/platform-applications
+[32] Experience Platform... https://experienceleague.adobe.com/en/docs/experience-platform/landing/getting-started/platform-architecture
+[33] Architect vs Architectural Technologist: What's the difference? https://www.linkedin.com/posts/envision-design-group-uk_architect-vs-architectural-technologist-activity-7384148955795755009-VzOz
+[34] AEP Architecture whiteboard (English) https://www.youtube.com/watch?v=LLFgpPW3KfU
+[35] Architect vs Architectural Technologist? https://www.reddit.com/r/architecture/comments/ma0va8/architect_vs_architectural_technologist/
+[36] Basic Architecture | Adobe Experience Platform https://experienceleague.adobe.com/en/docs/platform-learn/tutorials/intro-to-platform/basic-architecture
+[37] Chief Product Officer Program - FAQs https://www.architecturerating.com/post/chief-product-officer-program-faqs
+[38] What Is the Difference Between an Architect and ... https://www.ssaltd.com/news-resources/what-is-the-difference-between-an-architect-and-an-architectural-technologist/
+[39] 3 Proven Architecture Patterns for Integrating Digital ... https://www.publicissapient.com/insights/3-proven-architecture-patterns-for-integrating-digital-experience-platforms
+[40] Chief Product Architect - Jobs https://www.cambridgenetwork.co.uk/jobs/chief-product-architect
+[41] VP of Product Development Job Titles in 2025 - Most Popular Titles by Career Level https://www.tealhq.com/job-titles/vp-of-product-development
+[42] Product Strategist: Role, Skills, & Career Path https://productschool.com/blog/career-development/product-strategist
+[43] What is a Chief Product Officer? | Role, Skills and ... https://www.productleadership.com/blog/chief-product-officer-role-in-ai-era/
+[44] What is a Product Strategist? Responsibilities, Salaries ... https://userpilot.com/blog/what-is-a-product-strategist/
+[45] The Growing Role of the Chief Design Officer in Modern ... https://www.cmswire.com/digital-experience/the-growing-role-of-the-chief-design-officer-in-modern-business/
+[46] The most common product management job titles https://www.aha.io/roadmapping/guide/product-management/what-are-some-product-management-job-titles
+[47] VP of Product Job Description: Key Responsibilities and ... https://www.launchnotes.com/blog/vp-of-product-job-description-key-responsibilities-and-skills
+[48] Chief design officer https://en.wikipedia.org/wiki/Chief_design_officer
+[49] Common Product Management Roles and Job Titles https://www.pragmaticinstitute.com/resources/articles/product/product-management-job-titles/
+[50] Top 35 VP Product Interview Questions and Answers [2025] https://digitaldefynd.com/IQ/vp-product-interview-questions-answers/
+[51] A Guide to Product Management Titles https://www.pendo.io/pendo-blog/a-guide-to-product-management-titles/
+[52] VP Product Management Resume Examples for 2025 https://resumeworded.com/vp-product-management-resume-example
+[53] Product Management Job Titles https://www.launchnotes.com/glossary/product-management-job-titles-in-product-management-and-operations
+[54] VP of Product Job Description Template - Complete 2025 ... https://resources.rework.com/libraries/job-description-templates/vp-product
+[55] Chief design officer | Tech and AI https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/business-value-of-design/interactives/defining-the-role-of-a-chief-design-officer
+[56] The Complete API Product Management Guide https://zuplo.com/learning-center/api-product-management-guide
+[57] Telecommunications Designer Jobs, Employment https://www.indeed.com/q-telecommunications-designer-jobs.html
+[58] Product Operations vs Product Management: Key Role ... https://gocious.com/blog/product-operations-vs-product-management-key-role-differences
+[59] Design Careers: Work with digital and UX design at Ericsson https://www.ericsson.com/en/careers/design
+[60] What's the difference? Product Operations Manager vs. ... https://www.productplan.com/learn/product-management-vs-product-operations-whats-the-difference/
+[61] 18 Types of Product Managers: Entry-Level to Executive https://productschool.com/blog/career-development/types-product-managers
+[62] Jobs telecommunications Product Development Specialist https://www.profesia.sk/en/work/telecommunications-product-development-specialist/
+[63] Product Management vs. Product Operations https://www.linkedin.com/pulse/product-management-vs-operations-brian-de-haaff
+[64] 155 Telecommunications Designer jobs in United States (8 ... https://www.linkedin.com/jobs/telecommunications-designer-jobs
+[65] Product Operations vs Product Manager: Where Each Role ... https://www.launchnotes.com/blog/product-operations-vs-product-manager
+[66] Some structure for API Roles https://www.linkedin.com/pulse/some-structure-api-roles-sophie-rutard
+[67] Jobs telecommunications Network Designer english https://www.profesia.sk/en/work/telecommunications-network-designer/english/
+[68] Product Operations vs. Product Management https://www.pragmaticinstitute.com/resources/articles/product/product-operations-vs-product-management/
+[69] Technical Product Manager Job Titles in 2025 https://www.tealhq.com/job-titles/technical-product-manager
