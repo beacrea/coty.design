@@ -33,3 +33,6 @@ client/src/assets/
 
 # Claude settings
 .claude/settings.local.json
+
+# Replit configuration (each project has its own local config)
+.replit
