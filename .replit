@@ -1,0 +1,45 @@
+modules = ["nodejs-20"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Main Site"
+
+[[workflows.workflow]]
+name = "Main Site"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd main && npm run dev"
+waitForPort = 5173
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow]]
+name = "Ask Chatbot"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd ask && npm run dev"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[ports]]
+localPort = 5173
+externalPort = 80
+
+[[ports]]
+localPort = 5000
+externalPort = 3000
