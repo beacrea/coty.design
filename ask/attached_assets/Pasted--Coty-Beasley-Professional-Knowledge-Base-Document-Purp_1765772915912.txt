@@ -1,0 +1,158 @@
+# Coty Beasley - Professional Knowledge Base
+
+## Document Purpose
+This structured knowledge document enables AI agents to understand and interact with information about Coty Beasley's professional identity, skills, experience, and capabilities. It is designed to be queryable, comprehensive, and accessible to both technical and non-technical audiences.
+
+## Quick Reference
+
+**Name:** Coty Beasley  
+**Role:** Architect-Operator: Distributed Product Systems Coherence  
+**Website:** coty.design  
+**Company Founded:** Underline Technologies (open-access fiber network platform)
+
+**One-Sentence Summary:**  
+I architect product coherence across visual design, technical platforms, and operational workflows by defining canonical rules, schemas, and interface specifications that prevent complex multi-party systems from fracturing into contradiction.
+
+**Core Capability:** Semantic control - making implicit organizational knowledge explicit through infrastructure, specifications, and design systems
+
+**Key Differentiator:** Bridges design, engineering, and product domains that most organizations silo, operating as architect-operator who defines, builds, and validates systems
+
+## Document Structure
+
+### 1. Metadata
+- Document type, version, purpose, and usage notes
+- Audience definitions and context
+
+### 2. Quick Reference
+- High-level overview for fast comprehension
+- Key identifiers and one-sentence summaries
+
+### 3. Professional Identity
+- Core identity and role definition
+- What Coty does and doesn't do
+- Unique positioning and rare combinations
+- Professional taxonomy
+
+### 4. Core Responsibilities
+Six primary domains:
+1. **Design Systems Architecture** - Foundational infrastructure for coherent UX at scale
+2. **Product Architecture** - Multi-system coherence across APIs, workflows, operations
+3. **Context Engineering** - How AI/human systems discover and organize information
+4. **Technical Communication** - Artifacts enforcing organizational alignment
+5. **Emerging Technologies** - Pioneering new frontiers (AI, IoT, medical, civic tech)
+6. **Entrepreneurship** - Building companies and infrastructure
+
+### 5. Skills Inventory
+Comprehensive categorized skills:
+- **Design & UX Skills** - Design systems, visual design, UX, tools
+- **Technical & Engineering Skills** - Development, architecture, infrastructure, data
+- **Product & Strategy Skills** - Product architecture, communication, operations
+- **Domain Expertise** - Telecommunications, financial, medical, IoT, civic tech
+- **Communication & Leadership Skills** - Specification, visualization, teaching, collaboration
+
+### 6. Methodology
+How work gets done:
+- **Architectural Thinking Pattern** - Start with coherence, then add detail
+- **Infrastructure-First Mindset** - Infrastructure as first-class problem
+- **Abstraction Level Fluidity** - Operating across strategy/design/implementation
+- **Artifact-Driven Communication** - Specs, diagrams, systems as governance
+- **Semantic Control Methodology** - Defining what things mean
+- **Validation Through Building** - Proving architecture works
+
+### 7. Value & Impact
+- **Core Problem:** System incoherence in complex distributed products
+- **Solution Approach:** Canonical rules making systems coherent
+- **Impact Areas:** Design systems, product architecture, technical communication, organization building
+- **Measurable Outcomes:** Reduced rework, faster integration, lower support burden, increased velocity
+
+### 8. Examples & Use Cases
+Concrete examples across:
+- Design systems architecture
+- Product architecture
+- Technical communication
+- Context engineering
+
+### 9. Glossary
+Key terms with simple and technical definitions:
+- Semantic control
+- Architect-operator
+- Design tokens
+- Multi-party workflows
+- Context engineering
+- Infrastructure thinking
+- Schema governance
+- Distributed systems
+- DTCG, OKLCH
+
+### 10. FAQ
+15+ common questions covering:
+- Day-to-day work
+- Designer vs engineer
+- Differentiators
+- Industries and experience
+- Approach and methodology
+- Technical depth
+- Working style
+
+### 11. Agent Interaction Guide
+How AI agents should use this knowledge base:
+- **Query Patterns** - By topic, role fit, problem type, capability, methodology
+- **Response Guidelines** - For technical, non-technical, recruiters, clients
+- **Important Distinctions** - What Coty is and isn't
+- **Context Switching** - Understanding multi-level operation
+
+### 12. Professional Context
+Current situation:
+- Employment model and companies
+- Current focus areas and research
+- Professional interests (short/long term)
+- What Coty is seeking
+- Location and work preferences
+
+## How to Use This Document
+
+### For AI Agents
+1. Start with **Quick Reference** for overview
+2. Use **Agent Interaction Guide** to understand query patterns
+3. Reference **Glossary** for unfamiliar terms
+4. Navigate to relevant sections based on query type
+5. Combine information from multiple sections for complete picture
+
+### For Technical Audiences
+- Focus on: Skills Inventory (technical sections), Methodology, Examples
+- Reference: Glossary (technical definitions), Core Responsibilities
+
+### For Non-Technical Audiences  
+- Focus on: Professional Identity, Value & Impact, FAQ
+- Reference: Glossary (simple definitions), Quick Reference
+
+### For Recruiters/Clients
+- Focus on: Professional Identity (unique positioning), Value & Impact, Professional Context
+- Reference: FAQ, Examples & Use Cases
+
+## File Formats
+
+This knowledge base is available in:
+1. **JSON** (`coty_beasley_knowledge_base.json`) - For programmatic access and API integration
+2. **YAML** (`coty_beasley_knowledge_base.yaml`) - For human readability and configuration
+3. **Markdown** (this file) - For documentation and quick reference
+
+## Version Information
+
+**Version:** 1.0  
+**Created:** 2025-12-15  
+**Last Updated:** 2025-12-15  
+**Source:** Comprehensive Professional Dossier analysis
+
+## Notes for AI Context
+
+- This document is optimized for semantic search and LLM context
+- Each section can be queried independently
+- Definitions include both technical and non-technical explanations
+- Examples are provided for abstract concepts
+- Cross-references between sections maintain coherence
+- Structured for progressive disclosure (overview → detail)
+
+---
+
+**For full structured data, reference the JSON or YAML files.**

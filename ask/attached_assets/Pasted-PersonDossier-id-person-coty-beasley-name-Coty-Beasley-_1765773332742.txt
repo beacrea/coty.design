@@ -1,0 +1,574 @@
+PersonDossier
+  id person:coty_beasley
+  name Coty Beasley
+  version 1.0
+  last_updated 2025-12-15
+  intended_use AgentContextSet
+  language en
+  scope
+    Professional profile for Q&A about skills, roles, experience, operating style, domains, and artifacts; optimize for retrieval and agent reasoning.
+
+  executive_summary
+    Coty operates at the intersection of distributed product architecture, design infrastructure, and operational systems engineering, architecting product coherence across visual design, technical platforms, and operational workflows.
+    Distinct capability: semantic control—defining canonical rules, schemas, contracts, and interface specifications that prevent complex multi-party products from fracturing into contradiction.
+    Identity: architect-operator—defines system shape, communicates the rules, and validates they work in practice through hands-on work and implementation-aware design.
+
+  identity
+    primary_archetype Architect-Operator
+    differentiators[6]
+      Semantic control (canonical meaning, naming, contracts)
+      Cross-domain coherence (UX + API + ops + infra)
+      Infrastructure-first design systems (tokens as contracts)
+      Workflow semantics and distributed responsibility clarity
+      Specs/diagrams as governance artifacts
+      Emerging-tech pioneering (AI context, tokens, IoT)
+
+    simultaneous_modes[6]
+      Design systems architect (foundational infrastructure)
+      Product architect (multi-system coherence)
+      Context engineer (how AI understands information)
+      Technical communicator (alignment via artifacts)
+      Pioneer of emerging technologies in domain
+      Entrepreneur/infrastructure builder (telecom + civic networks)
+
+    role_fit_notes
+      Not primarily a people manager (though capable); not a pure IC-only contributor (though hands-on); not strategist-only (though sets direction).
+      Operates as architect-operator: defines architecture, encodes governance, ensures practical viability.
+
+  core_responsibilities
+    design_systems_architecture_infrastructure
+      scope
+        Architect foundational infrastructure enabling coherent UX at scale; treat design systems as infrastructural systems, not just component libraries.
+      design_token_architecture
+        activities[6]
+          Research token editors supporting computed values and intelligent operations (e.g., contrast-maximizing color selection, algorithmic variations).
+          Structure token taxonomy (brand attributes, visual foundations, semantic tokens) aligned to DTCG-style specification principles.
+          Build dark/light mode strategy using Figma variables and modes; focus on transformation rules across contexts.
+          Create token categories (fill, text, outline, elevation, motion) with explicit relationships and constraints.
+          Design naming conventions to prevent entropy and communicate intent to designers and engineers.
+          Treat tokens as contracts linking design intent to implementation reality.
+      implementation_design_alignment
+        activities[5]
+          Tie design libraries to component libraries/Storybook to reduce drift.
+          Define component schemas with explicit typography references, spacing relationships, and sizing rules.
+          Treat design-code alignment as a first-class architectural problem.
+          Build infrastructure that makes synchronization economical and sustainable.
+          Ensure teams trust rules by making governance explicit and usable.
+      design_infrastructure_pioneering
+        activities[4]
+          Explore token-authoring solutions beyond Tokens Studio (computed values, graph automation, intelligent operations).
+          Research how to enable design at scale without maintenance burden.
+          Apply systems thinking: understand cascade effects of token decisions.
+          Build governance patterns that remain stable as organizations grow.
+      why_it_matters
+        Design systems fail at scale when treated as libraries; succeed when treated as governed infrastructure with trusted contracts and maintainable semantics.
+
+    product_architecture_multi_system_coherence
+      scope
+        Define conceptual and technical shape of complex products spanning UX, APIs, data, and operational workflows; make products coherent under multi-team and multi-party reality.
+
+      api_as_product_architecture
+        activities[7]
+          Define requirements where API is the product (not an implementation detail).
+          Design schema exploration and discovery interfaces for large conceptual spaces.
+          Build versioning strategies balancing backward compatibility with evolution.
+          Create sandbox environments for safe experimentation and partner testing.
+          Distinguish internal vs external APIs with differing governance requirements.
+          Produce OpenAPI specifications as canonical contracts.
+          Author structured YAML object models (e.g., Invoice, InvoiceItem, enums, status flows).
+
+        core_view
+          API quality is primarily semantic and schema-driven: clarity of mental model, consistency under edge cases, and coherent contracts over time.
+
+      multi_party_workflow_orchestration
+        activities[6]
+          Design voice service order fulfillment workflows with explicit state semantics.
+          Define cross-party handoffs and expectations (subscriber, Underline, provider).
+          Specify responsibility at each stage to avoid ambiguous failure modes.
+          Build components and status systems that reflect distributed work reality.
+          Iterate heavily on event naming conventions (hierarchy, tense, separators, simplification rules).
+          Use aggregation rules for customer-facing status vs internal detail.
+
+        example_thinking_pattern
+          Use taxonomy: past-tense for completed events, present-tense for state; hierarchical naming to avoid ambiguity; naming is governance.
+
+      operational_platform_semantics
+        support_routing_and_traceability
+          activities[3]
+            Design support routing frameworks distinguishing internal handling vs provider escalation.
+            Maintain historical traceability across channels/systems so requests do not get lost.
+            Treat support semantics as product surface, not back-office noise.
+        billing_migration_and_semantics
+          activities[8]
+            Treat billing migration (Zuora) as product work, not an ops chore.
+            Design invoice status mapping semantics and filtering constraints.
+            Create calculated statuses (e.g., autopaid logic) bridging stored truth and customer-comprehensible truth.
+            Work with Zuora objects/tables (e.g., ProductRatePlanCharge, tier tables).
+            Define import field mappings, accounting code IDs, and data model alignment.
+            Ensure billing UI semantics match underlying financial realities without confusing customers.
+            Build semantics that support operations, finance, and customer support.
+            Encode governance so future changes don’t fracture meaning.
+        why_it_matters
+          Operational platforms fail when semantics are hidden; coherence requires explicit, user-meaningful contracts that reconcile system truth with human understanding.
+
+      internal_tools_as_product
+        activities[6]
+          Drive redesign of internal operations tool for multi-market and external partner use.
+          Define navigation groupings and admin structures that scale with domain complexity.
+          Name entities carefully (avoid conflating user vs account, etc.).
+          Treat multi-market scaling as architecture (not just additional fields).
+          Ensure permissions/admin surfaces map to real responsibilities.
+          Make complexity navigable through clear information architecture.
+        why_it_matters
+          Internal tool clarity reduces operational risk; ambiguity in ops tooling propagates into customer experience and partner reliability.
+
+    context_engineering_information_architecture
+      scope
+        Architect how AI and human systems discover, organize, and retrieve information; make implicit relationships explicit and machine-reasonable.
+
+      ontological_strategies_for_llm_context
+        activities[6]
+          Research open-source AI tools for assembling high-signal context from knowledge bases and domain models.
+          Explore how LLMs discover what data exists and where to find it.
+          Investigate knowledge graphs and OntologyRAG/OntoRAG approaches.
+          Define entity types, relationships, hierarchies, constraints, and exceptions.
+          Aim for reasoning over domain models, not mere keyword matching.
+          Design context flow: user needs → retrieval structure → coherent answer/action.
+
+      project_registry_and_templates
+        activities[5]
+          Create project template structures and bootstrap workflows.
+          Use ADRs and documentation patterns to preserve decision history.
+          Design discovery mechanisms so future work is findable.
+          Build reusable templates to reduce entropy at project start.
+          Treat information organization as foundational infrastructure.
+
+      ai_driven_personalization_architecture
+        activities[5]
+          Design conversational AI interfaces for onboarding and product selection.
+          Architect context flow from behavior → model understanding → personalized experience.
+          Explore LLM UI generation and visual reasoning.
+          Design recommendation discovery structures (what to retrieve for each user).
+          Build human-AI collaboration patterns that feel natural.
+
+      why_it_matters
+        As organizations and AI usage scale, the limiting factor becomes context structure; explicit models enable coherent retrieval and trustworthy reasoning.
+
+    technical_communication_specification
+      scope
+        Produce artifacts that enforce alignment: specs, diagrams, and communication that turn implicit assumptions into explicit governance.
+
+      specification_production
+        activities[6]
+          Write OpenAPI specifications as canonical API contracts.
+          Maintain structured YAML object definitions readable by systems and humans.
+          Create webhook payload specifications for partner integrations.
+          Author technical presentations separating vision, impact timing, and construction details.
+          Capture requirements with semantic precision and enforceable language.
+          Use specs as pre-work governance, not post-hoc documentation.
+        why_it_matters
+          Well-written specs prevent ambiguity that otherwise becomes bugs, missed requirements, and partner friction.
+
+      diagram_visual_architecture
+        activities[5]
+          Use Mermaid to model workflows and system interactions.
+          Create entity-relationship diagrams to reveal structural problems.
+          Build visual narratives for technical and non-technical audiences.
+          Prefer drawing the system as a test of clarity; if it can’t be drawn, it isn’t clear.
+          Use diagrams as persistent architecture artifacts.
+
+      presentation_mixed_audiences
+        activities[5]
+          Structure presentations for both technical and business stakeholders.
+          Lead with vision and impact, then drill into construction.
+          Use time constraints to distill what matters.
+          Produce durable artifacts (slides, diagrams, frameworks).
+          Communicate across abstraction layers without losing precision.
+
+    design_for_emerging_technologies
+      scope
+        Pioneer design systems and UX patterns for AI interfaces, smart home automation, advanced LED control, and other frontier domains.
+
+      ai_driven_interfaces
+        activities[5]
+          Lead design for conversational AI onboarding and product selection.
+          Evaluate LLM capabilities and benchmarks for UI generation and visual reasoning.
+          Design how AI systems interpret design intent and user context.
+          Build collaboration interfaces for human-AI work.
+          Emphasize coherent context and intent modeling.
+
+      smart_home_iot_infrastructure
+        activities[6]
+          Expert in Home Assistant, ESPHome, WLED automation ecosystem.
+          Design LED control systems and WS2811 infrastructure.
+          Architect distributed IoT networks with local-first automation.
+          Integrate custom hardware and networking solutions.
+          Optimize for reliability and cloud-optional control.
+          Apply distributed-state lessons back into product workflow design.
+
+      medical_healthcare_platforms
+        activities[4]
+          Design MCAT prep platform with tokenized design system aligned to DTCG principles.
+          Account for medical constraints, compliance, and accessibility needs.
+          Design educational interfaces supporting sustained engagement.
+          Apply precision/clarity lessons from high-stakes domains.
+
+      civic_infrastructure_technology
+        activities[4]
+          Found Underline Technologies: open-access fiber network platform serving communities.
+          Design for distributed infrastructure where product is network + operations + UX.
+          Understand telecom provisioning and multi-party service delivery needs.
+          Consider community benefit and civic participation implications.
+
+      color_science_accessibility
+        activities[4]
+          Deep expertise in OKLCH and perceptually uniform color spaces.
+          Design accessible color systems with predictable contrast across hues.
+          Use perceptual uniformity to enable programmatic palette generation.
+          Treat accessibility as systemic constraint, not a patch.
+
+      why_it_matters
+        Transferable architecture patterns apply across domains; frontier tech increases the need for explicit semantics and coherent infrastructure.
+
+    entrepreneurship_infrastructure_building
+      scope
+        Build companies and navigate real-world infrastructure complexity; apply architecture thinking across verticals.
+
+      founding_work_underline_technologies
+        activities[5]
+          Founded open-access fiber network platform serving communities.
+          Navigate networking/provisioning complexity and multi-party service delivery.
+          Address telecom infrastructure + regulatory + community needs.
+          Build product at intersection of civic tech, infrastructure, and UX.
+          Encode operational reality into coherent product semantics.
+
+      multi_employment_model
+        notes[5]
+          Holds multiple W-2 roles with distinct focus areas.
+          Navigates boundaries and tax implications.
+          Transfers architectural insights across domains.
+          Maintains consulting/part-time work with target additional revenue (~$30k/year).
+          Uses autonomy to pursue deep technical and design infrastructure work.
+
+      problem_solving_across_verticals
+        examples[7]
+          Design systems and token governance
+          Smart home automation and distributed device state
+          Psychiatric practice IT and HIPAA-aware constraints
+          Fiber network platform infrastructure + operations
+          Civic technology and governance
+          Financial platforms (billing/accounting/regulatory)
+          Medical/education platforms (accessibility/compliance)
+
+      why_it_matters
+        Not a vertical specialist; applies coherence/contract architecture to hard distributed problems across domains.
+
+  skills_inventory
+    design_ux_skills
+      design_systems_architecture[7]
+        Design token structure and taxonomy (DTCG-aligned)
+        Token authoring + computed values exploration
+        Algorithmic token variations and intelligent operations
+        Dark/light mode strategy with context transforms
+        Component library architecture and governance
+        Design infrastructure for organization-wide coherence
+        Design-code alignment as architectural discipline
+
+      visual_design[4]
+        Color science (OKLCH, perceptual uniformity, accessibility)
+        Typography systems
+        Spacing systems
+        Complex UI design (ops, billing, onboarding)
+
+      user_experience[6]
+        Multi-party workflow design (subscriber/platform/provider)
+        Onboarding and product discovery
+        Internal tool UX (ops/admin/support)
+        Accessibility-first UX and constraints thinking
+        Conversational AI interface design
+        Systems-to-UX coherence (surface true state meaningfully)
+
+      design_tools_implementation[5]
+        Figma (variables, modes, systems, prototyping)
+        Token tooling (Tokens Studio + alternatives)
+        Diagramming (Mermaid, ERD)
+        Storybook/component documentation alignment
+        Specification-driven design workflows
+
+    technical_engineering_skills
+      software_development[5]
+        Vue.js (Vue 3)
+        JavaScript/TypeScript
+        YAML configuration and definitions
+        JSON and JSON-LD
+        Markdown documentation/spec writing
+
+      architecture_systems_design[7]
+        API design (RESTful)
+        OpenAPI specification authoring
+        Database/schema modeling (incl. Zuora objects/structures)
+        Multi-party workflow and state machine design
+        Event-driven architecture semantics
+        Naming conventions and governance systems
+        Distributed systems thinking
+
+      infrastructure_devops[6]
+        Home Assistant automation
+        ESPHome device firmware/configuration
+        WLED lighting control ecosystems
+        WS2811 LED infrastructure design
+        Networking integration and reliability practices
+        Local-first distributed architecture
+
+      data_information_systems[6]
+        Context engineering for AI systems
+        Ontological strategies and knowledge graphs
+        Data dictionary design and semantics
+        Workflow state/status semantics
+        Billing and operational data modeling
+        Retrieval-oriented knowledge organization
+
+    product_strategy_skills
+      product_architecture[6]
+        API-as-product platform design
+        Multi-system coherence and schema governance
+        Operational platform semantics (billing/support/provisioning)
+        Product-led growth mechanics (landing/onboarding patterns)
+        Marketplace and multi-tenant thinking
+        Multi-market scaling as architecture
+
+      product_strategy_communication[6]
+        Technical vision and impact communication
+        Cross-functional alignment via specs
+        Technical ↔ non-technical translation
+        Presentation design for mixed audiences
+        Technical presentation under time constraints
+        Partner-facing clarity and integration readiness
+
+      product_operations[6]
+        Workflow/handoff design
+        Internal tool architecture
+        Process documentation and governance
+        Support routing/escalation frameworks
+        Multi-market scaling and localization strategy
+        Traceability across systems/channels
+
+    domain_expertise
+      telecommunications_infrastructure[4]
+        Open-access fiber network platforms
+        Multi-party service delivery
+        Provisioning/network operations conceptual understanding
+        Regulatory/business-model awareness
+
+      financial_billing[5]
+        Zuora object modeling and operational semantics
+        Invoice and billing meaning design
+        Subscription and tiered pricing models
+        Accounting code mapping awareness
+        Payment status and calculated status patterns
+
+      medical_healthcare[4]
+        HIPAA-aware governance mindset
+        Accessibility and compliance constraints
+        Provider/patient workflow sensitivity
+        Educational platform design for sustained learning
+
+      smart_home_iot[5]
+        Home Assistant ecosystem expertise
+        Distributed IoT networks and integrations
+        LED control systems design (WLED/WS2811)
+        Custom hardware integration
+        Local-first and cloud-optional architecture
+
+      civic_community_technology[4]
+        Open-access community networks
+        Community benefit orientation
+        Governance/regulatory context awareness
+        Volunteer/community involvement (Rotary)
+
+    communication_leadership
+      specification_documentation[5]
+        OpenAPI specs
+        YAML object model definitions
+        Event naming conventions and hierarchies
+        Technical requirements capture
+        Architecture documentation as governance
+
+      diagramming_visualization[4]
+        Mermaid diagrams
+        ERDs and system architecture diagrams
+        Visual communication of complex systems
+        Architecture storytelling artifacts
+
+      presentation_teaching[5]
+        Technical presentations for mixed audiences
+        Vision-impact-timing narrative structure
+        Interview-based architecture discovery
+        Collaborative facilitation
+        Clarity under time constraints
+
+      cross_functional_collaboration[5]
+        Design ↔ engineering alignment
+        Product ↔ operations integration
+        Technical ↔ non-technical communication
+        Partner communication and integration support
+        Vendor evaluation and relationship management
+
+  working_process_approach
+    architectural_thinking_pattern
+      rule
+        Start with coherence, then add detail.
+      steps[4]
+        Semantic clarity (entities, relationships, meanings of status/state/party)
+        Explicit contracts (interfaces, boundaries, responsibilities)
+        Naming governance (conventions preventing ambiguity and drift)
+        Cascade to detail (UI, tokens, workflows, implementation checks)
+
+      example_voice_service_order_fulfillment
+        key_questions[5]
+          Which parties are involved? (subscriber, Underline, provider)
+          What does each party know at each stage? (context boundaries)
+          Which statuses are semantically meaningful to customers and ops?
+          How should events be named (taxonomy, tense, hierarchy)?
+          What does the UI surface given this architecture?
+
+    infrastructure_first_class
+      claims[4]
+        Infrastructure is not overhead; it determines scalability and coherence.
+        Sound infrastructure makes new features cheaper and safer.
+        Chaotic semantics makes every future change harder.
+        Trust in rules is a product capability.
+
+    abstraction_level_mobility
+      levels[3]
+        High-level strategy (3-year architecture enablement)
+        Medium-level design (system support for scale/multi-market)
+        Detail-level validation (contrast/token correctness, naming compliance)
+
+    artifacts_not_just_words
+      outputs[6]
+        Specifications (OpenAPI, YAML, webhook payloads)
+        Diagrams (Mermaid, architecture visuals)
+        Design systems (Figma tokens/components)
+        Structured documents (ADRs, templates, conventions)
+        Governance frameworks (naming, schemas, status models)
+        Presentations that persist as reference artifacts
+
+  value_impact
+    problem_solved
+      name System incoherence
+      symptoms[6]
+        UI contradicts data model
+        API docs contradict implementation
+        Billing semantics confuse customers and teams
+        Support can’t route due to ambiguous statuses
+        Tokens work in one surface but break elsewhere
+        Multi-party handoffs fail silently
+
+      cause
+        Teams optimize locally (velocity, simplicity, expressiveness, stability) without semantic control and explicit contracts.
+
+      prevention_mechanisms[5]
+        Schema governance (entities/properties/relationships)
+        Naming conventions (status/event/party/context meaning)
+        Workflow semantics (responsibility, failure handling, proof)
+        Design infrastructure (token transforms, design-code alignment)
+        Communication artifacts (specs/diagrams) enforcing shared reality
+
+    impact_areas
+      design_systems[4]
+        Scale without fragmenting design intent
+        Shared language between designers and engineers via tokens
+        Reuse infrastructure across products
+        Accessibility embedded systemically
+
+      product_architecture[4]
+        APIs become coherent and usable
+        Multi-party products gain explicit contracts and fewer silent failures
+        Ops can explain state clearly to customers
+        New features integrate without contradictions
+
+      technical_communication[4]
+        Specs prevent ambiguity before build
+        Mixed audiences share one coherent vision
+        Decision rationale persists for future teams
+        Alignment survives org change
+
+      organization_building[5]
+        Coherence becomes teachable and repeatable
+        Onboarding improves via artifacts not oral tradition
+        Partners integrate against clear contracts
+        Vendor work is governed by explicit semantics
+        Technical decisions become reproducible
+
+  unique_positioning
+    bridges_verticals[4]
+      Design systems depth + operational workflow semantics
+      Product architecture + design tokens/accessibility
+      Infrastructure thinking + UI coherence
+      Emerging AI context engineering + design infrastructure
+
+    distributed_systems_lenses[3]
+      Technical (IoT, telecom, local-first networks)
+      Organizational (multi-party workflows, partner integrations, support routing)
+      User-facing (how architecture failures manifest as UX confusion)
+
+    pioneer_intersections[4]
+      Design tokens + AI context engineering (AI understanding of design systems)
+      Smart home + medical constraints (coherence in high-stakes systems)
+      Telecom infrastructure + civic technology (community networks as product)
+      Context engineering + design systems (discoverability and governance)
+
+    architect_operator_mode
+      description
+        Combines architecture definition, operational validation, and hands-on execution; understands implementation constraints while designing, and architectural implications while building.
+
+  inferred_preferences_goals
+    work_preferences[7]
+      Intellectually challenging cross-domain problems
+      Leverage through infrastructure/artifacts rather than heavy management
+      Deep dives while maintaining breadth
+      Emerging technology frontiers (LLMs, UI generation, quantum interest)
+      Portfolio building and market positioning (e.g., coty.design)
+      Part-time/consulting at premium rates; autonomy and optionality
+      Community/civic tech involvement (Underline + Rotary)
+
+  qa_intents
+    guidance
+      Provide concise answers; cite relevant sections; ask clarifying questions when missing dates/employers/metrics.
+    questions[16]
+      Who is Coty Beasley professionally?
+      What is Coty’s core differentiator?
+      What does “semantic control” mean in Coty’s work?
+      What does “architect-operator” mean here?
+      What design systems work does Coty do beyond components?
+      How does Coty structure design tokens and naming conventions?
+      How does Coty approach dark/light modes and token transforms?
+      How does Coty keep design and code aligned?
+      What does API-as-product mean in Coty’s approach?
+      What governance does Coty apply to OpenAPI and schemas?
+      How does Coty design multi-party workflows and responsibilities?
+      How does Coty name events and design status semantics?
+      What billing/Zuora semantics experience does Coty have?
+      What internal tools architecture experience does Coty have?
+      What is Coty’s context engineering approach for AI?
+      What domains has Coty applied these patterns to?
+
+  constraints_and_policies
+    unknowns_policy
+      If asked for dates, specific employers, exact revenue, headcount, or project timelines not present here: respond “Not specified in context” and ask a clarifying question.
+    non_fabrication_policy
+      Do not invent projects, metrics, credentials, or timelines.
+    update_policy
+      Treat user-provided updates as higher priority than inferred statements.
+
+  standards_anchors
+    dtcg
+      note
+        Uses DTCG-aligned design token taxonomy/governance principles; treat tokens as interoperable contracts.
+    openapi
+      note
+        Uses OpenAPI specifications as canonical API interface contracts.
+    wcag_contrast
+      note
+        Uses accessibility/contrast constraints as system-level requirements in color/token decisions.
