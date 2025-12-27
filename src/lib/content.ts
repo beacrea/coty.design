@@ -57,7 +57,7 @@ export const siteContent = {
   connect: {
     heading: "Connect",
     items: [
-      { text: "LinkedIn", description: "for professional conversations", url: "https://linkedin.com/in/cbeasley" },
+      { text: "LinkedIn", description: "for professional conversations", url: "https://linkedin.com/in/cbeasley0" },
       { text: "GitHub", description: "for code and collaborations", url: "https://github.com/beacrea" },
       { text: "Email", description: "available upon request", url: null }
     ] as ConnectItem[]

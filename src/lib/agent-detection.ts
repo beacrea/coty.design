@@ -30,7 +30,7 @@ export function getEnhancedJsonLd() {
     "description": "Good design brings clarity to complexity and makes technology actually useful. With this in mind, I work at the intersection of systems, people, and innovation to help organizations and communities connect, collaborate, and grow.",
     "url": "https://coty.design",
     "sameAs": [
-      "https://linkedin.com/in/cbeasley",
+      "https://linkedin.com/in/cbeasley0",
       "https://github.com/beacrea"
     ],
     "worksFor": {
