@@ -2,14 +2,14 @@
   "packages": {
     "portfolio": {
       "release-type": "node",
-      "package-name": "coty-portfolio",
+      "package-name": "portfolio",
       "changelog-path": "CHANGELOG.md",
       "bump-minor-pre-major": true,
       "bump-patch-for-minor-pre-major": true
     },
     "ask": {
       "release-type": "node",
-      "package-name": "coty-ask",
+      "package-name": "ask",
       "changelog-path": "CHANGELOG.md",
       "bump-minor-pre-major": true,
       "bump-patch-for-minor-pre-major": true
