@@ -1,5 +1,18 @@
 # ask.coty - Q&A Agent
 
+## Monorepo Context
+
+This app lives in the `/ask` subdirectory of the `coty.design` monorepo. When working in this Replit project:
+
+- **Working directory:** Monorepo root, so prefix paths with `ask/`
+- **Workflow:** "Ask Chatbot" runs `cd ask && npm run dev` on port 5000
+- **Key files:**
+  - `ask/server/routes.ts` - API endpoints, SSE streaming
+  - `ask/client/src/pages/chat.tsx` - Main chat UI
+  - `ask/server/kb/modules.ts` - Knowledge base content
+  - `ask/server/intent-analyzer.ts` - Query routing logic
+  - `ask/shared/schema.ts` - Types and database schema
+
 ## Overview
 
 This project is a mobile-first Progressive Web App (PWA) Q&A agent designed to answer questions about Coty Beasley's professional profile. It utilizes a curated, grounded knowledge base to prevent AI hallucinations, ensuring responses are based solely on provided context. The application aims to provide a conversational experience with streaming AI responses and discreet persona-aware adaptation, making the interaction feel naturally personalized. The project's ambition is to offer a sophisticated yet user-friendly interface for professional evaluation, casual inquiry, and peer-to-peer technical discussions.
