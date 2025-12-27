@@ -1,0 +1,77 @@
+common_technology_summary:
+  method:
+    definition_of_common: "Mentioned 2+ times across our recorded conversation history"
+    notes:
+      - "Items explicitly flagged as not evidenced were included only under not_evidenced_in_chat_history."
+      - "Where a tool was mentioned once or rarely, it appears under mentioned_single_or_rare."
+
+  clusters:
+    design_systems_and_tokens:
+      recurring:
+        - "Figma (variables, modes, design system work)"
+        - "Token Studio for Figma (token authoring/sync)"
+        - "W3C Design Tokens Community Group (DTCG) format/spec"
+        - "Design token schema modeling (e.g., fill/text/outline structure; sizing/typography scales)"
+      adjacent_recurring:
+        - "Component library / Storybook initiative (design-to-dev alignment context)"
+      not_evidenced_in_chat_history:
+        - "OKLCH color space"
+        - "Style Dictionary"
+        - "Supernova"
+
+    product_platform_ops_tooling:
+      recurring:
+        - "Zuora (billing migration, object dictionary usage, imports, invoice/charge modeling)"
+        - "Zendesk (ticket creation + structured comment formatting)"
+        - "Zapier (Code actions, parsing/formatting automation)"
+        - "Typeform (intake data + integration IDs)"
+        - "Box Sign (authorization/e-signature workflow context)"
+      mentioned_single_or_rare:
+        - "Intercom (integration mention)"
+        - "ServiceNow (support-routing consumer)"
+        - "Zoom Call Center (support-routing consumer)"
+
+    docs_specs_and_formats:
+      recurring:
+        - "OpenAPI (API specification/documentation)"
+        - "Markdown (documentation + doc-to-md workflows)"
+        - "YAML (schema/object modeling)"
+        - "JSON (payloads, schemas, integration data)"
+        - "Mermaid (sequence/flow diagrams)"
+      mentioned_single_or_rare:
+        - "Coda (housing QA content)"
+        - "Flourish (visualization tooling preference)"
+
+    dev_and_automation_utilities:
+      recurring:
+        - "JavaScript (notably Zapier code actions)"
+        - "GitHub (shared UI/component work context)"
+        - "CSV (Google Calendar import flows)"
+      mentioned_single_or_rare:
+        - "AppleScript + Alfred (personal automation)"
+        - "zsh (shell)"
+
+    smart_home_rf_iot:
+      evidenced:
+        - "Flipper Zero"
+        - "Sub-GHz RF control (multi-button light remote context)"
+      not_evidenced_in_chat_history:
+        - "Home Assistant"
+        - "ESPHome"
+        - "WLED"
+        - "WS2811 addressable LEDs"
+        - "UniFi / UniFi Protect (doorbell/camera ecosystem)"
+
+    ai_llm_and_agent_tooling:
+      evidenced:
+        - "Conversational AI interface (product/design direction)"
+      not_evidenced_in_chat_history:
+        - "OpenAI (API/hosted usage)"
+        - "Vercel AI SDK"
+        - "Next.js"
+        - "LangChain / LangGraph"
+        - "Agent delivery patterns for websites"
+
+  insights:
+    - "Your highest-frequency 'real stack' is enterprise workflow plumbing: billing (Zuora), support (Zendesk/ServiceNow), intake (Typeform), signatures (Box), and glue (Zapier + schemas)."
+    - "For clarity/credibility, keep two buckets: evidenced-in-chat vs plausible-but-not-mentioned, rather than blending them."

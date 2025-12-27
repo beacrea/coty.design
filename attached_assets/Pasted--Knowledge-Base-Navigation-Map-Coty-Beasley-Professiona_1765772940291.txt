@@ -1,0 +1,199 @@
+# Knowledge Base Navigation Map
+
+```
+Coty Beasley Professional Knowledge Base
+│
+├── 📋 METADATA
+│   ├── Document info (version, purpose, audience)
+│   └── Usage guidelines
+│
+├── ⚡ QUICK REFERENCE
+│   ├── One-sentence summary
+│   ├── Core capability
+│   └── Key differentiators
+│
+├── 👤 PROFESSIONAL IDENTITY
+│   ├── Core identity & role
+│   ├── What Coty does/doesn't do
+│   ├── Unique positioning
+│   └── Rare skill combinations
+│
+├── 💼 CORE RESPONSIBILITIES (6 domains)
+│   ├── 1. Design Systems Architecture
+│   │   ├── Token architecture & taxonomy
+│   │   ├── Design-code alignment
+│   │   └── Infrastructure thinking
+│   │
+│   ├── 2. Product Architecture
+│   │   ├── API-as-product
+│   │   ├── Multi-party workflows
+│   │   ├── Operational platforms
+│   │   └── Internal tools
+│   │
+│   ├── 3. Context Engineering
+│   │   ├── AI information organization
+│   │   ├── Knowledge graphs & ontologies
+│   │   └── Project organization
+│   │
+│   ├── 4. Technical Communication
+│   │   ├── Specifications (OpenAPI, YAML)
+│   │   ├── Diagrams & visualization
+│   │   └── Presentations
+│   │
+│   ├── 5. Emerging Technologies
+│   │   ├── AI-driven interfaces
+│   │   ├── Smart home & IoT
+│   │   ├── Medical & healthcare
+│   │   ├── Civic infrastructure
+│   │   └── Color science & accessibility
+│   │
+│   └── 6. Entrepreneurship
+│       ├── Underline Technologies
+│       ├── Multiple employment model
+│       └── Cross-vertical problem solving
+│
+├── 🛠️ SKILLS INVENTORY (5 categories)
+│   ├── Design & UX
+│   │   ├── Design systems architecture
+│   │   ├── Visual design
+│   │   ├── User experience
+│   │   └── Tools
+│   │
+│   ├── Technical & Engineering
+│   │   ├── Software development
+│   │   ├── Architecture & systems
+│   │   ├── Infrastructure & DevOps
+│   │   └── Data & information systems
+│   │
+│   ├── Product & Strategy
+│   │   ├── Product architecture
+│   │   ├── Communication
+│   │   └── Operations
+│   │
+│   ├── Domain Expertise
+│   │   ├── Telecommunications
+│   │   ├── Financial & billing
+│   │   ├── Medical & healthcare
+│   │   ├── Smart home & IoT
+│   │   └── Civic & community
+│   │
+│   └── Communication & Leadership
+│       ├── Specification & documentation
+│       ├── Visualization
+│       ├── Teaching & facilitation
+│       └── Collaboration
+│
+├── 🔄 METHODOLOGY (6 principles)
+│   ├── Architectural thinking pattern
+│   ├── Infrastructure-first mindset
+│   ├── Abstraction level fluidity
+│   ├── Artifact-driven communication
+│   ├── Semantic control methodology
+│   └── Validation through building
+│
+├── 💎 VALUE & IMPACT
+│   ├── Core problem: System incoherence
+│   ├── Solution approach
+│   ├── Impact areas (4 domains)
+│   ├── Measurable outcomes
+│   └── Unique value proposition
+│
+├── 📚 EXAMPLES & USE CASES
+│   ├── Design systems example
+│   ├── Product architecture example
+│   ├── Technical communication example
+│   └── Context engineering example
+│
+├── 📖 GLOSSARY (10 terms)
+│   ├── Semantic control
+│   ├── Architect-operator
+│   ├── Design tokens
+│   ├── Multi-party workflows
+│   ├── Context engineering
+│   ├── Infrastructure thinking
+│   ├── Schema governance
+│   ├── Distributed systems
+│   └── Technical standards (DTCG, OKLCH)
+│
+├── ❓ FAQ (15 questions)
+│   ├── What Coty does
+│   ├── Role definitions
+│   ├── Differentiators
+│   ├── Experience & industries
+│   ├── Methodology & approach
+│   └── Working style
+│
+├── 🤖 AGENT INTERACTION GUIDE
+│   ├── Query patterns (5 types)
+│   │   ├── By topic
+│   │   ├── By role fit
+│   │   ├── By problem type
+│   │   ├── By capability
+│   │   └── By methodology
+│   │
+│   ├── Response guidelines (4 audiences)
+│   │   ├── Technical audiences
+│   │   ├── Non-technical audiences
+│   │   ├── Recruiters
+│   │   └── Potential clients
+│   │
+│   ├── Important distinctions
+│   └── Context switching notes
+│
+└── 🎯 PROFESSIONAL CONTEXT
+    ├── Current employment
+    ├── Focus areas & research
+    ├── Professional interests
+    ├── What Coty is seeking
+    └── Location & preferences
+```
+
+## Quick Navigation Guide
+
+### "I want to understand who Coty is"
+→ Start: Quick Reference → Professional Identity → FAQ
+
+### "I'm evaluating Coty for a role"
+→ Start: Professional Identity → Core Responsibilities → Skills Inventory → Examples
+
+### "I have a specific problem to solve"
+→ Start: Value & Impact → Examples & Use Cases → Core Responsibilities
+
+### "I need to know about a specific skill"
+→ Start: Skills Inventory → Glossary (if unfamiliar terms) → Examples
+
+### "I want to understand how Coty works"
+→ Start: Methodology → Examples & Use Cases → FAQ
+
+### "I'm an AI agent querying this document"
+→ Start: Agent Interaction Guide → Query Patterns → Relevant sections
+
+## Document Relationships
+
+```
+Professional Identity ←→ Core Responsibilities
+        ↓                        ↓
+    Methodology ←→ Skills Inventory
+        ↓                        ↓
+    Examples ←→ Value & Impact
+        ↓
+    Glossary (supports all sections)
+        ↓
+    FAQ (synthesizes all sections)
+```
+
+## Information Density by Section
+
+| Section | Detail Level | Best For |
+|---------|-------------|----------|
+| Quick Reference | ⭐ Overview | Initial understanding |
+| Professional Identity | ⭐⭐ Conceptual | Understanding role & positioning |
+| Core Responsibilities | ⭐⭐⭐ Detailed | Understanding scope of work |
+| Skills Inventory | ⭐⭐⭐ Detailed | Evaluating capabilities |
+| Methodology | ⭐⭐ Conceptual | Understanding approach |
+| Value & Impact | ⭐⭐ Conceptual | Understanding outcomes |
+| Examples | ⭐⭐⭐ Detailed | Concrete demonstrations |
+| Glossary | ⭐⭐ Definitions | Understanding terminology |
+| FAQ | ⭐⭐ Synthesized | Quick answers |
+| Agent Guide | ⭐⭐ Structural | Using document effectively |
+| Professional Context | ⭐ Current | Current situation |
