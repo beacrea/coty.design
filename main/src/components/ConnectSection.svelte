@@ -70,8 +70,8 @@
   }
 
   .link:hover {
-    color: oklch(0.9 0 0);
-    text-decoration: none;
+    color: oklch(0.85 0 0);
+    text-decoration: underline;
   }
 
   .text {
