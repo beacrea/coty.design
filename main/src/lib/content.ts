@@ -65,6 +65,6 @@ export const siteContent = {
   
   metadata: {
     legal: "© Coty Beasley 2025",
-    version: "v1.0.0"
+    version: "v4.2.0"
   }
 };
