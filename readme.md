@@ -1,9 +1,10 @@
 # Coty.Design
-This repository is the main codebase for [coty.design](https://coty.design), my personal web app.
 
-I've created subfolders in this repo to contain different applications.
+Monorepo for [coty.design](https://coty.design) and related projects.
 
-- `/ask` - Chatbot that gives interactive details about my work and what I do, live at [ask.coty.design](https://ask.coty.design)
-- `/blog` - Static blog content built with [Harp.js](http://harpjs.com), live at [coty.blog](https://coty.blog)
-- `/main` - The main site at [coty.design](https://coty.design)
-- `/labs` - An experimental sandbox for various projects
+## Structure
+
+- [`/main`](main/) - Portfolio site (Svelte), live at [coty.design](https://coty.design)
+- [`/ask`](ask/) - AI chatbot about my work, live at [ask.coty.design](https://ask.coty.design)
+- [`/blog`](blog/) - Blog content ([Harp.js](http://harpjs.com)), live at [coty.blog](https://coty.blog)
+- [`/labs`](labs/) - Experimental sandbox
