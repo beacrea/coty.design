@@ -12,6 +12,7 @@ A pixel-perfect clone of coty.design portfolio built with Svelte + Vite. This pr
 - AI agent detection utilities ready
 
 ## Recent Changes
+- December 27, 2025: Accessibility improvements - focus states, skip link, prefers-reduced-motion, optimized content width (580px/640px), improved caption contrast
 - December 27, 2025: Complete portfolio implementation with AI agent detection, DTCG token files, and variable font support
 
 ## Project Architecture
@@ -64,6 +65,7 @@ A pixel-perfect clone of coty.design portfolio built with Svelte + Vite. This pr
 4. **SEO Ready**: Open Graph, Twitter Card, JSON-LD Person schema
 5. **PWA**: Web app manifest for installability
 6. **AI Detection**: isbot library for crawler detection
+7. **Accessibility**: Skip-to-content link, focus-visible states, prefers-reduced-motion support, WCAG contrast ratios
 
 ## User Preferences
 - Use Svelte (not React)
