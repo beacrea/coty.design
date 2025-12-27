@@ -4,15 +4,14 @@
   export let summary: string;
 </script>
 
-<header class="opener">
+<div class="opener">
   <h1 class="name">{name}</h1>
   <p class="role">{role}</p>
   <p class="summary">{summary}</p>
-</header>
+</div>
 
 <style>
   .opener {
-    margin-bottom: var(--section-spacing);
   }
 
   .name {
