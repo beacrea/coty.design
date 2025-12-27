@@ -13,14 +13,7 @@
       <li class="connect-item">
         <span class="bullet"></span>
         <span class="content">
-          {#if item.url}
-            <a href={item.url} target="_blank" rel="noopener noreferrer" class="link">
-              {item.text}
-            </a>
-          {:else}
-            <span class="text">{item.text}</span>
-          {/if}
-          <span class="description">{item.description}</span>
+          {#if item.url}<a href={item.url} target="_blank" rel="noopener noreferrer" class="link">{item.text}</a>{:else}<span class="text">{item.text}</span>{/if} <span class="description">{item.description}</span>
         </span>
       </li>
     {/each}
@@ -70,14 +63,14 @@
   }
 
   .link {
-    color: var(--semantic-link);
+    color: oklch(1 0 0);
     text-decoration: underline;
     text-underline-offset: 3px;
     transition: color var(--transition-theme);
   }
 
   .link:hover {
-    color: var(--semantic-link-hover);
+    color: oklch(0.9 0 0);
     text-decoration: none;
   }
 
