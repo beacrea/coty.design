@@ -4,19 +4,19 @@
 
 This is a monorepo for Coty Beasley's personal web presence, containing four distinct projects:
 
-- **`/main`** - Portfolio site built with Svelte + Vite, live at coty.design
+- **`/portfolio`** - Portfolio site built with Svelte + Vite, live at coty.design
 - **`/ask`** - AI-powered Q&A chatbot about Coty's professional work, live at ask.coty.design
 - **`/blog`** - Static blog built with Harp.js, live at coty.blog
 - **`/labs`** - Experimental design sandbox
 
-The primary active development focuses on the portfolio (`/main`) and the AI chatbot (`/ask`), which represents a sophisticated RAG-based conversational agent with persona adaptation.
+The primary active development focuses on the portfolio (`/portfolio`) and the AI chatbot (`/ask`), which represents a sophisticated RAG-based conversational agent with persona adaptation.
 
 ## Replit Project Context
 
 **This is a shared monorepo.** Each app has its own Replit project and subdirectory-specific documentation:
 
 - **`/ask`** - See `ask/replit.md` for chatbot-specific context (port 5000)
-- **`/main`** - See `main/replit.md` for portfolio-specific context (port 5001)
+- **`/portfolio`** - See `portfolio/replit.md` for portfolio-specific context (port 5001)
 
 When working in a Replit project, check the subdirectory's `replit.md` for app-specific file paths, workflows, and important files.
 
@@ -32,7 +32,7 @@ Additional preferences:
 
 ## System Architecture
 
-### Portfolio Site (`/main`)
+### Portfolio Site (`/portfolio`)
 
 **Framework:** Svelte 4 with Vite 5 and TypeScript
 
