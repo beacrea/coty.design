@@ -16,13 +16,14 @@ args = "Main Site"
 name = "Main Site"
 author = "agent"
 
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+outputType = "webview"
+
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd portfolio && npm run dev"
-waitForPort = 5173
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
+waitForPort = 5000
 
 [[workflows.workflow]]
 name = "Ask Chatbot"
@@ -38,8 +39,11 @@ agentRequireRestartOnSave = false
 
 [[ports]]
 localPort = 5000
-externalPort = 3000
+externalPort = 80
 
 [[ports]]
-localPort = 5173
-externalPort = 80
+localPort = 5001
+externalPort = 3000
+
+[agent]
+expertMode = true
