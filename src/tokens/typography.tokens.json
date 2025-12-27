@@ -1,0 +1,38 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "typography": {
+    "$type": "dimension",
+    "fontFamily": {
+      "$type": "fontFamily",
+      "$value": "'Red Hat Mono', monospace"
+    },
+    "fontWeight": {
+      "regular": { "$value": 400 },
+      "medium": { "$value": 460 },
+      "bold": { "$value": 680 }
+    },
+    "size": {
+      "sm": {
+        "title": { "$value": "33.178px" },
+        "subtitle": { "$value": "19.2px" },
+        "header": { "$value": "19.2px" },
+        "body": { "$value": "16px" },
+        "caption": { "$value": "16px" }
+      },
+      "md": {
+        "title": { "$value": "37.325px" },
+        "subtitle": { "$value": "21.6px" },
+        "header": { "$value": "21.6px" },
+        "body": { "$value": "18px" },
+        "caption": { "$value": "15px" }
+      },
+      "lg": {
+        "title": { "$value": "41.472px" },
+        "subtitle": { "$value": "24px" },
+        "header": { "$value": "24px" },
+        "body": { "$value": "20px" },
+        "caption": { "$value": "16.667px" }
+      }
+    }
+  }
+}
