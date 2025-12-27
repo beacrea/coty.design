@@ -22,7 +22,7 @@ outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd portfolio && npm run dev"
+args = "cd portfolio && npm run dev -- --port 5000"
 waitForPort = 5000
 
 [[workflows.workflow]]
@@ -40,10 +40,6 @@ agentRequireRestartOnSave = false
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[[ports]]
-localPort = 5001
-externalPort = 3000
 
 [agent]
 expertMode = true
