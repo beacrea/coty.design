@@ -1,0 +1,311 @@
+# Agent Handoff Instructions
+
+## Project Goal
+
+Create a pixel-perfect 1:1 clone of [coty.design](https://coty.design) portfolio using:
+- **Svelte** with Vite (NOT React)
+- **DTCG v2025.10** compliant design tokens
+- **OKLCH color space** for perceptual uniformity
+- Light/dark theme support
+- Mobile-optimized responsive design (sm/md/lg breakpoints)
+- PWA capabilities
+- SEO with Open Graph and JSON-LD structured data
+- AI agent detection for enhanced content delivery
+
+---
+
+## Critical Requirements
+
+1. **Use Svelte** - This is non-negotiable. Create project from Svelte template.
+2. **OKLCH Colors** - All colors must use oklch() for perceptual uniformity
+3. **DTCG Tokens** - Follow v2025.10 specification for all design tokens
+4. **Red Hat Mono** - Typography uses this font with weights 400/460/680
+
+---
+
+## Design Token System
+
+### Typography Scale (Minor Third 1.2)
+
+```css
+/* Mobile (sm < 640px) */
+--text-size-title: 33.178px;    /* weight: 680 */
+--text-size-subtitle: 19.2px;   /* weight: 460 */
+--text-size-header: 19.2px;     /* weight: 460 */
+--text-size-body: 16px;         /* weight: 400 */
+--text-size-caption: 16px;      /* weight: 400 */
+
+/* Tablet (md 640-1024px) */
+--text-size-title: 37.325px;
+--text-size-subtitle: 21.6px;
+--text-size-header: 21.6px;
+--text-size-body: 18px;
+--text-size-caption: 15px;
+
+/* Desktop (lg > 1024px) */
+--text-size-title: 41.472px;
+--text-size-subtitle: 24px;
+--text-size-header: 24px;
+--text-size-body: 20px;
+--text-size-caption: 16.667px;
+```
+
+### OKLCH Color Palette
+
+```css
+/* Light Theme */
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.208 0 0);
+  --semantic-title: oklch(0.658 0.180 45);      /* Warm orange */
+  --semantic-header: oklch(0.658 0.180 45);
+  --semantic-subtitle: oklch(0.145 0 0);
+  --semantic-body: oklch(0.208 0 0);
+  --semantic-caption: oklch(0 0 0 / 0.6);
+  --semantic-bullet: oklch(0.208 0 0);
+  --semantic-link: oklch(0.658 0.180 45);
+  --semantic-link-hover: oklch(0.495 0.160 40);
+}
+
+/* Dark Theme */
+.dark {
+  --background: oklch(0.116 0 0);
+  --foreground: oklch(0.847 0 0);
+  --semantic-title: oklch(0.576 0.213 277);     /* Cool violet */
+  --semantic-header: oklch(0.576 0.213 277);
+  --semantic-subtitle: oklch(0.961 0 0);
+  --semantic-body: oklch(0.847 0 0);
+  --semantic-caption: oklch(1 0 0 / 0.5);
+  --semantic-bullet: oklch(0.576 0.213 277);
+  --semantic-link: oklch(0.576 0.213 277);
+  --semantic-link-hover: oklch(0.737 0.098 277);
+}
+```
+
+### Spacing Tokens
+
+```css
+/* Mobile (sm) */
+--page-padding-x: 27.65px;
+--page-padding-top: 47.78px;
+--page-padding-bottom: 33.178px;
+--content-max-width: 320px;
+--section-spacing: 47.776px;
+
+/* Tablet (md) */
+--page-padding-x: 31.1px;
+--page-padding-top: 64.5px;
+--content-max-width: 670px;
+--section-spacing: 53.748px;
+
+/* Desktop (lg) */
+--page-padding-x: 34.56px;
+--page-padding-top: 103.2px;
+--content-max-width: 800px;
+--section-spacing: 59.72px;
+```
+
+### Component Tokens
+
+```css
+--toggle-size: 49.77px;
+--toggle-border-width: 1.5px;
+--icon-size: 28.8px;
+--bullet-size: 8px;
+--bullet-y-offset: 9.65px;
+--list-item-gap: 16.67px;
+--list-item-spacing: 13.89px;
+--transition-theme: 300ms;
+--transition-toggle: 200ms;
+```
+
+---
+
+## Content Structure
+
+```typescript
+const siteContent = {
+  opener: {
+    name: "Coty Beasley",
+    role: "Design and Product Leader",
+    summary: "Good design brings clarity to complexity and makes technology actually useful. With this in mind, I work at the intersection of systems, people, and innovation to help organizations and communities connect, collaborate, and grow."
+  },
+  
+  recentFocus: {
+    heading: "Recent Focus",
+    items: [
+      "Setting product vision and strategy",
+      "Leading cross-functional teams",
+      "Humanizing complex digital experiences",
+      "Building design systems and development workflows",
+      "Advancing productive and responsible use of emerging AI",
+      "Developing and mentoring talent",
+      "Driving innovation for network, civic, and social impact"
+    ]
+  },
+  
+  currentStatus: {
+    heading: "Current Status",
+    items: [
+      "Founder at Underline Technologies (est. 2019), where I create an open-access fiber network platform serving residents, businesses, and institutions.",
+      "Our mission is to make essential infrastructure accessible, competitive, and responsive to real human needs.",
+      "I serve as Head of Product Design and Innovation."
+    ]
+  },
+  
+  foundations: {
+    heading: "Foundations",
+    items: [
+      "My work is built on a strong foundation in computer science, combined with two decades in product and design leadership. Each project aims for technical rigor, empathy, and entrepreneurship.",
+      "I bring experience across civic technology, infrastructure, artificial intelligence, and emerging platforms, with a consistent commitment to the people and communities these systems serve."
+    ]
+  },
+  
+  domainExpertise: {
+    heading: "Domain Expertise",
+    items: [
+      "Financial technology",
+      "Civic and government technology",
+      "Consumer robotics and smart devices",
+      "Medical platforms and devices",
+      "Networks and telecommunications",
+      "Digital mapping and GIS",
+      "Multimedia, interface, and brand systems"
+    ]
+  },
+  
+  connect: {
+    heading: "Connect",
+    items: [
+      { text: "LinkedIn", description: "for professional conversations", url: "https://linkedin.com/in/cbeasley" },
+      { text: "GitHub", description: "for code and collaborations", url: "https://github.com/beacrea" },
+      { text: "Email", description: "available upon request", url: null }
+    ]
+  },
+  
+  metadata: {
+    legal: "© Coty Beasley 2025",
+    version: "v4.10"
+  }
+};
+```
+
+---
+
+## Component Structure
+
+```
+App.svelte
+├── ThemeToggle.svelte      # Fixed position, top-right, animated sun/moon icons
+├── Opener.svelte           # Name (title), Role (subtitle), Summary (body)
+├── Section.svelte          # Reusable: heading + bullet list or paragraphs
+│   └── BulletList.svelte   # Circular bullets with body text
+├── ConnectSection.svelte   # Links with descriptions
+└── Footer.svelte           # Legal + version
+```
+
+---
+
+## Theme Toggle Design
+
+**Dark Mode (Moon Icon):**
+- Border: `oklch(1 0 0 / 0.3)`
+- Fill: `oklch(0.521 0.215 277)` (violet)
+- Stroke: `oklch(0.576 0.213 277)`
+- Rays: `oklch(0.843 0.098 277)`
+
+**Light Mode (Sun Icon):**
+- Border: `oklch(0 0 0 / 0.15)`
+- Fill: `oklch(0.495 0.160 40)` (orange)
+- Stroke: `oklch(0.576 0.180 45)`
+- Rays: `oklch(0.816 0.130 55)`
+
+---
+
+## SEO & Metadata
+
+Include in `index.html`:
+- Open Graph tags (og:title, og:description, og:image, og:url)
+- Twitter Card tags
+- JSON-LD structured data (Person schema)
+- PWA manifest
+- Theme-color meta tags for light/dark
+
+---
+
+## AI Agent Detection
+
+Use `isbot` library to detect AI crawlers:
+- GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot
+- Inject enhanced JSON-LD with extended professional context for detected agents
+
+---
+
+## File Structure
+
+```
+├── src/
+│   ├── App.svelte
+│   ├── main.ts
+│   ├── app.css              # OKLCH tokens and styles
+│   ├── components/
+│   │   ├── ThemeToggle.svelte
+│   │   ├── Opener.svelte
+│   │   ├── Section.svelte
+│   │   ├── BulletList.svelte
+│   │   ├── ConnectSection.svelte
+│   │   └── Footer.svelte
+│   ├── lib/
+│   │   ├── content.ts       # Site content
+│   │   └── agent-detection.ts
+│   └── stores/
+│       └── theme.ts         # Svelte store for theme
+├── public/
+│   └── manifest.json
+├── docs/
+│   ├── SPEC.md
+│   └── adrs/
+│       ├── 001-framework-selection.md
+│       ├── 002-design-token-specification.md
+│       ├── 003-oklch-color-space.md
+│       ├── 004-ai-agent-detection.md
+│       ├── 005-pwa-and-caching.md
+│       └── 006-responsive-token-system.md
+└── README.md
+```
+
+---
+
+## Key Implementation Notes
+
+1. **Theme Toggle Position**: Fixed, top-right, offset by page padding
+2. **Bullet Lists**: Use circular bullets (8px) with vertical offset to align with text
+3. **Links**: Underlined with 3px offset, remove underline on hover
+4. **Sections**: "Recent Focus" and "Domain Expertise" use bullet lists; "Current Status" and "Foundations" use paragraph style with inline bullets
+5. **Transitions**: 300ms for theme colors, 200ms for toggle animation
+6. **Mobile-first**: Start with sm values, use media queries for md/lg
+
+---
+
+## Reference Files to Copy
+
+The following documentation should be copied to the new project:
+- `docs/SPEC.md` - Full project specification
+- `docs/adrs/*` - All 6 Architecture Decision Records
+- `README.md` - Project documentation
+- `client/src/tokens/colors.tokens.json` - DTCG color tokens
+- `client/src/lib/content.ts` - Site content
+- `client/src/lib/agent-detection.ts` - AI detection utilities
+
+---
+
+## Quick Start for New Agent
+
+1. Create new Svelte project with Vite
+2. Install: `tailwindcss`, `isbot`, font link for Red Hat Mono
+3. Copy design tokens to CSS (see OKLCH colors above)
+4. Create components following the structure above
+5. Implement theme toggle with localStorage persistence
+6. Add SEO meta tags and JSON-LD
+7. Add PWA manifest
+8. Test responsive breakpoints and theme switching
