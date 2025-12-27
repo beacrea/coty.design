@@ -13,7 +13,7 @@
   --semantic-header: oklch(0.658 0.180 45);
   --semantic-subtitle: oklch(0.145 0 0);
   --semantic-body: oklch(0.208 0 0);
-  --semantic-caption: oklch(0 0 0 / 0.6);
+  --semantic-caption: oklch(0.35 0 0);
   --semantic-bullet: oklch(0.208 0 0);
   --semantic-link: oklch(0.658 0.180 45);
   --semantic-link-hover: oklch(0.495 0.160 40);
@@ -53,7 +53,7 @@
   --semantic-header: oklch(0.576 0.213 277);
   --semantic-subtitle: oklch(0.961 0 0);
   --semantic-body: oklch(0.847 0 0);
-  --semantic-caption: oklch(1 0 0 / 0.5);
+  --semantic-caption: oklch(0.65 0 0);
   --semantic-bullet: oklch(0.576 0.213 277);
   --semantic-link: oklch(0.576 0.213 277);
   --semantic-link-hover: oklch(0.737 0.098 277);
@@ -74,7 +74,7 @@
     
     --page-padding-x: 31.1px;
     --page-padding-top: 64.5px;
-    --content-max-width: 670px;
+    --content-max-width: 580px;
     --section-spacing: 53.748px;
   }
 }
@@ -89,7 +89,7 @@
     
     --page-padding-x: 34.56px;
     --page-padding-top: 103.2px;
-    --content-max-width: 800px;
+    --content-max-width: 640px;
     --section-spacing: 59.72px;
   }
 }
@@ -125,4 +125,41 @@ h1, h2, h3, h4, h5, h6 {
 
 p, li {
   text-wrap: pretty;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--semantic-link);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--semantic-link);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--background);
+  color: var(--semantic-link);
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+  text-decoration: underline;
+  border: 2px solid var(--semantic-link);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

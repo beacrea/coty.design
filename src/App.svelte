@@ -11,7 +11,8 @@
 </script>
 
 <div class:dark={isDark}>
-  <main class="page">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <main class="page" id="main-content" tabindex="-1">
     <div class="content">
       <header class="header">
         <div class="opener-wrapper">
