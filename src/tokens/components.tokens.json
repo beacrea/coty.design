@@ -1,0 +1,26 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "component": {
+    "$type": "dimension",
+    "toggle": {
+      "size": { "$value": "49.77px" },
+      "border-width": { "$value": "1.5px" }
+    },
+    "icon": {
+      "size": { "$value": "28.8px" }
+    },
+    "bullet": {
+      "size": { "$value": "8px" },
+      "y-offset": { "$value": "9.65px" }
+    },
+    "list": {
+      "item-gap": { "$value": "16.67px" },
+      "item-spacing": { "$value": "13.89px" }
+    },
+    "transition": {
+      "$type": "duration",
+      "theme": { "$value": "300ms" },
+      "toggle": { "$value": "200ms" }
+    }
+  }
+}

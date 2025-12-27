@@ -1,0 +1,37 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "spacing": {
+    "$type": "dimension",
+    "page": {
+      "sm": {
+        "padding-x": { "$value": "27.65px" },
+        "padding-top": { "$value": "47.78px" },
+        "padding-bottom": { "$value": "33.178px" }
+      },
+      "md": {
+        "padding-x": { "$value": "31.1px" },
+        "padding-top": { "$value": "64.5px" },
+        "padding-bottom": { "$value": "33.178px" }
+      },
+      "lg": {
+        "padding-x": { "$value": "34.56px" },
+        "padding-top": { "$value": "103.2px" },
+        "padding-bottom": { "$value": "33.178px" }
+      }
+    },
+    "content": {
+      "sm": {
+        "max-width": { "$value": "320px" },
+        "section-spacing": { "$value": "47.776px" }
+      },
+      "md": {
+        "max-width": { "$value": "670px" },
+        "section-spacing": { "$value": "53.748px" }
+      },
+      "lg": {
+        "max-width": { "$value": "800px" },
+        "section-spacing": { "$value": "59.72px" }
+      }
+    }
+  }
+}

@@ -63,3 +63,19 @@ export function getEnhancedJsonLd() {
     }
   };
 }
+
+export function injectEnhancedJsonLd(): void {
+  const userAgent = navigator.userAgent;
+  
+  if (isAIAgent(userAgent)) {
+    const existingScript = document.querySelector('script[type="application/ld+json"]');
+    if (existingScript) {
+      existingScript.textContent = JSON.stringify(getEnhancedJsonLd(), null, 2);
+    } else {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(getEnhancedJsonLd(), null, 2);
+      document.head.appendChild(script);
+    }
+  }
+}

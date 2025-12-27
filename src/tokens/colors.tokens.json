@@ -1,0 +1,46 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "color": {
+    "$type": "color",
+    "light": {
+      "background": { "$value": "oklch(1 0 0)" },
+      "foreground": { "$value": "oklch(0.208 0 0)" },
+      "semantic": {
+        "title": { "$value": "oklch(0.658 0.180 45)" },
+        "header": { "$value": "oklch(0.658 0.180 45)" },
+        "subtitle": { "$value": "oklch(0.145 0 0)" },
+        "body": { "$value": "oklch(0.208 0 0)" },
+        "caption": { "$value": "oklch(0 0 0 / 0.6)" },
+        "bullet": { "$value": "oklch(0.208 0 0)" },
+        "link": { "$value": "oklch(0.658 0.180 45)" },
+        "link-hover": { "$value": "oklch(0.495 0.160 40)" }
+      },
+      "toggle": {
+        "border": { "$value": "oklch(0 0 0 / 0.15)" },
+        "fill": { "$value": "oklch(0.495 0.160 40)" },
+        "stroke": { "$value": "oklch(0.576 0.180 45)" },
+        "rays": { "$value": "oklch(0.816 0.130 55)" }
+      }
+    },
+    "dark": {
+      "background": { "$value": "oklch(0.116 0 0)" },
+      "foreground": { "$value": "oklch(0.847 0 0)" },
+      "semantic": {
+        "title": { "$value": "oklch(0.576 0.213 277)" },
+        "header": { "$value": "oklch(0.576 0.213 277)" },
+        "subtitle": { "$value": "oklch(0.961 0 0)" },
+        "body": { "$value": "oklch(0.847 0 0)" },
+        "caption": { "$value": "oklch(1 0 0 / 0.5)" },
+        "bullet": { "$value": "oklch(0.576 0.213 277)" },
+        "link": { "$value": "oklch(0.576 0.213 277)" },
+        "link-hover": { "$value": "oklch(0.737 0.098 277)" }
+      },
+      "toggle": {
+        "border": { "$value": "oklch(1 0 0 / 0.3)" },
+        "fill": { "$value": "oklch(0.521 0.215 277)" },
+        "stroke": { "$value": "oklch(0.576 0.213 277)" },
+        "rays": { "$value": "oklch(0.843 0.098 277)" }
+      }
+    }
+  }
+}
