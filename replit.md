@@ -48,27 +48,35 @@ The application adopts a mobile-first PWA design, featuring a React + Vite front
 ## Project Structure
 
 ```
-ask/
-├── client/                 # Frontend React + Vite app
-│   ├── src/
-│   │   ├── components/     # UI components (follow-up-card, etc.)
-│   │   ├── pages/          # Page components (chat.tsx)
-│   │   ├── hooks/          # Custom React hooks
-│   │   └── lib/            # Utilities (queryClient, etc.)
-│   └── public/             # Static assets, PWA manifest
-├── server/                 # Backend Express app
-│   ├── kb/                 # Knowledge base modules
-│   ├── routes.ts           # API endpoints, SSE streaming
-│   └── intent-analyzer.ts  # Query routing logic
-├── shared/                 # Shared types and schemas
-│   └── schema.ts           # TypeScript types, Zod schemas
-├── docs/                   # Documentation
-│   ├── ADR-001-RAG-Architecture.md
-│   └── design_guidelines.md
-├── script/                 # Build scripts
-├── attached_assets/        # User-provided assets
-└── [config files]          # vite, tailwind, tsconfig, etc.
+coty.design/                # Monorepo root
+├── docs/                   # Monorepo-level documentation
+│   └── adrs/              # Monorepo-wide ADRs (structure, ports, config)
+├── ask/                    # Q&A chatbot (this project)
+│   ├── client/            # Frontend React + Vite app
+│   │   ├── src/
+│   │   │   ├── components/  # UI components (follow-up-card, etc.)
+│   │   │   ├── pages/       # Page components (chat.tsx)
+│   │   │   ├── hooks/       # Custom React hooks
+│   │   │   └── lib/         # Utilities (queryClient, etc.)
+│   │   └── public/        # Static assets, PWA manifest
+│   ├── server/            # Backend Express app
+│   │   ├── kb/            # Knowledge base modules
+│   │   ├── routes.ts      # API endpoints, SSE streaming
+│   │   └── intent-analyzer.ts  # Query routing logic
+│   ├── shared/            # Shared types and schemas
+│   │   └── schema.ts      # TypeScript types, Zod schemas
+│   ├── docs/              # Ask-specific documentation
+│   │   ├── adrs/          # Ask-specific ADRs (RAG architecture, etc.)
+│   │   └── design_guidelines.md
+│   └── [config files]     # vite, tailwind, tsconfig, etc.
+├── main/                   # Portfolio site (separate Replit)
+├── blog/                   # Blog
+└── labs/                   # Experiments
 ```
+
+**ADR Locations:**
+- `/docs/adrs/` - Monorepo decisions (structure, ports, Replit config)
+- `/ask/docs/adrs/` - Ask-specific decisions (RAG architecture)
 
 ## External Dependencies
 
