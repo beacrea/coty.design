@@ -1,0 +1,120 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.208 0 0);
+  --semantic-title: oklch(0.658 0.180 45);
+  --semantic-header: oklch(0.658 0.180 45);
+  --semantic-subtitle: oklch(0.145 0 0);
+  --semantic-body: oklch(0.208 0 0);
+  --semantic-caption: oklch(0 0 0 / 0.6);
+  --semantic-bullet: oklch(0.208 0 0);
+  --semantic-link: oklch(0.658 0.180 45);
+  --semantic-link-hover: oklch(0.495 0.160 40);
+  
+  --toggle-border: oklch(0 0 0 / 0.15);
+  --toggle-fill: oklch(0.495 0.160 40);
+  --toggle-stroke: oklch(0.576 0.180 45);
+  --toggle-rays: oklch(0.816 0.130 55);
+  
+  --text-size-title: 33.178px;
+  --text-size-subtitle: 19.2px;
+  --text-size-header: 19.2px;
+  --text-size-body: 16px;
+  --text-size-caption: 16px;
+  
+  --page-padding-x: 27.65px;
+  --page-padding-top: 47.78px;
+  --page-padding-bottom: 33.178px;
+  --content-max-width: 320px;
+  --section-spacing: 47.776px;
+  
+  --toggle-size: 49.77px;
+  --toggle-border-width: 1.5px;
+  --icon-size: 28.8px;
+  --bullet-size: 8px;
+  --bullet-y-offset: 9.65px;
+  --list-item-gap: 16.67px;
+  --list-item-spacing: 13.89px;
+  --transition-theme: 300ms;
+  --transition-toggle: 200ms;
+}
+
+.dark {
+  --background: oklch(0.116 0 0);
+  --foreground: oklch(0.847 0 0);
+  --semantic-title: oklch(0.576 0.213 277);
+  --semantic-header: oklch(0.576 0.213 277);
+  --semantic-subtitle: oklch(0.961 0 0);
+  --semantic-body: oklch(0.847 0 0);
+  --semantic-caption: oklch(1 0 0 / 0.5);
+  --semantic-bullet: oklch(0.576 0.213 277);
+  --semantic-link: oklch(0.576 0.213 277);
+  --semantic-link-hover: oklch(0.737 0.098 277);
+  
+  --toggle-border: oklch(1 0 0 / 0.3);
+  --toggle-fill: oklch(0.521 0.215 277);
+  --toggle-stroke: oklch(0.576 0.213 277);
+  --toggle-rays: oklch(0.843 0.098 277);
+}
+
+@media (min-width: 640px) {
+  :root, .dark {
+    --text-size-title: 37.325px;
+    --text-size-subtitle: 21.6px;
+    --text-size-header: 21.6px;
+    --text-size-body: 18px;
+    --text-size-caption: 15px;
+    
+    --page-padding-x: 31.1px;
+    --page-padding-top: 64.5px;
+    --content-max-width: 670px;
+    --section-spacing: 53.748px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root, .dark {
+    --text-size-title: 41.472px;
+    --text-size-subtitle: 24px;
+    --text-size-header: 24px;
+    --text-size-body: 20px;
+    --text-size-caption: 16.667px;
+    
+    --page-padding-x: 34.56px;
+    --page-padding-top: 103.2px;
+    --content-max-width: 800px;
+    --section-spacing: 59.72px;
+  }
+}
+
+html {
+  font-family: 'Red Hat Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color var(--transition-theme), color var(--transition-theme);
+  min-height: 100vh;
+}
+
+a {
+  color: var(--semantic-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-theme);
+}
+
+a:hover {
+  color: var(--semantic-link-hover);
+  text-decoration: none;
+}

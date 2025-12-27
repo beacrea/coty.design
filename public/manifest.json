@@ -1,0 +1,16 @@
+{
+  "name": "Coty Beasley - Design and Product Leader",
+  "short_name": "Coty Beasley",
+  "description": "Design and product leadership portfolio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
