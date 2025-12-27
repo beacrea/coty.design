@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2"/>
-  <text x="16" y="21" text-anchor="middle" font-family="monospace" font-size="14" fill="currentColor">C</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2"/><text x="16" y="21" fill="currentColor" font-family="monospace" font-size="14" text-anchor="middle">C</text></svg>
