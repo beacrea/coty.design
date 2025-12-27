@@ -28,8 +28,7 @@
     font-size: var(--text-size-caption);
     font-weight: 400;
     color: var(--semantic-caption);
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    text-decoration: none;
     transition: color var(--transition-theme);
   }
 
