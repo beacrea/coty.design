@@ -20,7 +20,7 @@
   
   --toggle-border: oklch(0 0 0 / 0.15);
   --toggle-fill: oklch(0.495 0.160 40);
-  --toggle-stroke: oklch(0.576 0.180 45);
+  --toggle-stroke: oklch(0.55 0.180 45);
   --toggle-rays: oklch(0.816 0.130 55);
   
   --text-size-title: 33.178px;
@@ -60,7 +60,7 @@
   
   --toggle-border: oklch(1 0 0 / 0.3);
   --toggle-fill: oklch(0.521 0.215 277);
-  --toggle-stroke: oklch(0.576 0.213 277);
+  --toggle-stroke: oklch(0.68 0.213 277);
   --toggle-rays: oklch(0.843 0.098 277);
 }
 
