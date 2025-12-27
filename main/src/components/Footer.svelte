@@ -1,11 +1,12 @@
 <script lang="ts">
   export let legal: string;
   export let version: string;
+  export let repoUrl: string = "https://github.com/beacrea/coty-design";
 </script>
 
 <footer class="footer">
   <span class="legal">{legal}</span>
-  <span class="version">{version}</span>
+  <a href={repoUrl} target="_blank" rel="noopener noreferrer" class="version">{version}</a>
 </footer>
 
 <style>
@@ -16,11 +17,23 @@
     padding-top: var(--section-spacing);
   }
 
-  .legal,
-  .version {
+  .legal {
     font-size: var(--text-size-caption);
     font-weight: 400;
     color: var(--semantic-caption);
     transition: color var(--transition-theme);
+  }
+
+  .version {
+    font-size: var(--text-size-caption);
+    font-weight: 400;
+    color: var(--semantic-caption);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transition-theme);
+  }
+
+  .version:hover {
+    color: var(--semantic-link);
   }
 </style>
