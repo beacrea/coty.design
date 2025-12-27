@@ -1,29 +1,6 @@
 modules = ["nodejs-20"]
 
 [workflows]
-runButton = "Project"
-
-[[workflows.workflow]]
-name = "Project"
-mode = "parallel"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Main Site"
-
-[[workflows.workflow]]
-name = "Main Site"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-outputType = "webview"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd portfolio && npm run dev -- --port 5000"
-waitForPort = 5000
 
 [[workflows.workflow]]
 name = "Ask Chatbot"
