@@ -13,18 +13,12 @@ The primary active development focuses on the portfolio (`/main`) and the AI cha
 
 ## Replit Project Context
 
-**This Replit project focuses on the `/ask` chatbot application.**
+**This is a shared monorepo.** Each app has its own Replit project and subdirectory-specific documentation:
 
-- **Working directory:** Files are at the monorepo root, so the chatbot code is in `ask/`
-- **File paths:** When editing chatbot files, prefix with `ask/` (e.g., `ask/server/routes.ts`, `ask/client/src/pages/chat.tsx`)
-- **Workflows:** "Ask Chatbot" runs `cd ask && npm run dev` on port 5000
-- **Main Site:** Runs on port 5001, handled by a separate Replit project
-- **Important files for chatbot:**
-  - `ask/server/routes.ts` - API endpoints, SSE streaming
-  - `ask/client/src/pages/chat.tsx` - Main chat UI
-  - `ask/server/kb/modules.ts` - Knowledge base content
-  - `ask/server/intent-analyzer.ts` - Query routing logic
-  - `ask/shared/schema.ts` - Types and database schema
+- **`/ask`** - See `ask/replit.md` for chatbot-specific context (port 5000)
+- **`/main`** - See `main/replit.md` for portfolio-specific context (port 5001)
+
+When working in a Replit project, check the subdirectory's `replit.md` for app-specific file paths, workflows, and important files.
 
 ## User Preferences
 
