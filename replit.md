@@ -96,7 +96,7 @@ Additional preferences:
 - `npm run db:push` - Push Drizzle schema to PostgreSQL
 
 **Main Portfolio Scripts:**
-- `npm run dev` - Vite dev server on port 5000
+- `npm run dev` - Vite dev server on port 5001 (Replit workflow overrides to 5000)
 - `npm run build` - Production build
 
 ## External Dependencies
