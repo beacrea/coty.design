@@ -37,9 +37,9 @@ waitForPort = 5000
 agentRequireRestartOnSave = false
 
 [[ports]]
-localPort = 5173
-externalPort = 80
-
-[[ports]]
 localPort = 5000
 externalPort = 3000
+
+[[ports]]
+localPort = 5173
+externalPort = 80
