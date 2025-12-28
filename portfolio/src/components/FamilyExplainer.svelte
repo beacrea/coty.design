@@ -16,17 +16,13 @@
 <style>
   .family-section {
     margin-bottom: var(--section-spacing);
-    padding: 1rem 1.5rem 1.5rem;
-    border-radius: 0.75rem;
-    background-color: var(--semantic-bullet);
-    transition: background-color var(--transition-theme);
   }
 
   .heading {
     font-size: var(--text-size-header);
     font-weight: 460;
     color: var(--semantic-header);
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--list-item-gap);
     transition: color var(--transition-theme);
   }
 
