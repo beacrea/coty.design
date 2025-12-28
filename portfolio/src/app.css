@@ -50,6 +50,9 @@
   --list-item-spacing: 13.89px;
   --transition-theme: 300ms;
   --transition-toggle: 200ms;
+  
+  --animation-entrance: 400ms;
+  --animation-stagger: 80ms;
 }
 
 .dark {
@@ -145,12 +148,14 @@ a {
   color: var(--semantic-link);
   text-decoration: underline;
   text-underline-offset: 3px;
-  transition: color var(--transition-theme);
+  text-decoration-thickness: 1px;
+  transition: color 0.2s ease, text-underline-offset 0.2s ease, text-decoration-color 0.2s ease;
 }
 
 a:hover {
   color: var(--semantic-link-hover);
-  text-decoration: none;
+  text-underline-offset: 5px;
+  text-decoration-color: transparent;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -187,6 +192,29 @@ button:focus-visible {
 .skip-link:focus {
   top: 0;
 }
+
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-entrance {
+  animation: fade-slide-up var(--animation-entrance) ease-out both;
+}
+
+.stagger-1 { animation-delay: calc(var(--animation-stagger) * 1); }
+.stagger-2 { animation-delay: calc(var(--animation-stagger) * 2); }
+.stagger-3 { animation-delay: calc(var(--animation-stagger) * 3); }
+.stagger-4 { animation-delay: calc(var(--animation-stagger) * 4); }
+.stagger-5 { animation-delay: calc(var(--animation-stagger) * 5); }
+.stagger-6 { animation-delay: calc(var(--animation-stagger) * 6); }
+.stagger-7 { animation-delay: calc(var(--animation-stagger) * 7); }
 
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -5,7 +5,7 @@
   export let items: ConnectItem[];
 </script>
 
-<section class="connect-section">
+<section class="connect-section animate-entrance">
   <h2 class="heading">{heading}</h2>
   
   <ul class="connect-list">

@@ -5,7 +5,7 @@
   export let buttonUrl: string;
 </script>
 
-<section class="family-section">
+<section class="family-section animate-entrance">
   <h2 class="heading">{heading}</h2>
   <p class="description">{description}</p>
   <a href={buttonUrl} target="_blank" rel="noopener noreferrer" class="cta-button">
@@ -20,7 +20,12 @@
     border-radius: 0.75rem;
     border: 1px solid var(--surface-card-border);
     background-color: var(--surface-card-bg);
-    transition: background-color var(--transition-theme), border-color var(--transition-theme);
+    transition: background-color var(--transition-theme), border-color var(--transition-theme), transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .family-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px oklch(0 0 0 / 0.08);
   }
 
   @media (min-width: 640px) {

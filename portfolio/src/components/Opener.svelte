@@ -5,9 +5,9 @@
 </script>
 
 <div class="opener">
-  <h1 class="name">{name}</h1>
-  <p class="role">{role}</p>
-  <p class="summary">{summary}</p>
+  <h1 class="name animate-entrance">{name}</h1>
+  <p class="role animate-entrance stagger-1">{role}</p>
+  <p class="summary animate-entrance stagger-2">{summary}</p>
 </div>
 
 <style>

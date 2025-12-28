@@ -4,7 +4,7 @@
   export let versionUrl: string;
 </script>
 
-<footer class="footer">
+<footer class="footer animate-entrance">
   <span class="legal">{legal}</span>
   <a href={versionUrl} target="_blank" rel="noopener noreferrer" class="version">{version}</a>
 </footer>
