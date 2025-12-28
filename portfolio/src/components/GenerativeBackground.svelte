@@ -24,6 +24,36 @@
     distance: number;
   }
 
+  interface Tendril {
+    targetX: number;
+    targetY: number;
+    length: number;
+    maxLength: number;
+    curveOffset: number;
+    decaying: boolean;
+  }
+
+  interface ChainLink {
+    orgA: Organism;
+    orgB: Organism;
+    strength: number;
+    age: number;
+    maxAge: number;
+  }
+
+  interface Particle {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    size: number;
+    life: number;
+    maxLife: number;
+  }
+
+  let chainLinks: ChainLink[] = [];
+  let particles: Particle[] = [];
+
   class Organism {
     x: number;
     y: number;
@@ -34,6 +64,8 @@
     rotationSpeed: number;
     size: number;
     age: number;
+    tendril: Tendril | null;
+    spokeIntensity: number;
 
     constructor(canvasWidth: number, canvasHeight: number, cfg: WorldConfig) {
       this.x = Math.random() * canvasWidth;
@@ -46,9 +78,49 @@
       this.rotation = Math.random() * Math.PI * 2;
       this.rotationSpeed = (Math.random() - 0.5) * 0.003;
       this.age = 0;
+      this.tendril = null;
+      this.spokeIntensity = 0.3 + Math.random() * 0.4;
       const vertexRange = cfg.maxStartVertices - cfg.minStartVertices + 1;
       const startVertices = cfg.minStartVertices + Math.floor(Math.random() * vertexRange);
       this.vertices = this.createVertices(startVertices);
+    }
+
+    growTendril(targetX: number, targetY: number): void {
+      if (!this.tendril) {
+        const dx = targetX - this.x;
+        const dy = targetY - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        this.tendril = {
+          targetX,
+          targetY,
+          length: 0,
+          maxLength: Math.min(dist * 0.6, this.size * 1.5),
+          curveOffset: (Math.random() - 0.5) * 20,
+          decaying: false,
+        };
+      }
+    }
+
+    updateTendril(): void {
+      if (!this.tendril) return;
+      
+      if (this.tendril.decaying) {
+        this.tendril.length -= 0.8;
+        if (this.tendril.length <= 0) {
+          this.tendril = null;
+        }
+      } else {
+        this.tendril.length = Math.min(this.tendril.length + 0.5, this.tendril.maxLength);
+        if (this.tendril.length >= this.tendril.maxLength) {
+          this.tendril.decaying = true;
+        }
+      }
+    }
+
+    decayTendril(): void {
+      if (this.tendril && !this.tendril.decaying) {
+        this.tendril.decaying = true;
+      }
     }
 
     createVertices(count: number): Vertex[] {
@@ -136,6 +208,19 @@
     draw(ctx: CanvasRenderingContext2D, strokeColor: string, lineOpacity: number, vertexOpacity: number): void {
       const worldVerts = this.getWorldVertices();
       
+      if (this.vertices.length >= 4 && this.spokeIntensity > 0) {
+        const spokeAlpha = lineOpacity * this.spokeIntensity * 0.4;
+        ctx.strokeStyle = `rgba(${strokeColor}, ${spokeAlpha})`;
+        ctx.lineWidth = 0.5;
+        for (let i = 0; i < Math.floor(this.vertices.length / 2); i++) {
+          const oppositeIdx = (i + Math.floor(this.vertices.length / 2)) % this.vertices.length;
+          ctx.beginPath();
+          ctx.moveTo(worldVerts[i].x, worldVerts[i].y);
+          ctx.lineTo(worldVerts[oppositeIdx].x, worldVerts[oppositeIdx].y);
+          ctx.stroke();
+        }
+      }
+
       ctx.beginPath();
       ctx.moveTo(worldVerts[0].x, worldVerts[0].y);
       for (let i = 1; i < worldVerts.length; i++) {
@@ -152,6 +237,33 @@
         ctx.fillStyle = `rgba(${strokeColor}, ${vertexOpacity * 2})`;
         ctx.fill();
       });
+
+      if (this.tendril && this.tendril.length > 0) {
+        const dx = this.tendril.targetX - this.x;
+        const dy = this.tendril.targetY - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 0.1) return;
+        const nx = dx / dist;
+        const ny = dy / dist;
+        
+        const endX = this.x + nx * this.tendril.length;
+        const endY = this.y + ny * this.tendril.length;
+        const ctrlX = (this.x + endX) / 2 + this.tendril.curveOffset * -ny;
+        const ctrlY = (this.y + endY) / 2 + this.tendril.curveOffset * nx;
+        
+        const tendrilAlpha = lineOpacity * (this.tendril.length / this.tendril.maxLength) * 0.7;
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.quadraticCurveTo(ctrlX, ctrlY, endX, endY);
+        ctx.strokeStyle = `rgba(${strokeColor}, ${tendrilAlpha})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.arc(endX, endY, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${strokeColor}, ${tendrilAlpha})`;
+        ctx.fill();
+      }
     }
   }
 
@@ -232,9 +344,122 @@
 
   function initOrganisms(): void {
     organisms = [];
+    chainLinks = [];
+    particles = [];
     for (let i = 0; i < adaptedConfig.organismCount; i++) {
       organisms.push(new Organism(logicalWidth, logicalHeight, adaptedConfig));
     }
+  }
+
+  function spawnParticles(x: number, y: number, vx: number, vy: number, count: number): void {
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 0.3 + Math.random() * 0.5;
+      particles.push({
+        x,
+        y,
+        vx: vx * 0.3 + Math.cos(angle) * speed,
+        vy: vy * 0.3 + Math.sin(angle) * speed,
+        size: 1 + Math.random() * 2,
+        life: 1,
+        maxLife: 60 + Math.floor(Math.random() * 40),
+      });
+    }
+  }
+
+  function updateParticles(): void {
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vx *= 0.98;
+      p.vy *= 0.98;
+      p.life -= 1 / p.maxLife;
+      if (p.life <= 0) {
+        particles.splice(i, 1);
+      }
+    }
+  }
+
+  function drawParticles(ctx: CanvasRenderingContext2D, strokeColor: string, baseAlpha: number): void {
+    particles.forEach((p) => {
+      const alpha = p.life * baseAlpha * 0.6;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${strokeColor}, ${alpha})`;
+      ctx.fill();
+    });
+  }
+
+  function createChainLink(orgA: Organism, orgB: Organism): void {
+    const existing = chainLinks.find(
+      (c) => (c.orgA === orgA && c.orgB === orgB) || (c.orgA === orgB && c.orgB === orgA)
+    );
+    if (!existing) {
+      chainLinks.push({
+        orgA,
+        orgB,
+        strength: 1,
+        age: 0,
+        maxAge: 120 + Math.floor(Math.random() * 60),
+      });
+    }
+  }
+
+  function updateChainLinks(): void {
+    for (let i = chainLinks.length - 1; i >= 0; i--) {
+      const link = chainLinks[i];
+      link.age++;
+      
+      const dx = link.orgB.x - link.orgA.x;
+      const dy = link.orgB.y - link.orgA.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      const maxStretch = adaptedConfig.connectionDistance * 1.2;
+      if (distance > maxStretch) {
+        link.strength -= 0.05;
+      } else {
+        link.strength = Math.min(1, link.strength + 0.02);
+      }
+      
+      if (link.age > link.maxAge || link.strength <= 0) {
+        chainLinks.splice(i, 1);
+      }
+    }
+  }
+
+  function drawChainLinks(ctx: CanvasRenderingContext2D, strokeColor: string, baseAlpha: number): void {
+    chainLinks.forEach((link) => {
+      const dx = link.orgB.x - link.orgA.x;
+      const dy = link.orgB.y - link.orgA.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      if (distance < 0.1) return;
+      
+      const ageAlpha = link.age < 20 ? link.age / 20 : 
+                       link.age > link.maxAge - 20 ? (link.maxAge - link.age) / 20 : 1;
+      const alpha = link.strength * ageAlpha * baseAlpha * 0.5;
+      
+      const segments = 5;
+      const perpX = -dy / distance;
+      const perpY = dx / distance;
+      
+      ctx.beginPath();
+      ctx.moveTo(link.orgA.x, link.orgA.y);
+      
+      for (let i = 1; i < segments; i++) {
+        const t = i / segments;
+        const baseX = link.orgA.x + dx * t;
+        const baseY = link.orgA.y + dy * t;
+        const wobble = Math.sin(t * Math.PI * 2 + link.age * 0.05) * 5 * link.strength;
+        ctx.lineTo(baseX + perpX * wobble, baseY + perpY * wobble);
+      }
+      
+      ctx.lineTo(link.orgB.x, link.orgB.y);
+      ctx.strokeStyle = `rgba(${strokeColor}, ${alpha})`;
+      ctx.lineWidth = 0.6;
+      ctx.stroke();
+    });
   }
 
   function resizeCanvas(): void {
@@ -321,8 +546,10 @@
             if (interactionType < 0.35) {
               if (organisms[i].vertices.length <= organisms[j].vertices.length) {
                 organisms[i].evolve(adaptedConfig.maxVertices);
+                organisms[i].growTendril(organisms[j].x, organisms[j].y);
               } else {
                 organisms[j].evolve(adaptedConfig.maxVertices);
+                organisms[j].growTendril(organisms[i].x, organisms[i].y);
               }
             } else if (interactionType < 0.65) {
               if (organisms[i].vertices.length > organisms[j].vertices.length) {
@@ -330,6 +557,9 @@
               } else {
                 organisms[j].morphWith(organisms[i]);
               }
+              createChainLink(organisms[i], organisms[j]);
+              organisms[i].growTendril(organisms[j].x, organisms[j].y);
+              organisms[j].growTendril(organisms[i].x, organisms[i].y);
             } else if (interactionType < 0.78) {
               const burstForce = 0.2;
               organisms[i].vx -= nx * burstForce;
@@ -338,15 +568,21 @@
               organisms[j].vy += ny * burstForce;
               organisms[i].pulseSize(0.92);
               organisms[j].pulseSize(0.92);
+              const midX = (organisms[i].x + organisms[j].x) / 2;
+              const midY = (organisms[i].y + organisms[j].y) / 2;
+              spawnParticles(midX, midY, organisms[i].vx, organisms[i].vy, 4);
+              spawnParticles(midX, midY, organisms[j].vx, organisms[j].vy, 4);
             } else if (interactionType < 0.88) {
               const moreComplex = organisms[i].vertices.length > organisms[j].vertices.length ? organisms[i] : organisms[j];
               moreComplex.simplify();
+              spawnParticles(moreComplex.x, moreComplex.y, moreComplex.vx, moreComplex.vy, 2);
             } else {
               organisms[i].pulseSize(1.08);
               organisms[j].pulseSize(1.08);
               const avgRotSpeed = (organisms[i].rotationSpeed + organisms[j].rotationSpeed) / 2;
               organisms[i].rotationSpeed = avgRotSpeed * 1.3;
               organisms[j].rotationSpeed = avgRotSpeed * 1.3;
+              createChainLink(organisms[i], organisms[j]);
             }
           }
         }
@@ -406,12 +642,18 @@
       lastEvolutionTime = timestamp;
     }
 
+    updateParticles();
+    updateChainLinks();
+
     organisms.forEach((org) => {
       org.update(logicalWidth, logicalHeight);
+      org.updateTendril();
       org.draw(ctx!, strokeColor, lineAlpha, vertexAlpha);
     });
 
     drawConnections(ctx, organisms, adaptedConfig, isDark);
+    drawChainLinks(ctx, strokeColor, lineAlpha);
+    drawParticles(ctx, strokeColor, lineAlpha);
 
     ctx.filter = 'none';
 
