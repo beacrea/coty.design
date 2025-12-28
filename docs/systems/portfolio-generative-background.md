@@ -91,6 +91,7 @@ interface Organism {
   rotationSpeed: number;     // Angular velocity
   depth: number;             // 0-1, affects opacity
   glow: number;              // 0-1, bioluminescence intensity
+  hue: number;               // HSL hue for observation mode coloring
   lobes: Lobe[];             // Attached appendages
   tendril: Tendril | null;   // Temporary reaching line
   spokeIntensity: number;    // Internal spoke visibility
@@ -250,6 +251,31 @@ All interactions trigger bioluminescence glow (0.4-0.7 intensity).
 
 ## Visual Effects
 
+### Observation Mode
+
+A viewing mode activated by clicking the crystal ball icon that reveals organism colors:
+
+- **Content Mode** (default): Organisms render in achromatic grayscale to minimize visual distraction from portfolio content
+- **Observation Mode**: Organisms display their unique hues from an underwater-themed color palette
+
+**Color Palette**:
+Organisms are assigned hues from an underwater palette during initialization:
+- Teals (165-195): Sea glass, shallow water
+- Blues (195-225): Ocean depth, twilight water
+- Indigos (225-260): Deep sea, bioluminescent zones
+- Purples (260-280): Abyssal, exotic species
+
+Each hue includes ±10 degrees of variation for natural diversity.
+
+**Rendering in Observation Mode**:
+```
+saturation = 60% + (depth × 20%)  // 60-80%
+lightness = 45% + (depth × 15%)   // 45-60%
+color = hsla(hue, saturation, lightness, alpha)
+```
+
+Deeper organisms appear more vivid; shallower ones are softer.
+
 ### Bioluminescence
 
 Organisms glow when stimulated:
@@ -257,7 +283,7 @@ Organisms glow when stimulated:
 - **Trigger sources**: Eating food (0.8), interactions (0.4-0.7)
 - **Rendering**: Radial gradient around organism center
 - **Decay**: 96% per frame (soft fade over ~25 frames)
-- **Color**: Theme-aware, matches organism stroke color
+- **Color**: Theme-aware, matches organism stroke color (or hue in observation mode)
 
 ### Depth Layers
 
