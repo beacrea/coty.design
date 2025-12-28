@@ -819,7 +819,11 @@
     }
   }
 
-  function drawFoodSources(ctx: CanvasRenderingContext2D, strokeColor: string, alpha: number): void {
+  function drawFoodSources(ctx: CanvasRenderingContext2D, strokeColor: string, alpha: number, isDark: boolean): void {
+    const fillMultiplier = isDark ? 1.2 : 1.5;
+    const strokeMultiplier = isDark ? 0.6 : 0.8;
+    const outerRingMultiplier = isDark ? 0.3 : 0.4;
+    
     foodSources.forEach((food) => {
       if (!food.active) return;
 
@@ -828,12 +832,18 @@
 
       ctx.beginPath();
       ctx.arc(food.x, food.y, size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${strokeColor}, ${alpha * 0.6})`;
+      ctx.fillStyle = `rgba(${strokeColor}, ${Math.min(1, alpha * fillMultiplier)})`;
       ctx.fill();
 
       ctx.beginPath();
-      ctx.arc(food.x, food.y, size * 1.5, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(${strokeColor}, ${alpha * 0.3})`;
+      ctx.arc(food.x, food.y, size * 1.3, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(${strokeColor}, ${Math.min(1, alpha * strokeMultiplier)})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.arc(food.x, food.y, size * 2, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(${strokeColor}, ${Math.min(1, alpha * outerRingMultiplier)})`;
       ctx.lineWidth = 0.5;
       ctx.stroke();
     });
@@ -1354,7 +1364,7 @@
     updateParticles();
     updateChainLinks();
 
-    drawFoodSources(ctx, strokeColor, lineAlpha);
+    drawFoodSources(ctx, strokeColor, lineAlpha, isDark);
 
     const maxBoundingRadius = adaptedConfig.maxSize * 1.5;
     
