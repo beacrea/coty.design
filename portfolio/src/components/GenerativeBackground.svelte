@@ -615,7 +615,7 @@
           if (Math.random() < triggerChance) {
             const interactionType = Math.random();
             
-            if (interactionType < 0.35) {
+            if (interactionType < 0.20) {
               if (organisms[i].vertices.length <= organisms[j].vertices.length) {
                 organisms[i].evolve(adaptedConfig.maxVertices);
                 organisms[i].growTendril(organisms[j].x, organisms[j].y);
@@ -623,16 +623,13 @@
                 organisms[j].evolve(adaptedConfig.maxVertices);
                 organisms[j].growTendril(organisms[i].x, organisms[i].y);
               }
-            } else if (interactionType < 0.65) {
-              if (organisms[i].vertices.length > organisms[j].vertices.length) {
-                organisms[i].morphWith(organisms[j]);
-              } else {
-                organisms[j].morphWith(organisms[i]);
-              }
+            } else if (interactionType < 0.70) {
+              organisms[i].morphWith(organisms[j]);
+              organisms[j].morphWith(organisms[i]);
               createChainLink(organisms[i], organisms[j]);
               organisms[i].growTendril(organisms[j].x, organisms[j].y);
               organisms[j].growTendril(organisms[i].x, organisms[i].y);
-            } else if (interactionType < 0.78) {
+            } else if (interactionType < 0.80) {
               const burstForce = 0.2;
               organisms[i].vx -= nx * burstForce;
               organisms[i].vy -= ny * burstForce;
@@ -644,7 +641,7 @@
               const midY = (organisms[i].y + organisms[j].y) / 2;
               spawnParticles(midX, midY, organisms[i].vx, organisms[i].vy, 4);
               spawnParticles(midX, midY, organisms[j].vx, organisms[j].vy, 4);
-            } else if (interactionType < 0.88) {
+            } else if (interactionType < 0.90) {
               const moreComplex = organisms[i].vertices.length > organisms[j].vertices.length ? organisms[i] : organisms[j];
               moreComplex.simplify();
               spawnParticles(moreComplex.x, moreComplex.y, moreComplex.vx, moreComplex.vy, 2);
