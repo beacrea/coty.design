@@ -92,6 +92,7 @@
     decayRate: number;
     minSize: number;
     maxSize: number;
+    stabilizing: number;
 
     constructor(canvasWidth: number, canvasHeight: number, cfg: WorldConfig) {
       this.x = Math.random() * canvasWidth;
@@ -114,6 +115,7 @@
       this.age = 0;
       this.tendril = null;
       this.spokeIntensity = 0.3 + Math.random() * 0.4;
+      this.stabilizing = 0;
       this.lobes = [];
       const vertexRange = cfg.maxStartVertices - cfg.minStartVertices + 1;
       const startVertices = cfg.minStartVertices + Math.floor(Math.random() * vertexRange);
@@ -243,6 +245,10 @@
       this.size = Math.min(this.maxSize, this.size + amount);
     }
 
+    startStabilizing(): void {
+      this.stabilizing = 60;
+    }
+
     update(canvasWidth: number, canvasHeight: number): void {
       this.wanderAngle += (Math.random() - 0.5) * this.wanderRate;
       
@@ -252,6 +258,11 @@
       const steerStrength = 0.02;
       this.vx += (desiredVx - this.vx) * steerStrength;
       this.vy += (desiredVy - this.vy) * steerStrength;
+      
+      if (this.stabilizing > 0) {
+        this.stabilizing--;
+        this.rotationSpeed *= 0.92;
+      }
       
       this.x += this.vx;
       this.y += this.vy;
@@ -725,10 +736,13 @@
           const overlap = collisionBuffer - distance;
           const separationForce = Math.min(overlap * 0.02, 0.15);
           
-          organisms[i].vx -= nx * separationForce;
-          organisms[i].vy -= ny * separationForce;
-          organisms[j].vx += nx * separationForce;
-          organisms[j].vy += ny * separationForce;
+          const iStable = organisms[i].stabilizing > 0 ? 0.3 : 1;
+          const jStable = organisms[j].stabilizing > 0 ? 0.3 : 1;
+          
+          organisms[i].vx -= nx * separationForce * iStable;
+          organisms[i].vy -= ny * separationForce * iStable;
+          organisms[j].vx += nx * separationForce * jStable;
+          organisms[j].vy += ny * separationForce * jStable;
 
           if (distance < combinedRadius * 0.5) {
             const pushStrength = (combinedRadius * 0.5 - distance) * 0.05;
@@ -739,8 +753,11 @@
           }
 
           const spinDelta = (organisms[j].rotationSpeed - organisms[i].rotationSpeed) * spinInfluence;
-          organisms[i].rotationSpeed += spinDelta;
-          organisms[j].rotationSpeed -= spinDelta;
+          organisms[i].rotationSpeed += spinDelta * iStable;
+          organisms[j].rotationSpeed -= spinDelta * jStable;
+          
+          organisms[i].startStabilizing();
+          organisms[j].startStabilizing();
         }
 
         if (distance < alignmentDistance && distance > collisionBuffer) {
