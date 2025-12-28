@@ -11,6 +11,7 @@
   let animationId: number;
   let organisms: Organism[] = [];
   let lastEvolutionTime = 0;
+  let lastFoodSpawnTime = 0;
   let isVisible = true;
   let prefersReducedMotion = false;
   let dpr = 1;
@@ -444,39 +445,64 @@
     }
   }
 
+  function spawnRandomFood(timestamp: number): void {
+    if (timestamp - lastFoodSpawnTime > adaptedConfig.foodSpawnInterval) {
+      if (foodSources.filter(f => f.active).length < adaptedConfig.maxFoodSources) {
+        foodSources.push({
+          x: Math.random() * logicalWidth,
+          y: Math.random() * logicalHeight,
+          active: true,
+          respawnAt: 0,
+          pulsePhase: Math.random() * Math.PI * 2,
+        });
+      }
+      lastFoodSpawnTime = timestamp;
+    }
+  }
+
   function applyFoodAttraction(timestamp: number): void {
-    foodSources.forEach((food) => {
+    spawnRandomFood(timestamp);
+
+    const noticeDistance = 250;
+    const speedBoostMax = 3;
+
+    for (let i = foodSources.length - 1; i >= 0; i--) {
+      const food = foodSources[i];
+      
       if (!food.active) {
         if (timestamp >= food.respawnAt) {
           food.active = true;
           food.x = Math.random() * logicalWidth;
           food.y = Math.random() * logicalHeight;
         }
-        return;
+        continue;
       }
 
       food.pulsePhase += 0.02;
-
-      let closestOrg: Organism | null = null;
-      let closestDist = Infinity;
 
       organisms.forEach((org) => {
         const dx = food.x - org.x;
         const dy = food.y - org.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < closestDist) {
-          closestDist = dist;
-          closestOrg = org;
-        }
-
-        if (dist < 300) {
-          const proximityFactor = 1 - dist / 300;
-          const attractionStrength = adaptedConfig.foodAttractionStrength * proximityFactor * proximityFactor;
+        if (dist < noticeDistance) {
+          const proximityFactor = 1 - dist / noticeDistance;
+          const speedBoost = 1 + proximityFactor * proximityFactor * (speedBoostMax - 1);
+          
           const nx = dx / Math.max(dist, 0.1);
           const ny = dy / Math.max(dist, 0.1);
+          
+          const targetSpeed = adaptedConfig.maxSpeed * speedBoost;
+          const attractionStrength = adaptedConfig.foodAttractionStrength * proximityFactor * speedBoost;
+          
           org.vx += nx * attractionStrength;
           org.vy += ny * attractionStrength;
+          
+          const currentSpeed = Math.sqrt(org.vx * org.vx + org.vy * org.vy);
+          if (currentSpeed > targetSpeed && currentSpeed > 0) {
+            org.vx = (org.vx / currentSpeed) * targetSpeed;
+            org.vy = (org.vy / currentSpeed) * targetSpeed;
+          }
         }
 
         if (dist < org.size * 0.8) {
@@ -489,7 +515,7 @@
           spawnParticles(food.x, food.y, 0, 0, 6);
         }
       });
-    });
+    }
   }
 
   function drawFoodSources(ctx: CanvasRenderingContext2D, strokeColor: string, alpha: number): void {
