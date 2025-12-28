@@ -138,22 +138,32 @@
   }
 
   .observe-toggle {
+    width: var(--toggle-size);
+    height: var(--toggle-size);
+    border-radius: 50%;
+    border: var(--toggle-border-width) solid var(--toggle-border);
+    background: transparent;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    border: 1px solid var(--text-tertiary);
-    border-radius: 50%;
-    background: var(--background);
+    transition: border-color var(--transition-toggle), transform var(--transition-toggle);
+    z-index: 100;
+    flex-shrink: 0;
     color: var(--text-secondary);
-    cursor: pointer;
-    transition: all var(--transition-theme);
   }
 
   .observe-toggle:hover {
-    border-color: var(--text-secondary);
-    color: var(--text-primary);
+    transform: scale(1.05);
+  }
+
+  .observe-toggle:active {
+    transform: scale(0.95);
+  }
+
+  .observe-toggle svg {
+    width: var(--icon-size);
+    height: var(--icon-size);
   }
 
   .toggle-wrapper {
