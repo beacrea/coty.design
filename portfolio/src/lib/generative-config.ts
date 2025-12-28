@@ -2,6 +2,7 @@ export interface WorldConfig {
   organismCount: number;
   minSize: number;
   maxSize: number;
+  sizeVariation: number;
   minSpeed: number;
   maxSpeed: number;
   connectionDistance: number;
@@ -12,6 +13,10 @@ export interface WorldConfig {
   evolutionInterval: number;
   evolutionChance: number;
   interactionChance: number;
+  foodSourceCount: number;
+  foodAttractionStrength: number;
+  foodSize: number;
+  foodRespawnTime: number;
   lineContrast: {
     light: number;
     dark: number;
@@ -37,6 +42,7 @@ export const defaultWorldConfig: WorldConfig = {
   organismCount: 16,
   minSize: 20,
   maxSize: 60,
+  sizeVariation: 0.5,
   minSpeed: 0.08,
   maxSpeed: 0.3,
   connectionDistance: 200,
@@ -47,6 +53,10 @@ export const defaultWorldConfig: WorldConfig = {
   evolutionInterval: 3500,
   evolutionChance: 0.08,
   interactionChance: 0.35,
+  foodSourceCount: 4,
+  foodAttractionStrength: 0.015,
+  foodSize: 8,
+  foodRespawnTime: 8000,
   lineContrast: {
     light: 1.15,
     dark: 1.2,
