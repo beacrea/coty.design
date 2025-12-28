@@ -196,6 +196,17 @@ function getFlowField(x: number, y: number, time: number): { vx, vy }
 
 ## Behavioral Systems
 
+### Passive/Idle Behavior
+
+When not pursuing food or interacting, organisms exhibit gentle passive behaviors:
+
+- **Wandering**: Gradual random direction changes via `wanderAngle`
+- **Bobbing**: Subtle sinusoidal drift (different frequencies for X/Y)
+- **Pausing**: Occasional stops (0.08% chance per frame, 1-3 second duration)
+- **Direction shifts**: New random heading after pause ends
+
+These behaviors create organic, lifelike movement even in calm periods.
+
 ### Flocking (Boids Algorithm)
 
 Organisms exhibit classic boids-style emergent flocking:
