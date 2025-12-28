@@ -20,12 +20,12 @@
     border-radius: 0.75rem;
     border: 1px solid var(--surface-card-border);
     background-color: var(--surface-card-bg);
-    transition: background-color var(--transition-theme), border-color var(--transition-theme), transform 0.2s ease, box-shadow 0.2s ease;
+    transition: background-color var(--transition-theme), border-color var(--transition-theme), transform var(--animation-hover) ease, box-shadow var(--animation-hover) ease;
   }
 
   @media (hover: hover) {
     .family-section:hover {
-      transform: translateY(-2px);
+      transform: translateY(calc(var(--animation-hover-lift) * -1));
       box-shadow: 0 4px 16px oklch(0 0 0 / 0.08);
     }
   }
@@ -66,13 +66,13 @@
     background-color: var(--surface-cta-bg);
     border-radius: 0.5rem;
     text-decoration: none;
-    transition: background-color 0.2s ease, transform 0.15s ease, color var(--transition-theme);
+    transition: background-color var(--animation-hover) ease, transform var(--animation-hover) ease, color var(--transition-theme);
   }
 
   @media (hover: hover) {
     .cta-button:hover {
       background-color: var(--surface-cta-bg-hover);
-      transform: translateY(-1px);
+      transform: translateY(calc(var(--animation-hover-lift) * -0.5));
     }
   }
 

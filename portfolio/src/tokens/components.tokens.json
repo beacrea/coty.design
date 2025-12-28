@@ -21,6 +21,21 @@
       "$type": "duration",
       "theme": { "$value": "300ms" },
       "toggle": { "$value": "200ms" }
+    },
+    "animation": {
+      "$type": "duration",
+      "entrance": { "$value": "400ms", "$description": "Duration for content fade-slide-up entrance animations" },
+      "stagger": { "$value": "80ms", "$description": "Delay increment between staggered animation items" },
+      "hover": { "$value": "200ms", "$description": "Duration for hover state transitions" }
+    },
+    "animation-easing": {
+      "$type": "cubicBezier",
+      "entrance": { "$value": [0, 0, 0.2, 1], "$description": "Ease-out curve for entrance animations" }
+    },
+    "animation-distance": {
+      "$type": "dimension",
+      "entrance-offset": { "$value": "12px", "$description": "Vertical offset for entrance slide-up animation" },
+      "hover-lift": { "$value": "2px", "$description": "Vertical lift distance on hover" }
     }
   }
 }
