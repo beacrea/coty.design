@@ -5,6 +5,7 @@ const UNDERWATER_HUES = [180, 195, 210, 225, 240, 260, 280, 165];
 export function createDefaultGrabState(): GrabState {
   return {
     isGrabbed: false,
+    isDragging: false,
     pointerId: null,
     offsetX: 0,
     offsetY: 0,

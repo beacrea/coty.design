@@ -18,6 +18,7 @@ export interface Organelle {
 
 export interface GrabState {
   isGrabbed: boolean;
+  isDragging: boolean;
   pointerId: number | null;
   offsetX: number;
   offsetY: number;
