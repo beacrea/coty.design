@@ -56,7 +56,7 @@ export const siteContent = {
   
   familyExplainer: {
     heading: "Family Explainer Tool",
-    description: "Trying to explain what I do to the ladies at squash club? This AI can help translate my work into plain English.",
+    description: "Cornered at Thanksgiving? Neighbors asking questions? Need to explain what I do to someone who thinks I \"fix computers\"? This AI translates my work into plain English.",
     buttonText: "Ask My AI Assistant",
     buttonUrl: "https://ask.coty.design"
   },
