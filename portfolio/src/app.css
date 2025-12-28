@@ -23,8 +23,8 @@
   --toggle-stroke: oklch(0.55 0.180 45);
   --toggle-rays: oklch(0.816 0.130 55);
   
-  --surface-card-bg: oklch(0.96 0.015 260);
-  --surface-card-border: oklch(0.88 0.03 260);
+  --surface-card-bg: oklch(0.96 0.015 45);
+  --surface-card-border: oklch(0.88 0.03 45);
   --surface-cta-bg: oklch(0.50 0.16 45);
   --surface-cta-bg-hover: oklch(0.45 0.14 45);
   --surface-cta-text: oklch(1 0 0);
