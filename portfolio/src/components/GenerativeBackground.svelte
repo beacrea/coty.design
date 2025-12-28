@@ -752,23 +752,78 @@
     }
   }
 
+  let currentTime = 0;
+  
+  function getFlowField(x: number, y: number, time: number): { vx: number; vy: number } {
+    const scale = 0.003;
+    const timeScale = 0.0003;
+    
+    const nx = x * scale;
+    const ny = y * scale;
+    const t = time * timeScale;
+    
+    const angle1 = Math.sin(nx + t) * Math.cos(ny * 0.7 + t * 0.5) * Math.PI;
+    const angle2 = Math.cos(nx * 0.8 - t * 0.3) * Math.sin(ny + t * 0.7) * Math.PI * 0.5;
+    const flowAngle = angle1 + angle2 + Math.PI * -0.3;
+    
+    const strength = 0.015 + Math.sin(nx * 2 + ny * 2 + t) * 0.008;
+    
+    return {
+      vx: Math.cos(flowAngle) * strength,
+      vy: Math.sin(flowAngle) * strength,
+    };
+  }
+
   function spawnAmbientBubbles(): void {
-    if (Math.random() > 0.08) return;
+    currentTime++;
     
-    const x = Math.random() * logicalWidth;
-    const y = Math.random() * logicalHeight;
-    const driftAngle = -Math.PI / 2 + (Math.random() - 0.5) * 0.8;
-    const driftSpeed = 0.02 + Math.random() * 0.06;
+    const spawnCount = Math.random() < 0.3 ? 1 : 0;
+    for (let i = 0; i < spawnCount; i++) {
+      const edge = Math.floor(Math.random() * 4);
+      let x: number, y: number;
+      
+      if (edge === 0) {
+        x = Math.random() * logicalWidth;
+        y = -5;
+      } else if (edge === 1) {
+        x = logicalWidth + 5;
+        y = Math.random() * logicalHeight;
+      } else if (edge === 2) {
+        x = Math.random() * logicalWidth;
+        y = logicalHeight + 5;
+      } else {
+        x = -5;
+        y = Math.random() * logicalHeight;
+      }
+      
+      const flow = getFlowField(x, y, currentTime);
+      
+      particles.push({
+        x,
+        y,
+        vx: flow.vx + (Math.random() - 0.5) * 0.01,
+        vy: flow.vy + (Math.random() - 0.5) * 0.01,
+        size: 0.4 + Math.random() * 1.0,
+        life: 1,
+        maxLife: 200 + Math.floor(Math.random() * 150),
+      });
+    }
     
-    particles.push({
-      x,
-      y,
-      vx: Math.cos(driftAngle) * driftSpeed,
-      vy: Math.sin(driftAngle) * driftSpeed,
-      size: 0.3 + Math.random() * 0.8,
-      life: 1,
-      maxLife: 80 + Math.floor(Math.random() * 60),
-    });
+    if (Math.random() < 0.15) {
+      const x = Math.random() * logicalWidth;
+      const y = Math.random() * logicalHeight;
+      const flow = getFlowField(x, y, currentTime);
+      
+      particles.push({
+        x,
+        y,
+        vx: flow.vx + (Math.random() - 0.5) * 0.008,
+        vy: flow.vy + (Math.random() - 0.5) * 0.008,
+        size: 0.3 + Math.random() * 0.7,
+        life: 1,
+        maxLife: 120 + Math.floor(Math.random() * 80),
+      });
+    }
   }
 
   function spawnBubbleStream(org: Organism): void {
@@ -806,12 +861,18 @@
   function updateParticles(): void {
     for (let i = particles.length - 1; i >= 0; i--) {
       const p = particles[i];
+      
+      const flow = getFlowField(p.x, p.y, currentTime);
+      p.vx += flow.vx * 0.15;
+      p.vy += flow.vy * 0.15;
+      
       p.x += p.vx;
       p.y += p.vy;
-      p.vx *= 0.98;
-      p.vy *= 0.98;
+      p.vx *= 0.985;
+      p.vy *= 0.985;
       p.life -= 1 / p.maxLife;
-      if (p.life <= 0) {
+      
+      if (p.life <= 0 || p.x < -20 || p.x > logicalWidth + 20 || p.y < -20 || p.y > logicalHeight + 20) {
         particles.splice(i, 1);
       }
     }
