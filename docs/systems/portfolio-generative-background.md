@@ -279,8 +279,8 @@ lightness = 62% + (depth × 20%)   // 62-82%
 
 *Light Theme* (organisms as colored silhouettes):
 ```
-saturation = 55% + (depth × 15%)  // 55-70%
-lightness = 35% + (depth × 15%)   // 35-50%
+saturation = 65% + (depth × 20%)  // 65-85%
+lightness = 25% + (depth × 15%)   // 25-40%
 ```
 
 Deeper organisms appear more vivid; shallower ones are softer.
