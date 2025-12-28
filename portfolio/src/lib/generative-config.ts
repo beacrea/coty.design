@@ -58,12 +58,12 @@ export const defaultWorldConfig: WorldConfig = {
   foodSize: 8,
   foodRespawnTime: 8000,
   lineContrast: {
-    light: 1.15,
-    dark: 1.2,
+    light: 1.08,
+    dark: 1.12,
   },
   vertexContrast: {
-    light: 1.1,
-    dark: 1.15,
+    light: 1.06,
+    dark: 1.1,
   },
   blur: 0,
 };

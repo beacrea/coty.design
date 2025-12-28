@@ -28,13 +28,10 @@
     title={observeMode ? 'Show content' : 'Observe organisms'}
   >
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      {#if observeMode}
-        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-        <line x1="1" y1="1" x2="23" y2="23"></line>
-      {:else}
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-        <circle cx="12" cy="12" r="3"></circle>
-      {/if}
+      <path d="M6.5 12c0-3.5 3.5-6 6.5-6s6.5 2.5 6.5 6-3.5 6-6.5 6-6.5-2.5-6.5-6z"></path>
+      <path d="M6.5 12c-2 0-4.5-1-5.5-2 1-1 3.5-2 5.5-2"></path>
+      <circle cx="15" cy="10.5" r="1" fill="currentColor"></circle>
+      <path d="M20 9c1.5 1.5 3 3 3 3s-1.5 1.5-3 3"></path>
     </svg>
   </button>
 </div>
