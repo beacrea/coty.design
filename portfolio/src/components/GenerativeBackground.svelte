@@ -803,7 +803,7 @@
 
     const isDark = $theme === 'dark';
     const strokeColor = getStrokeColor(isDark);
-    const contrastMultiplier = enhancedContrast ? 2.5 : 1;
+    const contrastMultiplier = enhancedContrast ? 8 : 1;
     const lineContrast = isDark ? adaptedConfig.lineContrast.dark : adaptedConfig.lineContrast.light;
     const vertexContrast = isDark ? adaptedConfig.vertexContrast.dark : adaptedConfig.vertexContrast.light;
     const lineAlpha = Math.min(1, getAlphaFromContrast(lineContrast) * contrastMultiplier);
