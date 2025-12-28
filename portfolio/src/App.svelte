@@ -101,7 +101,7 @@
 
   .page {
     min-height: 100vh;
-    padding: var(--page-padding-top) var(--page-padding-x) var(--page-padding-bottom);
+    padding: var(--page-padding-top) var(--page-padding-right) var(--page-padding-bottom) var(--page-padding-x);
     background-color: var(--background);
     transition: background-color var(--transition-theme);
   }
