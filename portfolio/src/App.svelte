@@ -30,12 +30,13 @@
     title={observeMode ? 'Show content' : 'Observe organisms'}
   >
     {#key animateKey}
-    <svg class="crystal-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="10" r="7"></circle>
-      <path d="M8 20h8"></path>
-      <path d="M10 17v3"></path>
-      <path d="M14 17v3"></path>
-      <path d="M9 7.5c1.5-1 3.5-1 5 0"></path>
+    <svg class="microscope-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 18h8"></path>
+      <path d="M3 22h18"></path>
+      <path d="M14 22a7 7 0 1 0 0-14h-1"></path>
+      <path d="M9 14h2"></path>
+      <path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"></path>
+      <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"></path>
     </svg>
     {/key}
   </button>
@@ -158,22 +159,22 @@
     height: var(--icon-size);
   }
 
-  .observe-toggle .crystal-icon {
-    animation: crystal-glow 0.4s ease-out;
+  .observe-toggle .microscope-icon {
+    animation: microscope-focus 0.4s ease-out;
   }
 
-  @keyframes crystal-glow {
+  @keyframes microscope-focus {
     0% {
       transform: scale(1);
     }
     30% {
-      transform: scale(1.2) rotate(15deg);
+      transform: scale(1.15) translateY(-2px);
     }
     60% {
-      transform: scale(0.9) rotate(-5deg);
+      transform: scale(0.95);
     }
     100% {
-      transform: scale(1) rotate(0deg);
+      transform: scale(1) translateY(0);
     }
   }
 
