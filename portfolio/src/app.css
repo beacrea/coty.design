@@ -25,6 +25,9 @@
   
   --surface-card-bg: oklch(0.96 0.015 260);
   --surface-card-border: oklch(0.88 0.03 260);
+  --surface-cta-bg: oklch(0.50 0.16 45);
+  --surface-cta-bg-hover: oklch(0.45 0.14 45);
+  --surface-cta-text: oklch(1 0 0);
   
   --text-size-title: 33.178px;
   --text-size-subtitle: 19.2px;
@@ -68,6 +71,9 @@
   
   --surface-card-bg: oklch(0.18 0.02 277);
   --surface-card-border: oklch(0.30 0.04 277);
+  --surface-cta-bg: oklch(0.55 0.18 277);
+  --surface-cta-bg-hover: oklch(0.60 0.16 277);
+  --surface-cta-text: oklch(0.12 0 0);
 }
 
 @media (min-width: 640px) {
