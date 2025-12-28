@@ -10,6 +10,14 @@
   let animationId: number;
   let organisms: Organism[] = [];
   let lastEvolutionTime = 0;
+  let isVisible = true;
+  let prefersReducedMotion = false;
+  let dpr = 1;
+  let logicalWidth = 0;
+  let logicalHeight = 0;
+  let adaptedConfig: WorldConfig;
+  let motionQuery: MediaQueryList | null = null;
+  let motionHandler: ((e: MediaQueryListEvent) => void) | null = null;
 
   interface Vertex {
     angle: number;
@@ -105,6 +113,39 @@
     }
   }
 
+  function getAdaptedConfig(): WorldConfig {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const area = width * height;
+    const isMobile = width < 768;
+    const isSmallMobile = width < 480;
+    
+    let organismMultiplier = 1;
+    let speedMultiplier = 1;
+    let connectionMultiplier = 1;
+    
+    if (isSmallMobile) {
+      organismMultiplier = 0.5;
+      speedMultiplier = 0.7;
+      connectionMultiplier = 0.6;
+    } else if (isMobile) {
+      organismMultiplier = 0.65;
+      speedMultiplier = 0.8;
+      connectionMultiplier = 0.75;
+    } else if (area < 1200000) {
+      organismMultiplier = 0.8;
+    }
+    
+    return {
+      ...config,
+      organismCount: Math.max(4, Math.floor(config.organismCount * organismMultiplier)),
+      minSpeed: config.minSpeed * speedMultiplier,
+      maxSpeed: config.maxSpeed * speedMultiplier,
+      connectionDistance: config.connectionDistance * connectionMultiplier,
+      mergeDistance: config.mergeDistance * connectionMultiplier,
+    };
+  }
+
   function drawConnections(ctx: CanvasRenderingContext2D, organisms: Organism[], cfg: WorldConfig, isDark: boolean): void {
     const strokeColor = isDark ? cfg.strokeColor.dark : cfg.strokeColor.light;
     const baseOpacity = isDark ? cfg.lineOpacity.dark : cfg.lineOpacity.light;
@@ -144,15 +185,30 @@
 
   function initOrganisms(): void {
     organisms = [];
-    for (let i = 0; i < config.organismCount; i++) {
-      organisms.push(new Organism(canvas.width, canvas.height, config));
+    for (let i = 0; i < adaptedConfig.organismCount; i++) {
+      organisms.push(new Organism(logicalWidth, logicalHeight, adaptedConfig));
     }
   }
 
   function resizeCanvas(): void {
-    if (!canvas) return;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    if (!canvas || !ctx) return;
+    
+    logicalWidth = window.innerWidth;
+    logicalHeight = window.innerHeight;
+    
+    const rawDpr = window.devicePixelRatio || 1;
+    dpr = Math.min(rawDpr, 2);
+    
+    canvas.width = logicalWidth * dpr;
+    canvas.height = logicalHeight * dpr;
+    
+    canvas.style.width = logicalWidth + 'px';
+    canvas.style.height = logicalHeight + 'px';
+    
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    
+    adaptedConfig = getAdaptedConfig();
+    initOrganisms();
   }
 
   function checkProximityEvolution(): void {
@@ -162,14 +218,14 @@
         const dy = organisms[i].y - organisms[j].y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < config.mergeDistance) {
-          const evolveChance = (1 - distance / config.mergeDistance) * config.evolutionChance;
+        if (distance < adaptedConfig.mergeDistance) {
+          const evolveChance = (1 - distance / adaptedConfig.mergeDistance) * adaptedConfig.evolutionChance;
           
           if (Math.random() < evolveChance) {
             if (organisms[i].vertices.length <= organisms[j].vertices.length) {
-              organisms[i].evolve(config.maxVertices);
+              organisms[i].evolve(adaptedConfig.maxVertices);
             } else {
-              organisms[j].evolve(config.maxVertices);
+              organisms[j].evolve(adaptedConfig.maxVertices);
             }
           }
         }
@@ -177,49 +233,79 @@
     }
   }
 
+  function handleVisibilityChange(): void {
+    isVisible = document.visibilityState === 'visible';
+    if (isVisible && !animationId) {
+      animationId = requestAnimationFrame(animate);
+    }
+  }
+
   function animate(timestamp: number): void {
-    if (!ctx) return;
+    if (!ctx || !isVisible || prefersReducedMotion) {
+      animationId = 0;
+      return;
+    }
 
     const isDark = $theme === 'dark';
-    const strokeColor = isDark ? config.strokeColor.dark : config.strokeColor.light;
-    const lineOpacity = isDark ? config.lineOpacity.dark : config.lineOpacity.light;
-    const vertexOpacity = isDark ? config.vertexOpacity.dark : config.vertexOpacity.light;
+    const strokeColor = isDark ? adaptedConfig.strokeColor.dark : adaptedConfig.strokeColor.light;
+    const lineOpacity = isDark ? adaptedConfig.lineOpacity.dark : adaptedConfig.lineOpacity.light;
+    const vertexOpacity = isDark ? adaptedConfig.vertexOpacity.dark : adaptedConfig.vertexOpacity.light;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, logicalWidth, logicalHeight);
 
     checkProximityEvolution();
 
-    if (timestamp - lastEvolutionTime > config.evolutionInterval) {
+    if (timestamp - lastEvolutionTime > adaptedConfig.evolutionInterval) {
       const randomOrg = organisms[Math.floor(Math.random() * organisms.length)];
       if (randomOrg && Math.random() < 0.15) {
-        randomOrg.evolve(config.maxVertices);
+        randomOrg.evolve(adaptedConfig.maxVertices);
       }
       lastEvolutionTime = timestamp;
     }
 
     organisms.forEach((org) => {
-      org.update(canvas.width, canvas.height);
+      org.update(logicalWidth, logicalHeight);
       org.draw(ctx!, strokeColor, lineOpacity, vertexOpacity);
     });
 
-    drawConnections(ctx, organisms, config, isDark);
+    drawConnections(ctx, organisms, adaptedConfig, isDark);
 
     animationId = requestAnimationFrame(animate);
   }
 
   onMount(() => {
     ctx = canvas.getContext('2d');
+    
+    motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    prefersReducedMotion = motionQuery.matches;
+    motionHandler = (e: MediaQueryListEvent) => {
+      prefersReducedMotion = e.matches;
+      if (!prefersReducedMotion && isVisible && !animationId) {
+        animationId = requestAnimationFrame(animate);
+      }
+    };
+    motionQuery.addEventListener('change', motionHandler);
+    
+    adaptedConfig = getAdaptedConfig();
     resizeCanvas();
-    initOrganisms();
-    animationId = requestAnimationFrame(animate);
+    
+    if (!prefersReducedMotion) {
+      animationId = requestAnimationFrame(animate);
+    }
 
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('resize', resizeCanvas);
   });
 
   onDestroy(() => {
     if (animationId) {
       cancelAnimationFrame(animationId);
+      animationId = 0;
     }
+    if (motionQuery && motionHandler) {
+      motionQuery.removeEventListener('change', motionHandler);
+    }
+    document.removeEventListener('visibilitychange', handleVisibilityChange);
     window.removeEventListener('resize', resizeCanvas);
   });
 </script>
