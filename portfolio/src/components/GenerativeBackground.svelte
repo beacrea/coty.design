@@ -565,8 +565,22 @@
     chainLinks = [];
     particles = [];
     foodSources = [];
+    
+    const cols = Math.ceil(Math.sqrt(adaptedConfig.organismCount * (logicalWidth / logicalHeight)));
+    const rows = Math.ceil(adaptedConfig.organismCount / cols);
+    const cellWidth = logicalWidth / cols;
+    const cellHeight = logicalHeight / rows;
+    const jitter = 0.8;
+    
     for (let i = 0; i < adaptedConfig.organismCount; i++) {
-      organisms.push(new Organism(logicalWidth, logicalHeight, adaptedConfig));
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      const org = new Organism(logicalWidth, logicalHeight, adaptedConfig);
+      org.x = (col + 0.5 + (Math.random() - 0.5) * jitter) * cellWidth;
+      org.y = (row + 0.5 + (Math.random() - 0.5) * jitter) * cellHeight;
+      org.x = Math.max(org.size, Math.min(logicalWidth - org.size, org.x));
+      org.y = Math.max(org.size, Math.min(logicalHeight - org.size, org.y));
+      organisms.push(org);
     }
     for (let i = 0; i < adaptedConfig.foodSourceCount; i++) {
       foodSources.push({
@@ -597,9 +611,9 @@
   function applyFoodAttraction(timestamp: number): void {
     spawnRandomFood(timestamp);
 
-    const noticeDistance = 180;
-    const speedBoostMax = 6;
-    const aggressionDistance = 80;
+    const noticeDistance = 140;
+    const speedBoostMax = 4;
+    const aggressionDistance = 60;
 
     for (let i = foodSources.length - 1; i >= 0; i--) {
       const food = foodSources[i];
@@ -720,11 +734,30 @@
     }
   }
 
+  function spawnAmbientBubbles(): void {
+    if (Math.random() > 0.08) return;
+    
+    const x = Math.random() * logicalWidth;
+    const y = Math.random() * logicalHeight;
+    const driftAngle = -Math.PI / 2 + (Math.random() - 0.5) * 0.8;
+    const driftSpeed = 0.02 + Math.random() * 0.06;
+    
+    particles.push({
+      x,
+      y,
+      vx: Math.cos(driftAngle) * driftSpeed,
+      vy: Math.sin(driftAngle) * driftSpeed,
+      size: 0.3 + Math.random() * 0.8,
+      life: 1,
+      maxLife: 80 + Math.floor(Math.random() * 60),
+    });
+  }
+
   function spawnBubbleStream(org: Organism): void {
     const speed = Math.sqrt(org.vx * org.vx + org.vy * org.vy);
     if (speed < adaptedConfig.minSpeed * 1.2) return;
     
-    const bubbleChance = Math.min(0.35, speed / adaptedConfig.maxSpeed * 0.4);
+    const bubbleChance = Math.min(0.25, speed / adaptedConfig.maxSpeed * 0.3);
     if (Math.random() > bubbleChance) return;
     
     const forwardAngle = Math.atan2(org.vy, org.vx);
@@ -1083,6 +1116,7 @@
       lastEvolutionTime = timestamp;
     }
 
+    spawnAmbientBubbles();
     updateParticles();
     updateChainLinks();
 
