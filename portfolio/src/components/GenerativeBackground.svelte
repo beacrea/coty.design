@@ -459,8 +459,8 @@
             saturation = 70 + this.depth * 20;
             lightness = 62 + this.depth * 20;
           } else {
-            saturation = 65 + this.depth * 20;
-            lightness = 25 + this.depth * 15;
+            saturation = 70 + this.depth * 20;
+            lightness = 18 + this.depth * 12;
           }
           return `hsla(${this.hue}, ${saturation}%, ${lightness}%, ${alpha})`;
         }
