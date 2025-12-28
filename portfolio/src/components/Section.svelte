@@ -6,7 +6,7 @@
   export let variant: 'bullet' | 'paragraph' = 'bullet';
 </script>
 
-<section class="section">
+<section class="section animate-entrance">
   <h2 class="heading">{heading}</h2>
   
   {#if variant === 'bullet'}
