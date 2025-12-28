@@ -83,20 +83,18 @@
   }
 
   .header {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
+    position: relative;
     margin-bottom: var(--section-spacing);
   }
 
   .opener-wrapper {
-    flex: 1;
-    min-width: 0;
+    width: 100%;
   }
 
   .toggle-wrapper {
-    flex-shrink: 0;
-    padding-top: 0.25rem;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
   @media (min-width: 640px) {
@@ -104,15 +102,6 @@
       position: fixed;
       top: var(--page-padding-top);
       right: var(--page-padding-x);
-      padding-top: 0;
-    }
-
-    .header {
-      display: block;
-    }
-
-    .opener-wrapper {
-      margin-bottom: 0;
     }
   }
 </style>
