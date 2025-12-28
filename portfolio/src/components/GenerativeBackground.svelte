@@ -866,6 +866,22 @@
       p.vx += flow.vx * 0.15;
       p.vy += flow.vy * 0.15;
       
+      for (const org of organisms) {
+        const dx = p.x - org.x;
+        const dy = p.y - org.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const pushRadius = org.getBoundingRadius() * 1.3;
+        
+        if (dist < pushRadius && dist > 0.1) {
+          const overlap = pushRadius - dist;
+          const pushStrength = (overlap / pushRadius) * 0.08;
+          const nx = dx / dist;
+          const ny = dy / dist;
+          p.vx += nx * pushStrength;
+          p.vy += ny * pushStrength;
+        }
+      }
+      
       p.x += p.vx;
       p.y += p.vy;
       p.vx *= 0.985;
