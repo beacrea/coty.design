@@ -16,6 +16,19 @@
 <style>
   .family-section {
     margin-bottom: var(--section-spacing);
+    padding: 1.25rem 1.5rem 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--semantic-bullet);
+    background-color: oklch(0.25 0.03 260 / 0.3);
+    transition: background-color var(--transition-theme), border-color var(--transition-theme);
+  }
+
+  :global(.dark) .family-section {
+    background-color: oklch(0.25 0.03 260 / 0.3);
+  }
+
+  :global(:not(.dark)) .family-section {
+    background-color: oklch(0.95 0.02 260 / 0.5);
   }
 
   .heading {
