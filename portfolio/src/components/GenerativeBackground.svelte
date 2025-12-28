@@ -1099,8 +1099,7 @@
     logicalWidth = window.innerWidth;
     logicalHeight = window.innerHeight;
     
-    const rawDpr = window.devicePixelRatio || 1;
-    dpr = Math.min(rawDpr, 2);
+    dpr = window.devicePixelRatio || 1;
     
     canvas.width = logicalWidth * dpr;
     canvas.height = logicalHeight * dpr;
@@ -1447,8 +1446,6 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
     z-index: 0;
     pointer-events: none;
   }
