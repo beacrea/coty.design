@@ -6,11 +6,13 @@
   import FamilyExplainer from './components/FamilyExplainer.svelte';
   import ConnectSection from './components/ConnectSection.svelte';
   import Footer from './components/Footer.svelte';
+  import GenerativeBackground from './components/GenerativeBackground.svelte';
   import { siteContent } from './lib/content';
 
   $: isDark = $theme === 'dark';
 </script>
 
+<GenerativeBackground />
 <div class:dark={isDark}>
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <main class="page" id="main-content" tabindex="-1">
