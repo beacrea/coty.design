@@ -65,20 +65,24 @@ Key characteristics:
 
 ### Generative Background
 
-The portfolio features a subtle canvas-based generative background (`GenerativeBackground.svelte`). Geometric organisms (starting as triangles) float softly and evolve into more complex shapes when they encounter each other.
+The portfolio features a subtle canvas-based generative background (`GenerativeBackground.svelte`). Geometric organisms (3-5 sided polygons) float softly and interact when they encounter each other through morphing, evolution, repulsion bursts, and size pulses.
 
 **Configuration** (`src/lib/generative-config.ts`):
-- `organismCount` — Number of floating organisms
+- `organismCount` — Number of floating organisms (default: 16)
 - `minSize/maxSize` — Size range for organisms
 - `minSpeed/maxSpeed` — Drift velocity range
 - `connectionDistance` — Distance to draw connecting lines
-- `mergeDistance` — Distance that triggers evolution
-- `maxVertices` — Maximum polygon complexity (vertices)
+- `mergeDistance` — Distance that triggers interactions
+- `minStartVertices/maxStartVertices` — Starting vertex count range (3-5 = triangles to pentagons)
+- `maxVertices` — Maximum polygon complexity
 - `evolutionInterval` — Time-based evolution check interval
-- `evolutionChance` — Base probability for proximity evolution
+- `evolutionChance` — Base probability for time-based evolution
+- `interactionChance` — Base probability for proximity-triggered interactions (evolve, morph, burst, simplify)
 - `lineContrast` — Contrast ratio for shape outlines (light/dark themes)
 - `vertexContrast` — Contrast ratio for vertex dots (light/dark themes)
 - `blur` — Blur amount in pixels (0 = sharp, higher = softer/fuzzier)
+
+**Interaction Types**: When organisms get close, they may evolve (35%), morph/transfer vertices (30%), burst apart (13%), simplify (10%), or pulse/spin (12%).
 
 **Contrast Ratios**: Values like `1.15` mean 15% more visible than background. Higher values = more visible shapes.
 
