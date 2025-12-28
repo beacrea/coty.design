@@ -539,6 +539,7 @@
           food.active = false;
           food.respawnAt = timestamp + adaptedConfig.foodRespawnTime;
           org.grow(3);
+          org.decayRate += 0.0003;
           if (org.vertices.length < adaptedConfig.maxVertices && Math.random() < 0.4) {
             org.evolve(adaptedConfig.maxVertices);
           }
