@@ -73,6 +73,10 @@ A pixel-perfect clone of coty.design portfolio built with Svelte + Vite. This pr
 - Follow DTCG v2025.10 specification
 - Red Hat Mono typography
 
+## Current Version
+
+**v5.0 "Convergence"** — See [DER-005](../docs/eras/DER-005-convergence.md) for design philosophy
+
 ## Development
-- Run: `npm run dev` (starts on port 5000)
+- Run: `npm run dev` (starts on port 5001, Replit workflow overrides to 5000)
 - Build: `npm run build`
