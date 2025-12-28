@@ -1,6 +1,6 @@
 import type { OrganismData, SimulationConfig } from '../types';
 
-export function updateOrganismMovement(org: OrganismData, width: number, height: number): void {
+export function updateOrganismMovement(org: OrganismData, width: number, height: number, deathMultiplier: number = 1): void {
   org.idlePhase += 0.008;
   
   if (org.idlePauseTimer > 0) {
@@ -57,8 +57,8 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
   }
   
   const sizeRatio = org.size / org.minSize;
-  const decayMultiplier = sizeRatio < 1.2 ? 2.0 : 1.0;
-  org.size -= org.decayRate * decayMultiplier;
+  const sizeDecayMult = sizeRatio < 1.2 ? 2.0 : 1.0;
+  org.size -= org.decayRate * sizeDecayMult * deathMultiplier;
 
   const margin = org.size;
   if (org.x < -margin) org.x = width + margin;

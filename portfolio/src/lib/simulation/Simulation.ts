@@ -60,6 +60,19 @@ export class Simulation {
     const { organisms, particles, chainLinks, foodSources, width, height } = this.state;
     const cfg = this.config;
     
+    const target = cfg.populationTarget;
+    const aggr = Math.max(0, Math.min(1, cfg.populationAggressiveness));
+    const count = organisms.length;
+    const error = target > 0 ? (target - count) / target : 0;
+    
+    const birthPressure = Math.max(0, error) * (0.4 + 1.6 * aggr);
+    const deathPressure = Math.max(0, -error) * (0.3 + 1.7 * aggr);
+    
+    const targetDeathMult = 1 + deathPressure;
+    this.state.deathMultiplier += (targetDeathMult - this.state.deathMultiplier) * 0.1;
+    
+    this.state.birthAccumulator += birthPressure;
+    
     applyFlocking(organisms, cfg);
     applyCollisionSeparation(organisms);
     
@@ -97,7 +110,7 @@ export class Simulation {
     
     for (let i = organisms.length - 1; i >= 0; i--) {
       const org = organisms[i];
-      updateOrganismMovement(org, width, height);
+      updateOrganismMovement(org, width, height, this.state.deathMultiplier);
       updateTendril(org);
       enforceMaxBounds(org, maxBoundingRadius);
       clampSpeed(org, cfg);
@@ -112,8 +125,8 @@ export class Simulation {
       spawnBubbleStream(particles, org);
     }
     
-    const deficit = cfg.organismCount - organisms.length;
-    const spawnCount = Math.min(deficit, 3);
+    const spawnCount = Math.min(Math.floor(this.state.birthAccumulator), 3);
+    this.state.birthAccumulator -= spawnCount;
     
     for (let s = 0; s < spawnCount; s++) {
       const edge = Math.floor(Math.random() * 4);
