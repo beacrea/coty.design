@@ -184,10 +184,10 @@ export class Simulation {
     const lineAlpha = Math.min(1, getAlphaFromContrast(lineContrast) * contrastMultiplier);
     const vertexAlpha = Math.min(1, getAlphaFromContrast(vertexContrast) * contrastMultiplier);
     
-    const hueShift = Math.sin(this.state.currentTime * 0.00008) * 8;
-    const baseLightness = isDark ? 8 : 97;
-    const baseChroma = isDark ? 0.015 : 0.012;
-    const baseHue = 220 + hueShift;
+    const hueShift = Math.sin(this.state.currentTime * 0.0003) * 15;
+    const baseLightness = isDark ? 10 : 96;
+    const baseChroma = isDark ? 0.025 : 0.022;
+    const baseHue = 210 + hueShift;
     
     ctx.fillStyle = `oklch(${baseLightness}% ${baseChroma} ${baseHue})`;
     ctx.fillRect(0, 0, width, height);
