@@ -48,11 +48,16 @@
   --bullet-y-offset: 9.65px;
   --list-item-gap: 16.67px;
   --list-item-spacing: 13.89px;
+  /* Transitions - source: tokens/components.tokens.json → component.transition */
   --transition-theme: 300ms;
   --transition-toggle: 200ms;
   
+  /* Animations - source: tokens/components.tokens.json → component.animation */
   --animation-entrance: 400ms;
   --animation-stagger: 80ms;
+  --animation-hover: 200ms;
+  --animation-entrance-offset: 12px;
+  --animation-hover-lift: 2px;
 }
 
 .dark {
@@ -149,7 +154,7 @@ a {
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
-  transition: color 0.2s ease, text-underline-offset 0.2s ease, text-decoration-color 0.2s ease;
+  transition: color var(--animation-hover) ease, text-underline-offset var(--animation-hover) ease, text-decoration-color var(--animation-hover) ease;
 }
 
 @media (hover: hover) {
@@ -195,10 +200,11 @@ button:focus-visible {
   top: 0;
 }
 
+/* Entrance animation using token values */
 @keyframes fade-slide-up {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(var(--animation-entrance-offset));
   }
   to {
     opacity: 1;
