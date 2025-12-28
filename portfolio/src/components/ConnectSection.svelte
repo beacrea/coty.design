@@ -63,14 +63,14 @@
   }
 
   .link {
-    color: oklch(1 0 0);
+    color: var(--semantic-link);
     text-decoration: underline;
     text-underline-offset: 3px;
     transition: color var(--transition-theme);
   }
 
   .link:hover {
-    color: oklch(0.85 0 0);
+    color: var(--semantic-link-hover);
     text-decoration: underline;
   }
 
