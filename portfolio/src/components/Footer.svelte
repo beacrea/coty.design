@@ -1,12 +1,12 @@
 <script lang="ts">
   export let legal: string;
   export let version: string;
-  export let changelogUrl: string = "https://github.com/beacrea/coty-design/blob/main/CHANGELOG.md";
+  export let versionUrl: string;
 </script>
 
 <footer class="footer">
   <span class="legal">{legal}</span>
-  <a href={changelogUrl} target="_blank" rel="noopener noreferrer" class="version">{version}</a>
+  <a href={versionUrl} target="_blank" rel="noopener noreferrer" class="version">{version}</a>
 </footer>
 
 <style>

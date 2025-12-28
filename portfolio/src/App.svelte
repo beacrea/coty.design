@@ -59,6 +59,7 @@
       <Footer 
         legal={siteContent.metadata.legal}
         version={siteContent.metadata.version}
+        versionUrl={siteContent.metadata.versionUrl}
       />
     </div>
   </main>
