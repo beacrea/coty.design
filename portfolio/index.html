@@ -8,8 +8,18 @@
     <title>Coty Beasley - Design and Product Leader</title>
     <meta name="description" content="Good design brings clarity to complexity and makes technology actually useful. Design and product leadership portfolio of Coty Beasley." />
     
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" id="theme-color" content="#ffffff" />
+    <script>
+      (function() {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var isDark = stored === 'dark' || (!stored && prefersDark);
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+          document.getElementById('theme-color').content = '#1d1d1d';
+        }
+      })();
+    </script>
     
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://coty.design/" />

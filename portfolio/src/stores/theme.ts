@@ -2,9 +2,19 @@ import { writable } from 'svelte/store';
 
 type Theme = 'light' | 'dark';
 
+const THEME_COLORS = {
+  light: '#ffffff',
+  dark: '#1d1d1d'
+} as const;
+
 function updateHtmlClass(theme: Theme) {
   if (typeof document !== 'undefined') {
     document.documentElement.classList.toggle('dark', theme === 'dark');
+    
+    const themeColorMeta = document.getElementById('theme-color') as HTMLMetaElement | null;
+    if (themeColorMeta) {
+      themeColorMeta.content = THEME_COLORS[theme];
+    }
   }
 }
 
