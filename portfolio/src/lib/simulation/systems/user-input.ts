@@ -52,6 +52,7 @@ export function updateHover(
   
   for (let i = 0; i < organisms.length; i++) {
     const org = organisms[i];
+    if (!org.grab) continue;
     const targetIntensity = (i === hoveredIndex && !org.grab.isGrabbed) ? 1 : 0;
     org.hoverIntensity += (targetIntensity - org.hoverIntensity) * cfg.hoverEaseSpeed;
   }
@@ -65,7 +66,7 @@ export function applyGrabSpringPhysics(
   if (grabbedIdx === null) return;
   
   const org = state.organisms[grabbedIdx];
-  if (!org.grab.isGrabbed) return;
+  if (!org || !org.grab || !org.grab.isGrabbed) return;
   
   const targetX = state.pointer.x + org.grab.offsetX;
   const targetY = state.pointer.y + org.grab.offsetY;
@@ -171,6 +172,9 @@ export function beginGrab(
   org.grab.offsetY = org.y - y;
   org.grab.springVx = 0;
   org.grab.springVy = 0;
+  
+  org.vx = 0;
+  org.vy = 0;
   
   state.grabbedOrganismIndex = idx;
   return true;
