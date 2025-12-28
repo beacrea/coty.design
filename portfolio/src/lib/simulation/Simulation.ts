@@ -112,7 +112,10 @@ export class Simulation {
       spawnBubbleStream(particles, org);
     }
     
-    while (organisms.length < cfg.organismCount) {
+    const deficit = cfg.organismCount - organisms.length;
+    const spawnCount = Math.min(deficit, 3);
+    
+    for (let s = 0; s < spawnCount; s++) {
       const edge = Math.floor(Math.random() * 4);
       let x: number, y: number;
       if (edge === 0) {
@@ -129,7 +132,7 @@ export class Simulation {
         y = Math.random() * height;
       }
       const newOrg = createOrganism(x, y, cfg);
-      newOrg.glow = 0.3;
+      newOrg.glow = 0.15;
       organisms.push(newOrg);
     }
   }
