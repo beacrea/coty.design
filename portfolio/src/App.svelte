@@ -152,6 +152,26 @@
   .observe-toggle svg {
     width: var(--icon-size);
     height: var(--icon-size);
+    transition: transform 0.3s ease;
+  }
+
+  .observe-active .observe-toggle svg {
+    animation: crystal-glow 0.4s ease-out;
+  }
+
+  @keyframes crystal-glow {
+    0% {
+      transform: scale(1);
+    }
+    30% {
+      transform: scale(1.2) rotate(15deg);
+    }
+    60% {
+      transform: scale(0.9) rotate(-5deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
   }
 
   .toggle-wrapper {
