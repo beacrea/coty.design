@@ -773,48 +773,34 @@
 
   function spawnBubbleStream(org: Organism): void {
     const speed = Math.sqrt(org.vx * org.vx + org.vy * org.vy);
-    if (speed < adaptedConfig.minSpeed * 0.5) return;
+    if (speed < adaptedConfig.minSpeed * 0.8) return;
     
     const speedRatio = speed / adaptedConfig.maxSpeed;
-    const bubbleChance = speedRatio * speedRatio * 0.4;
+    const bubbleChance = speedRatio * speedRatio * 0.08;
     if (Math.random() > bubbleChance) return;
     
     const forwardAngle = Math.atan2(org.vy, org.vx);
     const rearAngle = forwardAngle + Math.PI;
     
-    const sideOffset = (Math.random() - 0.5) * 0.5;
+    const sideOffset = (Math.random() - 0.5) * 0.3;
     const emitAngle = rearAngle + sideOffset;
     
-    const emitDist = org.size * (0.7 + Math.random() * 0.2);
+    const emitDist = org.size * (0.8 + Math.random() * 0.15);
     const emitX = org.x + Math.cos(emitAngle) * emitDist;
     const emitY = org.y + Math.sin(emitAngle) * emitDist;
     
-    const bubbleSpeed = speed * (0.3 + Math.random() * 0.2);
-    const spreadAngle = rearAngle + (Math.random() - 0.5) * 0.4;
+    const bubbleSpeed = speed * (0.2 + Math.random() * 0.15);
+    const spreadAngle = rearAngle + (Math.random() - 0.5) * 0.3;
     
     particles.push({
       x: emitX,
       y: emitY,
       vx: Math.cos(spreadAngle) * bubbleSpeed,
       vy: Math.sin(spreadAngle) * bubbleSpeed,
-      size: 0.4 + speedRatio * 0.8 + Math.random() * 0.6,
+      size: 0.5 + Math.random() * 0.6,
       life: 1,
-      maxLife: 20 + Math.floor(Math.random() * 15),
+      maxLife: 30 + Math.floor(Math.random() * 20),
     });
-    
-    if (speedRatio > 0.5 && Math.random() < speedRatio * 0.5) {
-      const extraAngle = rearAngle + (Math.random() - 0.5) * 0.6;
-      const extraDist = org.size * (0.6 + Math.random() * 0.3);
-      particles.push({
-        x: org.x + Math.cos(extraAngle) * extraDist,
-        y: org.y + Math.sin(extraAngle) * extraDist,
-        vx: Math.cos(extraAngle) * bubbleSpeed * 0.7,
-        vy: Math.sin(extraAngle) * bubbleSpeed * 0.7,
-        size: 0.3 + speedRatio * 0.5 + Math.random() * 0.4,
-        life: 1,
-        maxLife: 15 + Math.floor(Math.random() * 10),
-      });
-    }
   }
 
   function updateParticles(): void {
