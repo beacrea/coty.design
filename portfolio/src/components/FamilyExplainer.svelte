@@ -16,7 +16,7 @@
 <style>
   .family-section {
     margin-bottom: var(--section-spacing);
-    padding: 1.5rem;
+    padding: 1rem 1.5rem 1.5rem;
     border-radius: 0.75rem;
     background-color: var(--semantic-bullet);
     transition: background-color var(--transition-theme);
