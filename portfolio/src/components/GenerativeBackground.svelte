@@ -90,6 +90,9 @@
     wanderAngle: number;
     wanderRate: number;
     baseSpeed: number;
+    idlePhase: number;
+    idlePauseTimer: number;
+    isPaused: boolean;
     decayRate: number;
     minSize: number;
     maxSize: number;
@@ -107,6 +110,9 @@
       this.baseSpeed = speed;
       this.wanderAngle = angle;
       this.wanderRate = 0.004 + Math.random() * 0.008;
+      this.idlePhase = Math.random() * Math.PI * 2;
+      this.idlePauseTimer = 0;
+      this.isPaused = false;
       this.decayRate = 0.001 + Math.random() * 0.002;
       this.minSize = cfg.minSize * 0.5;
       this.maxSize = cfg.maxSize * 1.2;
@@ -358,12 +364,31 @@
     }
 
     update(canvasWidth: number, canvasHeight: number): void {
+      this.idlePhase += 0.008;
+      
+      if (this.idlePauseTimer > 0) {
+        this.idlePauseTimer--;
+        if (this.idlePauseTimer === 0) {
+          this.isPaused = false;
+          this.wanderAngle += (Math.random() - 0.5) * Math.PI * 0.5;
+        }
+      } else if (!this.isPaused && Math.random() < 0.0008) {
+        this.isPaused = true;
+        this.idlePauseTimer = 60 + Math.floor(Math.random() * 120);
+      }
+      
       this.wanderAngle += (Math.random() - 0.5) * this.wanderRate;
       
-      const desiredVx = Math.cos(this.wanderAngle) * this.baseSpeed;
-      const desiredVy = Math.sin(this.wanderAngle) * this.baseSpeed;
+      const bobX = Math.sin(this.idlePhase) * 0.0008;
+      const bobY = Math.cos(this.idlePhase * 0.7) * 0.0006;
       
-      const steerStrength = 0.02;
+      const pauseMultiplier = this.isPaused ? 0.15 : 1;
+      const targetSpeed = this.baseSpeed * pauseMultiplier;
+      
+      const desiredVx = Math.cos(this.wanderAngle) * targetSpeed + bobX;
+      const desiredVy = Math.sin(this.wanderAngle) * targetSpeed + bobY;
+      
+      const steerStrength = this.isPaused ? 0.01 : 0.02;
       this.vx += (desiredVx - this.vx) * steerStrength;
       this.vy += (desiredVy - this.vy) * steerStrength;
       
