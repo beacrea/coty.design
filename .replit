@@ -33,5 +33,5 @@ expertMode = true
 
 [deployment]
 deploymentTarget = "static"
-build = ["bash", "-c", "cd portfolio && npm run build"]
+build = ["npm", "run", "build", "--prefix", "portfolio"]
 publicDir = "portfolio/dist"
