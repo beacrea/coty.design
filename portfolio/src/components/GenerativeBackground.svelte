@@ -242,10 +242,8 @@
   }
 
   function applyProximityInteractions(): void {
-    const repulsionDistance = adaptedConfig.mergeDistance * 1.5;
     const alignmentDistance = adaptedConfig.connectionDistance * 0.6;
     const interactionDistance = adaptedConfig.mergeDistance;
-    const repulsionStrength = 0.0003;
     const alignmentStrength = 0.002;
     const spinInfluence = 0.00005;
 
@@ -260,22 +258,35 @@
         const nx = dx / distance;
         const ny = dy / distance;
 
-        if (distance < repulsionDistance) {
-          const force = (1 - distance / repulsionDistance) * repulsionStrength;
-          organisms[i].vx -= nx * force;
-          organisms[i].vy -= ny * force;
-          organisms[j].vx += nx * force;
-          organisms[j].vy += ny * force;
+        const combinedRadius = (organisms[i].size + organisms[j].size) * 0.6;
+        const collisionBuffer = combinedRadius * 1.2;
+
+        if (distance < collisionBuffer) {
+          const overlap = collisionBuffer - distance;
+          const separationForce = Math.min(overlap * 0.08, 0.5);
+          
+          organisms[i].vx -= nx * separationForce;
+          organisms[i].vy -= ny * separationForce;
+          organisms[j].vx += nx * separationForce;
+          organisms[j].vy += ny * separationForce;
+
+          if (distance < combinedRadius) {
+            const pushStrength = (combinedRadius - distance) * 0.15;
+            organisms[i].x -= nx * pushStrength;
+            organisms[i].y -= ny * pushStrength;
+            organisms[j].x += nx * pushStrength;
+            organisms[j].y += ny * pushStrength;
+          }
 
           const spinDelta = (organisms[j].rotationSpeed - organisms[i].rotationSpeed) * spinInfluence;
           organisms[i].rotationSpeed += spinDelta;
           organisms[j].rotationSpeed -= spinDelta;
         }
 
-        if (distance < alignmentDistance && distance > repulsionDistance) {
+        if (distance < alignmentDistance && distance > collisionBuffer) {
           const avgVx = (organisms[i].vx + organisms[j].vx) / 2;
           const avgVy = (organisms[i].vy + organisms[j].vy) / 2;
-          const blend = (1 - (distance - repulsionDistance) / (alignmentDistance - repulsionDistance)) * alignmentStrength;
+          const blend = (1 - (distance - collisionBuffer) / (alignmentDistance - collisionBuffer)) * alignmentStrength;
           
           organisms[i].vx += (avgVx - organisms[i].vx) * blend;
           organisms[i].vy += (avgVy - organisms[i].vy) * blend;
