@@ -471,10 +471,9 @@
       const vertexRadius = observationMode ? 2.2 : 2;
       const lobeVertexRadius = observationMode ? 1.7 : 1.5;
       
-      if (this.glow > 0) {
+      if (this.glow > 0 && observationMode) {
         const glowRadius = this.getBoundingRadius() * (1.5 + this.glow * 0.5);
-        const glowAlphaBase = observationMode ? 0.25 : 0.15;
-        const glowAlpha = this.glow * glowAlphaBase;
+        const glowAlpha = this.glow * 0.25;
         const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowRadius);
         gradient.addColorStop(0, getColor(glowAlpha));
         gradient.addColorStop(1, getColor(0));
