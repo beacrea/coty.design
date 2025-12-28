@@ -134,7 +134,7 @@
     transition: border-color var(--transition-toggle), transform var(--transition-toggle);
     z-index: 100;
     flex-shrink: 0;
-    color: var(--text-secondary);
+    color: var(--toggle-stroke);
   }
 
   .observe-toggle:hover {
