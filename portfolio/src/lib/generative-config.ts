@@ -8,6 +8,7 @@ export interface WorldConfig {
   mergeDistance: number;
   maxVertices: number;
   evolutionInterval: number;
+  evolutionChance: number;
   lineOpacity: {
     light: number;
     dark: number;
@@ -32,6 +33,7 @@ export const defaultWorldConfig: WorldConfig = {
   mergeDistance: 40,
   maxVertices: 7,
   evolutionInterval: 8000,
+  evolutionChance: 0.02,
   lineOpacity: {
     light: 0.06,
     dark: 0.08,

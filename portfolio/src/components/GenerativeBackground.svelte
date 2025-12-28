@@ -155,6 +155,28 @@
     canvas.height = window.innerHeight;
   }
 
+  function checkProximityEvolution(): void {
+    for (let i = 0; i < organisms.length; i++) {
+      for (let j = i + 1; j < organisms.length; j++) {
+        const dx = organisms[i].x - organisms[j].x;
+        const dy = organisms[i].y - organisms[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < config.mergeDistance) {
+          const evolveChance = (1 - distance / config.mergeDistance) * config.evolutionChance;
+          
+          if (Math.random() < evolveChance) {
+            if (organisms[i].vertices.length <= organisms[j].vertices.length) {
+              organisms[i].evolve(config.maxVertices);
+            } else {
+              organisms[j].evolve(config.maxVertices);
+            }
+          }
+        }
+      }
+    }
+  }
+
   function animate(timestamp: number): void {
     if (!ctx) return;
 
@@ -165,8 +187,13 @@
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    checkProximityEvolution();
+
     if (timestamp - lastEvolutionTime > config.evolutionInterval) {
-      organisms.forEach((org) => org.evolve(config.maxVertices));
+      const randomOrg = organisms[Math.floor(Math.random() * organisms.length)];
+      if (randomOrg && Math.random() < 0.15) {
+        randomOrg.evolve(config.maxVertices);
+      }
       lastEvolutionTime = timestamp;
     }
 
