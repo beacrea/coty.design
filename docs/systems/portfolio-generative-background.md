@@ -139,8 +139,9 @@ interface Organism {
 - Evolve over time (gain vertices) or through interactions
 - Can simplify (lose vertices) during certain interactions
 - Bounding radius capped at `maxSize × 1.5` (42px default)
-- **Death**: Organism dies when size < 60% of minSize or vertices < 3
-- **Respawn**: New organisms spawn from screen edges to maintain population count
+- **Death**: Organism dies when size < 80% of minSize or vertices < 3
+- **Accelerated decay**: Organisms near minSize (within 120%) decay at 2× normal rate
+- **Respawn**: New organisms spawn from screen edges based on population controller
 - **Death particles**: 8 particles spawn at death location
 
 ### Lobes
@@ -279,7 +280,7 @@ When organisms come within `mergeDistance`, random interactions may trigger:
 | **Lobe Exchange** | 8% | Transfer or create lobes |
 | **Pulse/Spin** | 10% | Size pulse and rotation sync |
 
-All interactions trigger bioluminescence glow (0.4-0.7 intensity).
+All interactions trigger subtle bioluminescence glow (0.15-0.3 intensity).
 
 ---
 
@@ -329,8 +330,10 @@ In observation mode, visual elements are slightly emphasized:
 
 Organisms glow when stimulated:
 
-- **Trigger sources**: Eating food (0.8), interactions (0.4-0.7)
-- **Rendering**: Radial gradient around organism center
+- **Trigger sources**: Eating food (0.12), interactions (0.15-0.3)
+- **Rendering**: Radial gradient around organism center, clamped to 40% max intensity
+- **Radius**: 1.1-1.18× organism bounding radius (subtle halo)
+- **Opacity**: 10% of glow value (very subtle effect)
 - **Decay**: 96% per frame (soft fade over ~25 frames)
 - **Color**: Theme-aware, matches organism stroke color (or hue in observation mode)
 
@@ -414,9 +417,39 @@ interface WorldConfig {
   // Visual theming
   lineContrast: { light: number; dark: number };
   vertexContrast: { light: number; dark: number };
-  blur: number;                 // Default: 0
+
+  // Population control
+  populationTarget: number;        // Default: 16 — desired organism count
+  populationAggressiveness: number; // Default: 0.5 (0-1) — how strongly to push toward target
 }
 ```
+
+### Population Control System
+
+The simulation uses a proportional controller to maintain organism density:
+
+**Parameters:**
+- `populationTarget` — The desired number of organisms (default: 16)
+- `populationAggressiveness` — How strongly to push toward target (0-1, default: 0.5)
+
+**How it works:**
+
+1. **Error calculation**: `error = (target - currentCount) / target`
+
+2. **Birth pressure** (when below target):
+   - Accumulates fractionally each frame based on error and aggressiveness
+   - When accumulator reaches 1+, spawns organisms (up to 3 per frame)
+   - Higher aggressiveness = faster spawning
+
+3. **Death pressure** (when above target):
+   - Increases decay rate multiplier for all organisms
+   - Uses exponential smoothing to prevent oscillations
+   - Higher aggressiveness = faster culling
+
+**Aggressiveness tuning:**
+- `0.2` — Gentle, population drifts slowly toward target
+- `0.5` — Balanced (default), responsive but stable
+- `0.8` — Aggressive, quickly snaps to target
 
 ### Adaptive Configuration
 
@@ -434,7 +467,7 @@ The component adapts config based on viewport:
 
 - **Device pixel ratio**: Capped at 2× for performance
 - **Logical vs physical**: Canvas scales for retina while maintaining logical coordinates
-- **Resize handling**: Full re-initialization on viewport change
+- **Resize handling**: Preserves simulation state, scales entity positions proportionally
 
 ### Optimization Strategies
 

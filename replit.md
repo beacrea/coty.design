@@ -72,10 +72,11 @@ The portfolio features a subtle canvas-based generative background (`GenerativeB
 **Key Features**:
 - Boids-style flocking behavior (cohesion, alignment, separation)
 - Food competition system with aggressive speed boosts
-- Bioluminescence glow on eating and interactions
+- Subtle bioluminescence glow on eating and interactions
 - Depth layers with 40-100% opacity variation
 - Environmental bubbles following flow field currents
 - Lobes, tendrils, chain links, and internal spokes
+- Population density control with configurable target and aggressiveness
 
 **Configuration**: `src/lib/generative-config.ts`
 
