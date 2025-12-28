@@ -106,7 +106,7 @@
       this.wanderRate = 0.004 + Math.random() * 0.008;
       this.decayRate = 0.001 + Math.random() * 0.002;
       this.minSize = cfg.minSize * 0.5;
-      this.maxSize = cfg.maxSize * 1.5;
+      this.maxSize = cfg.maxSize * 1.2;
       const baseSize = cfg.minSize + Math.random() * (cfg.maxSize - cfg.minSize);
       const sizeMultiplier = 1 + (Math.random() - 0.5) * 2 * cfg.sizeVariation;
       this.size = Math.max(cfg.minSize * 0.5, Math.min(cfg.maxSize * 1.5, baseSize * sizeMultiplier));
@@ -131,14 +131,32 @@
 
     createLobe(cfg: WorldConfig): Lobe {
       const lobeVertexCount = 3 + Math.floor(Math.random() * 2);
-      const lobeSize = 0.3 + Math.random() * 0.4;
+      const lobeSize = 0.2 + Math.random() * 0.3;
       return {
         offsetAngle: Math.random() * Math.PI * 2,
-        offsetDistance: 0.7 + Math.random() * 0.5,
+        offsetDistance: 0.5 + Math.random() * 0.35,
         vertices: this.createVertices(lobeVertexCount),
         size: lobeSize,
         rotationOffset: Math.random() * Math.PI * 2,
       };
+    }
+
+    getBoundingRadius(): number {
+      let maxRadius = this.size;
+      for (const lobe of this.lobes) {
+        const lobeReach = this.size * lobe.offsetDistance + this.size * lobe.size;
+        maxRadius = Math.max(maxRadius, lobeReach);
+      }
+      return maxRadius;
+    }
+
+    enforceMaxBounds(maxBoundingRadius: number): void {
+      const currentRadius = this.getBoundingRadius();
+      if (currentRadius > maxBoundingRadius) {
+        const scale = maxBoundingRadius / currentRadius;
+        this.size *= scale;
+        this.size = Math.max(this.minSize, this.size);
+      }
     }
 
     growTendril(targetX: number, targetY: number): void {
@@ -1122,9 +1140,11 @@
 
     drawFoodSources(ctx, strokeColor, lineAlpha);
 
+    const maxBoundingRadius = adaptedConfig.maxSize * 1.5;
     organisms.forEach((org) => {
       org.update(logicalWidth, logicalHeight);
       org.updateTendril();
+      org.enforceMaxBounds(maxBoundingRadius);
       spawnBubbleStream(org);
       org.draw(ctx!, strokeColor, lineAlpha, vertexAlpha);
     });
