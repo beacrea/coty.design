@@ -8,7 +8,9 @@ export function drawParticles(
 ): void {
   particles.forEach((p) => {
     const depthFade = 0.4 + p.depth * 0.6;
-    const alpha = p.life * baseAlpha * 0.6 * depthFade;
+    const minAlpha = 0.08;
+    const effectiveBase = Math.max(baseAlpha, minAlpha);
+    const alpha = p.life * effectiveBase * depthFade;
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
     ctx.fillStyle = `rgba(${strokeColor}, ${alpha})`;

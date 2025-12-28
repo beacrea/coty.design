@@ -42,11 +42,11 @@ export function spawnAmbientBubbles(
   particles: Particle[],
   width: number,
   height: number,
-  maxParticles: number = 80
+  maxParticles: number = 120
 ): void {
   if (particles.length >= maxParticles) return;
   
-  if (Math.random() < 0.03) {
+  if (Math.random() < 0.06) {
     const edge = Math.floor(Math.random() * 4);
     let x: number, y: number;
     if (edge === 0) {
@@ -66,25 +66,25 @@ export function spawnAmbientBubbles(
     particles.push({
       x,
       y,
-      vx: (Math.random() - 0.5) * 0.2,
-      vy: (Math.random() - 0.5) * 0.2,
-      size: 0.15 + Math.random() * 0.6,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25,
+      size: 0.8 + Math.random() * 1.5,
       life: 1,
-      maxLife: 200 + Math.floor(Math.random() * 100),
-      depth: 0.2 + Math.random() * 0.3,
+      maxLife: 300 + Math.floor(Math.random() * 150),
+      depth: 0.3 + Math.random() * 0.4,
     });
   }
   
-  if (Math.random() < 0.01) {
+  if (Math.random() < 0.03) {
     particles.push({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.1,
-      vy: (Math.random() - 0.5) * 0.1,
-      size: 0.1 + Math.random() * 0.4,
+      vx: (Math.random() - 0.5) * 0.12,
+      vy: (Math.random() - 0.5) * 0.12,
+      size: 0.4 + Math.random() * 1.0,
       life: 1,
-      maxLife: 150 + Math.floor(Math.random() * 100),
-      depth: 0.1 + Math.random() * 0.2,
+      maxLife: 200 + Math.floor(Math.random() * 150),
+      depth: 0.2 + Math.random() * 0.3,
     });
   }
 }
