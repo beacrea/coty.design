@@ -84,7 +84,7 @@ export class Simulation {
     
     this.state.birthAccumulator += birthPressure;
     
-    applyFlocking(organisms, cfg, this.state.grabbedOrganismIndex);
+    applyFlocking(organisms, cfg, this.state.grabbedOrganismIndex ?? -1);
     applyCollisionSeparation(organisms);
     
     const interactionResult = applyProximityInteractions(organisms, cfg);
@@ -183,7 +183,13 @@ export class Simulation {
     const lineAlpha = Math.min(1, getAlphaFromContrast(lineContrast) * contrastMultiplier);
     const vertexAlpha = Math.min(1, getAlphaFromContrast(vertexContrast) * contrastMultiplier);
     
-    ctx.clearRect(0, 0, width, height);
+    const hueShift = Math.sin(this.state.currentTime * 0.00008) * 8;
+    const baseLightness = isDark ? 8 : 97;
+    const baseChroma = isDark ? 0.015 : 0.012;
+    const baseHue = 220 + hueShift;
+    
+    ctx.fillStyle = `oklch(${baseLightness}% ${baseChroma} ${baseHue})`;
+    ctx.fillRect(0, 0, width, height);
     
     drawFoodSources(ctx, foodSources, cfg, strokeColor, lineAlpha, isDark);
     

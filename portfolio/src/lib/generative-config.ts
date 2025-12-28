@@ -177,11 +177,11 @@ export const defaultStructuredConfig: StructuredConfig = {
     maxChainLinkPool: 50,
   },
   population: {
-    target: 16,
+    target: 20,
     aggressiveness: 0.5,
-    densityPerPixel: 90000,
-    minTarget: 8,
-    maxTarget: 40,
+    densityPerPixel: 50000,
+    minTarget: 12,
+    maxTarget: 50,
   },
   organelles: {
     spawnChance: 0.25,
