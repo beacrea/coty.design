@@ -32,7 +32,7 @@
   --page-padding-x: 27.65px;
   --page-padding-top: 47.78px;
   --page-padding-bottom: 33.178px;
-  --content-max-width: 320px;
+  --content-max-width: 100%;
   --section-spacing: 47.776px;
   
   --toggle-size: 49.77px;
@@ -72,9 +72,9 @@
     --text-size-body: 18px;
     --text-size-caption: 15px;
     
-    --page-padding-x: 31.1px;
+    --page-padding-x: 48px;
     --page-padding-top: 64.5px;
-    --content-max-width: 580px;
+    --content-max-width: 540px;
     --section-spacing: 53.748px;
   }
 }
@@ -87,10 +87,17 @@
     --text-size-body: 20px;
     --text-size-caption: 16.667px;
     
-    --page-padding-x: 34.56px;
-    --page-padding-top: 103.2px;
-    --content-max-width: 640px;
+    --page-padding-x: 64px;
+    --page-padding-top: 80px;
+    --content-max-width: 720px;
     --section-spacing: 59.72px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root, .dark {
+    --content-max-width: 800px;
+    --page-padding-x: 80px;
   }
 }
 
