@@ -340,9 +340,21 @@
       this.vx += (desiredVx - this.vx) * steerStrength;
       this.vy += (desiredVy - this.vy) * steerStrength;
       
+      const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+      if (speed > 0.01) {
+        const movementAngle = Math.atan2(this.vy, this.vx);
+        let angleDiff = movementAngle - this.rotation;
+        while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+        while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+        const alignStrength = Math.min(0.08, 0.015 + speed * 0.02);
+        this.rotationSpeed += angleDiff * alignStrength * 0.1;
+      }
+      
+      this.rotationSpeed *= 0.92;
+      
       if (this.stabilizing > 0) {
         this.stabilizing--;
-        this.rotationSpeed *= 0.92;
+        this.rotationSpeed *= 0.85;
       }
       
       this.x += this.vx;
