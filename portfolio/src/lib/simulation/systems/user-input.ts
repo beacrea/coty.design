@@ -68,6 +68,19 @@ export function applyGrabSpringPhysics(
   const org = state.organisms[grabbedIdx];
   if (!org || !org.grab || !org.grab.isGrabbed) return;
   
+  const pointerMoved = Math.abs(state.pointer.velocity.x) > 0.5 || 
+                       Math.abs(state.pointer.velocity.y) > 0.5;
+  
+  if (!org.grab.isDragging && pointerMoved) {
+    org.grab.isDragging = true;
+  }
+  
+  if (!org.grab.isDragging) {
+    org.vx = 0;
+    org.vy = 0;
+    return;
+  }
+  
   const targetX = state.pointer.x + org.grab.offsetX;
   const targetY = state.pointer.y + org.grab.offsetY;
   
@@ -172,6 +185,7 @@ export function beginGrab(
   
   const org = state.organisms[idx];
   org.grab.isGrabbed = true;
+  org.grab.isDragging = false;
   org.grab.pointerId = pointerId;
   org.grab.offsetX = org.x - x;
   org.grab.offsetY = org.y - y;
