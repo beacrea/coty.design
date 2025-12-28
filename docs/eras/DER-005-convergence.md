@@ -12,6 +12,34 @@ The guiding belief: **A portfolio should demonstrate craft through its execution
 
 This version also acknowledges a shifting audience. AI agents increasingly crawl and interpret web content alongside human visitors. The design must communicate effectively to both, treating machine readability as a first-class concern rather than an afterthought.
 
+## Context: The Paradigm Shift
+
+Version 5 emerges at a unique inflection point in design and technology. Several converging forces reshape how we think about creating for the web:
+
+### Perceptual Color Science
+
+Color management has evolved from intuitive adjustment to mathematical precision. OKLCH and similar perceptually uniform color spaces (OKLab, CAM16) enable designers to reason about color relationships with confidence. Contrast ratios become predictable. Theme variations become systematic rather than artisanal.
+
+### Design Token Maturation
+
+The DTCG (Design Tokens Community Group) specification represents a decade of industry learning about design systems. Tokens are no longer ad-hoc variables but structured, typed, portable artifacts with clear semantics. This formalization enables tooling, automation, and cross-platform consistency that wasn't possible before.
+
+### Spec and Context-Driven Development
+
+Modern development increasingly relies on specifications and context rather than implicit knowledge. Type systems, schema validation, and structured documentation create explicit contracts. AI coding assistants amplify this shift—they work best when context is clear, structured, and machine-readable.
+
+### AI as Consumer, Filter, and Coconspirator
+
+Perhaps the most significant shift: AI systems now participate at every level of content creation and consumption.
+
+- **As consumer:** AI agents crawl, index, and interpret web content. They summarize portfolios, answer questions about professional backgrounds, and surface information in novel contexts. Content must be structured for machine comprehension.
+
+- **As filter:** AI increasingly mediates discovery. Search results, recommendations, and summaries are shaped by AI interpretation. How content is parsed affects how it's received.
+
+- **As coconspirator:** AI tools participate in the creative process itself. This documentation was developed collaboratively with AI. The code was written with AI assistance. The design decisions were refined through AI dialogue. This changes authorship, iteration speed, and the nature of craft.
+
+This paradigm shift doesn't diminish human judgment—it amplifies it. The designer's role evolves from executor to curator, from author to editor, from craftsperson to conductor. Technical choices become more consequential because they determine how well human intent survives translation through AI systems.
+
 ## Goals
 
 1. **Perceptual color accuracy** — Use OKLCH color space for mathematically uniform contrast across light and dark themes
@@ -98,3 +126,4 @@ This version also acknowledges a shifting audience. AI agents increasingly crawl
 ---
 
 _Last updated: 2024-12-28_
+_Revised: Added paradigm shift context_
