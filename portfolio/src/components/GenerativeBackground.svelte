@@ -103,7 +103,7 @@
       this.vy = Math.sin(angle) * speed;
       this.baseSpeed = speed;
       this.wanderAngle = angle;
-      this.wanderRate = 0.01 + Math.random() * 0.02;
+      this.wanderRate = 0.004 + Math.random() * 0.008;
       this.decayRate = 0.001 + Math.random() * 0.002;
       this.minSize = cfg.minSize * 0.5;
       this.maxSize = cfg.maxSize * 1.5;
@@ -111,7 +111,7 @@
       const sizeMultiplier = 1 + (Math.random() - 0.5) * 2 * cfg.sizeVariation;
       this.size = Math.max(cfg.minSize * 0.5, Math.min(cfg.maxSize * 1.5, baseSize * sizeMultiplier));
       this.rotation = Math.random() * Math.PI * 2;
-      this.rotationSpeed = (Math.random() - 0.5) * 0.003;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.001;
       this.age = 0;
       this.tendril = null;
       this.spokeIntensity = 0.3 + Math.random() * 0.4;
@@ -597,9 +597,9 @@
   function applyFoodAttraction(timestamp: number): void {
     spawnRandomFood(timestamp);
 
-    const noticeDistance = 350;
-    const speedBoostMax = 5;
-    const aggressionDistance = 120;
+    const noticeDistance = 180;
+    const speedBoostMax = 6;
+    const aggressionDistance = 80;
 
     for (let i = foodSources.length - 1; i >= 0; i--) {
       const food = foodSources[i];
