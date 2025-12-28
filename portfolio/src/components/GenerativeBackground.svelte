@@ -720,30 +720,47 @@
     }
   }
 
-  function spawnJetStream(org: Organism): void {
+  function spawnBubbleStream(org: Organism): void {
     const speed = Math.sqrt(org.vx * org.vx + org.vy * org.vy);
-    if (speed < adaptedConfig.minSpeed * 1.5) return;
+    if (speed < adaptedConfig.minSpeed * 1.2) return;
     
-    const jetChance = Math.min(0.4, speed / adaptedConfig.maxSpeed * 0.5);
-    if (Math.random() > jetChance) return;
+    const bubbleChance = Math.min(0.35, speed / adaptedConfig.maxSpeed * 0.4);
+    if (Math.random() > bubbleChance) return;
     
-    const jetAngle = Math.atan2(-org.vy, -org.vx);
-    const spread = 0.4;
-    const particleCount = Math.min(3, 1 + Math.floor(speed / adaptedConfig.maxSpeed * 2));
+    const forwardAngle = Math.atan2(org.vy, org.vx);
+    const rearAngle = forwardAngle + Math.PI;
     
-    for (let i = 0; i < particleCount; i++) {
-      const angle = jetAngle + (Math.random() - 0.5) * spread;
-      const jetSpeed = 0.5 + Math.random() * 0.8;
-      const offsetDist = org.size * 0.4;
-      
+    const sideOffset = (Math.random() < 0.5 ? 1 : -1) * (0.3 + Math.random() * 0.4);
+    const emitAngle = rearAngle + sideOffset;
+    
+    const emitDist = org.size * (0.6 + Math.random() * 0.3);
+    const emitX = org.x + Math.cos(emitAngle) * emitDist;
+    const emitY = org.y + Math.sin(emitAngle) * emitDist;
+    
+    const driftAngle = rearAngle + (Math.random() - 0.5) * 0.6;
+    const driftSpeed = 0.15 + Math.random() * 0.25;
+    
+    particles.push({
+      x: emitX,
+      y: emitY,
+      vx: Math.cos(driftAngle) * driftSpeed + org.vx * 0.1,
+      vy: Math.sin(driftAngle) * driftSpeed + org.vy * 0.1,
+      size: 0.6 + Math.random() * 1.4,
+      life: 1,
+      maxLife: 25 + Math.floor(Math.random() * 20),
+    });
+    
+    if (speed > adaptedConfig.maxSpeed * 0.6 && Math.random() < 0.4) {
+      const extraAngle = rearAngle + (Math.random() - 0.5) * 0.8;
+      const extraDist = org.size * (0.5 + Math.random() * 0.4);
       particles.push({
-        x: org.x + Math.cos(jetAngle) * offsetDist,
-        y: org.y + Math.sin(jetAngle) * offsetDist,
-        vx: Math.cos(angle) * jetSpeed,
-        vy: Math.sin(angle) * jetSpeed,
-        size: 0.8 + Math.random() * 1.2,
+        x: org.x + Math.cos(extraAngle) * extraDist,
+        y: org.y + Math.sin(extraAngle) * extraDist,
+        vx: Math.cos(extraAngle) * driftSpeed * 0.8,
+        vy: Math.sin(extraAngle) * driftSpeed * 0.8,
+        size: 0.4 + Math.random() * 0.8,
         life: 1,
-        maxLife: 15 + Math.floor(Math.random() * 15),
+        maxLife: 18 + Math.floor(Math.random() * 12),
       });
     }
   }
@@ -1074,7 +1091,7 @@
     organisms.forEach((org) => {
       org.update(logicalWidth, logicalHeight);
       org.updateTendril();
-      spawnJetStream(org);
+      spawnBubbleStream(org);
       org.draw(ctx!, strokeColor, lineAlpha, vertexAlpha);
     });
 
