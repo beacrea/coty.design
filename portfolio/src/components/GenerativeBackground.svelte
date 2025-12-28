@@ -112,6 +112,7 @@
   
   function handlePointerDown(e: PointerEvent): void {
     if (!simulation) return;
+    e.preventDefault();
     const coords = getCanvasCoords(e);
     if (simulation.beginGrab(coords.x, coords.y, e.pointerId)) {
       canvas.setPointerCapture(e.pointerId);
@@ -126,6 +127,7 @@
   
   function handlePointerUp(e: PointerEvent): void {
     if (!simulation) return;
+    e.preventDefault();
     simulation.endGrab();
     canvas.releasePointerCapture(e.pointerId);
   }
@@ -192,6 +194,12 @@
     pointer-events: auto;
     touch-action: none;
     cursor: grab;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
   }
   
   .generative-background:active {
