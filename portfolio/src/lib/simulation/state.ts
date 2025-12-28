@@ -122,6 +122,8 @@ export function createSimulationState(width: number, height: number, cfg: Simula
     currentTime: 0,
     width,
     height,
+    birthAccumulator: 0,
+    deathMultiplier: 1,
   };
 }
 

@@ -42,6 +42,11 @@ export interface PoolingConfig {
   maxChainLinkPool: number;
 }
 
+export interface PopulationConfig {
+  target: number;
+  aggressiveness: number;
+}
+
 export interface WorldConfig {
   organismCount: number;
   minSize: number;
@@ -65,6 +70,8 @@ export interface WorldConfig {
   maxFoodSources: number;
   lineContrast: { light: number; dark: number };
   vertexContrast: { light: number; dark: number };
+  populationTarget: number;
+  populationAggressiveness: number;
 }
 
 export interface StructuredConfig {
@@ -74,6 +81,7 @@ export interface StructuredConfig {
   food: FoodConfig;
   visual: VisualConfig;
   pooling: PoolingConfig;
+  population: PopulationConfig;
 }
 
 function contrastToAlpha(contrastRatio: number): number {
@@ -125,6 +133,10 @@ export const defaultStructuredConfig: StructuredConfig = {
     maxChainLinks: 20,
     maxChainLinkPool: 50,
   },
+  population: {
+    target: 16,
+    aggressiveness: 0.5,
+  },
 };
 
 export function structuredToWorldConfig(structured: StructuredConfig): WorldConfig {
@@ -151,6 +163,8 @@ export function structuredToWorldConfig(structured: StructuredConfig): WorldConf
     maxFoodSources: structured.food.maxSources,
     lineContrast: structured.visual.lineContrast,
     vertexContrast: structured.visual.vertexContrast,
+    populationTarget: structured.population.target,
+    populationAggressiveness: structured.population.aggressiveness,
   };
 }
 
@@ -189,6 +203,10 @@ export function worldConfigToStructured(config: WorldConfig): StructuredConfig {
       vertexContrast: config.vertexContrast,
     },
     pooling: defaultStructuredConfig.pooling,
+    population: {
+      target: config.populationTarget,
+      aggressiveness: config.populationAggressiveness,
+    },
   };
 }
 

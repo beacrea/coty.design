@@ -85,6 +85,8 @@ export interface SimulationState {
   currentTime: number;
   width: number;
   height: number;
+  birthAccumulator: number;
+  deathMultiplier: number;
 }
 
 export interface SimulationConfig {
@@ -110,6 +112,8 @@ export interface SimulationConfig {
   maxFoodSources: number;
   lineContrast: { light: number; dark: number };
   vertexContrast: { light: number; dark: number };
+  populationTarget: number;
+  populationAggressiveness: number;
 }
 
 export interface RenderContext {
