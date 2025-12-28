@@ -17,6 +17,7 @@ export interface WorldConfig {
     light: number;
     dark: number;
   };
+  blur: number;
 }
 
 function contrastToAlpha(contrastRatio: number): number {
@@ -48,4 +49,5 @@ export const defaultWorldConfig: WorldConfig = {
     light: 1.1,
     dark: 1.15,
   },
+  blur: 0,
 };

@@ -260,6 +260,12 @@
 
     ctx.clearRect(0, 0, logicalWidth, logicalHeight);
 
+    if (adaptedConfig.blur > 0) {
+      ctx.filter = `blur(${adaptedConfig.blur}px)`;
+    } else {
+      ctx.filter = 'none';
+    }
+
     checkProximityEvolution();
 
     if (timestamp - lastEvolutionTime > adaptedConfig.evolutionInterval) {
@@ -276,6 +282,8 @@
     });
 
     drawConnections(ctx, organisms, adaptedConfig, isDark);
+
+    ctx.filter = 'none';
 
     animationId = requestAnimationFrame(animate);
   }
