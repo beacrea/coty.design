@@ -131,9 +131,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: border-color var(--transition-toggle), transform var(--transition-toggle);
+    transition: border-color var(--transition-toggle), transform var(--transition-toggle), color var(--transition-toggle);
     z-index: 100;
     flex-shrink: 0;
+    color: var(--toggle-rays);
+  }
+
+  :global(.dark) .observe-toggle {
     color: var(--toggle-stroke);
   }
 
