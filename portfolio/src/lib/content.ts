@@ -54,6 +54,13 @@ export const siteContent = {
     ]
   },
   
+  familyExplainer: {
+    heading: "Still confused about what I do?",
+    description: "If you're family and you still think I just \"work with computers\" after reading all that — I get it. I built an AI assistant that can explain my work in plain English. Ask it anything. Yes, even \"but what do you actually DO all day?\"",
+    buttonText: "Ask My AI Assistant",
+    buttonUrl: "https://ask.coty.design"
+  },
+
   connect: {
     heading: "Connect",
     items: [
