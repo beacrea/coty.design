@@ -268,13 +268,28 @@ Organisms are assigned hues from an underwater palette during initialization:
 Each hue includes ±10 degrees of variation for natural diversity.
 
 **Rendering in Observation Mode**:
+
+Colors are theme-aware for optimal contrast:
+
+*Dark Theme* (organisms should pop against dark background):
 ```
-saturation = 60% + (depth × 20%)  // 60-80%
-lightness = 45% + (depth × 15%)   // 45-60%
-color = hsla(hue, saturation, lightness, alpha)
+saturation = 70% + (depth × 20%)  // 70-90%
+lightness = 62% + (depth × 20%)   // 62-82%
+```
+
+*Light Theme* (organisms as colored silhouettes):
+```
+saturation = 55% + (depth × 15%)  // 55-70%
+lightness = 35% + (depth × 15%)   // 35-50%
 ```
 
 Deeper organisms appear more vivid; shallower ones are softer.
+
+**Enhanced Visibility**:
+In observation mode, visual elements are slightly emphasized:
+- Stroke width: 1.4px (main body), 1.0px (lobes) vs 1px/0.8px normally
+- Vertex radius: 2.2px (main), 1.7px (lobes) vs 2px/1.5px normally
+- Glow alpha: 0.25 vs 0.15 normally
 
 ### Bioluminescence
 
