@@ -115,8 +115,7 @@ function fuseWith(larger: OrganismData, smaller: OrganismData, cfg: SimulationCo
   larger.vertices.sort((a, b) => a.angle - b.angle);
   
   larger.size = Math.min(larger.maxSize, larger.size + smaller.size * 0.25);
-  smaller.size *= 0.7;
-  smaller.size = Math.max(smaller.minSize, smaller.size);
+  smaller.size *= 0.6;
   larger.spokeIntensity = Math.min(0.9, larger.spokeIntensity + 0.15);
   
   if (larger.lobes.length < maxLobes && Math.random() < 0.4) {
@@ -139,7 +138,7 @@ function simplify(org: OrganismData): void {
 
 function pulseSize(org: OrganismData, factor: number): void {
   org.size *= factor;
-  org.size = Math.max(org.minSize, Math.min(org.maxSize, org.size));
+  org.size = Math.min(org.maxSize, org.size);
 }
 
 export function applyProximityInteractions(

@@ -56,10 +56,9 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
     if (org.glow < 0.01) org.glow = 0;
   }
   
-  if (org.size > org.minSize) {
-    org.size -= org.decayRate;
-    org.size = Math.max(org.minSize, org.size);
-  }
+  const sizeRatio = org.size / org.minSize;
+  const decayMultiplier = sizeRatio < 1.2 ? 2.0 : 1.0;
+  org.size -= org.decayRate * decayMultiplier;
 
   const margin = org.size;
   if (org.x < -margin) org.x = width + margin;
@@ -94,7 +93,6 @@ export function enforceMaxBounds(org: OrganismData, maxBoundingRadius: number): 
   if (maxRadius > maxBoundingRadius) {
     const scale = maxBoundingRadius / maxRadius;
     org.size *= scale;
-    org.size = Math.max(org.minSize, org.size);
   }
 }
 
