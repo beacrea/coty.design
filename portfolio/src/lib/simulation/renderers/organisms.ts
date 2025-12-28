@@ -42,9 +42,10 @@ export function drawOrganism(
   const vertexRadius = observationMode ? 2.2 : 2;
   const lobeVertexRadius = observationMode ? 1.7 : 1.5;
   
-  if (org.glow > 0 && observationMode) {
-    const glowRadius = getBoundingRadius(org) * (1.5 + org.glow * 0.5);
-    const glowAlpha = org.glow * 0.25;
+  if (org.glow > 0.05 && observationMode) {
+    const clampedGlow = Math.min(org.glow, 0.4);
+    const glowRadius = getBoundingRadius(org) * (1.1 + clampedGlow * 0.2);
+    const glowAlpha = clampedGlow * 0.1;
     const gradient = ctx.createRadialGradient(org.x, org.y, 0, org.x, org.y, glowRadius);
     gradient.addColorStop(0, getOrgColor(glowAlpha));
     gradient.addColorStop(1, getOrgColor(0));

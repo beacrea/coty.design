@@ -19,8 +19,8 @@ function growTendril(org: OrganismData, targetX: number, targetY: number): void 
       targetX,
       targetY,
       length: 0,
-      maxLength: Math.min(dist * 0.6, org.size * 1.5),
-      curveOffset: (Math.random() - 0.5) * 20,
+      maxLength: Math.min(dist * 0.3, org.size * 0.8),
+      curveOffset: (Math.random() - 0.5) * 10,
       decaying: false,
     };
   }
