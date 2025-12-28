@@ -65,6 +65,7 @@ export const siteContent = {
   
   metadata: {
     legal: "© Coty Beasley 2025",
-    version: "v5.0.1"
+    version: `v${__APP_VERSION__}`,
+    versionUrl: `https://github.com/beacrea/coty.design/releases/tag/portfolio-v${__APP_VERSION__}`
   }
 };
