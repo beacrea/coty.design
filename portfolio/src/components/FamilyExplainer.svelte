@@ -48,23 +48,32 @@
   }
 
   .cta-button {
-    display: inline-block;
+    display: block;
+    width: 100%;
     padding: 0.75rem 1.25rem;
     font-size: var(--text-size-body);
     font-weight: 500;
+    text-align: center;
     color: oklch(1 0 0);
-    background-color: oklch(0.45 0.15 260);
+    background-color: var(--semantic-header);
     border-radius: 0.5rem;
     text-decoration: none;
     transition: background-color 0.2s ease, transform 0.15s ease;
   }
 
   .cta-button:hover {
-    background-color: oklch(0.5 0.15 260);
+    background-color: var(--semantic-link-hover);
     transform: translateY(-1px);
   }
 
   .cta-button:active {
     transform: translateY(0);
+  }
+
+  @media (min-width: 640px) {
+    .cta-button {
+      display: inline-block;
+      width: auto;
+    }
   }
 </style>
