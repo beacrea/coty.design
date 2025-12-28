@@ -38,15 +38,45 @@ export function spawnParticles(
   }
 }
 
+export function initializeAmbientBubbles(
+  particles: Particle[],
+  width: number,
+  height: number,
+  count: number = 40
+): void {
+  for (let i = 0; i < count; i++) {
+    const sizeRoll = Math.random();
+    let size: number;
+    if (sizeRoll < 0.5) {
+      size = 1.0 + Math.random() * 1.5;
+    } else if (sizeRoll < 0.8) {
+      size = 2.0 + Math.random() * 2.0;
+    } else {
+      size = 3.5 + Math.random() * 2.5;
+    }
+    
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.08,
+      vy: (Math.random() - 0.5) * 0.08,
+      size,
+      life: 0.3 + Math.random() * 0.7,
+      maxLife: 800 + Math.floor(Math.random() * 600),
+      depth: 0.2 + Math.random() * 0.5,
+    });
+  }
+}
+
 export function spawnAmbientBubbles(
   particles: Particle[],
   width: number,
   height: number,
-  maxParticles: number = 120
+  maxParticles: number = 80
 ): void {
   if (particles.length >= maxParticles) return;
   
-  if (Math.random() < 0.06) {
+  if (Math.random() < 0.04) {
     const edge = Math.floor(Math.random() * 4);
     let x: number, y: number;
     if (edge === 0) {
@@ -63,28 +93,46 @@ export function spawnAmbientBubbles(
       y = Math.random() * height;
     }
     
+    const sizeRoll = Math.random();
+    let size: number;
+    if (sizeRoll < 0.5) {
+      size = 1.0 + Math.random() * 1.5;
+    } else if (sizeRoll < 0.8) {
+      size = 2.0 + Math.random() * 2.0;
+    } else {
+      size = 3.5 + Math.random() * 2.5;
+    }
+    
     particles.push({
       x,
       y,
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: (Math.random() - 0.5) * 0.25,
-      size: 0.8 + Math.random() * 1.5,
+      vx: (Math.random() - 0.5) * 0.15,
+      vy: (Math.random() - 0.5) * 0.15,
+      size,
       life: 1,
-      maxLife: 300 + Math.floor(Math.random() * 150),
-      depth: 0.3 + Math.random() * 0.4,
+      maxLife: 800 + Math.floor(Math.random() * 600),
+      depth: 0.2 + Math.random() * 0.5,
     });
   }
   
-  if (Math.random() < 0.03) {
+  if (Math.random() < 0.015) {
+    const sizeRoll = Math.random();
+    let size: number;
+    if (sizeRoll < 0.6) {
+      size = 0.8 + Math.random() * 1.2;
+    } else {
+      size = 1.5 + Math.random() * 2.0;
+    }
+    
     particles.push({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.12,
-      vy: (Math.random() - 0.5) * 0.12,
-      size: 0.4 + Math.random() * 1.0,
+      vx: (Math.random() - 0.5) * 0.06,
+      vy: (Math.random() - 0.5) * 0.06,
+      size,
       life: 1,
-      maxLife: 200 + Math.floor(Math.random() * 150),
-      depth: 0.2 + Math.random() * 0.3,
+      maxLife: 600 + Math.floor(Math.random() * 500),
+      depth: 0.15 + Math.random() * 0.35,
     });
   }
 }

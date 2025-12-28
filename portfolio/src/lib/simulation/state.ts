@@ -167,9 +167,11 @@ export function createSimulationState(width: number, height: number, cfg: Simula
     foodSources.push(createFoodSource(width, height));
   }
 
+  const particles: import('./types').Particle[] = [];
+  
   return {
     organisms,
-    particles: [],
+    particles,
     chainLinks: [],
     foodSources,
     lastEvolutionTime: 0,

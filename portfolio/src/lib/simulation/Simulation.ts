@@ -3,7 +3,7 @@ import { createSimulationState, createOrganism, isOrganismDead } from './state';
 import { updateOrganismMovement, updateTendril, enforceMaxBounds, clampSpeed } from './systems/movement';
 import { applyFlocking, applyCollisionSeparation } from './systems/flocking';
 import { applyProximityInteractions } from './systems/interactions';
-import { updateParticles, spawnParticles, spawnAmbientBubbles, spawnBubbleStream } from './systems/particles';
+import { updateParticles, spawnParticles, spawnAmbientBubbles, spawnBubbleStream, initializeAmbientBubbles } from './systems/particles';
 import { updateFoodSources, applyFoodAttraction } from './systems/food';
 import { createChainLink, updateChainLinks, remapChainLinkIndices } from './systems/chainlinks';
 import { updateSpatialHash, updateHover, applyGrabSpringPhysics, applySoftBodyCollisions, beginGrab as beginGrabImpl, endGrab as endGrabImpl, updatePointer as updatePointerImpl, findOrganismAtPoint } from './systems/user-input';
@@ -22,6 +22,7 @@ export class Simulation {
   constructor(width: number, height: number, config: SimulationConfig) {
     this.config = config;
     this.state = createSimulationState(width, height, config);
+    initializeAmbientBubbles(this.state.particles, width, height, 40);
   }
   
   resize(newWidth: number, newHeight: number): void {
