@@ -46,6 +46,10 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
     org.rotationSpeed *= 0.85;
   }
   
+  if (!Number.isFinite(org.vx)) org.vx = 0;
+  if (!Number.isFinite(org.vy)) org.vy = 0;
+  if (!Number.isFinite(org.rotationSpeed)) org.rotationSpeed = 0;
+  
   org.x += org.vx;
   org.y += org.vy;
   org.rotation += org.rotationSpeed;

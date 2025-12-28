@@ -80,6 +80,9 @@ export function applyGrabSpringPhysics(
   org.grab.springVx *= cfg.grabSpringDamping;
   org.grab.springVy *= cfg.grabSpringDamping;
   
+  if (!Number.isFinite(org.grab.springVx)) org.grab.springVx = 0;
+  if (!Number.isFinite(org.grab.springVy)) org.grab.springVy = 0;
+  
   org.x += org.grab.springVx;
   org.y += org.grab.springVy;
   
@@ -118,17 +121,19 @@ export function applySoftBodyCollisions(
     const otherRadius = getBoundingRadius(other);
     const combinedRadius = (grabbedRadius + otherRadius) * 0.6;
     
-    if (distance < combinedRadius) {
+    if (distance < combinedRadius && distance > 0.01) {
       const overlap = combinedRadius - distance;
-      const pushStrength = overlap * cfg.softCollisionStrength * 0.1;
+      const pushStrength = Math.min(overlap * cfg.softCollisionStrength * 0.1, 2);
       
       const nx = dx / distance;
       const ny = dy / distance;
       
-      other.vx += nx * pushStrength;
-      other.vy += ny * pushStrength;
-      
-      applyCollisionDeformation(other, -nx, -ny, overlap, cfg);
+      if (Number.isFinite(nx) && Number.isFinite(ny)) {
+        other.vx += nx * pushStrength;
+        other.vy += ny * pushStrength;
+        
+        applyCollisionDeformation(other, -nx, -ny, overlap, cfg);
+      }
     }
   }
 }
