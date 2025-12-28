@@ -4,6 +4,7 @@
   import { defaultWorldConfig, getAlphaFromContrast, type WorldConfig } from '../lib/generative-config';
 
   export let config: WorldConfig = defaultWorldConfig;
+  export let enhancedContrast: boolean = false;
 
   let canvas: HTMLCanvasElement;
   let ctx: CanvasRenderingContext2D | null = null;
@@ -619,10 +620,11 @@
 
     const isDark = $theme === 'dark';
     const strokeColor = getStrokeColor(isDark);
+    const contrastMultiplier = enhancedContrast ? 2.5 : 1;
     const lineContrast = isDark ? adaptedConfig.lineContrast.dark : adaptedConfig.lineContrast.light;
     const vertexContrast = isDark ? adaptedConfig.vertexContrast.dark : adaptedConfig.vertexContrast.light;
-    const lineAlpha = getAlphaFromContrast(lineContrast);
-    const vertexAlpha = getAlphaFromContrast(vertexContrast);
+    const lineAlpha = Math.min(1, getAlphaFromContrast(lineContrast) * contrastMultiplier);
+    const vertexAlpha = Math.min(1, getAlphaFromContrast(vertexContrast) * contrastMultiplier);
 
     ctx.clearRect(0, 0, logicalWidth, logicalHeight);
 
