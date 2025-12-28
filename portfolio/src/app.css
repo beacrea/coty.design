@@ -107,6 +107,12 @@ html {
   font-family: 'Red Hat Mono', 'Red Hat Mono Fallback', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  transition: background-color var(--transition-theme);
+}
+
+html.dark {
+  --background: oklch(0.116 0 0);
 }
 
 body {
