@@ -142,5 +142,5 @@ export function getWorldVertices(org: OrganismData): { x: number; y: number }[] 
 }
 
 export function isOrganismDead(org: OrganismData): boolean {
-  return org.size < org.minSize * 0.6 || org.vertices.length < 3;
+  return org.size < org.minSize * 0.8 || org.vertices.length < 3;
 }
