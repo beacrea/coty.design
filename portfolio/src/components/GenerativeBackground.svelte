@@ -216,12 +216,46 @@
     initOrganisms();
   }
 
-  function checkProximityEvolution(): void {
+  function applyProximityInteractions(): void {
+    const repulsionDistance = adaptedConfig.mergeDistance * 1.5;
+    const alignmentDistance = adaptedConfig.connectionDistance * 0.6;
+    const repulsionStrength = 0.0003;
+    const alignmentStrength = 0.002;
+    const spinInfluence = 0.00005;
+
     for (let i = 0; i < organisms.length; i++) {
       for (let j = i + 1; j < organisms.length; j++) {
-        const dx = organisms[i].x - organisms[j].x;
-        const dy = organisms[i].y - organisms[j].y;
+        const dx = organisms[j].x - organisms[i].x;
+        const dy = organisms[j].y - organisms[i].y;
         const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < 0.1) continue;
+
+        const nx = dx / distance;
+        const ny = dy / distance;
+
+        if (distance < repulsionDistance) {
+          const force = (1 - distance / repulsionDistance) * repulsionStrength;
+          organisms[i].vx -= nx * force;
+          organisms[i].vy -= ny * force;
+          organisms[j].vx += nx * force;
+          organisms[j].vy += ny * force;
+
+          const spinDelta = (organisms[j].rotationSpeed - organisms[i].rotationSpeed) * spinInfluence;
+          organisms[i].rotationSpeed += spinDelta;
+          organisms[j].rotationSpeed -= spinDelta;
+        }
+
+        if (distance < alignmentDistance && distance > repulsionDistance) {
+          const avgVx = (organisms[i].vx + organisms[j].vx) / 2;
+          const avgVy = (organisms[i].vy + organisms[j].vy) / 2;
+          const blend = (1 - (distance - repulsionDistance) / (alignmentDistance - repulsionDistance)) * alignmentStrength;
+          
+          organisms[i].vx += (avgVx - organisms[i].vx) * blend;
+          organisms[i].vy += (avgVy - organisms[i].vy) * blend;
+          organisms[j].vx += (avgVx - organisms[j].vx) * blend;
+          organisms[j].vy += (avgVy - organisms[j].vy) * blend;
+        }
 
         if (distance < adaptedConfig.mergeDistance) {
           const evolveChance = (1 - distance / adaptedConfig.mergeDistance) * adaptedConfig.evolutionChance;
@@ -236,6 +270,20 @@
         }
       }
     }
+
+    const maxSpeed = adaptedConfig.maxSpeed * 1.5;
+    organisms.forEach((org) => {
+      const speed = Math.sqrt(org.vx * org.vx + org.vy * org.vy);
+      if (speed > maxSpeed) {
+        org.vx = (org.vx / speed) * maxSpeed;
+        org.vy = (org.vy / speed) * maxSpeed;
+      }
+      const minSpeed = adaptedConfig.minSpeed * 0.5;
+      if (speed < minSpeed && speed > 0) {
+        org.vx = (org.vx / speed) * minSpeed;
+        org.vy = (org.vy / speed) * minSpeed;
+      }
+    });
   }
 
   function handleVisibilityChange(): void {
@@ -266,7 +314,7 @@
       ctx.filter = 'none';
     }
 
-    checkProximityEvolution();
+    applyProximityInteractions();
 
     if (timestamp - lastEvolutionTime > adaptedConfig.evolutionInterval) {
       const randomOrg = organisms[Math.floor(Math.random() * organisms.length)];
