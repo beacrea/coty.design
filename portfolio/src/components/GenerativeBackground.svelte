@@ -583,6 +583,7 @@
     chainLinks = [];
     particles = [];
     foodSources = [];
+    currentTime = 0;
     
     const cols = Math.ceil(Math.sqrt(adaptedConfig.organismCount * (logicalWidth / logicalHeight)));
     const rows = Math.ceil(adaptedConfig.organismCount / cols);
@@ -607,6 +608,23 @@
         active: true,
         respawnAt: 0,
         pulsePhase: Math.random() * Math.PI * 2,
+      });
+    }
+    
+    const initialBubbleCount = Math.floor((logicalWidth * logicalHeight) / 8000);
+    for (let i = 0; i < initialBubbleCount; i++) {
+      const x = Math.random() * logicalWidth;
+      const y = Math.random() * logicalHeight;
+      const flow = getFlowField(x, y, 0);
+      
+      particles.push({
+        x,
+        y,
+        vx: flow.vx + (Math.random() - 0.5) * 0.01,
+        vy: flow.vy + (Math.random() - 0.5) * 0.01,
+        size: 0.3 + Math.random() * 0.9,
+        life: 0.5 + Math.random() * 0.5,
+        maxLife: 400 + Math.floor(Math.random() * 400),
       });
     }
   }
