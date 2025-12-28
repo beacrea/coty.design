@@ -3,8 +3,42 @@
 > Comprehensive technical documentation for the canvas-based generative background in the portfolio site.
 
 **Component**: `portfolio/src/components/GenerativeBackground.svelte`  
+**Simulation Core**: `portfolio/src/lib/simulation/`  
 **Configuration**: `portfolio/src/lib/generative-config.ts`  
 **Last Updated**: 2025-12-28
+
+## Architecture Overview
+
+The simulation uses an ECS-lite (Entity-Component-System) architecture for maintainability and extensibility:
+
+```
+portfolio/src/lib/simulation/
+├── types.ts              # All entity interfaces (OrganismData, Particle, etc.)
+├── state.ts              # Factory functions for creating entities
+├── Simulation.ts         # Main orchestrator class
+├── index.ts              # Public exports
+├── systems/              # Behavior systems
+│   ├── movement.ts       # Organism movement, tendril updates
+│   ├── flocking.ts       # Boids algorithm, collision separation
+│   ├── interactions.ts   # Evolve, morph, fuse, burst interactions
+│   ├── particles.ts      # Particle spawning and updates
+│   ├── food.ts           # Food source logic
+│   ├── chainlinks.ts     # Chain link management
+│   ├── particle-pool.ts  # Object pooling (ready for optimization)
+│   └── chainlink-pool.ts # Object pooling (ready for optimization)
+└── renderers/            # Drawing logic
+    ├── organisms.ts      # Organism rendering
+    ├── particles.ts      # Particle rendering
+    ├── chainlinks.ts     # Chain link rendering
+    └── food.ts           # Food source rendering
+```
+
+### Key Design Decisions
+
+- **Separation of concerns**: State, systems, and rendering are decoupled
+- **Data-oriented**: Entities are plain objects, not classes with behavior
+- **Immutable-friendly**: Systems operate on state without side effects where possible
+- **Pooling-ready**: Particle and chain link pools prepared for future optimization
 
 ---
 
