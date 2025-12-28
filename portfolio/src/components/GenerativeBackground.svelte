@@ -86,6 +86,9 @@
     tendril: Tendril | null;
     spokeIntensity: number;
     lobes: Lobe[];
+    wanderAngle: number;
+    wanderRate: number;
+    baseSpeed: number;
 
     constructor(canvasWidth: number, canvasHeight: number, cfg: WorldConfig) {
       this.x = Math.random() * canvasWidth;
@@ -94,6 +97,9 @@
       const angle = Math.random() * Math.PI * 2;
       this.vx = Math.cos(angle) * speed;
       this.vy = Math.sin(angle) * speed;
+      this.baseSpeed = speed;
+      this.wanderAngle = angle;
+      this.wanderRate = 0.01 + Math.random() * 0.02;
       const baseSize = cfg.minSize + Math.random() * (cfg.maxSize - cfg.minSize);
       const sizeMultiplier = 1 + (Math.random() - 0.5) * 2 * cfg.sizeVariation;
       this.size = Math.max(cfg.minSize * 0.5, Math.min(cfg.maxSize * 1.5, baseSize * sizeMultiplier));
@@ -228,6 +234,15 @@
     }
 
     update(canvasWidth: number, canvasHeight: number): void {
+      this.wanderAngle += (Math.random() - 0.5) * this.wanderRate;
+      
+      const desiredVx = Math.cos(this.wanderAngle) * this.baseSpeed;
+      const desiredVy = Math.sin(this.wanderAngle) * this.baseSpeed;
+      
+      const steerStrength = 0.02;
+      this.vx += (desiredVx - this.vx) * steerStrength;
+      this.vy += (desiredVy - this.vy) * steerStrength;
+      
       this.x += this.vx;
       this.y += this.vy;
       this.rotation += this.rotationSpeed;
