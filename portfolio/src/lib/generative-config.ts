@@ -57,7 +57,7 @@ export const defaultWorldConfig: WorldConfig = {
   interactionChance: 0.35,
   foodSourceCount: 2,
   foodAttractionStrength: 0.008,
-  foodSize: 8,
+  foodSize: 4,
   foodRespawnTime: 6000,
   foodSpawnInterval: 4000,
   maxFoodSources: 5,
