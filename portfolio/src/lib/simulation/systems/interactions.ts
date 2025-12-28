@@ -1,5 +1,6 @@
 import type { OrganismData, SimulationConfig, Vertex, Lobe } from '../types';
 import { createVertices, createLobe } from '../state';
+import { mergeOrganelles, transferOrganelles } from './organelles';
 
 export interface InteractionResult {
   spawnParticlesAt: { x: number; y: number; vx: number; vy: number; count: number }[];
@@ -32,7 +33,12 @@ function evolve(org: OrganismData, maxVertices: number): void {
     const nextIndex = (insertIndex + 1) % org.vertices.length;
     const newAngle = (org.vertices[insertIndex].angle + org.vertices[nextIndex].angle) / 2;
     const newDistance = 0.7 + Math.random() * 0.3;
-    org.vertices.splice(insertIndex + 1, 0, { angle: newAngle, distance: newDistance });
+    org.vertices.splice(insertIndex + 1, 0, { 
+      angle: newAngle, 
+      distance: newDistance,
+      baseDistance: newDistance,
+      deformation: 0
+    });
   }
 }
 
@@ -40,9 +46,12 @@ function morphWith(orgA: OrganismData, orgB: OrganismData): void {
   if (orgA.vertices.length > 3 && orgB.vertices.length < 7) {
     const donorIndex = Math.floor(Math.random() * orgA.vertices.length);
     const donatedVertex = orgA.vertices[donorIndex];
+    const newDistance = donatedVertex.distance * (0.8 + Math.random() * 0.4);
     const newVertex: Vertex = {
       angle: donatedVertex.angle + (Math.random() - 0.5) * 0.5,
-      distance: donatedVertex.distance * (0.8 + Math.random() * 0.4),
+      distance: newDistance,
+      baseDistance: newDistance,
+      deformation: 0,
     };
     orgB.vertices.push(newVertex);
     orgB.vertices.sort((a, b) => a.angle - b.angle);
@@ -56,10 +65,15 @@ function absorbLobeFrom(receiver: OrganismData, donor: OrganismData, cfg: Simula
   const newLobe: Lobe = {
     offsetAngle: stolenLobe.offsetAngle + (Math.random() - 0.5) * 0.5,
     offsetDistance: stolenLobe.offsetDistance * (0.9 + Math.random() * 0.3),
-    vertices: stolenLobe.vertices.map(v => ({
-      angle: v.angle,
-      distance: v.distance * (0.8 + Math.random() * 0.4),
-    })),
+    vertices: stolenLobe.vertices.map(v => {
+      const newDist = v.distance * (0.8 + Math.random() * 0.4);
+      return {
+        angle: v.angle,
+        distance: newDist,
+        baseDistance: newDist,
+        deformation: 0,
+      };
+    }),
     size: stolenLobe.size * (0.7 + Math.random() * 0.4),
     rotationOffset: stolenLobe.rotationOffset + Math.random() * 0.5,
   };
@@ -76,14 +90,19 @@ function incorporateFrom(larger: OrganismData, smaller: OrganismData, cfg: Simul
   if (smaller.vertices.length > 3 && larger.vertices.length < cfg.maxVertices) {
     const donorIndex = Math.floor(Math.random() * smaller.vertices.length);
     const donatedVertex = smaller.vertices[donorIndex];
+    const newDist = donatedVertex.distance * (0.85 + Math.random() * 0.3);
     const newVertex: Vertex = {
       angle: donatedVertex.angle + (Math.random() - 0.5) * 0.3,
-      distance: donatedVertex.distance * (0.85 + Math.random() * 0.3),
+      distance: newDist,
+      baseDistance: newDist,
+      deformation: 0,
     };
     larger.vertices.push(newVertex);
     larger.vertices.sort((a, b) => a.angle - b.angle);
     smaller.vertices.splice(donorIndex, 1);
   }
+  
+  transferOrganelles(smaller, larger, cfg.organelleMergeTransferChance, cfg.organelleMaxPerOrganism);
   
   if (Math.random() < 0.3 && larger.lobes.length < 5) {
     const newLobe = createLobe(cfg);
@@ -107,12 +126,17 @@ function fuseWith(larger: OrganismData, smaller: OrganismData, cfg: SimulationCo
   for (let i = 0; i < verticesToTake && smaller.vertices.length > 3; i++) {
     const idx = Math.floor(Math.random() * smaller.vertices.length);
     const v = smaller.vertices.splice(idx, 1)[0];
+    const newDist = v.distance * (0.8 + Math.random() * 0.4);
     larger.vertices.push({
       angle: v.angle + (Math.random() - 0.5) * 0.4,
-      distance: v.distance * (0.8 + Math.random() * 0.4),
+      distance: newDist,
+      baseDistance: newDist,
+      deformation: 0,
     });
   }
   larger.vertices.sort((a, b) => a.angle - b.angle);
+  
+  mergeOrganelles(larger, smaller, cfg.organelleMergeTransferChance, cfg.organelleMaxPerOrganism);
   
   larger.size = Math.min(larger.maxSize, larger.size + smaller.size * 0.25);
   smaller.size *= 0.6;

@@ -27,25 +27,27 @@
     const isMobile = width < 768;
     const isSmallMobile = width < 480;
     
-    let organismMultiplier = 1;
     let speedMultiplier = 1;
     let connectionMultiplier = 1;
     
     if (isSmallMobile) {
-      organismMultiplier = 0.5;
       speedMultiplier = 0.7;
       connectionMultiplier = 0.6;
     } else if (isMobile) {
-      organismMultiplier = 0.65;
       speedMultiplier = 0.8;
       connectionMultiplier = 0.75;
-    } else if (area < 1200000) {
-      organismMultiplier = 0.8;
     }
+    
+    const densityPerPixel = config.populationDensityPerPixel || 90000;
+    const minTarget = config.populationMinTarget || 8;
+    const maxTarget = config.populationMaxTarget || 40;
+    const dynamicTarget = Math.round(area / densityPerPixel);
+    const clampedTarget = Math.max(minTarget, Math.min(maxTarget, dynamicTarget));
     
     return {
       ...config,
-      organismCount: Math.max(4, Math.floor(config.organismCount * organismMultiplier)),
+      organismCount: clampedTarget,
+      populationTarget: clampedTarget,
       minSpeed: config.minSpeed * speedMultiplier,
       maxSpeed: config.maxSpeed * speedMultiplier,
       connectionDistance: config.connectionDistance * connectionMultiplier,
@@ -99,6 +101,40 @@
 
     animationId = requestAnimationFrame(animate);
   }
+  
+  function getCanvasCoords(e: MouseEvent | Touch): { x: number; y: number } {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: (e.clientX - rect.left),
+      y: (e.clientY - rect.top)
+    };
+  }
+  
+  function handlePointerDown(e: PointerEvent): void {
+    if (!simulation) return;
+    const coords = getCanvasCoords(e);
+    if (simulation.beginGrab(coords.x, coords.y, e.pointerId)) {
+      canvas.setPointerCapture(e.pointerId);
+    }
+  }
+  
+  function handlePointerMove(e: PointerEvent): void {
+    if (!simulation) return;
+    const coords = getCanvasCoords(e);
+    simulation.updatePointer(coords.x, coords.y, true);
+  }
+  
+  function handlePointerUp(e: PointerEvent): void {
+    if (!simulation) return;
+    simulation.endGrab();
+    canvas.releasePointerCapture(e.pointerId);
+  }
+  
+  function handlePointerLeave(): void {
+    if (!simulation) return;
+    simulation.updatePointer(0, 0, false);
+    simulation.endGrab();
+  }
 
   onMount(() => {
     ctx = canvas.getContext('2d');
@@ -137,7 +173,15 @@
   });
 </script>
 
-<canvas bind:this={canvas} class="generative-background"></canvas>
+<canvas 
+  bind:this={canvas} 
+  class="generative-background"
+  on:pointerdown={handlePointerDown}
+  on:pointermove={handlePointerMove}
+  on:pointerup={handlePointerUp}
+  on:pointerleave={handlePointerLeave}
+  on:pointercancel={handlePointerLeave}
+></canvas>
 
 <style>
   .generative-background {
@@ -145,6 +189,12 @@
     top: 0;
     left: 0;
     z-index: 0;
-    pointer-events: none;
+    pointer-events: auto;
+    touch-action: none;
+    cursor: grab;
+  }
+  
+  .generative-background:active {
+    cursor: grabbing;
   }
 </style>

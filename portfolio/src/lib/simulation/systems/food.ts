@@ -1,5 +1,6 @@
 import type { FoodSource, OrganismData, SimulationConfig, SimulationState } from '../types';
 import { createFoodSource } from '../state';
+import { grantOrganelleFromFood } from './organelles';
 
 export function updateFoodSources(
   state: SimulationState,
@@ -58,6 +59,9 @@ export function applyFoodAttraction(
       if (nearestDist < cfg.foodSize * 3) {
         org.size = Math.min(org.maxSize, org.size + 0.5);
         org.glow = Math.min(1, org.glow + 0.12);
+        
+        grantOrganelleFromFood(org, cfg.organelleFoodGrantChance, cfg.organelleMaxPerOrganism);
+        
         nearestFood.active = false;
         nearestFood.respawnAt = timestamp + cfg.foodRespawnTime;
       }
