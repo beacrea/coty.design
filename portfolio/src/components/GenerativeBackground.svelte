@@ -1340,12 +1340,6 @@
 
     ctx.clearRect(0, 0, logicalWidth, logicalHeight);
 
-    if (adaptedConfig.blur > 0) {
-      ctx.filter = `blur(${adaptedConfig.blur}px)`;
-    } else {
-      ctx.filter = 'none';
-    }
-
     applyProximityInteractions();
     applyFoodAttraction(timestamp);
 
@@ -1405,8 +1399,6 @@
     drawConnections(ctx, organisms, adaptedConfig, isDark);
     drawChainLinks(ctx, strokeColor, lineAlpha);
     drawParticles(ctx, strokeColor, lineAlpha);
-
-    ctx.filter = 'none';
 
     animationId = requestAnimationFrame(animate);
   }
