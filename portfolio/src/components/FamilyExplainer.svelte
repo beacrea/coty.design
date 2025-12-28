@@ -16,7 +16,7 @@
 <style>
   .family-section {
     margin-bottom: var(--section-spacing);
-    padding: 1rem;
+    padding: 1rem 1.25rem 1.25rem;
     border-radius: 0.75rem;
     border: 1px solid var(--surface-card-border);
     background-color: var(--surface-card-bg);
@@ -35,6 +35,7 @@
     color: var(--semantic-header);
     margin-bottom: var(--list-item-gap);
     transition: color var(--transition-theme);
+    text-wrap: balance;
   }
 
   .description {
@@ -54,15 +55,15 @@
     font-size: var(--text-size-body);
     font-weight: 500;
     text-align: center;
-    color: oklch(1 0 0);
-    background-color: var(--semantic-header);
+    color: var(--surface-cta-text);
+    background-color: var(--surface-cta-bg);
     border-radius: 0.5rem;
     text-decoration: none;
-    transition: background-color 0.2s ease, transform 0.15s ease;
+    transition: background-color 0.2s ease, transform 0.15s ease, color var(--transition-theme);
   }
 
   .cta-button:hover {
-    background-color: var(--semantic-link-hover);
+    background-color: var(--surface-cta-bg-hover);
     transform: translateY(-1px);
   }
 
