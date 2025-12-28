@@ -157,6 +157,7 @@
     top: var(--page-padding-top);
     right: var(--page-padding-x);
     display: flex;
+    flex-direction: column;
     gap: 8px;
     align-items: center;
     z-index: 100;
