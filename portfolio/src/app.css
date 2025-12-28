@@ -94,8 +94,17 @@
   }
 }
 
+@font-face {
+  font-family: 'Red Hat Mono Fallback';
+  src: local('Menlo'), local('Monaco'), local('Consolas');
+  size-adjust: 105%;
+  ascent-override: 90%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
 html {
-  font-family: 'Red Hat Mono', monospace;
+  font-family: 'Red Hat Mono', 'Red Hat Mono Fallback', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
