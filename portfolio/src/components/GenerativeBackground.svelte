@@ -89,6 +89,9 @@
     wanderAngle: number;
     wanderRate: number;
     baseSpeed: number;
+    decayRate: number;
+    minSize: number;
+    maxSize: number;
 
     constructor(canvasWidth: number, canvasHeight: number, cfg: WorldConfig) {
       this.x = Math.random() * canvasWidth;
@@ -100,6 +103,9 @@
       this.baseSpeed = speed;
       this.wanderAngle = angle;
       this.wanderRate = 0.01 + Math.random() * 0.02;
+      this.decayRate = 0.001 + Math.random() * 0.002;
+      this.minSize = cfg.minSize * 0.5;
+      this.maxSize = cfg.maxSize * 1.5;
       const baseSize = cfg.minSize + Math.random() * (cfg.maxSize - cfg.minSize);
       const sizeMultiplier = 1 + (Math.random() - 0.5) * 2 * cfg.sizeVariation;
       this.size = Math.max(cfg.minSize * 0.5, Math.min(cfg.maxSize * 1.5, baseSize * sizeMultiplier));
@@ -230,7 +236,11 @@
 
     pulseSize(factor: number): void {
       this.size *= factor;
-      this.size = Math.max(15, Math.min(80, this.size));
+      this.size = Math.max(this.minSize, Math.min(this.maxSize, this.size));
+    }
+
+    grow(amount: number): void {
+      this.size = Math.min(this.maxSize, this.size + amount);
     }
 
     update(canvasWidth: number, canvasHeight: number): void {
@@ -247,6 +257,11 @@
       this.y += this.vy;
       this.rotation += this.rotationSpeed;
       this.age++;
+      
+      if (this.size > this.minSize) {
+        this.size -= this.decayRate;
+        this.size = Math.max(this.minSize, this.size);
+      }
 
       const margin = this.size;
       if (this.x < -margin) this.x = canvasWidth + margin;
@@ -523,7 +538,7 @@
         if (dist < org.size * 0.8) {
           food.active = false;
           food.respawnAt = timestamp + adaptedConfig.foodRespawnTime;
-          org.pulseSize(1.15);
+          org.grow(3);
           if (org.vertices.length < adaptedConfig.maxVertices && Math.random() < 0.4) {
             org.evolve(adaptedConfig.maxVertices);
           }
