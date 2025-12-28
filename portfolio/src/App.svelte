@@ -3,6 +3,7 @@
   import ThemeToggle from './components/ThemeToggle.svelte';
   import Opener from './components/Opener.svelte';
   import Section from './components/Section.svelte';
+  import FamilyExplainer from './components/FamilyExplainer.svelte';
   import ConnectSection from './components/ConnectSection.svelte';
   import Footer from './components/Footer.svelte';
   import { siteContent } from './lib/content';
@@ -49,6 +50,13 @@
         heading={siteContent.domainExpertise.heading}
         items={siteContent.domainExpertise.items}
         variant="bullet"
+      />
+
+      <FamilyExplainer 
+        heading={siteContent.familyExplainer.heading}
+        description={siteContent.familyExplainer.description}
+        buttonText={siteContent.familyExplainer.buttonText}
+        buttonUrl={siteContent.familyExplainer.buttonUrl}
       />
       
       <ConnectSection 
