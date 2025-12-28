@@ -47,16 +47,18 @@ export function applyGrabDeformation(
   const org = state.organisms[grabbedIdx];
   if (!org || !org.grab || !org.grab.isGrabbed) return;
   
-  const pointerDx = state.pointer.velocity.x;
-  const pointerDy = state.pointer.velocity.y;
-  const speed = Math.sqrt(pointerDx * pointerDx + pointerDy * pointerDy);
+  const springVx = org.grab.springVx || 0;
+  const springVy = org.grab.springVy || 0;
+  const speed = Math.sqrt(springVx * springVx + springVy * springVy);
   
-  if (speed < 0.5) return;
+  if (speed < 0.3) return;
   
-  const dirX = pointerDx / speed;
-  const dirY = pointerDy / speed;
+  const dirX = springVx / speed;
+  const dirY = springVy / speed;
   
-  const deformAmount = Math.min(speed * 0.02, cfg.maxDeformation * 0.3);
+  const speedFactor = Math.min(speed / 2, 1);
+  const baseDeform = speed * 0.08 * (1 + speedFactor * 0.5);
+  const deformAmount = Math.min(baseDeform, cfg.maxDeformation * 0.6);
   
   for (const vertex of org.vertices) {
     const vertexAngle = vertex.angle + org.rotation;
@@ -65,10 +67,10 @@ export function applyGrabDeformation(
     
     const dot = vertexNx * dirX + vertexNy * dirY;
     
-    if (dot > 0.2) {
-      vertex.deformation += deformAmount * dot * 0.3;
-    } else if (dot < -0.2) {
-      vertex.deformation -= deformAmount * Math.abs(dot) * 0.15;
+    if (dot > 0.1) {
+      vertex.deformation += deformAmount * dot * 0.5;
+    } else if (dot < -0.1) {
+      vertex.deformation -= deformAmount * Math.abs(dot) * 0.35;
     }
   }
 }
