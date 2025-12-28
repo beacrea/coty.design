@@ -448,9 +448,8 @@
     draw(ctx: CanvasRenderingContext2D, strokeColor: string, lineOpacity: number, vertexOpacity: number, observationMode: boolean = false, isDark: boolean = true): void {
       const worldVerts = this.getWorldVertices();
       
-      const depthFade = 0.4 + this.depth * 0.6;
-      const adjustedLineOpacity = lineOpacity * depthFade;
-      const adjustedVertexOpacity = vertexOpacity * depthFade;
+      const adjustedLineOpacity = lineOpacity;
+      const adjustedVertexOpacity = vertexOpacity;
       
       const getColor = (alpha: number): string => {
         if (observationMode) {
@@ -475,7 +474,7 @@
       if (this.glow > 0) {
         const glowRadius = this.getBoundingRadius() * (1.5 + this.glow * 0.5);
         const glowAlphaBase = observationMode ? 0.25 : 0.15;
-        const glowAlpha = this.glow * glowAlphaBase * depthFade;
+        const glowAlpha = this.glow * glowAlphaBase;
         const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowRadius);
         gradient.addColorStop(0, getColor(glowAlpha));
         gradient.addColorStop(1, getColor(0));
