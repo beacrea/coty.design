@@ -71,6 +71,31 @@
       }
     }
 
+    morphWith(other: Organism): void {
+      if (this.vertices.length > 3 && other.vertices.length < 7) {
+        const donorIndex = Math.floor(Math.random() * this.vertices.length);
+        const donatedVertex = this.vertices[donorIndex];
+        const newVertex: Vertex = {
+          angle: donatedVertex.angle + (Math.random() - 0.5) * 0.5,
+          distance: donatedVertex.distance * (0.8 + Math.random() * 0.4),
+        };
+        other.vertices.push(newVertex);
+        other.vertices.sort((a, b) => a.angle - b.angle);
+      }
+    }
+
+    simplify(): void {
+      if (this.vertices.length > 3) {
+        const removeIndex = Math.floor(Math.random() * this.vertices.length);
+        this.vertices.splice(removeIndex, 1);
+      }
+    }
+
+    pulseSize(factor: number): void {
+      this.size *= factor;
+      this.size = Math.max(15, Math.min(80, this.size));
+    }
+
     update(canvasWidth: number, canvasHeight: number): void {
       this.x += this.vx;
       this.y += this.vy;
@@ -219,6 +244,7 @@
   function applyProximityInteractions(): void {
     const repulsionDistance = adaptedConfig.mergeDistance * 1.5;
     const alignmentDistance = adaptedConfig.connectionDistance * 0.6;
+    const interactionDistance = adaptedConfig.mergeDistance;
     const repulsionStrength = 0.0003;
     const alignmentStrength = 0.002;
     const spinInfluence = 0.00005;
@@ -257,14 +283,42 @@
           organisms[j].vy += (avgVy - organisms[j].vy) * blend;
         }
 
-        if (distance < adaptedConfig.mergeDistance) {
-          const evolveChance = (1 - distance / adaptedConfig.mergeDistance) * adaptedConfig.evolutionChance;
+        if (distance < interactionDistance) {
+          const interactionChance = (1 - distance / interactionDistance) * adaptedConfig.evolutionChance;
           
-          if (Math.random() < evolveChance) {
-            if (organisms[i].vertices.length <= organisms[j].vertices.length) {
-              organisms[i].evolve(adaptedConfig.maxVertices);
+          if (Math.random() < interactionChance) {
+            const interactionType = Math.random();
+            
+            if (interactionType < 0.25) {
+              if (organisms[i].vertices.length <= organisms[j].vertices.length) {
+                organisms[i].evolve(adaptedConfig.maxVertices);
+              } else {
+                organisms[j].evolve(adaptedConfig.maxVertices);
+              }
+            } else if (interactionType < 0.45) {
+              if (organisms[i].vertices.length > organisms[j].vertices.length) {
+                organisms[i].morphWith(organisms[j]);
+              } else {
+                organisms[j].morphWith(organisms[i]);
+              }
+            } else if (interactionType < 0.60) {
+              const burstForce = 0.15;
+              organisms[i].vx -= nx * burstForce;
+              organisms[i].vy -= ny * burstForce;
+              organisms[j].vx += nx * burstForce;
+              organisms[j].vy += ny * burstForce;
+              organisms[i].pulseSize(0.95);
+              organisms[j].pulseSize(0.95);
+            } else if (interactionType < 0.70) {
+              const moreComplex = organisms[i].vertices.length > organisms[j].vertices.length ? organisms[i] : organisms[j];
+              moreComplex.simplify();
+            } else if (interactionType < 0.80) {
+              organisms[i].pulseSize(1.05);
+              organisms[j].pulseSize(1.05);
             } else {
-              organisms[j].evolve(adaptedConfig.maxVertices);
+              const avgRotSpeed = (organisms[i].rotationSpeed + organisms[j].rotationSpeed) / 2;
+              organisms[i].rotationSpeed = avgRotSpeed * 1.2;
+              organisms[j].rotationSpeed = avgRotSpeed * 1.2;
             }
           }
         }
