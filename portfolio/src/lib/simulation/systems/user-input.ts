@@ -60,7 +60,7 @@ export function updateHover(
 
 export function applyGrabSpringPhysics(
   state: SimulationState,
-  cfg: SimulationConfig
+  _cfg: SimulationConfig
 ): void {
   const grabbedIdx = state.grabbedOrganismIndex;
   if (grabbedIdx === null) return;
@@ -68,39 +68,26 @@ export function applyGrabSpringPhysics(
   const org = state.organisms[grabbedIdx];
   if (!org || !org.grab || !org.grab.isGrabbed) return;
   
-  const pointerMoved = Math.abs(state.pointer.velocity.x) > 0.5 || 
-                       Math.abs(state.pointer.velocity.y) > 0.5;
-  
-  if (!org.grab.isDragging && pointerMoved) {
-    org.grab.isDragging = true;
-  }
-  
-  if (!org.grab.isDragging) {
-    org.vx = 0;
-    org.vy = 0;
-    return;
-  }
-  
   const targetX = state.pointer.x + org.grab.offsetX;
   const targetY = state.pointer.y + org.grab.offsetY;
   
-  const dx = targetX - org.x;
-  const dy = targetY - org.y;
+  const prevX = org.x;
+  const prevY = org.y;
   
-  org.grab.springVx += dx * cfg.grabSpringStiffness;
-  org.grab.springVy += dy * cfg.grabSpringStiffness;
+  org.x = targetX;
+  org.y = targetY;
   
-  org.grab.springVx *= cfg.grabSpringDamping;
-  org.grab.springVy *= cfg.grabSpringDamping;
+  const dx = org.x - prevX;
+  const dy = org.y - prevY;
+  
+  org.grab.springVx = org.grab.springVx * 0.7 + dx * 0.3;
+  org.grab.springVy = org.grab.springVy * 0.7 + dy * 0.3;
   
   if (!Number.isFinite(org.grab.springVx)) org.grab.springVx = 0;
   if (!Number.isFinite(org.grab.springVy)) org.grab.springVy = 0;
   
-  org.x += org.grab.springVx;
-  org.y += org.grab.springVy;
-  
-  org.vx = org.grab.springVx * 0.5;
-  org.vy = org.grab.springVy * 0.5;
+  org.vx = 0;
+  org.vy = 0;
 }
 
 export function applySoftBodyCollisions(
@@ -184,6 +171,8 @@ export function beginGrab(
   if (idx === null) return false;
   
   const org = state.organisms[idx];
+  if (!org || !org.grab) return false;
+  
   org.grab.isGrabbed = true;
   org.grab.isDragging = false;
   org.grab.pointerId = pointerId;
@@ -204,11 +193,32 @@ export function endGrab(state: SimulationState): void {
   if (grabbedIdx === null) return;
   
   const org = state.organisms[grabbedIdx];
+  if (!org || !org.grab) {
+    state.grabbedOrganismIndex = null;
+    return;
+  }
+  
   org.grab.isGrabbed = false;
+  org.grab.isDragging = false;
   org.grab.pointerId = null;
   
-  org.vx += org.grab.springVx * 0.8;
-  org.vy += org.grab.springVy * 0.8;
+  const releaseVx = org.grab.springVx * 1.5;
+  const releaseVy = org.grab.springVy * 1.5;
+  
+  const maxReleaseSpeed = 3;
+  const releaseSpeed = Math.sqrt(releaseVx * releaseVx + releaseVy * releaseVy);
+  
+  if (releaseSpeed > maxReleaseSpeed && releaseSpeed > 0) {
+    const scale = maxReleaseSpeed / releaseSpeed;
+    org.vx = releaseVx * scale;
+    org.vy = releaseVy * scale;
+  } else {
+    org.vx = releaseVx;
+    org.vy = releaseVy;
+  }
+  
+  if (!Number.isFinite(org.vx)) org.vx = 0;
+  if (!Number.isFinite(org.vy)) org.vy = 0;
   
   state.grabbedOrganismIndex = null;
 }
