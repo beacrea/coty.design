@@ -773,45 +773,46 @@
 
   function spawnBubbleStream(org: Organism): void {
     const speed = Math.sqrt(org.vx * org.vx + org.vy * org.vy);
-    if (speed < adaptedConfig.minSpeed * 1.2) return;
+    if (speed < adaptedConfig.minSpeed * 0.5) return;
     
-    const bubbleChance = Math.min(0.25, speed / adaptedConfig.maxSpeed * 0.3);
+    const speedRatio = speed / adaptedConfig.maxSpeed;
+    const bubbleChance = speedRatio * speedRatio * 0.4;
     if (Math.random() > bubbleChance) return;
     
     const forwardAngle = Math.atan2(org.vy, org.vx);
     const rearAngle = forwardAngle + Math.PI;
     
-    const sideOffset = (Math.random() < 0.5 ? 1 : -1) * (0.3 + Math.random() * 0.4);
+    const sideOffset = (Math.random() - 0.5) * 0.5;
     const emitAngle = rearAngle + sideOffset;
     
-    const emitDist = org.size * (0.6 + Math.random() * 0.3);
+    const emitDist = org.size * (0.7 + Math.random() * 0.2);
     const emitX = org.x + Math.cos(emitAngle) * emitDist;
     const emitY = org.y + Math.sin(emitAngle) * emitDist;
     
-    const driftAngle = rearAngle + (Math.random() - 0.5) * 0.6;
-    const driftSpeed = 0.15 + Math.random() * 0.25;
+    const bubbleSpeed = speed * (0.3 + Math.random() * 0.2);
+    const spreadAngle = rearAngle + (Math.random() - 0.5) * 0.4;
     
     particles.push({
       x: emitX,
       y: emitY,
-      vx: Math.cos(driftAngle) * driftSpeed + org.vx * 0.1,
-      vy: Math.sin(driftAngle) * driftSpeed + org.vy * 0.1,
-      size: 0.6 + Math.random() * 1.4,
+      vx: Math.cos(spreadAngle) * bubbleSpeed,
+      vy: Math.sin(spreadAngle) * bubbleSpeed,
+      size: 0.4 + speedRatio * 0.8 + Math.random() * 0.6,
       life: 1,
-      maxLife: 25 + Math.floor(Math.random() * 20),
+      maxLife: 20 + Math.floor(Math.random() * 15),
     });
     
-    if (speed > adaptedConfig.maxSpeed * 0.6 && Math.random() < 0.4) {
-      const extraAngle = rearAngle + (Math.random() - 0.5) * 0.8;
-      const extraDist = org.size * (0.5 + Math.random() * 0.4);
+    if (speedRatio > 0.5 && Math.random() < speedRatio * 0.5) {
+      const extraAngle = rearAngle + (Math.random() - 0.5) * 0.6;
+      const extraDist = org.size * (0.6 + Math.random() * 0.3);
       particles.push({
         x: org.x + Math.cos(extraAngle) * extraDist,
         y: org.y + Math.sin(extraAngle) * extraDist,
-        vx: Math.cos(extraAngle) * driftSpeed * 0.8,
-        vy: Math.sin(extraAngle) * driftSpeed * 0.8,
-        size: 0.4 + Math.random() * 0.8,
+        vx: Math.cos(extraAngle) * bubbleSpeed * 0.7,
+        vy: Math.sin(extraAngle) * bubbleSpeed * 0.7,
+        size: 0.3 + speedRatio * 0.5 + Math.random() * 0.4,
         life: 1,
-        maxLife: 18 + Math.floor(Math.random() * 12),
+        maxLife: 15 + Math.floor(Math.random() * 10),
       });
     }
   }
