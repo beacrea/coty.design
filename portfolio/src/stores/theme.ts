@@ -9,13 +9,17 @@ const THEME_COLORS = {
 
 function updateHtmlClass(theme: Theme) {
   if (typeof document !== 'undefined') {
-    document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(theme);
     document.documentElement.style.backgroundColor = THEME_COLORS[theme];
     
-    const themeColorMeta = document.getElementById('theme-color') as HTMLMetaElement | null;
-    if (themeColorMeta) {
-      themeColorMeta.content = THEME_COLORS[theme];
+    let themeColorMeta = document.querySelector('meta[name="theme-color"]:not([media])') as HTMLMetaElement | null;
+    if (!themeColorMeta) {
+      themeColorMeta = document.createElement('meta');
+      themeColorMeta.name = 'theme-color';
+      document.head.appendChild(themeColorMeta);
     }
+    themeColorMeta.content = THEME_COLORS[theme];
   }
 }
 

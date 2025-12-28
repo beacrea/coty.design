@@ -8,17 +8,31 @@
     <title>Coty Beasley - Design and Product Leader</title>
     <meta name="description" content="Good design brings clarity to complexity and makes technology actually useful. Design and product leadership portfolio of Coty Beasley." />
     
-    <meta name="theme-color" id="theme-color" content="#ffffff" />
+    <meta name="theme-color" id="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)" />
+    <style>
+      html, body { margin: 0; padding: 0; }
+      html { background-color: #ffffff; }
+      @media (prefers-color-scheme: dark) {
+        html { background-color: #1d1d1d; }
+      }
+      html.dark { background-color: #1d1d1d !important; }
+      html.light { background-color: #ffffff !important; }
+    </style>
     <script>
       (function() {
         var stored = localStorage.getItem('theme');
-        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var isDark = stored === 'dark' || (!stored && prefersDark);
-        var color = isDark ? '#1d1d1d' : '#ffffff';
-        document.documentElement.style.backgroundColor = color;
-        document.getElementById('theme-color').content = color;
-        if (isDark) {
-          document.documentElement.classList.add('dark');
+        if (stored) {
+          var color = stored === 'dark' ? '#1d1d1d' : '#ffffff';
+          document.documentElement.className = stored;
+          document.documentElement.style.backgroundColor = color;
+          var meta = document.querySelector('meta[name="theme-color"]:not([media])');
+          if (!meta) {
+            meta = document.createElement('meta');
+            meta.name = 'theme-color';
+            document.head.appendChild(meta);
+          }
+          meta.content = color;
         }
       })();
     </script>
