@@ -28,10 +28,11 @@
     title={observeMode ? 'Show content' : 'Observe organisms'}
   >
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M6.5 12c0-3.5 3.5-6 6.5-6s6.5 2.5 6.5 6-3.5 6-6.5 6-6.5-2.5-6.5-6z"></path>
-      <path d="M6.5 12c-2 0-4.5-1-5.5-2 1-1 3.5-2 5.5-2"></path>
-      <circle cx="15" cy="10.5" r="1" fill="currentColor"></circle>
-      <path d="M20 9c1.5 1.5 3 3 3 3s-1.5 1.5-3 3"></path>
+      <circle cx="12" cy="10" r="7"></circle>
+      <path d="M8 20h8"></path>
+      <path d="M10 17v3"></path>
+      <path d="M14 17v3"></path>
+      <path d="M9 7.5c1.5-1 3.5-1 5 0"></path>
     </svg>
   </button>
 </div>
