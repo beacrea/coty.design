@@ -2,6 +2,12 @@ import { writable } from 'svelte/store';
 
 type Theme = 'light' | 'dark';
 
+function updateHtmlClass(theme: Theme) {
+  if (typeof document !== 'undefined') {
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+  }
+}
+
 function createThemeStore() {
   const storedTheme = typeof localStorage !== 'undefined' 
     ? localStorage.getItem('theme') as Theme | null 
@@ -15,7 +21,22 @@ function createThemeStore() {
   
   const initialTheme: Theme = storedTheme || (prefersDark ? 'dark' : 'light');
   
-  const { subscribe, set, update } = writable<Theme>(initialTheme);
+  updateHtmlClass(initialTheme);
+  
+  const { subscribe, set: originalSet, update: originalUpdate } = writable<Theme>(initialTheme);
+  
+  const set = (theme: Theme) => {
+    updateHtmlClass(theme);
+    originalSet(theme);
+  };
+  
+  const update = (fn: (current: Theme) => Theme) => {
+    originalUpdate(current => {
+      const newTheme = fn(current);
+      updateHtmlClass(newTheme);
+      return newTheme;
+    });
+  };
   
   let hasUserPreference = !!storedTheme;
   
