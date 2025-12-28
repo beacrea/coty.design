@@ -94,10 +94,14 @@
       return;
     }
 
-    const isDark = $theme === 'dark';
-    
-    simulation.tick(timestamp);
-    simulation.render(ctx, isDark, enhancedContrast, enhancedContrast);
+    try {
+      const isDark = $theme === 'dark';
+      
+      simulation.tick(timestamp);
+      simulation.render(ctx, isDark, enhancedContrast, enhancedContrast);
+    } catch (err) {
+      console.error('Simulation error:', err);
+    }
 
     animationId = requestAnimationFrame(animate);
   }

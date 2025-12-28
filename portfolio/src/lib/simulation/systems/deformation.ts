@@ -45,7 +45,7 @@ export function applyGrabDeformation(
   if (grabbedIdx === null) return;
   
   const org = state.organisms[grabbedIdx];
-  if (!org.grab.isGrabbed) return;
+  if (!org || !org.grab || !org.grab.isGrabbed) return;
   
   const pointerDx = state.pointer.velocity.x;
   const pointerDy = state.pointer.velocity.y;
