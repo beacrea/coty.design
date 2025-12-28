@@ -572,20 +572,20 @@
         const nx = dx / distance;
         const ny = dy / distance;
 
-        const combinedRadius = (organisms[i].size + organisms[j].size) * 0.6;
-        const collisionBuffer = combinedRadius * 1.2;
+        const combinedRadius = (organisms[i].size + organisms[j].size) * 0.5;
+        const collisionBuffer = combinedRadius * 0.9;
 
         if (distance < collisionBuffer) {
           const overlap = collisionBuffer - distance;
-          const separationForce = Math.min(overlap * 0.08, 0.5);
+          const separationForce = Math.min(overlap * 0.02, 0.15);
           
           organisms[i].vx -= nx * separationForce;
           organisms[i].vy -= ny * separationForce;
           organisms[j].vx += nx * separationForce;
           organisms[j].vy += ny * separationForce;
 
-          if (distance < combinedRadius) {
-            const pushStrength = (combinedRadius - distance) * 0.15;
+          if (distance < combinedRadius * 0.5) {
+            const pushStrength = (combinedRadius * 0.5 - distance) * 0.05;
             organisms[i].x -= nx * pushStrength;
             organisms[i].y -= ny * pushStrength;
             organisms[j].x += nx * pushStrength;
