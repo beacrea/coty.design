@@ -12,9 +12,11 @@
   $: isDark = $theme === 'dark';
   
   let observeMode = false;
+  let animateKey = 0;
   
   function toggleObserveMode() {
     observeMode = !observeMode;
+    animateKey++;
   }
 </script>
 
@@ -27,13 +29,15 @@
     aria-label={observeMode ? 'Show content' : 'Observe organisms'}
     title={observeMode ? 'Show content' : 'Observe organisms'}
   >
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    {#key animateKey}
+    <svg class="crystal-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="10" r="7"></circle>
       <path d="M8 20h8"></path>
       <path d="M10 17v3"></path>
       <path d="M14 17v3"></path>
       <path d="M9 7.5c1.5-1 3.5-1 5 0"></path>
     </svg>
+    {/key}
   </button>
 </div>
 <div class:dark={isDark} class:observe-mode={observeMode}>
@@ -152,10 +156,9 @@
   .observe-toggle svg {
     width: var(--icon-size);
     height: var(--icon-size);
-    transition: transform 0.3s ease;
   }
 
-  .observe-active .observe-toggle svg {
+  .observe-toggle .crystal-icon {
     animation: crystal-glow 0.4s ease-out;
   }
 
