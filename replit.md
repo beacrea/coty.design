@@ -78,6 +78,7 @@ The portfolio features a subtle canvas-based generative background (`GenerativeB
 - `evolutionChance` — Base probability for proximity evolution
 - `lineContrast` — Contrast ratio for shape outlines (light/dark themes)
 - `vertexContrast` — Contrast ratio for vertex dots (light/dark themes)
+- `blur` — Blur amount in pixels (0 = sharp, higher = softer/fuzzier)
 
 **Contrast Ratios**: Values like `1.15` mean 15% more visible than background. Higher values = more visible shapes.
 
