@@ -104,6 +104,9 @@ interface Organism {
 - Evolve over time (gain vertices) or through interactions
 - Can simplify (lose vertices) during certain interactions
 - Bounding radius capped at `maxSize × 1.5` (42px default)
+- **Death**: Organism dies when size < 60% of minSize or vertices < 3
+- **Respawn**: New organisms spawn from screen edges to maintain population count
+- **Death particles**: 8 particles spawn at death location
 
 ### Lobes
 
