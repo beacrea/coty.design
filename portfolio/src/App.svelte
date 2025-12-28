@@ -20,6 +20,7 @@
 
 <GenerativeBackground enhancedContrast={observeMode} />
 <div class="toggle-wrapper" class:observe-active={observeMode}>
+  <ThemeToggle />
   <button 
     class="observe-toggle"
     on:click={toggleObserveMode}
@@ -36,7 +37,6 @@
       {/if}
     </svg>
   </button>
-  <ThemeToggle />
 </div>
 <div class:dark={isDark} class:observe-mode={observeMode}>
   <a href="#main-content" class="skip-link">Skip to main content</a>
