@@ -9,18 +9,24 @@ export interface WorldConfig {
   maxVertices: number;
   evolutionInterval: number;
   evolutionChance: number;
-  lineOpacity: {
+  lineContrast: {
     light: number;
     dark: number;
   };
-  vertexOpacity: {
+  vertexContrast: {
     light: number;
     dark: number;
   };
-  strokeColor: {
-    light: string;
-    dark: string;
-  };
+}
+
+function contrastToAlpha(contrastRatio: number): number {
+  const targetContrast = Math.max(1, contrastRatio);
+  const alpha = (targetContrast - 1) * 0.5;
+  return Math.min(1, Math.max(0, alpha));
+}
+
+export function getAlphaFromContrast(contrast: number): number {
+  return contrastToAlpha(contrast);
 }
 
 export const defaultWorldConfig: WorldConfig = {
@@ -34,16 +40,12 @@ export const defaultWorldConfig: WorldConfig = {
   maxVertices: 7,
   evolutionInterval: 8000,
   evolutionChance: 0.02,
-  lineOpacity: {
-    light: 0.06,
-    dark: 0.08,
+  lineContrast: {
+    light: 1.15,
+    dark: 1.2,
   },
-  vertexOpacity: {
-    light: 0.04,
-    dark: 0.06,
-  },
-  strokeColor: {
-    light: '0, 0, 0',
-    dark: '255, 255, 255',
+  vertexContrast: {
+    light: 1.1,
+    dark: 1.15,
   },
 };

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { theme } from '../stores/theme';
-  import { defaultWorldConfig, type WorldConfig } from '../lib/generative-config';
+  import { defaultWorldConfig, getAlphaFromContrast, type WorldConfig } from '../lib/generative-config';
 
   export let config: WorldConfig = defaultWorldConfig;
 
@@ -146,9 +146,14 @@
     };
   }
 
+  function getStrokeColor(isDark: boolean): string {
+    return isDark ? '255, 255, 255' : '0, 0, 0';
+  }
+
   function drawConnections(ctx: CanvasRenderingContext2D, organisms: Organism[], cfg: WorldConfig, isDark: boolean): void {
-    const strokeColor = isDark ? cfg.strokeColor.dark : cfg.strokeColor.light;
-    const baseOpacity = isDark ? cfg.lineOpacity.dark : cfg.lineOpacity.light;
+    const strokeColor = getStrokeColor(isDark);
+    const lineContrast = isDark ? cfg.lineContrast.dark : cfg.lineContrast.light;
+    const baseAlpha = getAlphaFromContrast(lineContrast);
 
     for (let i = 0; i < organisms.length; i++) {
       for (let j = i + 1; j < organisms.length; j++) {
@@ -157,7 +162,7 @@
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance < cfg.connectionDistance) {
-          const opacity = (1 - distance / cfg.connectionDistance) * baseOpacity * 0.5;
+          const alpha = (1 - distance / cfg.connectionDistance) * baseAlpha * 0.5;
           
           const vertsA = organisms[i].getWorldVertices();
           const vertsB = organisms[j].getWorldVertices();
@@ -175,7 +180,7 @@
           ctx.beginPath();
           ctx.moveTo(closestA.v.x, closestA.v.y);
           ctx.lineTo(closestB.v.x, closestB.v.y);
-          ctx.strokeStyle = `rgba(${strokeColor}, ${opacity})`;
+          ctx.strokeStyle = `rgba(${strokeColor}, ${alpha})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
@@ -247,9 +252,11 @@
     }
 
     const isDark = $theme === 'dark';
-    const strokeColor = isDark ? adaptedConfig.strokeColor.dark : adaptedConfig.strokeColor.light;
-    const lineOpacity = isDark ? adaptedConfig.lineOpacity.dark : adaptedConfig.lineOpacity.light;
-    const vertexOpacity = isDark ? adaptedConfig.vertexOpacity.dark : adaptedConfig.vertexOpacity.light;
+    const strokeColor = getStrokeColor(isDark);
+    const lineContrast = isDark ? adaptedConfig.lineContrast.dark : adaptedConfig.lineContrast.light;
+    const vertexContrast = isDark ? adaptedConfig.vertexContrast.dark : adaptedConfig.vertexContrast.light;
+    const lineAlpha = getAlphaFromContrast(lineContrast);
+    const vertexAlpha = getAlphaFromContrast(vertexContrast);
 
     ctx.clearRect(0, 0, logicalWidth, logicalHeight);
 
@@ -265,7 +272,7 @@
 
     organisms.forEach((org) => {
       org.update(logicalWidth, logicalHeight);
-      org.draw(ctx!, strokeColor, lineOpacity, vertexOpacity);
+      org.draw(ctx!, strokeColor, lineAlpha, vertexAlpha);
     });
 
     drawConnections(ctx, organisms, adaptedConfig, isDark);

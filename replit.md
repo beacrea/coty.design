@@ -76,8 +76,10 @@ The portfolio features a subtle canvas-based generative background (`GenerativeB
 - `maxVertices` — Maximum polygon complexity (vertices)
 - `evolutionInterval` — Time-based evolution check interval
 - `evolutionChance` — Base probability for proximity evolution
-- `lineOpacity/vertexOpacity` — Theme-aware opacity values
-- `strokeColor` — RGB values for light/dark themes
+- `lineContrast` — Contrast ratio for shape outlines (light/dark themes)
+- `vertexContrast` — Contrast ratio for vertex dots (light/dark themes)
+
+**Contrast Ratios**: Values like `1.15` mean 15% more visible than background. Higher values = more visible shapes.
 
 ## External Dependencies
 
