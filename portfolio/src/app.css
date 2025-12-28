@@ -23,6 +23,9 @@
   --toggle-stroke: oklch(0.55 0.180 45);
   --toggle-rays: oklch(0.816 0.130 55);
   
+  --surface-card-bg: oklch(0.96 0.015 260);
+  --surface-card-border: oklch(0.88 0.03 260);
+  
   --text-size-title: 33.178px;
   --text-size-subtitle: 19.2px;
   --text-size-header: 19.2px;
@@ -62,6 +65,9 @@
   --toggle-fill: oklch(0.521 0.215 277);
   --toggle-stroke: oklch(0.68 0.213 277);
   --toggle-rays: oklch(0.843 0.098 277);
+  
+  --surface-card-bg: oklch(0.18 0.02 277);
+  --surface-card-border: oklch(0.30 0.04 277);
 }
 
 @media (min-width: 640px) {
