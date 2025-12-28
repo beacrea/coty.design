@@ -84,6 +84,12 @@ The portfolio features a subtle canvas-based generative background (`GenerativeB
 
 **Interaction Types**: When organisms get close, they may evolve (35%), morph/transfer vertices (30%), burst apart (13%), simplify (10%), or pulse/spin (12%).
 
+**Morphological Features**:
+- **Tendrils** — Curved lines that grow toward nearby organisms during evolution/morph interactions, then retract
+- **Internal spokes** — Lines connecting opposite vertices on organisms with 4+ vertices, intensity varies per organism
+- **Chain links** — Wobbling connections that form during morph/pulse interactions, stretch as organisms drift, then break
+- **Trailing particles** — Small fading dots spawned during burst repulsions and simplifications
+
 **Contrast Ratios**: Values like `1.15` mean 15% more visible than background. Higher values = more visible shapes.
 
 ## External Dependencies
