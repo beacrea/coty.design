@@ -504,8 +504,9 @@
   function applyFoodAttraction(timestamp: number): void {
     spawnRandomFood(timestamp);
 
-    const noticeDistance = 250;
-    const speedBoostMax = 3;
+    const noticeDistance = 350;
+    const speedBoostMax = 5;
+    const aggressionDistance = 120;
 
     for (let i = foodSources.length - 1; i >= 0; i--) {
       const food = foodSources[i];
@@ -519,7 +520,9 @@
         continue;
       }
 
-      food.pulsePhase += 0.02;
+      food.pulsePhase += 0.03;
+
+      const nearbyOrgs: { org: Organism; dist: number }[] = [];
 
       organisms.forEach((org) => {
         const dx = food.x - org.x;
@@ -527,17 +530,27 @@
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < noticeDistance) {
+          nearbyOrgs.push({ org, dist });
+          
           const proximityFactor = 1 - dist / noticeDistance;
-          const speedBoost = 1 + proximityFactor * proximityFactor * (speedBoostMax - 1);
+          const urgencyFactor = dist < aggressionDistance ? 2.5 : 1;
+          const speedBoost = 1 + proximityFactor * proximityFactor * (speedBoostMax - 1) * urgencyFactor;
           
           const nx = dx / Math.max(dist, 0.1);
           const ny = dy / Math.max(dist, 0.1);
           
           const targetSpeed = adaptedConfig.maxSpeed * speedBoost;
-          const attractionStrength = adaptedConfig.foodAttractionStrength * proximityFactor * speedBoost;
+          const attractionStrength = adaptedConfig.foodAttractionStrength * proximityFactor * speedBoost * urgencyFactor;
           
           org.vx += nx * attractionStrength;
           org.vy += ny * attractionStrength;
+          
+          if (dist < aggressionDistance) {
+            org.rotationSpeed += (Math.random() - 0.5) * 0.01;
+            if (Math.random() < 0.02) {
+              org.growTendril(food.x, food.y);
+            }
+          }
           
           const currentSpeed = Math.sqrt(org.vx * org.vx + org.vy * org.vy);
           if (currentSpeed > targetSpeed && currentSpeed > 0) {
@@ -549,14 +562,32 @@
         if (dist < org.size * 0.8) {
           food.active = false;
           food.respawnAt = timestamp + adaptedConfig.foodRespawnTime;
-          org.grow(3);
-          org.decayRate += 0.0003;
-          if (org.vertices.length < adaptedConfig.maxVertices && Math.random() < 0.4) {
+          org.grow(5);
+          org.decayRate += 0.0005;
+          if (org.vertices.length < adaptedConfig.maxVertices && Math.random() < 0.6) {
             org.evolve(adaptedConfig.maxVertices);
           }
-          spawnParticles(food.x, food.y, 0, 0, 6);
+          if (Math.random() < 0.3 && org.lobes.length < 3) {
+            org.lobes.push(org.createLobe(adaptedConfig));
+          }
+          spawnParticles(food.x, food.y, 0, 0, 10);
         }
       });
+
+      if (nearbyOrgs.length >= 2) {
+        nearbyOrgs.sort((a, b) => a.dist - b.dist);
+        for (let n = 0; n < Math.min(nearbyOrgs.length - 1, 3); n++) {
+          const orgA = nearbyOrgs[n].org;
+          const orgB = nearbyOrgs[n + 1].org;
+          const distBetween = Math.hypot(orgB.x - orgA.x, orgB.y - orgA.y);
+          
+          if (distBetween < adaptedConfig.mergeDistance * 1.5 && Math.random() < 0.08) {
+            orgA.morphWith(orgB);
+            createChainLink(orgA, orgB);
+            orgA.growTendril(orgB.x, orgB.y);
+          }
+        }
+      }
     }
   }
 
@@ -773,12 +804,13 @@
 
         if (distance < interactionDistance) {
           const proximityFactor = 1 - distance / interactionDistance;
-          const triggerChance = proximityFactor * adaptedConfig.interactionChance;
+          const baseChance = adaptedConfig.interactionChance * (1 + proximityFactor);
+          const triggerChance = proximityFactor * baseChance;
           
           if (Math.random() < triggerChance) {
             const interactionType = Math.random();
             
-            if (interactionType < 0.20) {
+            if (interactionType < 0.15) {
               if (organisms[i].vertices.length <= organisms[j].vertices.length) {
                 organisms[i].evolve(adaptedConfig.maxVertices);
                 organisms[i].growTendril(organisms[j].x, organisms[j].y);
@@ -786,35 +818,50 @@
                 organisms[j].evolve(adaptedConfig.maxVertices);
                 organisms[j].growTendril(organisms[i].x, organisms[i].y);
               }
-            } else if (interactionType < 0.70) {
+              spawnParticles((organisms[i].x + organisms[j].x) / 2, (organisms[i].y + organisms[j].y) / 2, 0, 0, 3);
+            } else if (interactionType < 0.55) {
               organisms[i].morphWith(organisms[j]);
               organisms[j].morphWith(organisms[i]);
               createChainLink(organisms[i], organisms[j]);
               organisms[i].growTendril(organisms[j].x, organisms[j].y);
               organisms[j].growTendril(organisms[i].x, organisms[i].y);
-            } else if (interactionType < 0.80) {
-              const burstForce = 0.2;
+              spawnParticles((organisms[i].x + organisms[j].x) / 2, (organisms[i].y + organisms[j].y) / 2, 0, 0, 4);
+            } else if (interactionType < 0.70) {
+              const larger = organisms[i].size > organisms[j].size ? organisms[i] : organisms[j];
+              const smaller = organisms[i].size > organisms[j].size ? organisms[j] : organisms[i];
+              larger.grow(smaller.size * 0.15);
+              smaller.pulseSize(0.88);
+              larger.morphWith(smaller);
+              createChainLink(organisms[i], organisms[j]);
+              spawnParticles(smaller.x, smaller.y, smaller.vx, smaller.vy, 5);
+            } else if (interactionType < 0.82) {
+              const burstForce = 0.35;
               organisms[i].vx -= nx * burstForce;
               organisms[i].vy -= ny * burstForce;
               organisms[j].vx += nx * burstForce;
               organisms[j].vy += ny * burstForce;
-              organisms[i].pulseSize(0.92);
-              organisms[j].pulseSize(0.92);
+              organisms[i].pulseSize(0.90);
+              organisms[j].pulseSize(0.90);
               const midX = (organisms[i].x + organisms[j].x) / 2;
               const midY = (organisms[i].y + organisms[j].y) / 2;
-              spawnParticles(midX, midY, organisms[i].vx, organisms[i].vy, 4);
-              spawnParticles(midX, midY, organisms[j].vx, organisms[j].vy, 4);
-            } else if (interactionType < 0.90) {
+              spawnParticles(midX, midY, organisms[i].vx, organisms[i].vy, 6);
+              spawnParticles(midX, midY, organisms[j].vx, organisms[j].vy, 6);
+            } else if (interactionType < 0.92) {
               const moreComplex = organisms[i].vertices.length > organisms[j].vertices.length ? organisms[i] : organisms[j];
+              const lessComplex = organisms[i].vertices.length > organisms[j].vertices.length ? organisms[j] : organisms[i];
               moreComplex.simplify();
-              spawnParticles(moreComplex.x, moreComplex.y, moreComplex.vx, moreComplex.vy, 2);
+              lessComplex.evolve(adaptedConfig.maxVertices);
+              spawnParticles(moreComplex.x, moreComplex.y, moreComplex.vx, moreComplex.vy, 3);
             } else {
-              organisms[i].pulseSize(1.08);
-              organisms[j].pulseSize(1.08);
+              organisms[i].pulseSize(1.12);
+              organisms[j].pulseSize(1.12);
               const avgRotSpeed = (organisms[i].rotationSpeed + organisms[j].rotationSpeed) / 2;
-              organisms[i].rotationSpeed = avgRotSpeed * 1.3;
-              organisms[j].rotationSpeed = avgRotSpeed * 1.3;
+              organisms[i].rotationSpeed = avgRotSpeed * 1.5;
+              organisms[j].rotationSpeed = avgRotSpeed * 1.5;
               createChainLink(organisms[i], organisms[j]);
+              if (Math.random() < 0.4 && organisms[i].lobes.length < 3) {
+                organisms[i].lobes.push(organisms[i].createLobe(adaptedConfig));
+              }
             }
           }
         }
