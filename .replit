@@ -30,3 +30,8 @@ externalPort = 80
 
 [agent]
 expertMode = true
+
+[deployment]
+deploymentTarget = "static"
+build = ["bash", "-c", "cd portfolio && npm run build"]
+publicDir = "portfolio/dist"
