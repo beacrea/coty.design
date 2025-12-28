@@ -1,11 +1,13 @@
 import type { OrganismData, SimulationConfig } from '../types';
 
-export function applyFlocking(organisms: OrganismData[], cfg: SimulationConfig): void {
+export function applyFlocking(organisms: OrganismData[], cfg: SimulationConfig, grabbedIndex: number = -1): void {
   const flockingDistance = cfg.connectionDistance * 0.8;
   const alignmentStrength = 0.003;
   const cohesionStrength = 0.0008;
 
   for (let i = 0; i < organisms.length; i++) {
+    if (i === grabbedIndex || organisms[i].grab.isGrabbed) continue;
+    
     let neighborCount = 0;
     let avgNeighborX = 0;
     let avgNeighborY = 0;

@@ -1,5 +1,13 @@
-import type { OrganismData, RenderContext } from '../types';
+import type { OrganismData, RenderContext, OrganelleType } from '../types';
 import { getWorldVertices, getBoundingRadius } from '../state';
+
+const ORGANELLE_COLORS: Record<OrganelleType, { h: number; s: number }> = {
+  nucleus: { h: 280, s: 50 },
+  mitochondria: { h: 15, s: 70 },
+  vacuole: { h: 200, s: 40 },
+  chloroplast: { h: 120, s: 60 },
+  ribosome: { h: 60, s: 50 },
+};
 
 function getColor(
   strokeColor: string,
@@ -42,10 +50,11 @@ export function drawOrganism(
   const vertexRadius = observationMode ? 2.2 : 2;
   const lobeVertexRadius = observationMode ? 1.7 : 1.5;
   
-  if (org.glow > 0.05 && observationMode) {
-    const clampedGlow = Math.min(org.glow, 0.4);
-    const glowRadius = getBoundingRadius(org) * (1.1 + clampedGlow * 0.2);
-    const glowAlpha = clampedGlow * 0.1;
+  const effectiveGlow = Math.max(org.glow, org.hoverIntensity * 0.3);
+  if (effectiveGlow > 0.05 && observationMode) {
+    const clampedGlow = Math.min(effectiveGlow, 0.5);
+    const glowRadius = getBoundingRadius(org) * (1.1 + clampedGlow * 0.3);
+    const glowAlpha = clampedGlow * 0.15;
     const gradient = ctx.createRadialGradient(org.x, org.y, 0, org.x, org.y, glowRadius);
     gradient.addColorStop(0, getOrgColor(glowAlpha));
     gradient.addColorStop(1, getOrgColor(0));
@@ -53,6 +62,14 @@ export function drawOrganism(
     ctx.arc(org.x, org.y, glowRadius, 0, Math.PI * 2);
     ctx.fillStyle = gradient;
     ctx.fill();
+  }
+  
+  if (org.hoverIntensity > 0.05) {
+    const hoverScale = 1 + org.hoverIntensity * 0.08;
+    ctx.save();
+    ctx.translate(org.x, org.y);
+    ctx.scale(hoverScale, hoverScale);
+    ctx.translate(-org.x, -org.y);
   }
   
   if (org.vertices.length >= 4 && org.spokeIntensity > 0) {
@@ -131,27 +148,78 @@ export function drawOrganism(
     const dx = org.tendril.targetX - org.x;
     const dy = org.tendril.targetY - org.y;
     const dist = Math.sqrt(dx * dx + dy * dy);
-    if (dist < 0.1) return;
-    const nx = dx / dist;
-    const ny = dy / dist;
+    if (dist >= 0.1) {
+      const nx = dx / dist;
+      const ny = dy / dist;
+      
+      const endX = org.x + nx * org.tendril.length;
+      const endY = org.y + ny * org.tendril.length;
+      const ctrlX = (org.x + endX) / 2 + org.tendril.curveOffset * -ny;
+      const ctrlY = (org.y + endY) / 2 + org.tendril.curveOffset * nx;
+      
+      const tendrilAlpha = lineAlpha * (org.tendril.length / org.tendril.maxLength) * 0.7;
+      ctx.beginPath();
+      ctx.moveTo(org.x, org.y);
+      ctx.quadraticCurveTo(ctrlX, ctrlY, endX, endY);
+      ctx.strokeStyle = getOrgColor(tendrilAlpha);
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.arc(endX, endY, 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = getOrgColor(tendrilAlpha);
+      ctx.fill();
+    }
+  }
+  
+  if (observationMode && org.organelles.length > 0) {
+    drawOrganelles(ctx, org, lineAlpha, isDark);
+  }
+  
+  if (org.hoverIntensity > 0.05) {
+    ctx.restore();
+  }
+}
+
+function drawOrganelles(
+  ctx: CanvasRenderingContext2D,
+  org: OrganismData,
+  alpha: number,
+  isDark: boolean
+): void {
+  for (const organelle of org.organelles) {
+    const colors = ORGANELLE_COLORS[organelle.type];
+    const pulse = Math.sin(organelle.pulsePhase) * 0.1 + 1;
     
-    const endX = org.x + nx * org.tendril.length;
-    const endY = org.y + ny * org.tendril.length;
-    const ctrlX = (org.x + endX) / 2 + org.tendril.curveOffset * -ny;
-    const ctrlY = (org.y + endY) / 2 + org.tendril.curveOffset * nx;
+    const x = org.x + Math.cos(organelle.angle + org.rotation) * org.size * organelle.radiusRatio;
+    const y = org.y + Math.sin(organelle.angle + org.rotation) * org.size * organelle.radiusRatio;
+    const size = org.size * organelle.sizeRatio * pulse;
     
-    const tendrilAlpha = lineAlpha * (org.tendril.length / org.tendril.maxLength) * 0.7;
+    const lightness = isDark ? 60 + org.depth * 20 : 35 + org.depth * 15;
+    const organelleAlpha = alpha * (0.4 + org.depth * 0.4);
+    
     ctx.beginPath();
-    ctx.moveTo(org.x, org.y);
-    ctx.quadraticCurveTo(ctrlX, ctrlY, endX, endY);
-    ctx.strokeStyle = getOrgColor(tendrilAlpha);
-    ctx.lineWidth = 0.8;
-    ctx.stroke();
     
-    ctx.beginPath();
-    ctx.arc(endX, endY, 1.5, 0, Math.PI * 2);
-    ctx.fillStyle = getOrgColor(tendrilAlpha);
+    if (organelle.type === 'nucleus') {
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+    } else if (organelle.type === 'mitochondria') {
+      ctx.ellipse(x, y, size * 1.5, size * 0.7, organelle.angle + org.rotation, 0, Math.PI * 2);
+    } else if (organelle.type === 'vacuole') {
+      ctx.arc(x, y, size * 1.2, 0, Math.PI * 2);
+    } else if (organelle.type === 'chloroplast') {
+      ctx.ellipse(x, y, size * 1.3, size * 0.6, organelle.angle + org.rotation + Math.PI / 4, 0, Math.PI * 2);
+    } else {
+      ctx.arc(x, y, size * 0.5, 0, Math.PI * 2);
+    }
+    
+    ctx.fillStyle = `hsla(${colors.h}, ${colors.s}%, ${lightness}%, ${organelleAlpha})`;
     ctx.fill();
+    
+    if (organelle.type === 'nucleus' || organelle.type === 'vacuole') {
+      ctx.strokeStyle = `hsla(${colors.h}, ${colors.s}%, ${lightness - 10}%, ${organelleAlpha * 0.7})`;
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    }
   }
 }
 

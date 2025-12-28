@@ -6,6 +6,9 @@ import { applyProximityInteractions } from './systems/interactions';
 import { updateParticles, spawnParticles, spawnAmbientBubbles, spawnBubbleStream } from './systems/particles';
 import { updateFoodSources, applyFoodAttraction } from './systems/food';
 import { createChainLink, updateChainLinks, remapChainLinkIndices } from './systems/chainlinks';
+import { updateSpatialHash, updateHover, applyGrabSpringPhysics, applySoftBodyCollisions, beginGrab as beginGrabImpl, endGrab as endGrabImpl, updatePointer as updatePointerImpl, findOrganismAtPoint } from './systems/user-input';
+import { updateDeformations } from './systems/deformation';
+import { updateOrganellePositions } from './systems/organelles';
 import { drawOrganism, drawConnections } from './renderers/organisms';
 import { drawParticles } from './renderers/particles';
 import { drawChainLinks } from './renderers/chainlinks';
@@ -60,6 +63,14 @@ export class Simulation {
     const { organisms, particles, chainLinks, foodSources, width, height } = this.state;
     const cfg = this.config;
     
+    updateSpatialHash(this.state);
+    updateHover(this.state, cfg);
+    applyGrabSpringPhysics(this.state, cfg);
+    applySoftBodyCollisions(this.state, cfg);
+    
+    updateOrganellePositions(organisms, 1);
+    updateDeformations(this.state, cfg);
+    
     const target = cfg.populationTarget;
     const aggr = Math.max(0, Math.min(1, cfg.populationAggressiveness));
     const count = organisms.length;
@@ -73,7 +84,7 @@ export class Simulation {
     
     this.state.birthAccumulator += birthPressure;
     
-    applyFlocking(organisms, cfg);
+    applyFlocking(organisms, cfg, this.state.grabbedOrganismIndex);
     applyCollisionSeparation(organisms);
     
     const interactionResult = applyProximityInteractions(organisms, cfg);
@@ -96,7 +107,13 @@ export class Simulation {
           const insertIndex = Math.floor(Math.random() * randomOrg.vertices.length);
           const nextIndex = (insertIndex + 1) % randomOrg.vertices.length;
           const newAngle = (randomOrg.vertices[insertIndex].angle + randomOrg.vertices[nextIndex].angle) / 2;
-          randomOrg.vertices.splice(insertIndex + 1, 0, { angle: newAngle, distance: 0.7 + Math.random() * 0.3 });
+          const newDistance = 0.7 + Math.random() * 0.3;
+          randomOrg.vertices.splice(insertIndex + 1, 0, { 
+            angle: newAngle, 
+            distance: newDistance,
+            baseDistance: newDistance,
+            deformation: 0
+          });
         }
       }
       this.state.lastEvolutionTime = timestamp;
@@ -189,5 +206,25 @@ export class Simulation {
   
   getParticleCount(): number {
     return this.state.particles.length;
+  }
+  
+  beginGrab(x: number, y: number, pointerId: number = 0): boolean {
+    return beginGrabImpl(this.state, x, y, pointerId);
+  }
+  
+  endGrab(): void {
+    endGrabImpl(this.state);
+  }
+  
+  updatePointer(x: number, y: number, isActive: boolean): void {
+    updatePointerImpl(this.state, x, y, isActive);
+  }
+  
+  findNearestOrganism(x: number, y: number): number | null {
+    return findOrganismAtPoint(this.state, x, y);
+  }
+  
+  isGrabbing(): boolean {
+    return this.state.grabbedOrganismIndex !== null;
   }
 }

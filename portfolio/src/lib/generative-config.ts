@@ -45,6 +45,33 @@ export interface PoolingConfig {
 export interface PopulationConfig {
   target: number;
   aggressiveness: number;
+  densityPerPixel: number;
+  minTarget: number;
+  maxTarget: number;
+}
+
+export interface OrganelleConfig {
+  spawnChance: number;
+  maxPerOrganism: number;
+  foodGrantChance: number;
+  mergeTransferChance: number;
+  types: {
+    nucleus: { weight: number; speedMod: number; decayMod: number; glowMod: number };
+    mitochondria: { weight: number; speedMod: number; decayMod: number; glowMod: number };
+    vacuole: { weight: number; speedMod: number; decayMod: number; glowMod: number };
+    chloroplast: { weight: number; speedMod: number; decayMod: number; glowMod: number };
+    ribosome: { weight: number; speedMod: number; decayMod: number; glowMod: number };
+  };
+}
+
+export interface InteractionConfig {
+  grabSpringStiffness: number;
+  grabSpringDamping: number;
+  softCollisionStrength: number;
+  hoverEaseSpeed: number;
+  deformationStiffness: number;
+  deformationDamping: number;
+  maxDeformation: number;
 }
 
 export interface WorldConfig {
@@ -72,6 +99,20 @@ export interface WorldConfig {
   vertexContrast: { light: number; dark: number };
   populationTarget: number;
   populationAggressiveness: number;
+  populationDensityPerPixel: number;
+  populationMinTarget: number;
+  populationMaxTarget: number;
+  organelleSpawnChance: number;
+  organelleMaxPerOrganism: number;
+  organelleFoodGrantChance: number;
+  organelleMergeTransferChance: number;
+  grabSpringStiffness: number;
+  grabSpringDamping: number;
+  softCollisionStrength: number;
+  hoverEaseSpeed: number;
+  deformationStiffness: number;
+  deformationDamping: number;
+  maxDeformation: number;
 }
 
 export interface StructuredConfig {
@@ -82,6 +123,8 @@ export interface StructuredConfig {
   visual: VisualConfig;
   pooling: PoolingConfig;
   population: PopulationConfig;
+  organelles: OrganelleConfig;
+  interaction: InteractionConfig;
 }
 
 function contrastToAlpha(contrastRatio: number): number {
@@ -136,6 +179,31 @@ export const defaultStructuredConfig: StructuredConfig = {
   population: {
     target: 16,
     aggressiveness: 0.5,
+    densityPerPixel: 90000,
+    minTarget: 8,
+    maxTarget: 40,
+  },
+  organelles: {
+    spawnChance: 0.3,
+    maxPerOrganism: 6,
+    foodGrantChance: 0.15,
+    mergeTransferChance: 0.7,
+    types: {
+      nucleus: { weight: 0.15, speedMod: 0, decayMod: -0.2, glowMod: 0.1 },
+      mitochondria: { weight: 0.3, speedMod: 0.15, decayMod: 0, glowMod: 0 },
+      vacuole: { weight: 0.2, speedMod: -0.05, decayMod: -0.3, glowMod: 0 },
+      chloroplast: { weight: 0.2, speedMod: 0, decayMod: 0, glowMod: 0.25 },
+      ribosome: { weight: 0.15, speedMod: 0.05, decayMod: 0, glowMod: 0 },
+    },
+  },
+  interaction: {
+    grabSpringStiffness: 0.15,
+    grabSpringDamping: 0.85,
+    softCollisionStrength: 0.8,
+    hoverEaseSpeed: 0.1,
+    deformationStiffness: 0.2,
+    deformationDamping: 0.9,
+    maxDeformation: 0.4,
   },
 };
 
@@ -165,6 +233,20 @@ export function structuredToWorldConfig(structured: StructuredConfig): WorldConf
     vertexContrast: structured.visual.vertexContrast,
     populationTarget: structured.population.target,
     populationAggressiveness: structured.population.aggressiveness,
+    populationDensityPerPixel: structured.population.densityPerPixel,
+    populationMinTarget: structured.population.minTarget,
+    populationMaxTarget: structured.population.maxTarget,
+    organelleSpawnChance: structured.organelles.spawnChance,
+    organelleMaxPerOrganism: structured.organelles.maxPerOrganism,
+    organelleFoodGrantChance: structured.organelles.foodGrantChance,
+    organelleMergeTransferChance: structured.organelles.mergeTransferChance,
+    grabSpringStiffness: structured.interaction.grabSpringStiffness,
+    grabSpringDamping: structured.interaction.grabSpringDamping,
+    softCollisionStrength: structured.interaction.softCollisionStrength,
+    hoverEaseSpeed: structured.interaction.hoverEaseSpeed,
+    deformationStiffness: structured.interaction.deformationStiffness,
+    deformationDamping: structured.interaction.deformationDamping,
+    maxDeformation: structured.interaction.maxDeformation,
   };
 }
 
@@ -206,6 +288,25 @@ export function worldConfigToStructured(config: WorldConfig): StructuredConfig {
     population: {
       target: config.populationTarget,
       aggressiveness: config.populationAggressiveness,
+      densityPerPixel: config.populationDensityPerPixel,
+      minTarget: config.populationMinTarget,
+      maxTarget: config.populationMaxTarget,
+    },
+    organelles: {
+      spawnChance: config.organelleSpawnChance,
+      maxPerOrganism: config.organelleMaxPerOrganism,
+      foodGrantChance: config.organelleFoodGrantChance,
+      mergeTransferChance: config.organelleMergeTransferChance,
+      types: defaultStructuredConfig.organelles.types,
+    },
+    interaction: {
+      grabSpringStiffness: config.grabSpringStiffness,
+      grabSpringDamping: config.grabSpringDamping,
+      softCollisionStrength: config.softCollisionStrength,
+      hoverEaseSpeed: config.hoverEaseSpeed,
+      deformationStiffness: config.deformationStiffness,
+      deformationDamping: config.deformationDamping,
+      maxDeformation: config.maxDeformation,
     },
   };
 }

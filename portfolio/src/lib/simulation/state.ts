@@ -1,6 +1,17 @@
-import type { SimulationState, SimulationConfig, OrganismData, Particle, ChainLink, FoodSource, Vertex, Lobe } from './types';
+import type { SimulationState, SimulationConfig, OrganismData, Particle, ChainLink, FoodSource, Vertex, Lobe, GrabState, Organelle, OrganelleType } from './types';
 
 const UNDERWATER_HUES = [180, 195, 210, 225, 240, 260, 280, 165];
+
+export function createDefaultGrabState(): GrabState {
+  return {
+    isGrabbed: false,
+    pointerId: null,
+    offsetX: 0,
+    offsetY: 0,
+    springVx: 0,
+    springVy: 0,
+  };
+}
 
 export function createVertices(count: number): Vertex[] {
   const verts: Vertex[] = [];
@@ -25,6 +36,8 @@ export function createVertices(count: number): Vertex[] {
     verts.push({
       angle: baseAngle + angleJitter,
       distance: distanceVariation,
+      baseDistance: distanceVariation,
+      deformation: 0,
     });
   }
   return verts;
@@ -40,6 +53,44 @@ export function createLobe(cfg: SimulationConfig): Lobe {
     size: lobeSize,
     rotationOffset: Math.random() * Math.PI * 2,
   };
+}
+
+const ORGANELLE_TYPES: OrganelleType[] = ['nucleus', 'mitochondria', 'vacuole', 'chloroplast', 'ribosome'];
+const ORGANELLE_WEIGHTS = [0.15, 0.3, 0.2, 0.2, 0.15];
+
+function pickWeightedOrganelleType(): OrganelleType {
+  const totalWeight = ORGANELLE_WEIGHTS.reduce((a, b) => a + b, 0);
+  let random = Math.random() * totalWeight;
+  for (let i = 0; i < ORGANELLE_TYPES.length; i++) {
+    random -= ORGANELLE_WEIGHTS[i];
+    if (random <= 0) return ORGANELLE_TYPES[i];
+  }
+  return ORGANELLE_TYPES[0];
+}
+
+export function createOrganelle(type?: OrganelleType): Organelle {
+  const organelleType = type ?? pickWeightedOrganelleType();
+  const isNucleus = organelleType === 'nucleus';
+  
+  return {
+    type: organelleType,
+    radiusRatio: isNucleus ? 0.1 + Math.random() * 0.15 : 0.3 + Math.random() * 0.4,
+    angle: Math.random() * Math.PI * 2,
+    sizeRatio: isNucleus ? 0.15 + Math.random() * 0.1 : 0.05 + Math.random() * 0.08,
+    rotationSpeed: (Math.random() - 0.5) * 0.02,
+    pulsePhase: Math.random() * Math.PI * 2,
+  };
+}
+
+export function spawnOrganellesForOrganism(spawnChance: number, maxCount: number): Organelle[] {
+  const organelles: Organelle[] = [];
+  if (Math.random() >= spawnChance) return organelles;
+  
+  const count = 1 + Math.floor(Math.random() * Math.min(3, maxCount));
+  for (let i = 0; i < count; i++) {
+    organelles.push(createOrganelle());
+  }
+  return organelles;
 }
 
 export function createOrganism(x: number, y: number, cfg: SimulationConfig): OrganismData {
@@ -84,6 +135,9 @@ export function createOrganism(x: number, y: number, cfg: SimulationConfig): Org
     hue: UNDERWATER_HUES[Math.floor(Math.random() * UNDERWATER_HUES.length)] + (Math.random() - 0.5) * 20,
     vertices: createVertices(startVertices),
     lobes,
+    organelles: spawnOrganellesForOrganism(cfg.organelleSpawnChance, cfg.organelleMaxPerOrganism),
+    grab: createDefaultGrabState(),
+    hoverIntensity: 0,
   };
 }
 
@@ -124,6 +178,18 @@ export function createSimulationState(width: number, height: number, cfg: Simula
     height,
     birthAccumulator: 0,
     deathMultiplier: 1,
+    pointer: {
+      x: 0,
+      y: 0,
+      isActive: false,
+      velocity: { x: 0, y: 0 },
+    },
+    hoveredOrganismIndex: null,
+    grabbedOrganismIndex: null,
+    spatialHash: {
+      cells: new Map(),
+      cellSize: 60,
+    },
   };
 }
 
@@ -137,10 +203,75 @@ export function getBoundingRadius(org: OrganismData): number {
 }
 
 export function getWorldVertices(org: OrganismData): { x: number; y: number }[] {
-  return org.vertices.map((v) => ({
-    x: org.x + Math.cos(v.angle + org.rotation) * org.size * v.distance,
-    y: org.y + Math.sin(v.angle + org.rotation) * org.size * v.distance,
-  }));
+  return org.vertices.map((v) => {
+    const effectiveDistance = v.baseDistance + v.deformation;
+    return {
+      x: org.x + Math.cos(v.angle + org.rotation) * org.size * effectiveDistance,
+      y: org.y + Math.sin(v.angle + org.rotation) * org.size * effectiveDistance,
+    };
+  });
+}
+
+export function createDefaultPointerState() {
+  return {
+    x: 0,
+    y: 0,
+    isActive: false,
+    velocity: { x: 0, y: 0 },
+  };
+}
+
+export function createSpatialHash(cellSize: number = 60) {
+  return {
+    cells: new Map<string, { organismIndices: number[] }>(),
+    cellSize,
+  };
+}
+
+export function getCellKey(x: number, y: number, cellSize: number): string {
+  const cellX = Math.floor(x / cellSize);
+  const cellY = Math.floor(y / cellSize);
+  return `${cellX},${cellY}`;
+}
+
+export function rebuildSpatialHash(state: SimulationState): void {
+  state.spatialHash.cells.clear();
+  const cellSize = state.spatialHash.cellSize;
+  
+  for (let i = 0; i < state.organisms.length; i++) {
+    const org = state.organisms[i];
+    const key = getCellKey(org.x, org.y, cellSize);
+    let cell = state.spatialHash.cells.get(key);
+    if (!cell) {
+      cell = { organismIndices: [] };
+      state.spatialHash.cells.set(key, cell);
+    }
+    cell.organismIndices.push(i);
+  }
+}
+
+export function getNearbyOrganismIndices(
+  state: SimulationState,
+  x: number,
+  y: number,
+  radius: number
+): number[] {
+  const cellSize = state.spatialHash.cellSize;
+  const minCellX = Math.floor((x - radius) / cellSize);
+  const maxCellX = Math.floor((x + radius) / cellSize);
+  const minCellY = Math.floor((y - radius) / cellSize);
+  const maxCellY = Math.floor((y + radius) / cellSize);
+  
+  const result: number[] = [];
+  for (let cx = minCellX; cx <= maxCellX; cx++) {
+    for (let cy = minCellY; cy <= maxCellY; cy++) {
+      const cell = state.spatialHash.cells.get(`${cx},${cy}`);
+      if (cell) {
+        result.push(...cell.organismIndices);
+      }
+    }
+  }
+  return result;
 }
 
 export function isOrganismDead(org: OrganismData): boolean {

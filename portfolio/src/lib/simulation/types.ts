@@ -1,6 +1,35 @@
 export interface Vertex {
   angle: number;
   distance: number;
+  baseDistance: number;
+  deformation: number;
+}
+
+export type OrganelleType = 'nucleus' | 'mitochondria' | 'vacuole' | 'chloroplast' | 'ribosome';
+
+export interface Organelle {
+  type: OrganelleType;
+  radiusRatio: number;
+  angle: number;
+  sizeRatio: number;
+  rotationSpeed: number;
+  pulsePhase: number;
+}
+
+export interface GrabState {
+  isGrabbed: boolean;
+  pointerId: number | null;
+  offsetX: number;
+  offsetY: number;
+  springVx: number;
+  springVy: number;
+}
+
+export interface PointerState {
+  x: number;
+  y: number;
+  isActive: boolean;
+  velocity: { x: number; y: number };
 }
 
 export interface Tendril {
@@ -46,6 +75,9 @@ export interface OrganismData {
   glow: number;
   depth: number;
   hue: number;
+  organelles: Organelle[];
+  grab: GrabState;
+  hoverIntensity: number;
 }
 
 export interface Particle {
@@ -75,6 +107,15 @@ export interface FoodSource {
   pulsePhase: number;
 }
 
+export interface SpatialCell {
+  organismIndices: number[];
+}
+
+export interface SpatialHash {
+  cells: Map<string, SpatialCell>;
+  cellSize: number;
+}
+
 export interface SimulationState {
   organisms: OrganismData[];
   particles: Particle[];
@@ -87,6 +128,10 @@ export interface SimulationState {
   height: number;
   birthAccumulator: number;
   deathMultiplier: number;
+  pointer: PointerState;
+  hoveredOrganismIndex: number | null;
+  grabbedOrganismIndex: number | null;
+  spatialHash: SpatialHash;
 }
 
 export interface SimulationConfig {
@@ -114,6 +159,20 @@ export interface SimulationConfig {
   vertexContrast: { light: number; dark: number };
   populationTarget: number;
   populationAggressiveness: number;
+  populationDensityPerPixel: number;
+  populationMinTarget: number;
+  populationMaxTarget: number;
+  organelleSpawnChance: number;
+  organelleMaxPerOrganism: number;
+  organelleFoodGrantChance: number;
+  organelleMergeTransferChance: number;
+  grabSpringStiffness: number;
+  grabSpringDamping: number;
+  softCollisionStrength: number;
+  hoverEaseSpeed: number;
+  deformationStiffness: number;
+  deformationDamping: number;
+  maxDeformation: number;
 }
 
 export interface RenderContext {
