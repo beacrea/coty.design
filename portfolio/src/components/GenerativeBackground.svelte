@@ -828,7 +828,8 @@
   function spawnAmbientBubbles(): void {
     currentTime++;
     
-    const spawnCount = Math.random() < 0.3 ? 1 : 0;
+    const edgeSpawnChance = Math.random();
+    const spawnCount = edgeSpawnChance < 0.5 ? 1 : edgeSpawnChance < 0.7 ? 2 : 0;
     for (let i = 0; i < spawnCount; i++) {
       const edge = Math.floor(Math.random() * 4);
       let x: number, y: number;
@@ -848,30 +849,39 @@
       }
       
       const flow = getFlowField(x, y, currentTime);
+      const sizeRoll = Math.random();
+      const bubbleSize = sizeRoll < 0.4 ? 0.2 + Math.random() * 0.3 :
+                         sizeRoll < 0.75 ? 0.4 + Math.random() * 0.5 :
+                         sizeRoll < 0.92 ? 0.8 + Math.random() * 0.6 :
+                         1.2 + Math.random() * 0.6;
       
       particles.push({
         x,
         y,
         vx: flow.vx + (Math.random() - 0.5) * 0.01,
         vy: flow.vy + (Math.random() - 0.5) * 0.01,
-        size: 0.4 + Math.random() * 1.0,
+        size: bubbleSize,
         life: 1,
         maxLife: 800 + Math.floor(Math.random() * 600),
         depth: Math.random(),
       });
     }
     
-    if (Math.random() < 0.12) {
+    if (Math.random() < 0.25) {
       const x = Math.random() * logicalWidth;
       const y = Math.random() * logicalHeight;
       const flow = getFlowField(x, y, currentTime);
+      const sizeRoll = Math.random();
+      const bubbleSize = sizeRoll < 0.5 ? 0.15 + Math.random() * 0.25 :
+                         sizeRoll < 0.8 ? 0.3 + Math.random() * 0.4 :
+                         0.6 + Math.random() * 0.5;
       
       particles.push({
         x,
         y,
         vx: flow.vx + (Math.random() - 0.5) * 0.008,
         vy: flow.vy + (Math.random() - 0.5) * 0.008,
-        size: 0.3 + Math.random() * 0.7,
+        size: bubbleSize,
         life: 1,
         maxLife: 600 + Math.floor(Math.random() * 400),
         depth: Math.random(),
