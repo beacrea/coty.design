@@ -363,6 +363,10 @@
       this.stabilizing = 60;
     }
 
+    isDead(): boolean {
+      return this.size < this.minSize * 0.6 || this.vertices.length < 3;
+    }
+
     update(canvasWidth: number, canvasHeight: number): void {
       this.idlePhase += 0.008;
       
@@ -1336,13 +1340,43 @@
     drawFoodSources(ctx, strokeColor, lineAlpha);
 
     const maxBoundingRadius = adaptedConfig.maxSize * 1.5;
-    organisms.forEach((org) => {
+    
+    for (let i = organisms.length - 1; i >= 0; i--) {
+      const org = organisms[i];
       org.update(logicalWidth, logicalHeight);
       org.updateTendril();
       org.enforceMaxBounds(maxBoundingRadius);
+      
+      if (org.isDead()) {
+        spawnParticles(org.x, org.y, org.vx, org.vy, 8);
+        organisms.splice(i, 1);
+        continue;
+      }
+      
       spawnBubbleStream(org);
       org.draw(ctx!, strokeColor, lineAlpha, vertexAlpha);
-    });
+    }
+    
+    while (organisms.length < adaptedConfig.organismCount) {
+      const edge = Math.floor(Math.random() * 4);
+      let x: number, y: number;
+      if (edge === 0) {
+        x = Math.random() * logicalWidth;
+        y = -20;
+      } else if (edge === 1) {
+        x = logicalWidth + 20;
+        y = Math.random() * logicalHeight;
+      } else if (edge === 2) {
+        x = Math.random() * logicalWidth;
+        y = logicalHeight + 20;
+      } else {
+        x = -20;
+        y = Math.random() * logicalHeight;
+      }
+      const newOrg = new Organism(x, y, adaptedConfig);
+      newOrg.triggerGlow(0.3);
+      organisms.push(newOrg);
+    }
 
     drawConnections(ctx, organisms, adaptedConfig, isDark);
     drawChainLinks(ctx, strokeColor, lineAlpha);
