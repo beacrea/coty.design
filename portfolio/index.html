@@ -14,9 +14,11 @@
         var stored = localStorage.getItem('theme');
         var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         var isDark = stored === 'dark' || (!stored && prefersDark);
+        var color = isDark ? '#1d1d1d' : '#ffffff';
+        document.documentElement.style.backgroundColor = color;
+        document.getElementById('theme-color').content = color;
         if (isDark) {
           document.documentElement.classList.add('dark');
-          document.getElementById('theme-color').content = '#1d1d1d';
         }
       })();
     </script>
