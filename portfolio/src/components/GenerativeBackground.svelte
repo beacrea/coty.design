@@ -445,7 +445,7 @@
       }));
     }
 
-    draw(ctx: CanvasRenderingContext2D, strokeColor: string, lineOpacity: number, vertexOpacity: number, observationMode: boolean = false): void {
+    draw(ctx: CanvasRenderingContext2D, strokeColor: string, lineOpacity: number, vertexOpacity: number, observationMode: boolean = false, isDark: boolean = true): void {
       const worldVerts = this.getWorldVertices();
       
       const depthFade = 0.4 + this.depth * 0.6;
@@ -454,16 +454,28 @@
       
       const getColor = (alpha: number): string => {
         if (observationMode) {
-          const saturation = 60 + this.depth * 20;
-          const lightness = 45 + this.depth * 15;
+          let saturation: number, lightness: number;
+          if (isDark) {
+            saturation = 70 + this.depth * 20;
+            lightness = 62 + this.depth * 20;
+          } else {
+            saturation = 55 + this.depth * 15;
+            lightness = 35 + this.depth * 15;
+          }
           return `hsla(${this.hue}, ${saturation}%, ${lightness}%, ${alpha})`;
         }
         return `rgba(${strokeColor}, ${alpha})`;
       };
       
+      const strokeWidth = observationMode ? 1.4 : 1;
+      const lobeStrokeWidth = observationMode ? 1.0 : 0.8;
+      const vertexRadius = observationMode ? 2.2 : 2;
+      const lobeVertexRadius = observationMode ? 1.7 : 1.5;
+      
       if (this.glow > 0) {
         const glowRadius = this.getBoundingRadius() * (1.5 + this.glow * 0.5);
-        const glowAlpha = this.glow * 0.15 * depthFade;
+        const glowAlphaBase = observationMode ? 0.25 : 0.15;
+        const glowAlpha = this.glow * glowAlphaBase * depthFade;
         const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowRadius);
         gradient.addColorStop(0, getColor(glowAlpha));
         gradient.addColorStop(1, getColor(0));
@@ -493,12 +505,12 @@
       }
       ctx.closePath();
       ctx.strokeStyle = getColor(adjustedLineOpacity);
-      ctx.lineWidth = 1;
+      ctx.lineWidth = strokeWidth;
       ctx.stroke();
 
       worldVerts.forEach((v) => {
         ctx.beginPath();
-        ctx.arc(v.x, v.y, 2, 0, Math.PI * 2);
+        ctx.arc(v.x, v.y, vertexRadius, 0, Math.PI * 2);
         ctx.fillStyle = getColor(adjustedVertexOpacity * 2);
         ctx.fill();
       });
@@ -522,12 +534,12 @@
         }
         ctx.closePath();
         ctx.strokeStyle = getColor(adjustedLineOpacity * 0.8);
-        ctx.lineWidth = 0.8;
+        ctx.lineWidth = lobeStrokeWidth;
         ctx.stroke();
         
         lobeVerts.forEach((v) => {
           ctx.beginPath();
-          ctx.arc(v.x, v.y, 1.5, 0, Math.PI * 2);
+          ctx.arc(v.x, v.y, lobeVertexRadius, 0, Math.PI * 2);
           ctx.fillStyle = getColor(adjustedVertexOpacity * 1.5);
           ctx.fill();
         });
@@ -1366,7 +1378,7 @@
       }
       
       spawnBubbleStream(org);
-      org.draw(ctx!, strokeColor, lineAlpha, vertexAlpha, enhancedContrast);
+      org.draw(ctx!, strokeColor, lineAlpha, vertexAlpha, enhancedContrast, isDark);
     }
     
     while (organisms.length < adaptedConfig.organismCount) {
