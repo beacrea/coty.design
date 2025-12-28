@@ -65,12 +65,12 @@ Key characteristics:
 
 ### Generative Background
 
-The portfolio features a subtle canvas-based generative background (`GenerativeBackground.svelte`). Geometric organisms (3-5 sided polygons) float softly and interact when they encounter each other through morphing, evolution, repulsion bursts, and size pulses.
+The portfolio features a subtle canvas-based generative background (`GenerativeBackground.svelte`) that evokes an underwater/fluid environment. Geometric organisms (3-5 sided polygons) float softly and interact when they encounter each other through morphing, evolution, repulsion bursts, and size pulses.
 
 **Configuration** (`src/lib/generative-config.ts`):
 - `organismCount` — Number of floating organisms (default: 16)
 - `minSize/maxSize` — Size range for organisms
-- `minSpeed/maxSpeed` — Drift velocity range
+- `minSpeed/maxSpeed` — Drift velocity range (default: 0.01-0.04, intentionally slow for subtle background)
 - `connectionDistance` — Distance to draw connecting lines
 - `mergeDistance` — Distance that triggers interactions
 - `minStartVertices/maxStartVertices` — Starting vertex count range (3-5 = triangles to pentagons)
@@ -81,16 +81,55 @@ The portfolio features a subtle canvas-based generative background (`GenerativeB
 - `lineContrast` — Contrast ratio for shape outlines (light/dark themes)
 - `vertexContrast` — Contrast ratio for vertex dots (light/dark themes)
 - `blur` — Blur amount in pixels (0 = sharp, higher = softer/fuzzier)
+- `foodSourceCount/maxFoodSources` — Food particles that organisms compete for
 
-**Interaction Types**: When organisms get close, they may evolve (35%), morph/transfer vertices (30%), burst apart (13%), simplify (10%), or pulse/spin (12%).
+**Behavioral Systems**:
+
+*Flocking*: Organisms exhibit boids-style flocking behavior:
+- **Cohesion** — Move toward the center of nearby neighbors
+- **Alignment** — Match velocity direction with neighbors
+- **Separation** — Avoid collisions with other organisms
+
+*Food Competition*: When food particles are present, organisms become more aggressive:
+- Speed increases when approaching food (up to 2x normal speed)
+- Eating food triggers growth and bioluminescence glow
+- Organisms may evolve or grow lobes after eating
+
+**Interaction Types**: When organisms get close, they may evolve (10%), morph/transfer vertices (25%), incorporate mass (20%), fuse together (17%), burst apart (10%), exchange lobes (8%), or pulse/spin (10%).
+
+**Visual Effects**:
+
+*Bioluminescence*: Organisms glow when:
+- Eating food (0.8 intensity)
+- Interacting with other organisms (0.4-0.7 intensity)
+- Glow decays at 96% per frame, creating a soft fade
+
+*Depth Layers*: Each organism and bubble has a random depth value (0-1):
+- Opacity scales from 40% (far) to 100% (near)
+- Creates 3D parallax/layered visual effect
+
+*Environmental Bubbles*: Ambient particles that:
+- Spawn from screen edges and interior
+- Follow a Perlin-noise-like flow field for organic drift
+- Get displaced when colliding with organisms
+- Vary in size (0.15-1.8px) with most being tiny
+
+*Propulsion Bubbles*: Small particles emitted from the rear of moving organisms:
+- Spawn rate proportional to organism speed
+- Sparse (8% chance) for subtlety
 
 **Morphological Features**:
 - **Tendrils** — Curved lines that grow toward nearby organisms during evolution/morph interactions, then retract
 - **Internal spokes** — Lines connecting opposite vertices on organisms with 4+ vertices, intensity varies per organism
 - **Chain links** — Wobbling connections that form during morph/pulse interactions, stretch as organisms drift, then break
+- **Lobes** — Secondary polygon appendages attached to main organism body
 - **Trailing particles** — Small fading dots spawned during burst repulsions and simplifications
 
 **Contrast Ratios**: Values like `1.15` mean 15% more visible than background. Higher values = more visible shapes.
+
+**Design Constraints**:
+- Maximum organism bounding radius capped at 42px (maxSize × 1.5)
+- Base speed intentionally slow (0.01-0.04) for subtle background effect
 
 ## External Dependencies
 
@@ -122,4 +161,4 @@ cd ask && npm run db:push     # Push Drizzle schema
 
 ---
 
-_Last updated: 2024-12-28_
+_Last updated: 2025-12-28_
