@@ -52,6 +52,14 @@
     maxLife: number;
   }
 
+  interface Lobe {
+    offsetAngle: number;
+    offsetDistance: number;
+    vertices: Vertex[];
+    size: number;
+    rotationOffset: number;
+  }
+
   let chainLinks: ChainLink[] = [];
   let particles: Particle[] = [];
 
@@ -67,6 +75,7 @@
     age: number;
     tendril: Tendril | null;
     spokeIntensity: number;
+    lobes: Lobe[];
 
     constructor(canvasWidth: number, canvasHeight: number, cfg: WorldConfig) {
       this.x = Math.random() * canvasWidth;
@@ -81,9 +90,29 @@
       this.age = 0;
       this.tendril = null;
       this.spokeIntensity = 0.3 + Math.random() * 0.4;
+      this.lobes = [];
       const vertexRange = cfg.maxStartVertices - cfg.minStartVertices + 1;
       const startVertices = cfg.minStartVertices + Math.floor(Math.random() * vertexRange);
       this.vertices = this.createVertices(startVertices);
+      
+      if (Math.random() < 0.25) {
+        const lobeCount = 1 + Math.floor(Math.random() * 3);
+        for (let i = 0; i < lobeCount; i++) {
+          this.lobes.push(this.createLobe(cfg));
+        }
+      }
+    }
+
+    createLobe(cfg: WorldConfig): Lobe {
+      const lobeVertexCount = 3 + Math.floor(Math.random() * 2);
+      const lobeSize = 0.3 + Math.random() * 0.4;
+      return {
+        offsetAngle: Math.random() * Math.PI * 2,
+        offsetDistance: 0.7 + Math.random() * 0.5,
+        vertices: this.createVertices(lobeVertexCount),
+        size: lobeSize,
+        rotationOffset: Math.random() * Math.PI * 2,
+      };
     }
 
     growTendril(targetX: number, targetY: number): void {
@@ -237,6 +266,48 @@
         ctx.arc(v.x, v.y, 2, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${strokeColor}, ${vertexOpacity * 2})`;
         ctx.fill();
+      });
+
+      this.lobes.forEach((lobe) => {
+        const lobeAngle = this.rotation + lobe.offsetAngle;
+        const lobeCenterX = this.x + Math.cos(lobeAngle) * this.size * lobe.offsetDistance;
+        const lobeCenterY = this.y + Math.sin(lobeAngle) * this.size * lobe.offsetDistance;
+        const lobeRotation = this.rotation + lobe.rotationOffset;
+        const lobeSize = this.size * lobe.size;
+        
+        const lobeVerts = lobe.vertices.map((v) => ({
+          x: lobeCenterX + Math.cos(v.angle + lobeRotation) * v.distance * lobeSize,
+          y: lobeCenterY + Math.sin(v.angle + lobeRotation) * v.distance * lobeSize,
+        }));
+        
+        ctx.beginPath();
+        ctx.moveTo(lobeVerts[0].x, lobeVerts[0].y);
+        for (let i = 1; i < lobeVerts.length; i++) {
+          ctx.lineTo(lobeVerts[i].x, lobeVerts[i].y);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = `rgba(${strokeColor}, ${lineOpacity * 0.8})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+        
+        lobeVerts.forEach((v) => {
+          ctx.beginPath();
+          ctx.arc(v.x, v.y, 1.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${strokeColor}, ${vertexOpacity * 1.5})`;
+          ctx.fill();
+        });
+        
+        const nearestMainVert = worldVerts.reduce((nearest, v) => {
+          const d = Math.hypot(v.x - lobeCenterX, v.y - lobeCenterY);
+          return d < nearest.dist ? { v, dist: d } : nearest;
+        }, { v: worldVerts[0], dist: Infinity });
+        
+        ctx.beginPath();
+        ctx.moveTo(nearestMainVert.v.x, nearestMainVert.v.y);
+        ctx.lineTo(lobeCenterX, lobeCenterY);
+        ctx.strokeStyle = `rgba(${strokeColor}, ${lineOpacity * 0.5})`;
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
       });
 
       if (this.tendril && this.tendril.length > 0) {
