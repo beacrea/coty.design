@@ -47,9 +47,16 @@ export function updateChainLinks(
     const dy = orgB.y - orgA.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
     
-    const maxStretch = cfg.connectionDistance * 1.2;
+    const maxStretch = cfg.connectionDistance * 0.8;
+    const breakDistance = cfg.connectionDistance * 1.5;
+    
+    if (distance > breakDistance) {
+      chainLinks.splice(i, 1);
+      continue;
+    }
+    
     if (distance > maxStretch) {
-      link.strength -= 0.05;
+      link.strength -= 0.08;
     } else {
       link.strength = Math.min(1, link.strength + 0.02);
     }
