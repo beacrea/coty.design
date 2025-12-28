@@ -172,8 +172,8 @@ export function applyProximityInteractions(
         if (Math.random() < triggerChance) {
           const interactionType = Math.random();
           
-          triggerGlow(organisms[i], 0.4);
-          triggerGlow(organisms[j], 0.4);
+          triggerGlow(organisms[i], 0.15);
+          triggerGlow(organisms[j], 0.15);
           
           if (interactionType < 0.10) {
             if (organisms[i].vertices.length <= organisms[j].vertices.length) {
@@ -203,7 +203,7 @@ export function applyProximityInteractions(
             const larger = organisms[i].size > organisms[j].size ? organisms[i] : organisms[j];
             const smaller = organisms[i].size > organisms[j].size ? organisms[j] : organisms[i];
             incorporateFrom(larger, smaller, cfg);
-            triggerGlow(larger, 0.6);
+            triggerGlow(larger, 0.25);
             result.createChainLinks.push({ orgAIndex: i, orgBIndex: j });
             growTendril(larger, smaller.x, smaller.y);
             result.spawnParticlesAt.push({ x: smaller.x, y: smaller.y, vx: smaller.vx, vy: smaller.vy, count: 6 });
@@ -212,7 +212,7 @@ export function applyProximityInteractions(
             const larger = organisms[i].size > organisms[j].size ? organisms[i] : organisms[j];
             const smaller = organisms[i].size > organisms[j].size ? organisms[j] : organisms[i];
             fuseWith(larger, smaller, cfg);
-            triggerGlow(larger, 0.7);
+            triggerGlow(larger, 0.3);
             result.createChainLinks.push({ orgAIndex: i, orgBIndex: j });
             growTendril(larger, smaller.x, smaller.y);
             growTendril(smaller, larger.x, larger.y);
@@ -229,8 +229,8 @@ export function applyProximityInteractions(
             organisms[j].vy += ny * burstForce;
             pulseSize(organisms[i], 0.90);
             pulseSize(organisms[j], 0.90);
-            triggerGlow(organisms[i], 0.5);
-            triggerGlow(organisms[j], 0.5);
+            triggerGlow(organisms[i], 0.2);
+            triggerGlow(organisms[j], 0.2);
             const midX = (organisms[i].x + organisms[j].x) / 2;
             const midY = (organisms[i].y + organisms[j].y) / 2;
             result.spawnParticlesAt.push({ x: midX, y: midY, vx: organisms[i].vx, vy: organisms[i].vy, count: 6 });
