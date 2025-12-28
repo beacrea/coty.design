@@ -10,6 +10,7 @@ const THEME_COLORS = {
 function updateHtmlClass(theme: Theme) {
   if (typeof document !== 'undefined') {
     document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.style.backgroundColor = THEME_COLORS[theme];
     
     const themeColorMeta = document.getElementById('theme-color') as HTMLMetaElement | null;
     if (themeColorMeta) {
