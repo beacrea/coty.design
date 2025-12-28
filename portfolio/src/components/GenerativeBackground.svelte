@@ -708,6 +708,34 @@
     }
   }
 
+  function spawnJetStream(org: Organism): void {
+    const speed = Math.sqrt(org.vx * org.vx + org.vy * org.vy);
+    if (speed < adaptedConfig.minSpeed * 1.5) return;
+    
+    const jetChance = Math.min(0.4, speed / adaptedConfig.maxSpeed * 0.5);
+    if (Math.random() > jetChance) return;
+    
+    const jetAngle = Math.atan2(-org.vy, -org.vx);
+    const spread = 0.4;
+    const particleCount = Math.min(3, 1 + Math.floor(speed / adaptedConfig.maxSpeed * 2));
+    
+    for (let i = 0; i < particleCount; i++) {
+      const angle = jetAngle + (Math.random() - 0.5) * spread;
+      const jetSpeed = 0.5 + Math.random() * 0.8;
+      const offsetDist = org.size * 0.4;
+      
+      particles.push({
+        x: org.x + Math.cos(jetAngle) * offsetDist,
+        y: org.y + Math.sin(jetAngle) * offsetDist,
+        vx: Math.cos(angle) * jetSpeed,
+        vy: Math.sin(angle) * jetSpeed,
+        size: 0.8 + Math.random() * 1.2,
+        life: 1,
+        maxLife: 15 + Math.floor(Math.random() * 15),
+      });
+    }
+  }
+
   function updateParticles(): void {
     for (let i = particles.length - 1; i >= 0; i--) {
       const p = particles[i];
@@ -1034,6 +1062,7 @@
     organisms.forEach((org) => {
       org.update(logicalWidth, logicalHeight);
       org.updateTendril();
+      spawnJetStream(org);
       org.draw(ctx!, strokeColor, lineAlpha, vertexAlpha);
     });
 
