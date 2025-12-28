@@ -44,18 +44,35 @@
       this.vy = Math.sin(angle) * speed;
       this.size = cfg.minSize + Math.random() * (cfg.maxSize - cfg.minSize);
       this.rotation = Math.random() * Math.PI * 2;
-      this.rotationSpeed = (Math.random() - 0.5) * 0.002;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.003;
       this.age = 0;
-      this.vertices = this.createVertices(3);
+      const vertexRange = cfg.maxStartVertices - cfg.minStartVertices + 1;
+      const startVertices = cfg.minStartVertices + Math.floor(Math.random() * vertexRange);
+      this.vertices = this.createVertices(startVertices);
     }
 
     createVertices(count: number): Vertex[] {
       const verts: Vertex[] = [];
+      const shapeStyle = Math.random();
       for (let i = 0; i < count; i++) {
         const baseAngle = (Math.PI * 2 * i) / count;
+        let angleJitter: number;
+        let distanceVariation: number;
+        
+        if (shapeStyle < 0.3) {
+          angleJitter = (Math.random() - 0.5) * 0.15;
+          distanceVariation = 0.85 + Math.random() * 0.15;
+        } else if (shapeStyle < 0.6) {
+          angleJitter = (Math.random() - 0.5) * 0.5;
+          distanceVariation = 0.5 + Math.random() * 0.5;
+        } else {
+          angleJitter = (Math.random() - 0.5) * 0.35;
+          distanceVariation = 0.65 + Math.random() * 0.35;
+        }
+        
         verts.push({
-          angle: baseAngle + (Math.random() - 0.5) * 0.3,
-          distance: 0.7 + Math.random() * 0.3,
+          angle: baseAngle + angleJitter,
+          distance: distanceVariation,
         });
       }
       return verts;
@@ -295,41 +312,41 @@
         }
 
         if (distance < interactionDistance) {
-          const interactionChance = (1 - distance / interactionDistance) * adaptedConfig.evolutionChance;
+          const proximityFactor = 1 - distance / interactionDistance;
+          const triggerChance = proximityFactor * adaptedConfig.interactionChance;
           
-          if (Math.random() < interactionChance) {
+          if (Math.random() < triggerChance) {
             const interactionType = Math.random();
             
-            if (interactionType < 0.25) {
+            if (interactionType < 0.35) {
               if (organisms[i].vertices.length <= organisms[j].vertices.length) {
                 organisms[i].evolve(adaptedConfig.maxVertices);
               } else {
                 organisms[j].evolve(adaptedConfig.maxVertices);
               }
-            } else if (interactionType < 0.45) {
+            } else if (interactionType < 0.65) {
               if (organisms[i].vertices.length > organisms[j].vertices.length) {
                 organisms[i].morphWith(organisms[j]);
               } else {
                 organisms[j].morphWith(organisms[i]);
               }
-            } else if (interactionType < 0.60) {
-              const burstForce = 0.15;
+            } else if (interactionType < 0.78) {
+              const burstForce = 0.2;
               organisms[i].vx -= nx * burstForce;
               organisms[i].vy -= ny * burstForce;
               organisms[j].vx += nx * burstForce;
               organisms[j].vy += ny * burstForce;
-              organisms[i].pulseSize(0.95);
-              organisms[j].pulseSize(0.95);
-            } else if (interactionType < 0.70) {
+              organisms[i].pulseSize(0.92);
+              organisms[j].pulseSize(0.92);
+            } else if (interactionType < 0.88) {
               const moreComplex = organisms[i].vertices.length > organisms[j].vertices.length ? organisms[i] : organisms[j];
               moreComplex.simplify();
-            } else if (interactionType < 0.80) {
-              organisms[i].pulseSize(1.05);
-              organisms[j].pulseSize(1.05);
             } else {
+              organisms[i].pulseSize(1.08);
+              organisms[j].pulseSize(1.08);
               const avgRotSpeed = (organisms[i].rotationSpeed + organisms[j].rotationSpeed) / 2;
-              organisms[i].rotationSpeed = avgRotSpeed * 1.2;
-              organisms[j].rotationSpeed = avgRotSpeed * 1.2;
+              organisms[i].rotationSpeed = avgRotSpeed * 1.3;
+              organisms[j].rotationSpeed = avgRotSpeed * 1.3;
             }
           }
         }

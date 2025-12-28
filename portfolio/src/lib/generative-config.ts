@@ -6,9 +6,12 @@ export interface WorldConfig {
   maxSpeed: number;
   connectionDistance: number;
   mergeDistance: number;
+  minStartVertices: number;
+  maxStartVertices: number;
   maxVertices: number;
   evolutionInterval: number;
   evolutionChance: number;
+  interactionChance: number;
   lineContrast: {
     light: number;
     dark: number;
@@ -31,16 +34,19 @@ export function getAlphaFromContrast(contrast: number): number {
 }
 
 export const defaultWorldConfig: WorldConfig = {
-  organismCount: 12,
+  organismCount: 16,
   minSize: 20,
   maxSize: 60,
   minSpeed: 0.08,
-  maxSpeed: 0.25,
-  connectionDistance: 180,
-  mergeDistance: 40,
+  maxSpeed: 0.3,
+  connectionDistance: 200,
+  mergeDistance: 55,
+  minStartVertices: 3,
+  maxStartVertices: 5,
   maxVertices: 7,
-  evolutionInterval: 8000,
-  evolutionChance: 0.02,
+  evolutionInterval: 5000,
+  evolutionChance: 0.04,
+  interactionChance: 0.12,
   lineContrast: {
     light: 1.15,
     dark: 1.2,
