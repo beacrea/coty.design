@@ -22,7 +22,7 @@ export class Simulation {
   constructor(width: number, height: number, config: SimulationConfig) {
     this.config = config;
     this.state = createSimulationState(width, height, config);
-    initializeAmbientBubbles(this.state.particles, width, height, 40);
+    initializeAmbientBubbles(this.state.particles, width, height, 100);
   }
   
   resize(newWidth: number, newHeight: number): void {

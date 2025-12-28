@@ -72,11 +72,11 @@ export function spawnAmbientBubbles(
   particles: Particle[],
   width: number,
   height: number,
-  maxParticles: number = 80
+  maxParticles: number = 200
 ): void {
   if (particles.length >= maxParticles) return;
   
-  if (Math.random() < 0.04) {
+  if (Math.random() < 0.08) {
     const edge = Math.floor(Math.random() * 4);
     let x: number, y: number;
     if (edge === 0) {
@@ -115,7 +115,7 @@ export function spawnAmbientBubbles(
     });
   }
   
-  if (Math.random() < 0.015) {
+  if (Math.random() < 0.04) {
     const sizeRoll = Math.random();
     let size: number;
     if (sizeRoll < 0.6) {
