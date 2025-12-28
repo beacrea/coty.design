@@ -23,9 +23,11 @@
     transition: background-color var(--transition-theme), border-color var(--transition-theme), transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .family-section:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px oklch(0 0 0 / 0.08);
+  @media (hover: hover) {
+    .family-section:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px oklch(0 0 0 / 0.08);
+    }
   }
 
   @media (min-width: 640px) {
@@ -67,12 +69,15 @@
     transition: background-color 0.2s ease, transform 0.15s ease, color var(--transition-theme);
   }
 
-  .cta-button:hover {
-    background-color: var(--surface-cta-bg-hover);
-    transform: translateY(-1px);
+  @media (hover: hover) {
+    .cta-button:hover {
+      background-color: var(--surface-cta-bg-hover);
+      transform: translateY(-1px);
+    }
   }
 
   .cta-button:active {
+    background-color: var(--surface-cta-bg-hover);
     transform: translateY(0);
   }
 

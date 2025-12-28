@@ -69,9 +69,11 @@
     transition: color var(--transition-theme);
   }
 
-  .link:hover {
-    color: var(--semantic-link-hover);
-    text-decoration: underline;
+  @media (hover: hover) {
+    .link:hover {
+      color: var(--semantic-link-hover);
+      text-decoration: underline;
+    }
   }
 
   .text {
