@@ -16,11 +16,17 @@
 <style>
   .family-section {
     margin-bottom: var(--section-spacing);
-    padding: 1.25rem 1.5rem 1.5rem;
+    padding: 1rem;
     border-radius: 0.75rem;
     border: 1px solid var(--surface-card-border);
     background-color: var(--surface-card-bg);
     transition: background-color var(--transition-theme), border-color var(--transition-theme);
+  }
+
+  @media (min-width: 640px) {
+    .family-section {
+      padding: 1.25rem 1.5rem 1.5rem;
+    }
   }
 
   .heading {
