@@ -60,8 +60,17 @@
     rotationOffset: number;
   }
 
+  interface FoodSource {
+    x: number;
+    y: number;
+    active: boolean;
+    respawnAt: number;
+    pulsePhase: number;
+  }
+
   let chainLinks: ChainLink[] = [];
   let particles: Particle[] = [];
+  let foodSources: FoodSource[] = [];
 
   class Organism {
     x: number;
@@ -84,7 +93,9 @@
       const angle = Math.random() * Math.PI * 2;
       this.vx = Math.cos(angle) * speed;
       this.vy = Math.sin(angle) * speed;
-      this.size = cfg.minSize + Math.random() * (cfg.maxSize - cfg.minSize);
+      const baseSize = cfg.minSize + Math.random() * (cfg.maxSize - cfg.minSize);
+      const sizeMultiplier = 1 + (Math.random() - 0.5) * 2 * cfg.sizeVariation;
+      this.size = Math.max(cfg.minSize * 0.5, Math.min(cfg.maxSize * 1.5, baseSize * sizeMultiplier));
       this.rotation = Math.random() * Math.PI * 2;
       this.rotationSpeed = (Math.random() - 0.5) * 0.003;
       this.age = 0;
@@ -418,9 +429,87 @@
     organisms = [];
     chainLinks = [];
     particles = [];
+    foodSources = [];
     for (let i = 0; i < adaptedConfig.organismCount; i++) {
       organisms.push(new Organism(logicalWidth, logicalHeight, adaptedConfig));
     }
+    for (let i = 0; i < adaptedConfig.foodSourceCount; i++) {
+      foodSources.push({
+        x: Math.random() * logicalWidth,
+        y: Math.random() * logicalHeight,
+        active: true,
+        respawnAt: 0,
+        pulsePhase: Math.random() * Math.PI * 2,
+      });
+    }
+  }
+
+  function applyFoodAttraction(timestamp: number): void {
+    foodSources.forEach((food) => {
+      if (!food.active) {
+        if (timestamp >= food.respawnAt) {
+          food.active = true;
+          food.x = Math.random() * logicalWidth;
+          food.y = Math.random() * logicalHeight;
+        }
+        return;
+      }
+
+      food.pulsePhase += 0.02;
+
+      let closestOrg: Organism | null = null;
+      let closestDist = Infinity;
+
+      organisms.forEach((org) => {
+        const dx = food.x - org.x;
+        const dy = food.y - org.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < closestDist) {
+          closestDist = dist;
+          closestOrg = org;
+        }
+
+        if (dist < 300) {
+          const proximityFactor = 1 - dist / 300;
+          const attractionStrength = adaptedConfig.foodAttractionStrength * proximityFactor * proximityFactor;
+          const nx = dx / Math.max(dist, 0.1);
+          const ny = dy / Math.max(dist, 0.1);
+          org.vx += nx * attractionStrength;
+          org.vy += ny * attractionStrength;
+        }
+
+        if (dist < org.size * 0.8) {
+          food.active = false;
+          food.respawnAt = timestamp + adaptedConfig.foodRespawnTime;
+          org.pulseSize(1.15);
+          if (org.vertices.length < adaptedConfig.maxVertices && Math.random() < 0.4) {
+            org.evolve(adaptedConfig.maxVertices);
+          }
+          spawnParticles(food.x, food.y, 0, 0, 6);
+        }
+      });
+    });
+  }
+
+  function drawFoodSources(ctx: CanvasRenderingContext2D, strokeColor: string, alpha: number): void {
+    foodSources.forEach((food) => {
+      if (!food.active) return;
+
+      const pulse = 1 + Math.sin(food.pulsePhase) * 0.2;
+      const size = adaptedConfig.foodSize * pulse;
+
+      ctx.beginPath();
+      ctx.arc(food.x, food.y, size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${strokeColor}, ${alpha * 0.6})`;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(food.x, food.y, size * 1.5, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(${strokeColor}, ${alpha * 0.3})`;
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    });
   }
 
   function spawnParticles(x: number, y: number, vx: number, vy: number, count: number): void {
@@ -703,6 +792,7 @@
     }
 
     applyProximityInteractions();
+    applyFoodAttraction(timestamp);
 
     if (timestamp - lastEvolutionTime > adaptedConfig.evolutionInterval) {
       const randomOrg = organisms[Math.floor(Math.random() * organisms.length)];
@@ -714,6 +804,8 @@
 
     updateParticles();
     updateChainLinks();
+
+    drawFoodSources(ctx, strokeColor, lineAlpha);
 
     organisms.forEach((org) => {
       org.update(logicalWidth, logicalHeight);
