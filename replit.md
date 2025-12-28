@@ -61,6 +61,23 @@ Key characteristics:
 - DTCG v2025.10 compliant design tokens
 - WCAG AA accessibility compliance
 - AI agent detection with enhanced structured data
+- Generative background with evolving geometric organisms
+
+### Generative Background
+
+The portfolio features a subtle canvas-based generative background (`GenerativeBackground.svelte`). Geometric organisms (starting as triangles) float softly and evolve into more complex shapes when they encounter each other.
+
+**Configuration** (`src/lib/generative-config.ts`):
+- `organismCount` — Number of floating organisms
+- `minSize/maxSize` — Size range for organisms
+- `minSpeed/maxSpeed` — Drift velocity range
+- `connectionDistance` — Distance to draw connecting lines
+- `mergeDistance` — Distance that triggers evolution
+- `maxVertices` — Maximum polygon complexity (vertices)
+- `evolutionInterval` — Time-based evolution check interval
+- `evolutionChance` — Base probability for proximity evolution
+- `lineOpacity/vertexOpacity` — Theme-aware opacity values
+- `strokeColor` — RGB values for light/dark themes
 
 ## External Dependencies
 
