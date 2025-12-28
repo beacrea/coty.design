@@ -51,6 +51,7 @@
     size: number;
     life: number;
     maxLife: number;
+    depth: number;
   }
 
   interface Lobe {
@@ -93,6 +94,8 @@
     minSize: number;
     maxSize: number;
     stabilizing: number;
+    glow: number;
+    depth: number;
 
     constructor(canvasWidth: number, canvasHeight: number, cfg: WorldConfig) {
       this.x = Math.random() * canvasWidth;
@@ -116,6 +119,8 @@
       this.tendril = null;
       this.spokeIntensity = 0.3 + Math.random() * 0.4;
       this.stabilizing = 0;
+      this.glow = 0;
+      this.depth = Math.random();
       this.lobes = [];
       const vertexRange = cfg.maxStartVertices - cfg.minStartVertices + 1;
       const startVertices = cfg.minStartVertices + Math.floor(Math.random() * vertexRange);
@@ -344,6 +349,10 @@
       this.size = Math.min(this.maxSize, this.size + amount);
     }
 
+    triggerGlow(intensity: number = 1): void {
+      this.glow = Math.min(1, this.glow + intensity);
+    }
+
     startStabilizing(): void {
       this.stabilizing = 60;
     }
@@ -380,6 +389,11 @@
       this.rotation += this.rotationSpeed;
       this.age++;
       
+      if (this.glow > 0) {
+        this.glow *= 0.96;
+        if (this.glow < 0.01) this.glow = 0;
+      }
+      
       if (this.size > this.minSize) {
         this.size -= this.decayRate;
         this.size = Math.max(this.minSize, this.size);
@@ -402,8 +416,24 @@
     draw(ctx: CanvasRenderingContext2D, strokeColor: string, lineOpacity: number, vertexOpacity: number): void {
       const worldVerts = this.getWorldVertices();
       
+      const depthFade = 0.4 + this.depth * 0.6;
+      const adjustedLineOpacity = lineOpacity * depthFade;
+      const adjustedVertexOpacity = vertexOpacity * depthFade;
+      
+      if (this.glow > 0) {
+        const glowRadius = this.getBoundingRadius() * (1.5 + this.glow * 0.5);
+        const glowAlpha = this.glow * 0.15 * depthFade;
+        const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowRadius);
+        gradient.addColorStop(0, `rgba(${strokeColor}, ${glowAlpha})`);
+        gradient.addColorStop(1, `rgba(${strokeColor}, 0)`);
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, glowRadius, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+      }
+      
       if (this.vertices.length >= 4 && this.spokeIntensity > 0) {
-        const spokeAlpha = lineOpacity * this.spokeIntensity * 0.4;
+        const spokeAlpha = adjustedLineOpacity * this.spokeIntensity * 0.4;
         ctx.strokeStyle = `rgba(${strokeColor}, ${spokeAlpha})`;
         ctx.lineWidth = 0.5;
         for (let i = 0; i < Math.floor(this.vertices.length / 2); i++) {
@@ -421,14 +451,14 @@
         ctx.lineTo(worldVerts[i].x, worldVerts[i].y);
       }
       ctx.closePath();
-      ctx.strokeStyle = `rgba(${strokeColor}, ${lineOpacity})`;
+      ctx.strokeStyle = `rgba(${strokeColor}, ${adjustedLineOpacity})`;
       ctx.lineWidth = 1;
       ctx.stroke();
 
       worldVerts.forEach((v) => {
         ctx.beginPath();
         ctx.arc(v.x, v.y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${strokeColor}, ${vertexOpacity * 2})`;
+        ctx.fillStyle = `rgba(${strokeColor}, ${adjustedVertexOpacity * 2})`;
         ctx.fill();
       });
 
@@ -450,14 +480,14 @@
           ctx.lineTo(lobeVerts[i].x, lobeVerts[i].y);
         }
         ctx.closePath();
-        ctx.strokeStyle = `rgba(${strokeColor}, ${lineOpacity * 0.8})`;
+        ctx.strokeStyle = `rgba(${strokeColor}, ${adjustedLineOpacity * 0.8})`;
         ctx.lineWidth = 0.8;
         ctx.stroke();
         
         lobeVerts.forEach((v) => {
           ctx.beginPath();
           ctx.arc(v.x, v.y, 1.5, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${strokeColor}, ${vertexOpacity * 1.5})`;
+          ctx.fillStyle = `rgba(${strokeColor}, ${adjustedVertexOpacity * 1.5})`;
           ctx.fill();
         });
         
@@ -469,7 +499,7 @@
         ctx.beginPath();
         ctx.moveTo(nearestMainVert.v.x, nearestMainVert.v.y);
         ctx.lineTo(lobeCenterX, lobeCenterY);
-        ctx.strokeStyle = `rgba(${strokeColor}, ${lineOpacity * 0.5})`;
+        ctx.strokeStyle = `rgba(${strokeColor}, ${adjustedLineOpacity * 0.5})`;
         ctx.lineWidth = 0.6;
         ctx.stroke();
       });
@@ -487,7 +517,7 @@
         const ctrlX = (this.x + endX) / 2 + this.tendril.curveOffset * -ny;
         const ctrlY = (this.y + endY) / 2 + this.tendril.curveOffset * nx;
         
-        const tendrilAlpha = lineOpacity * (this.tendril.length / this.tendril.maxLength) * 0.7;
+        const tendrilAlpha = adjustedLineOpacity * (this.tendril.length / this.tendril.maxLength) * 0.7;
         ctx.beginPath();
         ctx.moveTo(this.x, this.y);
         ctx.quadraticCurveTo(ctrlX, ctrlY, endX, endY);
@@ -625,6 +655,7 @@
         size: 0.3 + Math.random() * 0.9,
         life: 0.5 + Math.random() * 0.5,
         maxLife: 400 + Math.floor(Math.random() * 400),
+        depth: Math.random(),
       });
     }
   }
@@ -706,6 +737,7 @@
           food.active = false;
           food.respawnAt = timestamp + adaptedConfig.foodRespawnTime;
           org.grow(5);
+          org.triggerGlow(0.8);
           org.decayRate += 0.0005;
           if (org.vertices.length < adaptedConfig.maxVertices && Math.random() < 0.6) {
             org.evolve(adaptedConfig.maxVertices);
@@ -766,6 +798,7 @@
         size: 1 + Math.random() * 2,
         life: 1,
         maxLife: 60 + Math.floor(Math.random() * 40),
+        depth: Math.random(),
       });
     }
   }
@@ -824,6 +857,7 @@
         size: 0.4 + Math.random() * 1.0,
         life: 1,
         maxLife: 800 + Math.floor(Math.random() * 600),
+        depth: Math.random(),
       });
     }
     
@@ -840,6 +874,7 @@
         size: 0.3 + Math.random() * 0.7,
         life: 1,
         maxLife: 600 + Math.floor(Math.random() * 400),
+        depth: Math.random(),
       });
     }
   }
@@ -873,6 +908,7 @@
       size: 0.5 + Math.random() * 0.6,
       life: 1,
       maxLife: 30 + Math.floor(Math.random() * 20),
+      depth: org.depth,
     });
   }
 
@@ -914,7 +950,8 @@
 
   function drawParticles(ctx: CanvasRenderingContext2D, strokeColor: string, baseAlpha: number): void {
     particles.forEach((p) => {
-      const alpha = p.life * baseAlpha * 0.6;
+      const depthFade = 0.4 + p.depth * 0.6;
+      const alpha = p.life * baseAlpha * 0.6 * depthFade;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(${strokeColor}, ${alpha})`;
@@ -1015,10 +1052,55 @@
   }
 
   function applyProximityInteractions(): void {
+    const flockingDistance = adaptedConfig.connectionDistance * 0.8;
     const alignmentDistance = adaptedConfig.connectionDistance * 0.6;
     const interactionDistance = adaptedConfig.mergeDistance;
-    const alignmentStrength = 0.002;
+    const alignmentStrength = 0.003;
+    const cohesionStrength = 0.0008;
     const spinInfluence = 0.00005;
+
+    for (let i = 0; i < organisms.length; i++) {
+      let neighborCount = 0;
+      let avgNeighborX = 0;
+      let avgNeighborY = 0;
+      let avgNeighborVx = 0;
+      let avgNeighborVy = 0;
+      
+      for (let j = 0; j < organisms.length; j++) {
+        if (i === j) continue;
+        
+        const dx = organisms[j].x - organisms[i].x;
+        const dy = organisms[j].y - organisms[i].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < flockingDistance && distance > 0.1) {
+          neighborCount++;
+          avgNeighborX += organisms[j].x;
+          avgNeighborY += organisms[j].y;
+          avgNeighborVx += organisms[j].vx;
+          avgNeighborVy += organisms[j].vy;
+        }
+      }
+      
+      if (neighborCount > 0) {
+        avgNeighborX /= neighborCount;
+        avgNeighborY /= neighborCount;
+        avgNeighborVx /= neighborCount;
+        avgNeighborVy /= neighborCount;
+        
+        const cohesionDx = avgNeighborX - organisms[i].x;
+        const cohesionDy = avgNeighborY - organisms[i].y;
+        const cohesionDist = Math.sqrt(cohesionDx * cohesionDx + cohesionDy * cohesionDy);
+        
+        if (cohesionDist > organisms[i].size * 2) {
+          organisms[i].vx += (cohesionDx / cohesionDist) * cohesionStrength * neighborCount;
+          organisms[i].vy += (cohesionDy / cohesionDist) * cohesionStrength * neighborCount;
+        }
+        
+        organisms[i].vx += (avgNeighborVx - organisms[i].vx) * alignmentStrength;
+        organisms[i].vy += (avgNeighborVy - organisms[i].vy) * alignmentStrength;
+      }
+    }
 
     for (let i = 0; i < organisms.length; i++) {
       for (let j = i + 1; j < organisms.length; j++) {
@@ -1036,7 +1118,7 @@
 
         if (distance < collisionBuffer) {
           const overlap = collisionBuffer - distance;
-          const separationForce = Math.min(overlap * 0.02, 0.15);
+          const separationForce = Math.min(overlap * 0.025, 0.18);
           
           const iStable = organisms[i].stabilizing > 0 ? 0.3 : 1;
           const jStable = organisms[j].stabilizing > 0 ? 0.3 : 1;
@@ -1062,17 +1144,6 @@
           organisms[j].startStabilizing();
         }
 
-        if (distance < alignmentDistance && distance > collisionBuffer) {
-          const avgVx = (organisms[i].vx + organisms[j].vx) / 2;
-          const avgVy = (organisms[i].vy + organisms[j].vy) / 2;
-          const blend = (1 - (distance - collisionBuffer) / (alignmentDistance - collisionBuffer)) * alignmentStrength;
-          
-          organisms[i].vx += (avgVx - organisms[i].vx) * blend;
-          organisms[i].vy += (avgVy - organisms[i].vy) * blend;
-          organisms[j].vx += (avgVx - organisms[j].vx) * blend;
-          organisms[j].vy += (avgVy - organisms[j].vy) * blend;
-        }
-
         if (distance < interactionDistance) {
           const proximityFactor = 1 - distance / interactionDistance;
           const baseChance = adaptedConfig.interactionChance * (1 + proximityFactor);
@@ -1080,6 +1151,9 @@
           
           if (Math.random() < triggerChance) {
             const interactionType = Math.random();
+            
+            organisms[i].triggerGlow(0.4);
+            organisms[j].triggerGlow(0.4);
             
             if (interactionType < 0.10) {
               if (organisms[i].vertices.length <= organisms[j].vertices.length) {
@@ -1101,6 +1175,7 @@
               const larger = organisms[i].size > organisms[j].size ? organisms[i] : organisms[j];
               const smaller = organisms[i].size > organisms[j].size ? organisms[j] : organisms[i];
               larger.incorporateFrom(smaller, adaptedConfig);
+              larger.triggerGlow(0.6);
               createChainLink(organisms[i], organisms[j]);
               larger.growTendril(smaller.x, smaller.y);
               spawnParticles(smaller.x, smaller.y, smaller.vx, smaller.vy, 6);
@@ -1109,6 +1184,7 @@
               const larger = organisms[i].size > organisms[j].size ? organisms[i] : organisms[j];
               const smaller = organisms[i].size > organisms[j].size ? organisms[j] : organisms[i];
               larger.fuseWith(smaller, adaptedConfig);
+              larger.triggerGlow(0.7);
               createChainLink(organisms[i], organisms[j]);
               larger.growTendril(smaller.x, smaller.y);
               smaller.growTendril(larger.x, larger.y);
@@ -1121,6 +1197,8 @@
               organisms[j].vy += ny * burstForce;
               organisms[i].pulseSize(0.90);
               organisms[j].pulseSize(0.90);
+              organisms[i].triggerGlow(0.5);
+              organisms[j].triggerGlow(0.5);
               const midX = (organisms[i].x + organisms[j].x) / 2;
               const midY = (organisms[i].y + organisms[j].y) / 2;
               spawnParticles(midX, midY, organisms[i].vx, organisms[i].vy, 6);
