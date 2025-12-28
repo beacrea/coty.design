@@ -805,11 +805,11 @@
         vy: flow.vy + (Math.random() - 0.5) * 0.01,
         size: 0.4 + Math.random() * 1.0,
         life: 1,
-        maxLife: 200 + Math.floor(Math.random() * 150),
+        maxLife: 800 + Math.floor(Math.random() * 600),
       });
     }
     
-    if (Math.random() < 0.15) {
+    if (Math.random() < 0.12) {
       const x = Math.random() * logicalWidth;
       const y = Math.random() * logicalHeight;
       const flow = getFlowField(x, y, currentTime);
@@ -821,7 +821,7 @@
         vy: flow.vy + (Math.random() - 0.5) * 0.008,
         size: 0.3 + Math.random() * 0.7,
         life: 1,
-        maxLife: 120 + Math.floor(Math.random() * 80),
+        maxLife: 600 + Math.floor(Math.random() * 400),
       });
     }
   }
