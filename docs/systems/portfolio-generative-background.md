@@ -24,10 +24,13 @@ portfolio/src/lib/simulation/
 │   ├── particles.ts      # Particle spawning and updates
 │   ├── food.ts           # Food source logic
 │   ├── chainlinks.ts     # Chain link management
+│   ├── user-input.ts     # Pointer tracking, hover detection, grab physics
+│   ├── deformation.ts    # Vertex deformation and spring relaxation
+│   ├── organelles.ts     # Internal organelle behavior and stat modifiers
 │   ├── particle-pool.ts  # Object pooling (ready for optimization)
 │   └── chainlink-pool.ts # Object pooling (ready for optimization)
 └── renderers/            # Drawing logic
-    ├── organisms.ts      # Organism rendering
+    ├── organisms.ts      # Organism rendering (with organelles)
     ├── particles.ts      # Particle rendering
     ├── chainlinks.ts     # Chain link rendering
     └── food.ts           # Food source rendering
@@ -39,6 +42,8 @@ portfolio/src/lib/simulation/
 - **Data-oriented**: Entities are plain objects, not classes with behavior
 - **Immutable-friendly**: Systems operate on state without side effects where possible
 - **Pooling-ready**: Particle and chain link pools prepared for future optimization
+- **Spatial hashing**: Efficient O(k) neighbor queries for hover detection and collisions
+- **User interaction**: Direct manipulation through pointer events with physics-based response
 
 ---
 
@@ -47,13 +52,15 @@ portfolio/src/lib/simulation/
 1. [Purpose & Design Goals](#purpose--design-goals)
 2. [System Overview](#system-overview)
 3. [Architectural Components](#architectural-components)
-4. [Behavioral Systems](#behavioral-systems)
-5. [Visual Effects](#visual-effects)
-6. [Configuration Reference](#configuration-reference)
-7. [Rendering & Performance](#rendering--performance)
-8. [Extension Points](#extension-points)
-9. [Maintenance Playbook](#maintenance-playbook)
-10. [Related Documentation](#related-documentation)
+4. [User Interactions](#user-interactions)
+5. [Organelles System](#organelles-system)
+6. [Behavioral Systems](#behavioral-systems)
+7. [Visual Effects](#visual-effects)
+8. [Configuration Reference](#configuration-reference)
+9. [Rendering & Performance](#rendering--performance)
+10. [Extension Points](#extension-points)
+11. [Maintenance Playbook](#maintenance-playbook)
+12. [Related Documentation](#related-documentation)
 
 ---
 
@@ -230,6 +237,102 @@ function getFlowField(x: number, y: number, time: number): { vx, vy }
 - Creates organic, swirling current patterns
 - Time-varying for continuous evolution
 - Environmental bubbles follow field with slight randomness
+
+---
+
+## User Interactions
+
+The simulation supports direct manipulation of organisms through pointer events, creating an engaging tactile experience.
+
+### Grab and Drag
+
+Users can click/tap and drag organisms around the canvas:
+
+- **Detection**: Spatial hash enables efficient nearest-organism lookup
+- **Physics**: Spring-based connection between pointer and organism
+- **Behavior**: Grabbed organisms are excluded from flocking forces
+- **Release**: Organisms retain momentum from drag velocity
+
+**Configuration:**
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `grabSpringStiffness` | 0.12 | How tightly organism follows pointer |
+| `grabSpringDamping` | 0.88 | Velocity damping during grab |
+
+### Hover Effects
+
+Organisms respond to pointer proximity:
+
+- **Detection**: Pointer position tracked continuously via `pointermove`
+- **Visual**: Subtle glow intensifies as pointer approaches
+- **Scale**: Hovered organisms grow slightly (1.05× scale)
+- **Transition**: Smooth easing in/out controlled by `hoverEaseSpeed`
+
+### Soft Body Collisions
+
+Organisms push each other with deformable boundaries:
+
+- **Per-vertex deformation**: Each vertex tracks individual displacement
+- **Spring relaxation**: Vertices return to rest position over time
+- **Visual feedback**: Organism shapes visibly squish on contact
+
+**Configuration:**
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `softCollisionStrength` | 0.5 | Push force on collision |
+| `deformationStiffness` | 0.15 | How quickly vertices restore |
+| `deformationDamping` | 0.92 | Smooths deformation animation |
+| `maxDeformation` | 0.35 | Maximum vertex displacement (fraction of size) |
+
+### Spatial Hashing
+
+For efficient proximity queries:
+
+- **Cell size**: ~60 pixels (adaptive)
+- **Operations**: Insert, query neighbors, clear
+- **Use cases**: Hover detection, collision checks, nearest-organism lookup
+- **Performance**: O(k) where k = organisms in neighboring cells
+
+---
+
+## Organelles System
+
+Organisms can contain internal organelles that grant stat modifiers and visual variety.
+
+### Organelle Types
+
+| Type | Weight | Visual | Effect |
+|------|--------|--------|--------|
+| **Nucleus** | 18% | Large central circle | +12% glow, -15% decay |
+| **Mitochondria** | 28% | Oval/bean shape | +12% speed |
+| **Vacuole** | 22% | Irregular blob | -3% speed, -25% decay |
+| **Chloroplast** | 18% | Stacked discs | +20% glow |
+| **Ribosome** | 14% | Small dot cluster | +4% speed |
+
+### Lifecycle
+
+1. **Spawn**: 25% chance per organism at creation (0-3 initial organelles)
+2. **Food grant**: 12% chance to gain organelle when eating
+3. **Merge transfer**: 60% chance to inherit organelles during merge/fuse
+4. **Maximum**: 5 organelles per organism
+
+### Rendering
+
+Organelles are drawn inside the organism body:
+
+- **Position**: Distributed around organism center with rotation
+- **Animation**: Gentle pulsing and orbital movement
+- **Depth**: Rendered before organism outline for proper layering
+
+### Stat Modifiers
+
+Organelle effects stack additively:
+
+```
+effectiveSpeed = baseSpeed × (1 + Σ speedMod)
+effectiveDecay = baseDecay × (1 + Σ decayMod)  
+glowBonus = Σ glowMod
+```
 
 ---
 
@@ -421,6 +524,24 @@ interface WorldConfig {
   // Population control
   populationTarget: number;        // Default: 16 — desired organism count
   populationAggressiveness: number; // Default: 0.5 (0-1) — how strongly to push toward target
+  populationDensityPerPixel: number; // Default: 90000 — pixels per organism
+  populationMinTarget: number;     // Default: 8 — minimum organisms
+  populationMaxTarget: number;     // Default: 40 — maximum organisms
+
+  // Organelles
+  organelleSpawnChance: number;    // Default: 0.25 — chance to spawn with organelles
+  organelleMaxPerOrganism: number; // Default: 5 — max organelles per organism
+  organelleFoodGrantChance: number; // Default: 0.12 — chance to gain on eating
+  organelleMergeTransferChance: number; // Default: 0.6 — chance to inherit on merge
+
+  // User interaction
+  grabSpringStiffness: number;     // Default: 0.12 — grab follow tightness
+  grabSpringDamping: number;       // Default: 0.88 — grab velocity damping
+  softCollisionStrength: number;   // Default: 0.5 — collision push force
+  hoverEaseSpeed: number;          // Default: 0.08 — hover transition speed
+  deformationStiffness: number;    // Default: 0.15 — vertex spring restoration
+  deformationDamping: number;      // Default: 0.92 — deformation smoothing
+  maxDeformation: number;          // Default: 0.35 — max vertex displacement
 }
 ```
 
@@ -431,6 +552,23 @@ The simulation uses a proportional controller to maintain organism density:
 **Parameters:**
 - `populationTarget` — The desired number of organisms (default: 16)
 - `populationAggressiveness` — How strongly to push toward target (0-1, default: 0.5)
+- `populationDensityPerPixel` — Pixels per organism for dynamic scaling (default: 90000)
+- `populationMinTarget` — Minimum organisms regardless of screen size (default: 8)
+- `populationMaxTarget` — Maximum organisms cap (default: 40)
+
+**Dynamic Population Scaling:**
+
+Population target is calculated based on viewport area:
+```
+dynamicTarget = round(viewportArea / densityPerPixel)
+clampedTarget = clamp(dynamicTarget, minTarget, maxTarget)
+```
+
+This ensures consistent visual density across devices:
+- Small phone (375×667): ~8 organisms
+- Tablet (768×1024): ~8-9 organisms  
+- Desktop (1920×1080): ~23 organisms
+- Large monitor (2560×1440): ~40 organisms (capped)
 
 **How it works:**
 
@@ -471,10 +609,11 @@ The component adapts config based on viewport:
 
 ### Optimization Strategies
 
-1. **Spatial partitioning** — Not currently implemented; viable for higher organism counts
+1. **Spatial hashing** — O(k) neighbor queries for hover detection and soft body collisions
 2. **Particle culling** — Particles removed when life depletes
 3. **Chain link cleanup** — Broken links removed each frame
-4. **Adaptive config** — Fewer organisms on smaller/less capable devices
+4. **Adaptive config** — Dynamic population scaling based on viewport area
+5. **Avoid allocations** — Flocking skips grabbed organisms via index check, not array filter
 
 ### Performance Targets
 
