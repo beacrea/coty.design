@@ -1,0 +1,12 @@
+export * from './types';
+export * from './state';
+export { updateOrganismMovement, updateTendril, enforceMaxBounds, clampSpeed } from './systems/movement';
+export { applyFlocking, applyCollisionSeparation } from './systems/flocking';
+export { applyProximityInteractions, type InteractionResult } from './systems/interactions';
+export { updateParticles, spawnParticles, spawnAmbientBubbles, spawnBubbleStream, getFlowField } from './systems/particles';
+export { updateFoodSources, applyFoodAttraction } from './systems/food';
+export { createChainLink, updateChainLinks, remapChainLinkIndices } from './systems/chainlinks';
+export { drawOrganism, drawConnections } from './renderers/organisms';
+export { drawParticles } from './renderers/particles';
+export { drawChainLinks } from './renderers/chainlinks';
+export { drawFoodSources } from './renderers/food';

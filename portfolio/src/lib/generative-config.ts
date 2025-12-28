@@ -1,3 +1,47 @@
+export interface OrganismConfig {
+  count: number;
+  minSize: number;
+  maxSize: number;
+  sizeVariation: number;
+  minStartVertices: number;
+  maxStartVertices: number;
+  maxVertices: number;
+}
+
+export interface MovementConfig {
+  minSpeed: number;
+  maxSpeed: number;
+  connectionDistance: number;
+  mergeDistance: number;
+}
+
+export interface EvolutionConfig {
+  interval: number;
+  chance: number;
+  interactionChance: number;
+}
+
+export interface FoodConfig {
+  sourceCount: number;
+  attractionStrength: number;
+  size: number;
+  respawnTime: number;
+  spawnInterval: number;
+  maxSources: number;
+}
+
+export interface VisualConfig {
+  lineContrast: { light: number; dark: number };
+  vertexContrast: { light: number; dark: number };
+}
+
+export interface PoolingConfig {
+  maxParticles: number;
+  maxParticlePool: number;
+  maxChainLinks: number;
+  maxChainLinkPool: number;
+}
+
 export interface WorldConfig {
   organismCount: number;
   minSize: number;
@@ -19,14 +63,17 @@ export interface WorldConfig {
   foodRespawnTime: number;
   foodSpawnInterval: number;
   maxFoodSources: number;
-  lineContrast: {
-    light: number;
-    dark: number;
-  };
-  vertexContrast: {
-    light: number;
-    dark: number;
-  };
+  lineContrast: { light: number; dark: number };
+  vertexContrast: { light: number; dark: number };
+}
+
+export interface StructuredConfig {
+  organism: OrganismConfig;
+  movement: MovementConfig;
+  evolution: EvolutionConfig;
+  food: FoodConfig;
+  visual: VisualConfig;
+  pooling: PoolingConfig;
 }
 
 function contrastToAlpha(contrastRatio: number): number {
@@ -39,33 +86,110 @@ export function getAlphaFromContrast(contrast: number): number {
   return contrastToAlpha(contrast);
 }
 
-export const defaultWorldConfig: WorldConfig = {
-  organismCount: 16,
-  minSize: 8,
-  maxSize: 28,
-  sizeVariation: 0.35,
-  minSpeed: 0.01,
-  maxSpeed: 0.04,
-  connectionDistance: 150,
-  mergeDistance: 55,
-  minStartVertices: 3,
-  maxStartVertices: 5,
-  maxVertices: 8,
-  evolutionInterval: 2500,
-  evolutionChance: 0.15,
-  interactionChance: 0.65,
-  foodSourceCount: 3,
-  foodAttractionStrength: 0.015,
-  foodSize: 3,
-  foodRespawnTime: 4000,
-  foodSpawnInterval: 3000,
-  maxFoodSources: 6,
-  lineContrast: {
-    light: 1.08,
-    dark: 1.12,
+export const defaultStructuredConfig: StructuredConfig = {
+  organism: {
+    count: 16,
+    minSize: 8,
+    maxSize: 28,
+    sizeVariation: 0.35,
+    minStartVertices: 3,
+    maxStartVertices: 5,
+    maxVertices: 8,
   },
-  vertexContrast: {
-    light: 1.06,
-    dark: 1.1,
+  movement: {
+    minSpeed: 0.01,
+    maxSpeed: 0.04,
+    connectionDistance: 150,
+    mergeDistance: 55,
+  },
+  evolution: {
+    interval: 2500,
+    chance: 0.15,
+    interactionChance: 0.65,
+  },
+  food: {
+    sourceCount: 3,
+    attractionStrength: 0.015,
+    size: 3,
+    respawnTime: 4000,
+    spawnInterval: 3000,
+    maxSources: 6,
+  },
+  visual: {
+    lineContrast: { light: 1.08, dark: 1.12 },
+    vertexContrast: { light: 1.06, dark: 1.1 },
+  },
+  pooling: {
+    maxParticles: 80,
+    maxParticlePool: 200,
+    maxChainLinks: 20,
+    maxChainLinkPool: 50,
   },
 };
+
+export function structuredToWorldConfig(structured: StructuredConfig): WorldConfig {
+  return {
+    organismCount: structured.organism.count,
+    minSize: structured.organism.minSize,
+    maxSize: structured.organism.maxSize,
+    sizeVariation: structured.organism.sizeVariation,
+    minStartVertices: structured.organism.minStartVertices,
+    maxStartVertices: structured.organism.maxStartVertices,
+    maxVertices: structured.organism.maxVertices,
+    minSpeed: structured.movement.minSpeed,
+    maxSpeed: structured.movement.maxSpeed,
+    connectionDistance: structured.movement.connectionDistance,
+    mergeDistance: structured.movement.mergeDistance,
+    evolutionInterval: structured.evolution.interval,
+    evolutionChance: structured.evolution.chance,
+    interactionChance: structured.evolution.interactionChance,
+    foodSourceCount: structured.food.sourceCount,
+    foodAttractionStrength: structured.food.attractionStrength,
+    foodSize: structured.food.size,
+    foodRespawnTime: structured.food.respawnTime,
+    foodSpawnInterval: structured.food.spawnInterval,
+    maxFoodSources: structured.food.maxSources,
+    lineContrast: structured.visual.lineContrast,
+    vertexContrast: structured.visual.vertexContrast,
+  };
+}
+
+export function worldConfigToStructured(config: WorldConfig): StructuredConfig {
+  return {
+    organism: {
+      count: config.organismCount,
+      minSize: config.minSize,
+      maxSize: config.maxSize,
+      sizeVariation: config.sizeVariation,
+      minStartVertices: config.minStartVertices,
+      maxStartVertices: config.maxStartVertices,
+      maxVertices: config.maxVertices,
+    },
+    movement: {
+      minSpeed: config.minSpeed,
+      maxSpeed: config.maxSpeed,
+      connectionDistance: config.connectionDistance,
+      mergeDistance: config.mergeDistance,
+    },
+    evolution: {
+      interval: config.evolutionInterval,
+      chance: config.evolutionChance,
+      interactionChance: config.interactionChance,
+    },
+    food: {
+      sourceCount: config.foodSourceCount,
+      attractionStrength: config.foodAttractionStrength,
+      size: config.foodSize,
+      respawnTime: config.foodRespawnTime,
+      spawnInterval: config.foodSpawnInterval,
+      maxSources: config.maxFoodSources,
+    },
+    visual: {
+      lineContrast: config.lineContrast,
+      vertexContrast: config.vertexContrast,
+    },
+    pooling: defaultStructuredConfig.pooling,
+  };
+}
+
+export const defaultWorldConfig: WorldConfig = structuredToWorldConfig(defaultStructuredConfig);
