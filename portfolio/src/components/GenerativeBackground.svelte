@@ -229,6 +229,87 @@
       }
     }
 
+    absorbLobeFrom(other: Organism, cfg: WorldConfig): boolean {
+      if (other.lobes.length === 0 || this.lobes.length >= 5) return false;
+      
+      const stolenLobe = other.lobes.pop()!;
+      const newLobe: Lobe = {
+        offsetAngle: stolenLobe.offsetAngle + (Math.random() - 0.5) * 0.5,
+        offsetDistance: stolenLobe.offsetDistance * (0.9 + Math.random() * 0.3),
+        vertices: stolenLobe.vertices.map(v => ({
+          angle: v.angle,
+          distance: v.distance * (0.8 + Math.random() * 0.4),
+        })),
+        size: stolenLobe.size * (0.7 + Math.random() * 0.4),
+        rotationOffset: stolenLobe.rotationOffset + Math.random() * 0.5,
+      };
+      this.lobes.push(newLobe);
+      this.grow(other.size * 0.1);
+      return true;
+    }
+
+    incorporateFrom(other: Organism, cfg: WorldConfig): void {
+      if (other.lobes.length > 0 && this.lobes.length < 5 && Math.random() < 0.6) {
+        this.absorbLobeFrom(other, cfg);
+      }
+      
+      if (other.vertices.length > 3 && this.vertices.length < cfg.maxVertices) {
+        const donorIndex = Math.floor(Math.random() * other.vertices.length);
+        const donatedVertex = other.vertices[donorIndex];
+        const newVertex: Vertex = {
+          angle: donatedVertex.angle + (Math.random() - 0.5) * 0.3,
+          distance: donatedVertex.distance * (0.85 + Math.random() * 0.3),
+        };
+        this.vertices.push(newVertex);
+        this.vertices.sort((a, b) => a.angle - b.angle);
+        other.vertices.splice(donorIndex, 1);
+      }
+      
+      if (Math.random() < 0.3 && this.lobes.length < 5) {
+        const newLobe = this.createLobe(cfg);
+        newLobe.size *= 0.6 + Math.random() * 0.4;
+        this.lobes.push(newLobe);
+      }
+      
+      this.grow(other.size * 0.15);
+      this.spokeIntensity = Math.min(0.8, this.spokeIntensity + 0.1);
+    }
+
+    fuseWith(other: Organism, cfg: WorldConfig): void {
+      const totalLobes = this.lobes.length + other.lobes.length;
+      const maxLobes = 5;
+      
+      while (other.lobes.length > 0 && this.lobes.length < maxLobes) {
+        this.absorbLobeFrom(other, cfg);
+      }
+      
+      const vertexBudget = cfg.maxVertices - this.vertices.length;
+      const verticesToTake = Math.min(vertexBudget, Math.floor(other.vertices.length * 0.5));
+      for (let i = 0; i < verticesToTake && other.vertices.length > 3; i++) {
+        const idx = Math.floor(Math.random() * other.vertices.length);
+        const v = other.vertices.splice(idx, 1)[0];
+        this.vertices.push({
+          angle: v.angle + (Math.random() - 0.5) * 0.4,
+          distance: v.distance * (0.8 + Math.random() * 0.4),
+        });
+      }
+      this.vertices.sort((a, b) => a.angle - b.angle);
+      
+      this.grow(other.size * 0.25);
+      other.pulseSize(0.7);
+      this.spokeIntensity = Math.min(0.9, this.spokeIntensity + 0.15);
+      
+      if (this.lobes.length < maxLobes && Math.random() < 0.4) {
+        const bridgeLobe = this.createLobe(cfg);
+        const dx = other.x - this.x;
+        const dy = other.y - this.y;
+        bridgeLobe.offsetAngle = Math.atan2(dy, dx) - this.rotation;
+        bridgeLobe.offsetDistance = 1.0 + Math.random() * 0.3;
+        bridgeLobe.size *= 0.8;
+        this.lobes.push(bridgeLobe);
+      }
+    }
+
     simplify(): void {
       if (this.vertices.length > 3) {
         const removeIndex = Math.floor(Math.random() * this.vertices.length);
@@ -810,7 +891,7 @@
           if (Math.random() < triggerChance) {
             const interactionType = Math.random();
             
-            if (interactionType < 0.15) {
+            if (interactionType < 0.10) {
               if (organisms[i].vertices.length <= organisms[j].vertices.length) {
                 organisms[i].evolve(adaptedConfig.maxVertices);
                 organisms[i].growTendril(organisms[j].x, organisms[j].y);
@@ -819,21 +900,29 @@
                 organisms[j].growTendril(organisms[i].x, organisms[i].y);
               }
               spawnParticles((organisms[i].x + organisms[j].x) / 2, (organisms[i].y + organisms[j].y) / 2, 0, 0, 3);
-            } else if (interactionType < 0.55) {
+            } else if (interactionType < 0.35) {
               organisms[i].morphWith(organisms[j]);
               organisms[j].morphWith(organisms[i]);
               createChainLink(organisms[i], organisms[j]);
               organisms[i].growTendril(organisms[j].x, organisms[j].y);
               organisms[j].growTendril(organisms[i].x, organisms[i].y);
               spawnParticles((organisms[i].x + organisms[j].x) / 2, (organisms[i].y + organisms[j].y) / 2, 0, 0, 4);
-            } else if (interactionType < 0.70) {
+            } else if (interactionType < 0.55) {
               const larger = organisms[i].size > organisms[j].size ? organisms[i] : organisms[j];
               const smaller = organisms[i].size > organisms[j].size ? organisms[j] : organisms[i];
-              larger.grow(smaller.size * 0.15);
-              smaller.pulseSize(0.88);
-              larger.morphWith(smaller);
+              larger.incorporateFrom(smaller, adaptedConfig);
               createChainLink(organisms[i], organisms[j]);
-              spawnParticles(smaller.x, smaller.y, smaller.vx, smaller.vy, 5);
+              larger.growTendril(smaller.x, smaller.y);
+              spawnParticles(smaller.x, smaller.y, smaller.vx, smaller.vy, 6);
+              spawnParticles(larger.x, larger.y, 0, 0, 4);
+            } else if (interactionType < 0.72) {
+              const larger = organisms[i].size > organisms[j].size ? organisms[i] : organisms[j];
+              const smaller = organisms[i].size > organisms[j].size ? organisms[j] : organisms[i];
+              larger.fuseWith(smaller, adaptedConfig);
+              createChainLink(organisms[i], organisms[j]);
+              larger.growTendril(smaller.x, smaller.y);
+              smaller.growTendril(larger.x, larger.y);
+              spawnParticles((organisms[i].x + organisms[j].x) / 2, (organisms[i].y + organisms[j].y) / 2, 0, 0, 8);
             } else if (interactionType < 0.82) {
               const burstForce = 0.35;
               organisms[i].vx -= nx * burstForce;
@@ -846,12 +935,23 @@
               const midY = (organisms[i].y + organisms[j].y) / 2;
               spawnParticles(midX, midY, organisms[i].vx, organisms[i].vy, 6);
               spawnParticles(midX, midY, organisms[j].vx, organisms[j].vy, 6);
-            } else if (interactionType < 0.92) {
-              const moreComplex = organisms[i].vertices.length > organisms[j].vertices.length ? organisms[i] : organisms[j];
-              const lessComplex = organisms[i].vertices.length > organisms[j].vertices.length ? organisms[j] : organisms[i];
-              moreComplex.simplify();
-              lessComplex.evolve(adaptedConfig.maxVertices);
-              spawnParticles(moreComplex.x, moreComplex.y, moreComplex.vx, moreComplex.vy, 3);
+            } else if (interactionType < 0.90) {
+              const hasLobes = organisms[i].lobes.length > 0 || organisms[j].lobes.length > 0;
+              if (hasLobes) {
+                const donor = organisms[i].lobes.length > organisms[j].lobes.length ? organisms[i] : organisms[j];
+                const receiver = organisms[i].lobes.length > organisms[j].lobes.length ? organisms[j] : organisms[i];
+                if (receiver.absorbLobeFrom(donor, adaptedConfig)) {
+                  createChainLink(organisms[i], organisms[j]);
+                  receiver.growTendril(donor.x, donor.y);
+                  spawnParticles(donor.x, donor.y, donor.vx, donor.vy, 5);
+                }
+              } else {
+                const moreComplex = organisms[i].vertices.length > organisms[j].vertices.length ? organisms[i] : organisms[j];
+                const lessComplex = organisms[i].vertices.length > organisms[j].vertices.length ? organisms[j] : organisms[i];
+                moreComplex.simplify();
+                lessComplex.evolve(adaptedConfig.maxVertices);
+                spawnParticles(moreComplex.x, moreComplex.y, moreComplex.vx, moreComplex.vy, 3);
+              }
             } else {
               organisms[i].pulseSize(1.12);
               organisms[j].pulseSize(1.12);
@@ -859,8 +959,11 @@
               organisms[i].rotationSpeed = avgRotSpeed * 1.5;
               organisms[j].rotationSpeed = avgRotSpeed * 1.5;
               createChainLink(organisms[i], organisms[j]);
-              if (Math.random() < 0.4 && organisms[i].lobes.length < 3) {
-                organisms[i].lobes.push(organisms[i].createLobe(adaptedConfig));
+              if (Math.random() < 0.5) {
+                const target = Math.random() < 0.5 ? organisms[i] : organisms[j];
+                if (target.lobes.length < 4) {
+                  target.lobes.push(target.createLobe(adaptedConfig));
+                }
               }
             }
           }
