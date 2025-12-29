@@ -133,9 +133,14 @@ jobs:
 
       - name: Create conventional commit
         run: |
+          # Touch a file in the package dir so Release Please detects it
+          PACKAGE="${{ inputs.package }}"
+          echo "Release triggered: $(date)" > ${PACKAGE}/.release-trigger
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit --allow-empty -F /tmp/release-summary.txt
+          git add ${PACKAGE}/.release-trigger
+          git commit -F /tmp/release-summary.txt
           git push origin main
 
       - name: Trigger Release Please
