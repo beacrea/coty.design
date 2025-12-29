@@ -102,26 +102,33 @@ jobs:
           echo "perf_count=$PERF_COUNT" >> $GITHUB_OUTPUT
           echo "total=$TOTAL" >> $GITHUB_OUTPUT
 
-          # Save for commit message
-          cat > /tmp/release-summary.txt << EOF
-          ${{ inputs.bump_type }}($PACKAGE): Release summary
+          # Create summary commit message
+          {
+            echo "${{ inputs.bump_type }}(${PACKAGE}): Release summary"
+            echo ""
+            echo "Accumulated changes since ${LAST_TAG}:"
+            echo ""
+            echo "Features (${FEAT_COUNT}):"
+            echo -e "$FEATURES" | head -20
+            if [ $FEAT_COUNT -gt 20 ]; then
+              echo "... and $((FEAT_COUNT - 20)) more"
+            fi
+            echo ""
+            if [ $FIX_COUNT -gt 0 ]; then
+              echo "Fixes (${FIX_COUNT}):"
+              echo -e "$FIXES"
+              echo ""
+            fi
+            if [ $PERF_COUNT -gt 0 ]; then
+              echo "Performance (${PERF_COUNT}):"
+              echo -e "$PERF_ITEMS"
+              echo ""
+            fi
+            echo "Total commits: ${TOTAL}"
+            echo "Refactors: ${REFACTOR_COUNT}, Styles: ${STYLE_COUNT}"
+          } > /tmp/release-summary.txt
 
-          Accumulated changes since $LAST_TAG:
-
-          Features ($FEAT_COUNT):
-          $(echo -e "$FEATURES" | head -20)
-          ${FEAT_COUNT -gt 20:+... and $((FEAT_COUNT - 20)) more}
-
-          ${FIX_COUNT -gt 0:+Fixes ($FIX_COUNT):}
-          ${FIX_COUNT -gt 0:+$(echo -e "$FIXES")}
-
-          ${PERF_COUNT -gt 0:+Performance ($PERF_COUNT):}
-          ${PERF_COUNT -gt 0:+$(echo -e "$PERF_ITEMS")}
-
-          Total commits: $TOTAL
-          Refactors: $REFACTOR_COUNT, Styles: $STYLE_COUNT
-          EOF
-
+          echo "=== Generated Summary ==="
           cat /tmp/release-summary.txt
 
       - name: Create conventional commit
