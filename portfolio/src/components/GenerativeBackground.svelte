@@ -6,6 +6,7 @@
 
   export let config: WorldConfig = defaultWorldConfig;
   export let enhancedContrast: boolean = false;
+  export let observationMode: boolean = false;
 
   let canvas: HTMLCanvasElement;
   let ctx: CanvasRenderingContext2D | null = null;
@@ -115,7 +116,7 @@
   }
   
   function handlePointerDown(e: PointerEvent): void {
-    if (!simulation) return;
+    if (!simulation || !observationMode) return;
     e.preventDefault();
     const coords = getCanvasCoords(e);
     if (simulation.beginGrab(coords.x, coords.y, e.pointerId)) {
@@ -126,20 +127,34 @@
   function handlePointerMove(e: PointerEvent): void {
     if (!simulation) return;
     const coords = getCanvasCoords(e);
-    simulation.updatePointer(coords.x, coords.y, true);
+    if (observationMode) {
+      simulation.updatePointer(coords.x, coords.y, true);
+    }
   }
   
   function handlePointerUp(e: PointerEvent): void {
     if (!simulation) return;
     e.preventDefault();
     simulation.endGrab();
-    canvas.releasePointerCapture(e.pointerId);
+    try {
+      canvas.releasePointerCapture(e.pointerId);
+    } catch {}
   }
   
   function handlePointerLeave(): void {
     if (!simulation) return;
     simulation.updatePointer(0, 0, false);
     simulation.endGrab();
+  }
+  
+  function resetInteractionState(): void {
+    if (!simulation) return;
+    simulation.updatePointer(0, 0, false);
+    simulation.endGrab();
+  }
+  
+  $: if (!observationMode) {
+    resetInteractionState();
   }
 
   onMount(() => {
@@ -182,6 +197,7 @@
 <canvas 
   bind:this={canvas} 
   class="generative-background"
+  class:observation-mode={observationMode}
   on:pointerdown={handlePointerDown}
   on:pointermove={handlePointerMove}
   on:pointerup={handlePointerUp}
@@ -197,7 +213,7 @@
     z-index: 0;
     pointer-events: auto;
     touch-action: none;
-    cursor: grab;
+    cursor: default;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -206,7 +222,11 @@
     -webkit-tap-highlight-color: transparent;
   }
   
-  .generative-background:active {
+  .generative-background.observation-mode {
+    cursor: grab;
+  }
+  
+  .generative-background.observation-mode:active {
     cursor: grabbing;
   }
 </style>

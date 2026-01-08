@@ -188,15 +188,17 @@ function drawOrganelles(
   isDark: boolean
 ): void {
   for (const organelle of org.organelles) {
-    const colors = ORGANELLE_COLORS[organelle.type];
-    const pulse = Math.sin(organelle.pulsePhase) * 0.1 + 1;
+    const defaultColors = ORGANELLE_COLORS[organelle.type];
+    const hue = organelle.customHue !== undefined ? organelle.customHue : defaultColors.h;
+    const saturation = organelle.customHue !== undefined ? 70 : defaultColors.s;
+    const pulse = Math.sin(organelle.pulsePhase) * 0.12 + 1;
     
     const x = org.x + Math.cos(organelle.angle + org.rotation) * org.size * organelle.radiusRatio;
     const y = org.y + Math.sin(organelle.angle + org.rotation) * org.size * organelle.radiusRatio;
     const size = org.size * organelle.sizeRatio * pulse;
     
     const lightness = isDark ? 60 + org.depth * 20 : 35 + org.depth * 15;
-    const organelleAlpha = alpha * (0.4 + org.depth * 0.4);
+    const organelleAlpha = alpha * (0.5 + org.depth * 0.4);
     
     ctx.beginPath();
     
@@ -212,13 +214,20 @@ function drawOrganelles(
       ctx.arc(x, y, size * 0.5, 0, Math.PI * 2);
     }
     
-    ctx.fillStyle = `hsla(${colors.h}, ${colors.s}%, ${lightness}%, ${organelleAlpha})`;
+    ctx.fillStyle = `hsla(${hue}, ${saturation}%, ${lightness}%, ${organelleAlpha})`;
     ctx.fill();
     
     if (organelle.type === 'nucleus' || organelle.type === 'vacuole') {
-      ctx.strokeStyle = `hsla(${colors.h}, ${colors.s}%, ${lightness - 10}%, ${organelleAlpha * 0.7})`;
+      ctx.strokeStyle = `hsla(${hue}, ${saturation}%, ${lightness - 10}%, ${organelleAlpha * 0.7})`;
       ctx.lineWidth = 0.5;
       ctx.stroke();
+    }
+    
+    if (organelle.customHue !== undefined && size > 2) {
+      ctx.beginPath();
+      ctx.arc(x - size * 0.2, y - size * 0.2, size * 0.2, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${hue}, ${saturation - 15}%, ${lightness + 15}%, ${organelleAlpha * 0.4})`;
+      ctx.fill();
     }
   }
 }

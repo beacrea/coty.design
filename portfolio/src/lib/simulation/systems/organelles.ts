@@ -61,15 +61,20 @@ export function transferOrganelles(
 export function grantOrganelleFromFood(
   org: OrganismData,
   grantChance: number,
-  maxOrganelles: number
+  maxOrganelles: number,
+  foodHue?: number
 ): boolean {
   if (org.organelles.length >= maxOrganelles) return false;
   if (Math.random() >= grantChance) return false;
   
-  const preferredTypes: OrganelleType[] = ['chloroplast', 'mitochondria'];
+  const preferredTypes: OrganelleType[] = ['chloroplast', 'mitochondria', 'vacuole'];
   const type = preferredTypes[Math.floor(Math.random() * preferredTypes.length)];
   
-  org.organelles.push(createOrganelle(type));
+  const organelle = createOrganelle(type);
+  if (foodHue !== undefined) {
+    organelle.customHue = foodHue + (Math.random() - 0.5) * 15;
+  }
+  org.organelles.push(organelle);
   return true;
 }
 

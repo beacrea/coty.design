@@ -184,15 +184,16 @@ export class Simulation {
     const lineAlpha = Math.min(1, getAlphaFromContrast(lineContrast) * contrastMultiplier);
     const vertexAlpha = Math.min(1, getAlphaFromContrast(vertexContrast) * contrastMultiplier);
     
-    const hueShift = Math.sin(this.state.currentTime * 0.0003) * 15;
-    const baseLightness = isDark ? 10 : 96;
-    const baseChroma = isDark ? 0.025 : 0.022;
-    const baseHue = 210 + hueShift;
+    const hueShift = Math.sin(this.state.currentTime * 0.0002) * 40 + Math.sin(this.state.currentTime * 0.00007) * 20;
+    const chromaWave = Math.sin(this.state.currentTime * 0.00015) * 0.015 + Math.sin(this.state.currentTime * 0.00005) * 0.01;
+    const baseLightness = isDark ? 8 : 97;
+    const baseChroma = (isDark ? 0.06 : 0.045) + chromaWave;
+    const baseHue = 200 + hueShift;
     
     ctx.fillStyle = `oklch(${baseLightness}% ${baseChroma} ${baseHue})`;
     ctx.fillRect(0, 0, width, height);
     
-    drawFoodSources(ctx, foodSources, cfg, strokeColor, lineAlpha, isDark);
+    drawFoodSources(ctx, foodSources, cfg, strokeColor, lineAlpha, isDark, observationMode);
     
     for (const org of organisms) {
       drawOrganism(ctx, org, strokeColor, lineAlpha, vertexAlpha, observationMode, isDark);
