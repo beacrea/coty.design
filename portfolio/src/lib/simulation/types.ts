@@ -91,6 +91,9 @@ export interface Particle {
   life: number;
   maxLife: number;
   depth: number;
+  isBubble?: boolean;
+  wobblePhase?: number;
+  wobbleSpeed?: number;
 }
 
 export interface ChainLink {

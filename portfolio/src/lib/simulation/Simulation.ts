@@ -184,14 +184,12 @@ export class Simulation {
     const lineAlpha = Math.min(1, getAlphaFromContrast(lineContrast) * contrastMultiplier);
     const vertexAlpha = Math.min(1, getAlphaFromContrast(vertexContrast) * contrastMultiplier);
     
-    const hueShift = Math.sin(this.state.currentTime * 0.0002) * 40 + Math.sin(this.state.currentTime * 0.00007) * 20;
-    const chromaWave = Math.sin(this.state.currentTime * 0.00015) * 0.015 + Math.sin(this.state.currentTime * 0.00005) * 0.01;
-    const baseLightness = isDark ? 8 : 97;
-    const baseChroma = (isDark ? 0.06 : 0.045) + chromaWave;
-    const baseHue = 200 + hueShift;
-    
-    ctx.fillStyle = `oklch(${baseLightness}% ${baseChroma} ${baseHue})`;
+    const time = this.state.currentTime;
+    const baseLightness = isDark ? 6 : 98;
+    ctx.fillStyle = isDark ? '#0a0c10' : '#f8fbff';
     ctx.fillRect(0, 0, width, height);
+    
+    this.drawAuroraBackground(ctx, width, height, time, isDark);
     
     drawFoodSources(ctx, foodSources, cfg, strokeColor, lineAlpha, isDark, observationMode);
     
@@ -201,7 +199,7 @@ export class Simulation {
     
     drawConnections(ctx, organisms, cfg.connectionDistance, strokeColor, lineAlpha);
     drawChainLinks(ctx, chainLinks, organisms, strokeColor, lineAlpha);
-    drawParticles(ctx, particles, strokeColor, lineAlpha);
+    drawParticles(ctx, particles, strokeColor, lineAlpha, isDark, observationMode);
   }
   
   getState(): SimulationState {
@@ -234,5 +232,97 @@ export class Simulation {
   
   isGrabbing(): boolean {
     return this.state.grabbedOrganismIndex !== null;
+  }
+  
+  private drawAuroraBackground(
+    ctx: CanvasRenderingContext2D,
+    width: number,
+    height: number,
+    time: number,
+    isDark: boolean
+  ): void {
+    const bandCount = 3;
+    const baseAlpha = isDark ? 0.08 : 0.04;
+    
+    for (let i = 0; i < bandCount; i++) {
+      const bandOffset = i * 0.33;
+      const speed = 0.000025 + i * 0.000008;
+      const ySpeed = 0.000018 + i * 0.000006;
+      
+      const xDrift = Math.sin(time * speed + bandOffset * Math.PI * 2) * width * 0.25;
+      const yDrift = Math.cos(time * ySpeed + bandOffset * Math.PI) * height * 0.12;
+      
+      const hue1 = isDark 
+        ? 180 + Math.sin(time * 0.00003 + i * 1.2) * 50
+        : 200 + Math.sin(time * 0.00003 + i * 1.2) * 30;
+      const hue2 = isDark
+        ? 220 + Math.cos(time * 0.000025 + i * 0.8) * 40
+        : 210 + Math.cos(time * 0.000025 + i * 0.8) * 25;
+      
+      const centerX = width * (0.25 + bandOffset * 0.5) + xDrift;
+      const centerY = height * (0.35 + i * 0.18) + yDrift;
+      const radiusX = width * (0.45 + Math.sin(time * 0.000015 + i) * 0.15);
+      const radiusY = height * (0.35 + Math.cos(time * 0.00002 + i) * 0.12);
+      
+      const gradient = ctx.createRadialGradient(
+        centerX, centerY, 0,
+        centerX, centerY, Math.max(radiusX, radiusY)
+      );
+      
+      const saturation = isDark ? 55 : 35;
+      const lightness = isDark ? 45 : 70;
+      const alpha1 = baseAlpha * (0.7 + Math.sin(time * 0.00005 + i * 2) * 0.3);
+      const alpha2 = baseAlpha * 0.4;
+      
+      gradient.addColorStop(0, `hsla(${hue1}, ${saturation}%, ${lightness}%, ${alpha1})`);
+      gradient.addColorStop(0.4, `hsla(${hue2}, ${saturation - 5}%, ${lightness + 5}%, ${alpha2})`);
+      gradient.addColorStop(0.7, `hsla(${hue1}, ${saturation - 10}%, ${lightness + 8}%, ${alpha2 * 0.3})`);
+      gradient.addColorStop(1, `hsla(${hue1}, ${saturation}%, ${lightness}%, 0)`);
+      
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.scale(radiusX / Math.max(radiusX, radiusY), radiusY / Math.max(radiusX, radiusY));
+      ctx.translate(-centerX, -centerY);
+      
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, Math.max(radiusX, radiusY), 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+      ctx.restore();
+    }
+    
+    for (let i = 0; i < 2; i++) {
+      const flowTime = time * (0.00006 + i * 0.000015);
+      const flowY = height * (0.25 + i * 0.4) + Math.sin(flowTime) * height * 0.08;
+      const flowHue = isDark 
+        ? 190 + Math.sin(flowTime * 1.2 + i) * 25
+        : 200 + Math.sin(flowTime * 1.2 + i) * 15;
+      
+      ctx.beginPath();
+      ctx.moveTo(0, flowY);
+      
+      for (let x = 0; x <= width; x += 25) {
+        const waveY = flowY + 
+          Math.sin(x * 0.0025 + flowTime * 1.5) * 20 +
+          Math.sin(x * 0.005 + flowTime * 1.2) * 10 +
+          Math.cos(x * 0.0015 + flowTime * 0.8) * 15;
+        ctx.lineTo(x, waveY);
+      }
+      
+      ctx.lineTo(width, flowY + 50);
+      ctx.lineTo(0, flowY + 50);
+      ctx.closePath();
+      
+      const streamGradient = ctx.createLinearGradient(0, flowY - 25, 0, flowY + 50);
+      const streamAlpha = isDark ? 0.025 : 0.015;
+      const streamLightness = isDark ? 50 : 75;
+      streamGradient.addColorStop(0, `hsla(${flowHue}, 50%, ${streamLightness}%, 0)`);
+      streamGradient.addColorStop(0.35, `hsla(${flowHue}, 55%, ${streamLightness}%, ${streamAlpha})`);
+      streamGradient.addColorStop(0.65, `hsla(${flowHue + 15}, 50%, ${streamLightness + 5}%, ${streamAlpha * 0.6})`);
+      streamGradient.addColorStop(1, `hsla(${flowHue}, 45%, ${streamLightness}%, 0)`);
+      
+      ctx.fillStyle = streamGradient;
+      ctx.fill();
+    }
   }
 }
