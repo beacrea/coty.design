@@ -189,7 +189,7 @@ export class Simulation {
     ctx.fillStyle = isDark ? '#0a0c10' : '#f8fbff';
     ctx.fillRect(0, 0, width, height);
     
-    this.drawAuroraBackground(ctx, width, height, time, isDark);
+    this.drawFlowFieldBackground(ctx, width, height, time, isDark);
     
     drawFoodSources(ctx, foodSources, cfg, strokeColor, lineAlpha, isDark, observationMode);
     
@@ -234,94 +234,54 @@ export class Simulation {
     return this.state.grabbedOrganismIndex !== null;
   }
   
-  private drawAuroraBackground(
+  private drawFlowFieldBackground(
     ctx: CanvasRenderingContext2D,
     width: number,
     height: number,
     time: number,
     isDark: boolean
   ): void {
-    const bandCount = 3;
-    const baseAlpha = isDark ? 0.08 : 0.04;
+    const baseAlpha = isDark ? 0.018 : 0.01;
+    const t = time * 0.00001;
     
+    const bandCount = 5;
     for (let i = 0; i < bandCount; i++) {
-      const bandOffset = i * 0.33;
-      const speed = 0.000025 + i * 0.000008;
-      const ySpeed = 0.000018 + i * 0.000006;
+      const phase = i * 0.2 * Math.PI * 2;
       
-      const xDrift = Math.sin(time * speed + bandOffset * Math.PI * 2) * width * 0.25;
-      const yDrift = Math.cos(time * ySpeed + bandOffset * Math.PI) * height * 0.12;
+      const baseCenterX = width * (0.2 + i * 0.15);
+      const baseCenterY = height * (0.3 + (i % 3) * 0.2);
       
-      const hue1 = isDark 
-        ? 180 + Math.sin(time * 0.00003 + i * 1.2) * 50
-        : 200 + Math.sin(time * 0.00003 + i * 1.2) * 30;
-      const hue2 = isDark
-        ? 220 + Math.cos(time * 0.000025 + i * 0.8) * 40
-        : 210 + Math.cos(time * 0.000025 + i * 0.8) * 25;
+      const driftX = Math.sin(t * 0.8 + phase) * width * 0.15 + 
+                     Math.cos(t * 0.5 + phase * 0.7) * width * 0.1;
+      const driftY = Math.cos(t * 0.6 + phase) * height * 0.12 + 
+                     Math.sin(t * 0.4 + phase * 1.3) * height * 0.08;
       
-      const centerX = width * (0.25 + bandOffset * 0.5) + xDrift;
-      const centerY = height * (0.35 + i * 0.18) + yDrift;
-      const radiusX = width * (0.45 + Math.sin(time * 0.000015 + i) * 0.15);
-      const radiusY = height * (0.35 + Math.cos(time * 0.00002 + i) * 0.12);
+      const centerX = baseCenterX + driftX;
+      const centerY = baseCenterY + driftY;
+      
+      const radiusBase = Math.min(width, height) * (0.3 + Math.sin(t * 0.3 + i) * 0.1);
+      
+      const hue = isDark 
+        ? 195 + Math.sin(t * 0.7 + i * 0.8) * 20
+        : 205 + Math.sin(t * 0.7 + i * 0.8) * 12;
+      const saturation = isDark ? 30 : 18;
+      const lightness = isDark ? 55 : 82;
+      
+      const pulseAlpha = baseAlpha * (0.6 + Math.sin(t * 0.5 + i * 1.2) * 0.4);
       
       const gradient = ctx.createRadialGradient(
         centerX, centerY, 0,
-        centerX, centerY, Math.max(radiusX, radiusY)
+        centerX, centerY, radiusBase
       );
       
-      const saturation = isDark ? 55 : 35;
-      const lightness = isDark ? 45 : 70;
-      const alpha1 = baseAlpha * (0.7 + Math.sin(time * 0.00005 + i * 2) * 0.3);
-      const alpha2 = baseAlpha * 0.4;
-      
-      gradient.addColorStop(0, `hsla(${hue1}, ${saturation}%, ${lightness}%, ${alpha1})`);
-      gradient.addColorStop(0.4, `hsla(${hue2}, ${saturation - 5}%, ${lightness + 5}%, ${alpha2})`);
-      gradient.addColorStop(0.7, `hsla(${hue1}, ${saturation - 10}%, ${lightness + 8}%, ${alpha2 * 0.3})`);
-      gradient.addColorStop(1, `hsla(${hue1}, ${saturation}%, ${lightness}%, 0)`);
-      
-      ctx.save();
-      ctx.translate(centerX, centerY);
-      ctx.scale(radiusX / Math.max(radiusX, radiusY), radiusY / Math.max(radiusX, radiusY));
-      ctx.translate(-centerX, -centerY);
+      gradient.addColorStop(0, `hsla(${hue}, ${saturation}%, ${lightness}%, ${pulseAlpha})`);
+      gradient.addColorStop(0.4, `hsla(${hue + 5}, ${saturation - 3}%, ${lightness}%, ${pulseAlpha * 0.5})`);
+      gradient.addColorStop(0.7, `hsla(${hue - 5}, ${saturation - 5}%, ${lightness}%, ${pulseAlpha * 0.2})`);
+      gradient.addColorStop(1, `hsla(${hue}, ${saturation}%, ${lightness}%, 0)`);
       
       ctx.beginPath();
-      ctx.arc(centerX, centerY, Math.max(radiusX, radiusY), 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, radiusBase, 0, Math.PI * 2);
       ctx.fillStyle = gradient;
-      ctx.fill();
-      ctx.restore();
-    }
-    
-    for (let i = 0; i < 2; i++) {
-      const flowTime = time * (0.00006 + i * 0.000015);
-      const flowY = height * (0.25 + i * 0.4) + Math.sin(flowTime) * height * 0.08;
-      const flowHue = isDark 
-        ? 190 + Math.sin(flowTime * 1.2 + i) * 25
-        : 200 + Math.sin(flowTime * 1.2 + i) * 15;
-      
-      ctx.beginPath();
-      ctx.moveTo(0, flowY);
-      
-      for (let x = 0; x <= width; x += 25) {
-        const waveY = flowY + 
-          Math.sin(x * 0.0025 + flowTime * 1.5) * 20 +
-          Math.sin(x * 0.005 + flowTime * 1.2) * 10 +
-          Math.cos(x * 0.0015 + flowTime * 0.8) * 15;
-        ctx.lineTo(x, waveY);
-      }
-      
-      ctx.lineTo(width, flowY + 50);
-      ctx.lineTo(0, flowY + 50);
-      ctx.closePath();
-      
-      const streamGradient = ctx.createLinearGradient(0, flowY - 25, 0, flowY + 50);
-      const streamAlpha = isDark ? 0.025 : 0.015;
-      const streamLightness = isDark ? 50 : 75;
-      streamGradient.addColorStop(0, `hsla(${flowHue}, 50%, ${streamLightness}%, 0)`);
-      streamGradient.addColorStop(0.35, `hsla(${flowHue}, 55%, ${streamLightness}%, ${streamAlpha})`);
-      streamGradient.addColorStop(0.65, `hsla(${flowHue + 15}, 50%, ${streamLightness + 5}%, ${streamAlpha * 0.6})`);
-      streamGradient.addColorStop(1, `hsla(${flowHue}, 45%, ${streamLightness}%, 0)`);
-      
-      ctx.fillStyle = streamGradient;
       ctx.fill();
     }
   }
