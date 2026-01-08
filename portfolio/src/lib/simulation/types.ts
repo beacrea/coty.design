@@ -14,6 +14,7 @@ export interface Organelle {
   sizeRatio: number;
   rotationSpeed: number;
   pulsePhase: number;
+  customHue?: number;
 }
 
 export interface GrabState {
@@ -106,6 +107,7 @@ export interface FoodSource {
   active: boolean;
   respawnAt: number;
   pulsePhase: number;
+  hue: number;
 }
 
 export interface SpatialCell {

@@ -60,7 +60,7 @@ export function applyFoodAttraction(
         org.size = Math.min(org.maxSize, org.size + 0.5);
         org.glow = Math.min(1, org.glow + 0.12);
         
-        grantOrganelleFromFood(org, cfg.organelleFoodGrantChance, cfg.organelleMaxPerOrganism);
+        grantOrganelleFromFood(org, cfg.organelleFoodGrantChance, cfg.organelleMaxPerOrganism, nearestFood.hue);
         
         nearestFood.active = false;
         nearestFood.respawnAt = timestamp + cfg.foodRespawnTime;

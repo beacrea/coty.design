@@ -42,28 +42,30 @@ export function initializeAmbientBubbles(
   particles: Particle[],
   width: number,
   height: number,
-  count: number = 40
+  count: number = 80
 ): void {
   for (let i = 0; i < count; i++) {
     const sizeRoll = Math.random();
     let size: number;
-    if (sizeRoll < 0.5) {
-      size = 1.0 + Math.random() * 1.5;
-    } else if (sizeRoll < 0.8) {
-      size = 2.0 + Math.random() * 2.0;
+    if (sizeRoll < 0.4) {
+      size = 0.8 + Math.random() * 1.2;
+    } else if (sizeRoll < 0.7) {
+      size = 1.5 + Math.random() * 2.5;
+    } else if (sizeRoll < 0.9) {
+      size = 3.0 + Math.random() * 3.0;
     } else {
-      size = 3.5 + Math.random() * 2.5;
+      size = 5.0 + Math.random() * 3.0;
     }
     
     particles.push({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.08,
-      vy: (Math.random() - 0.5) * 0.08,
+      vx: (Math.random() - 0.5) * 0.12,
+      vy: (Math.random() - 0.5) * 0.12 - 0.02,
       size,
       life: 0.3 + Math.random() * 0.7,
-      maxLife: 800 + Math.floor(Math.random() * 600),
-      depth: 0.2 + Math.random() * 0.5,
+      maxLife: 600 + Math.floor(Math.random() * 800),
+      depth: 0.1 + Math.random() * 0.7,
     });
   }
 }
@@ -72,67 +74,79 @@ export function spawnAmbientBubbles(
   particles: Particle[],
   width: number,
   height: number,
-  maxParticles: number = 200
+  maxParticles: number = 350
 ): void {
   if (particles.length >= maxParticles) return;
   
-  if (Math.random() < 0.08) {
+  if (Math.random() < 0.18) {
     const edge = Math.floor(Math.random() * 4);
-    let x: number, y: number;
+    let x: number, y: number, vx: number, vy: number;
     if (edge === 0) {
       x = Math.random() * width;
       y = height + 10;
+      vx = (Math.random() - 0.5) * 0.1;
+      vy = -0.08 - Math.random() * 0.15;
     } else if (edge === 1) {
       x = -10;
       y = Math.random() * height;
+      vx = 0.05 + Math.random() * 0.1;
+      vy = (Math.random() - 0.5) * 0.1 - 0.02;
     } else if (edge === 2) {
       x = Math.random() * width;
       y = -10;
+      vx = (Math.random() - 0.5) * 0.1;
+      vy = 0.05 + Math.random() * 0.1;
     } else {
       x = width + 10;
       y = Math.random() * height;
+      vx = -0.05 - Math.random() * 0.1;
+      vy = (Math.random() - 0.5) * 0.1 - 0.02;
     }
     
     const sizeRoll = Math.random();
     let size: number;
-    if (sizeRoll < 0.5) {
-      size = 1.0 + Math.random() * 1.5;
-    } else if (sizeRoll < 0.8) {
-      size = 2.0 + Math.random() * 2.0;
+    if (sizeRoll < 0.35) {
+      size = 0.6 + Math.random() * 1.0;
+    } else if (sizeRoll < 0.65) {
+      size = 1.5 + Math.random() * 2.5;
+    } else if (sizeRoll < 0.85) {
+      size = 3.0 + Math.random() * 3.0;
     } else {
-      size = 3.5 + Math.random() * 2.5;
+      size = 5.0 + Math.random() * 4.0;
     }
     
     particles.push({
       x,
       y,
-      vx: (Math.random() - 0.5) * 0.15,
-      vy: (Math.random() - 0.5) * 0.15,
+      vx,
+      vy,
       size,
       life: 1,
-      maxLife: 800 + Math.floor(Math.random() * 600),
-      depth: 0.2 + Math.random() * 0.5,
+      maxLife: 500 + Math.floor(Math.random() * 700),
+      depth: 0.1 + Math.random() * 0.7,
     });
   }
   
-  if (Math.random() < 0.04) {
+  if (Math.random() < 0.12) {
     const sizeRoll = Math.random();
     let size: number;
-    if (sizeRoll < 0.6) {
-      size = 0.8 + Math.random() * 1.2;
+    if (sizeRoll < 0.5) {
+      size = 0.5 + Math.random() * 1.0;
+    } else if (sizeRoll < 0.8) {
+      size = 1.2 + Math.random() * 2.0;
     } else {
-      size = 1.5 + Math.random() * 2.0;
+      size = 2.5 + Math.random() * 3.0;
     }
     
     particles.push({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.06,
-      vy: (Math.random() - 0.5) * 0.06,
+      vx: (Math.random() - 0.5) * 0.08,
+      vy: (Math.random() - 0.5) * 0.08 - 0.03,
       size,
       life: 1,
-      maxLife: 600 + Math.floor(Math.random() * 500),
-      depth: 0.15 + Math.random() * 0.35,
+      maxLife: 400 + Math.floor(Math.random() * 600),
+      depth: 0.05 + Math.random() * 0.6,
     });
   }
 }

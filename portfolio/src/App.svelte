@@ -20,7 +20,7 @@
   }
 </script>
 
-<GenerativeBackground enhancedContrast={observeMode} />
+<GenerativeBackground enhancedContrast={observeMode} observationMode={observeMode} />
 <div class="toggle-wrapper" class:observe-active={observeMode}>
   <ThemeToggle />
   <button 

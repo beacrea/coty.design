@@ -142,6 +142,8 @@ export function createOrganism(x: number, y: number, cfg: SimulationConfig): Org
   };
 }
 
+const FOOD_HUES = [320, 45, 280, 160, 30, 200, 350, 90, 270, 15];
+
 export function createFoodSource(width: number, height: number): FoodSource {
   return {
     x: 50 + Math.random() * (width - 100),
@@ -149,6 +151,7 @@ export function createFoodSource(width: number, height: number): FoodSource {
     active: true,
     respawnAt: 0,
     pulsePhase: Math.random() * Math.PI * 2,
+    hue: FOOD_HUES[Math.floor(Math.random() * FOOD_HUES.length)] + (Math.random() - 0.5) * 20,
   };
 }
 
