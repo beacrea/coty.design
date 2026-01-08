@@ -186,7 +186,7 @@ export const defaultStructuredConfig: StructuredConfig = {
   organelles: {
     spawnChance: 0.25,
     maxPerOrganism: 5,
-    foodGrantChance: 0.12,
+    foodGrantChance: 0.35,
     mergeTransferChance: 0.6,
     types: {
       nucleus: { weight: 0.18, speedMod: 0, decayMod: -0.15, glowMod: 0.12 },
