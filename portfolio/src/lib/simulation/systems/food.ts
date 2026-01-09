@@ -63,6 +63,23 @@ export function applyFoodAttraction(
         org.pitchV += (Math.random() - 0.5) * 0.05;
         org.rollV += (Math.random() - 0.5) * 0.05;
         
+        if (org.vertices.length < cfg.maxVertices && Math.random() < 0.15) {
+          const insertIndex = Math.floor(Math.random() * org.vertices.length);
+          const nextIndex = (insertIndex + 1) % org.vertices.length;
+          const newAngle = (org.vertices[insertIndex].angle + org.vertices[nextIndex].angle) / 2;
+          const newDistance = 0.5 + Math.random() * 0.5;
+          org.vertices.splice(insertIndex + 1, 0, { 
+            angle: newAngle, 
+            distance: newDistance,
+            baseDistance: newDistance,
+            deformation: 0
+          });
+        }
+        
+        if (org.irregularity !== undefined) {
+          org.irregularity = Math.min(1.0, org.irregularity + 0.02);
+        }
+        
         grantOrganelleFromFood(org, cfg.organelleFoodGrantChance, cfg.organelleMaxPerOrganism, nearestFood.hue);
         
         nearestFood.active = false;
