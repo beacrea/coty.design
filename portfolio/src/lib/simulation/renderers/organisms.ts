@@ -128,143 +128,112 @@ function getLocalVertices3D(org: OrganismData): Point3D[] {
   });
 }
 
-function generateOrganismMesh(org: OrganismData): { vertices: Point3D[]; faces: number[][] } {
+interface Edge3D {
+  start: Point3D;
+  end: Point3D;
+  depth: number;
+}
+
+function generateOrganismMesh(org: OrganismData): { vertices: Point3D[]; edges: [number, number][] } {
   const vertices: Point3D[] = [];
-  const faces: number[][] = [];
+  const edges: [number, number][] = [];
   const n = org.vertices.length;
   
-  const topZ = org.size * 0.4;
-  const bottomZ = -org.size * 0.3;
-  
-  for (const v of org.vertices) {
-    const x = Math.cos(v.angle) * v.distance * org.size;
-    const y = Math.sin(v.angle) * v.distance * org.size;
-    vertices.push({ x, y, z: topZ * v.distance });
-  }
-  
-  for (const v of org.vertices) {
-    const x = Math.cos(v.angle) * v.distance * org.size;
-    const y = Math.sin(v.angle) * v.distance * org.size;
-    vertices.push({ x, y, z: bottomZ * v.distance });
-  }
+  const layers = 4;
+  const topZ = org.size * 0.5;
+  const bottomZ = -org.size * 0.4;
   
   vertices.push({ x: 0, y: 0, z: topZ });
+  
+  for (let layer = 0; layer < layers; layer++) {
+    const t = (layer + 1) / (layers + 1);
+    const z = topZ * (1 - t * 2);
+    const radiusScale = Math.sin(t * Math.PI) * 0.9 + 0.1;
+    
+    for (let i = 0; i < n; i++) {
+      const v = org.vertices[i];
+      const jitter = 1 + Math.sin(layer * 2.3 + i * 1.7) * 0.15;
+      const x = Math.cos(v.angle) * v.distance * org.size * radiusScale * jitter;
+      const y = Math.sin(v.angle) * v.distance * org.size * radiusScale * jitter;
+      vertices.push({ x, y, z });
+    }
+  }
+  
   vertices.push({ x: 0, y: 0, z: bottomZ });
   
-  const topCenter = n * 2;
-  const bottomCenter = n * 2 + 1;
+  const topApex = 0;
+  const bottomApex = vertices.length - 1;
   
   for (let i = 0; i < n; i++) {
-    const next = (i + 1) % n;
-    faces.push([topCenter, i, next]);
+    edges.push([topApex, 1 + i]);
   }
   
+  for (let layer = 0; layer < layers; layer++) {
+    const layerStart = 1 + layer * n;
+    for (let i = 0; i < n; i++) {
+      const next = (i + 1) % n;
+      edges.push([layerStart + i, layerStart + next]);
+    }
+  }
+  
+  for (let layer = 0; layer < layers - 1; layer++) {
+    const thisStart = 1 + layer * n;
+    const nextStart = 1 + (layer + 1) * n;
+    for (let i = 0; i < n; i++) {
+      edges.push([thisStart + i, nextStart + i]);
+      const nextI = (i + 1) % n;
+      edges.push([thisStart + i, nextStart + nextI]);
+    }
+  }
+  
+  const lastLayerStart = 1 + (layers - 1) * n;
   for (let i = 0; i < n; i++) {
-    const next = (i + 1) % n;
-    faces.push([bottomCenter, n + next, n + i]);
+    edges.push([lastLayerStart + i, bottomApex]);
   }
   
-  for (let i = 0; i < n; i++) {
-    const next = (i + 1) % n;
-    faces.push([i, n + i, next]);
-    faces.push([next, n + i, n + next]);
-  }
-  
-  return { vertices, faces };
+  return { vertices, edges };
 }
 
-function getTransformedMesh(org: OrganismData): Face3D[] {
+function getTransformedEdges(org: OrganismData): Edge3D[] {
   const mesh = generateOrganismMesh(org);
-  const faces: Face3D[] = [];
+  const transformedVerts = mesh.vertices.map(v => 
+    transform3D(v, org.rotation, org.pitch, org.roll)
+  );
   
-  for (const faceIndices of mesh.faces) {
-    const worldVerts = faceIndices.map(i => 
-      transform3D(mesh.vertices[i], org.rotation, org.pitch, org.roll)
-    );
-    
-    const v0 = worldVerts[0];
-    const v1 = worldVerts[1];
-    const v2 = worldVerts[2];
-    
-    const edge1 = { x: v1.x - v0.x, y: v1.y - v0.y, z: v1.z - v0.z };
-    const edge2 = { x: v2.x - v0.x, y: v2.y - v0.y, z: v2.z - v0.z };
-    const normal = normalize(crossProduct(edge1, edge2));
-    
-    const avgZ = (v0.z + v1.z + v2.z) / 3;
-    
-    const isFront = normal.z < 0;
-    
-    faces.push({
-      vertices: faceIndices.map(i => mesh.vertices[i]),
-      projected: worldVerts,
-      normal,
-      depth: avgZ,
-      isFront
-    });
-  }
+  const edges: Edge3D[] = mesh.edges.map(([i, j]) => {
+    const start = transformedVerts[i];
+    const end = transformedVerts[j];
+    const depth = (start.z + end.z) / 2;
+    return { start, end, depth };
+  });
   
-  faces.sort((a, b) => b.depth - a.depth);
+  edges.sort((a, b) => b.depth - a.depth);
   
-  return faces;
+  return edges;
 }
 
-function drawOrganicBody(
+function draw3DWireframe(
   ctx: CanvasRenderingContext2D,
   org: OrganismData,
   getOrgColor: (alpha: number) => string,
   lineAlpha: number,
   observationMode: boolean
 ): void {
-  const localVerts = getLocalVertices3D(org);
+  const edges = getTransformedEdges(org);
+  const baseWidth = observationMode ? 1.2 : 0.8;
   
-  const strokeWidth = observationMode ? 1.4 : 1;
-  const vertexRadius = observationMode ? 2.2 : 2;
-  
-  const tiltAmount = Math.abs(org.pitch) + Math.abs(org.roll);
-  const depthShade = 0.03 * tiltAmount;
-  
-  if (depthShade > 0.005) {
+  for (const edge of edges) {
+    const depthFactor = 1 - (edge.depth / (org.size * 2));
+    const edgeAlpha = lineAlpha * (0.3 + depthFactor * 0.7);
+    const edgeWidth = baseWidth * (0.5 + depthFactor * 0.5);
+    
     ctx.beginPath();
-    ctx.moveTo(localVerts[0].x, localVerts[0].y);
-    for (let i = 1; i < localVerts.length; i++) {
-      ctx.lineTo(localVerts[i].x, localVerts[i].y);
-    }
-    ctx.closePath();
-    ctx.fillStyle = getOrgColor(depthShade);
-    ctx.fill();
+    ctx.moveTo(edge.start.x, edge.start.y);
+    ctx.lineTo(edge.end.x, edge.end.y);
+    ctx.strokeStyle = getOrgColor(edgeAlpha);
+    ctx.lineWidth = edgeWidth;
+    ctx.stroke();
   }
-  
-  if (org.vertices.length >= 4 && org.spokeIntensity > 0) {
-    const spokeAlpha = lineAlpha * org.spokeIntensity * 0.4;
-    ctx.strokeStyle = getOrgColor(spokeAlpha);
-    ctx.lineWidth = 0.5;
-    for (let i = 0; i < Math.floor(org.vertices.length / 2); i++) {
-      const oppositeIdx = (i + Math.floor(org.vertices.length / 2)) % org.vertices.length;
-      ctx.beginPath();
-      ctx.moveTo(localVerts[i].x, localVerts[i].y);
-      ctx.lineTo(localVerts[oppositeIdx].x, localVerts[oppositeIdx].y);
-      ctx.stroke();
-    }
-  }
-
-  ctx.beginPath();
-  ctx.moveTo(localVerts[0].x, localVerts[0].y);
-  for (let i = 1; i < localVerts.length; i++) {
-    ctx.lineTo(localVerts[i].x, localVerts[i].y);
-  }
-  ctx.closePath();
-  ctx.strokeStyle = getOrgColor(lineAlpha);
-  ctx.lineWidth = strokeWidth;
-  ctx.stroke();
-
-  localVerts.forEach((v, i) => {
-    const depthFactor = 0.8 + (v.z * 0.01);
-    const adjustedRadius = vertexRadius * Math.max(0.6, Math.min(1.4, depthFactor));
-    ctx.beginPath();
-    ctx.arc(v.x, v.y, adjustedRadius, 0, Math.PI * 2);
-    ctx.fillStyle = getOrgColor(lineAlpha * 1.5);
-    ctx.fill();
-  });
 }
 
 export function drawOrganism(
@@ -304,7 +273,7 @@ export function drawOrganism(
     ctx.fill();
   }
   
-  drawOrganicBody(ctx, org, getOrgColor, lineAlpha, observationMode);
+  draw3DWireframe(ctx, org, getOrgColor, lineAlpha, observationMode);
 
   org.lobes.forEach((lobe) => {
     const lobeAngle = lobe.offsetAngle;
