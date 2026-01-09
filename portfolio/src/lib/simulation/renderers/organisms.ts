@@ -139,22 +139,21 @@ function generateOrganismMesh(org: OrganismData): { vertices: Point3D[]; edges: 
   const edges: [number, number][] = [];
   const n = org.vertices.length;
   
-  const layers = 4;
-  const topZ = org.size * 0.5;
-  const bottomZ = -org.size * 0.4;
+  const layers = 2;
+  const topZ = org.size * 0.35;
+  const bottomZ = -org.size * 0.25;
   
   vertices.push({ x: 0, y: 0, z: topZ });
   
   for (let layer = 0; layer < layers; layer++) {
     const t = (layer + 1) / (layers + 1);
-    const z = topZ * (1 - t * 2);
-    const radiusScale = Math.sin(t * Math.PI) * 0.9 + 0.1;
+    const z = topZ * (1 - t * 2.2);
+    const radiusScale = layer === 0 ? 1.0 : 0.7;
     
     for (let i = 0; i < n; i++) {
       const v = org.vertices[i];
-      const jitter = 1 + Math.sin(layer * 2.3 + i * 1.7) * 0.15;
-      const x = Math.cos(v.angle) * v.distance * org.size * radiusScale * jitter;
-      const y = Math.sin(v.angle) * v.distance * org.size * radiusScale * jitter;
+      const x = Math.cos(v.angle) * v.distance * org.size * radiusScale;
+      const y = Math.sin(v.angle) * v.distance * org.size * radiusScale;
       vertices.push({ x, y, z });
     }
   }
@@ -181,8 +180,6 @@ function generateOrganismMesh(org: OrganismData): { vertices: Point3D[]; edges: 
     const nextStart = 1 + (layer + 1) * n;
     for (let i = 0; i < n; i++) {
       edges.push([thisStart + i, nextStart + i]);
-      const nextI = (i + 1) % n;
-      edges.push([thisStart + i, nextStart + nextI]);
     }
   }
   
