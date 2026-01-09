@@ -100,6 +100,7 @@ export interface Particle {
   isBubble?: boolean;
   wobblePhase?: number;
   wobbleSpeed?: number;
+  fadeIn?: number;
 }
 
 export interface ChainLink {
@@ -117,6 +118,7 @@ export interface FoodSource {
   respawnAt: number;
   pulsePhase: number;
   hue: number;
+  fadeIn: number;
 }
 
 export interface SpatialCell {
