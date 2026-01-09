@@ -55,18 +55,14 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
   org.rotation += org.rotationSpeed;
   org.age++;
   
-  const baseSpeed = 0.003 + (org.hue % 50) * 0.00005;
-  org.pitchV += baseSpeed;
-  org.rollV += baseSpeed * 0.7;
+  const targetPitch = org.vy * 0.8;
+  const targetRoll = -org.vx * 0.8;
   
-  const targetPitch = org.vy * 1.5;
-  const targetRoll = -org.vx * 1.5;
+  org.pitchV += (targetPitch - org.pitchV) * 0.008;
+  org.rollV += (targetRoll - org.rollV) * 0.008;
   
-  org.pitchV += (targetPitch - org.pitchV) * 0.02;
-  org.rollV += (targetRoll - org.rollV) * 0.02;
-  
-  org.pitchV *= 0.995;
-  org.rollV *= 0.995;
+  org.pitchV *= 0.992;
+  org.rollV *= 0.992;
   
   org.pitch += org.pitchV;
   org.roll += org.rollV;
