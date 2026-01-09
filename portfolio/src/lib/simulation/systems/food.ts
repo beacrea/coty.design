@@ -10,10 +10,10 @@ export function updateFoodSources(
   const { foodSources, width, height } = state;
   
   for (const food of foodSources) {
-    food.pulsePhase += 0.02;
+    food.pulsePhase += 0.01;
     
     if (food.active && food.fadeIn < 1) {
-      food.fadeIn = Math.min(1, food.fadeIn + 0.03);
+      food.fadeIn = Math.min(1, food.fadeIn + 0.015);
     }
     
     if (!food.active && timestamp > food.respawnAt) {

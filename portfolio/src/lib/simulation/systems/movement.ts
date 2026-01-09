@@ -1,46 +1,46 @@
 import type { OrganismData, SimulationConfig } from '../types';
 
 export function updateOrganismMovement(org: OrganismData, width: number, height: number, deathMultiplier: number = 1): void {
-  org.idlePhase += 0.008;
+  org.idlePhase += 0.004;
   
   if (org.idlePauseTimer > 0) {
     org.idlePauseTimer--;
     if (org.idlePauseTimer === 0) {
       org.isPaused = false;
-      org.wanderAngle += (Math.random() - 0.5) * Math.PI * 0.5;
+      org.wanderAngle += (Math.random() - 0.5) * Math.PI * 0.3;
     }
-  } else if (!org.isPaused && Math.random() < 0.0008) {
+  } else if (!org.isPaused && Math.random() < 0.0015) {
     org.isPaused = true;
-    org.idlePauseTimer = 60 + Math.floor(Math.random() * 120);
+    org.idlePauseTimer = 90 + Math.floor(Math.random() * 180);
   }
   
-  org.wanderAngle += (Math.random() - 0.5) * org.wanderRate;
+  org.wanderAngle += (Math.random() - 0.5) * org.wanderRate * 0.6;
   
-  const bobX = Math.sin(org.idlePhase) * 0.0008;
-  const bobY = Math.cos(org.idlePhase * 0.7) * 0.0006;
+  const bobX = Math.sin(org.idlePhase) * 0.0004;
+  const bobY = Math.cos(org.idlePhase * 0.7) * 0.0003;
   
-  const pauseMultiplier = org.isPaused ? 0.15 : 1;
+  const pauseMultiplier = org.isPaused ? 0.08 : 1;
   const targetSpeed = org.baseSpeed * pauseMultiplier;
   
   const desiredVx = Math.cos(org.wanderAngle) * targetSpeed + bobX;
   const desiredVy = Math.sin(org.wanderAngle) * targetSpeed + bobY;
   
-  const steerStrength = org.isPaused ? 0.01 : 0.02;
+  const steerStrength = org.isPaused ? 0.005 : 0.008;
   org.vx += (desiredVx - org.vx) * steerStrength;
   org.vy += (desiredVy - org.vy) * steerStrength;
   
   const speed = Math.sqrt(org.vx * org.vx + org.vy * org.vy);
-  if (speed > 0.01) {
+  if (speed > 0.005) {
     const movementAngle = Math.atan2(org.vy, org.vx);
     let angleDiff = movementAngle - org.rotation;
     while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
     while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-    const alignStrength = Math.min(0.02, 0.005 + speed * 0.005);
-    org.rotationSpeed += angleDiff * alignStrength * 0.03;
-    org.rotationSpeed = Math.max(-0.008, Math.min(0.008, org.rotationSpeed));
+    const alignStrength = Math.min(0.01, 0.003 + speed * 0.003);
+    org.rotationSpeed += angleDiff * alignStrength * 0.02;
+    org.rotationSpeed = Math.max(-0.004, Math.min(0.004, org.rotationSpeed));
   }
   
-  org.rotationSpeed *= 0.92;
+  org.rotationSpeed *= 0.96;
   
   if (org.stabilizing > 0) {
     org.stabilizing--;
@@ -56,14 +56,14 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
   org.rotation += org.rotationSpeed;
   org.age++;
   
-  const targetPitch = org.vy * 0.08;
-  const targetRoll = -org.vx * 0.08;
+  const targetPitch = org.vy * 0.05;
+  const targetRoll = -org.vx * 0.05;
   
-  org.pitchV += (targetPitch - org.pitchV) * 0.0008;
-  org.rollV += (targetRoll - org.rollV) * 0.0008;
+  org.pitchV += (targetPitch - org.pitchV) * 0.0004;
+  org.rollV += (targetRoll - org.rollV) * 0.0004;
   
-  org.pitchV *= 0.995;
-  org.rollV *= 0.995;
+  org.pitchV *= 0.998;
+  org.rollV *= 0.998;
   
   org.pitch += org.pitchV;
   org.roll += org.rollV;
@@ -78,7 +78,7 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
   if (!Number.isFinite(org.rollV)) org.rollV = 0;
   
   if (org.glow > 0) {
-    org.glow *= 0.96;
+    org.glow *= 0.98;
     if (org.glow < 0.01) org.glow = 0;
   }
   
