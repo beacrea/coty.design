@@ -141,74 +141,44 @@ function generateOrganismMesh(org: OrganismData): { vertices: Point3D[]; edges: 
   const elongation = org.elongation ?? 1.0;
   const squash = 1 / Math.sqrt(elongation);
   
-  const complexity = n + (elongation > 1.5 ? 2 : 0);
-  const layers = complexity <= 4 ? 2 : complexity <= 6 ? 3 : 4;
-  
-  const heightScale = 0.3 + (elongation - 1) * 0.15;
+  const heightScale = 0.35 + (elongation - 1) * 0.1;
   const topZ = org.size * heightScale;
-  const bottomZ = -org.size * heightScale * 0.7;
+  const bottomZ = -org.size * heightScale * 0.6;
   
   vertices.push({ x: 0, y: 0, z: topZ });
   
-  for (let layer = 0; layer < layers; layer++) {
-    const t = (layer + 1) / (layers + 1);
-    const z = topZ - t * (topZ - bottomZ);
-    const bulge = Math.sin(t * Math.PI);
-    const radiusScale = 0.5 + bulge * 0.5;
-    
-    for (let i = 0; i < n; i++) {
-      const v = org.vertices[i];
-      const baseX = Math.cos(v.angle) * v.distance * org.size * radiusScale;
-      const baseY = Math.sin(v.angle) * v.distance * org.size * radiusScale;
-      const x = baseX * elongation;
-      const y = baseY * squash;
-      vertices.push({ x, y, z });
-    }
+  for (let i = 0; i < n; i++) {
+    const v = org.vertices[i];
+    const baseX = Math.cos(v.angle) * v.distance * org.size;
+    const baseY = Math.sin(v.angle) * v.distance * org.size;
+    const x = baseX * elongation;
+    const y = baseY * squash;
+    const zOffset = (v.distance - 0.8) * org.size * 0.15;
+    vertices.push({ x, y, z: zOffset });
   }
   
   vertices.push({ x: 0, y: 0, z: bottomZ });
   
   const topApex = 0;
-  const bottomApex = vertices.length - 1;
+  const bottomApex = n + 1;
   
   for (let i = 0; i < n; i++) {
     edges.push([topApex, 1 + i]);
   }
   
-  for (let layer = 0; layer < layers; layer++) {
-    const layerStart = 1 + layer * n;
-    for (let i = 0; i < n; i++) {
-      const next = (i + 1) % n;
-      edges.push([layerStart + i, layerStart + next]);
-    }
-  }
-  
-  for (let layer = 0; layer < layers - 1; layer++) {
-    const thisStart = 1 + layer * n;
-    const nextStart = 1 + (layer + 1) * n;
-    for (let i = 0; i < n; i++) {
-      edges.push([thisStart + i, nextStart + i]);
-    }
-    if (n >= 5 || elongation > 1.3) {
-      const offset = layer % 2;
-      for (let i = offset; i < n; i += 2) {
-        const nextI = (i + 1) % n;
-        edges.push([thisStart + i, nextStart + nextI]);
-      }
-    }
-  }
-  
-  const lastLayerStart = 1 + (layers - 1) * n;
   for (let i = 0; i < n; i++) {
-    edges.push([lastLayerStart + i, bottomApex]);
+    const next = (i + 1) % n;
+    edges.push([1 + i, 1 + next]);
   }
   
-  if (n >= 5 && layers >= 3) {
-    const midLayer = Math.floor(layers / 2);
-    const midStart = 1 + midLayer * n;
+  for (let i = 0; i < n; i++) {
+    edges.push([1 + i, bottomApex]);
+  }
+  
+  if (n >= 5 || elongation > 1.5) {
     for (let i = 0; i < n; i += 2) {
-      edges.push([topApex, midStart + i]);
-      edges.push([bottomApex, midStart + i]);
+      const opposite = (i + Math.floor(n / 2)) % n;
+      edges.push([1 + i, 1 + opposite]);
     }
   }
   
