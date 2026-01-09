@@ -59,6 +59,36 @@ export function createLobe(cfg: SimulationConfig): Lobe {
   };
 }
 
+export function scaleLobesWithSize(org: OrganismData, cfg: SimulationConfig): void {
+  const sizeRatio = org.size / 40;
+  const maxLobes = Math.min(5, Math.floor(1 + sizeRatio * 2));
+  
+  if (org.lobes.length < maxLobes && Math.random() < 0.001) {
+    const existingAngles = org.lobes.map(l => l.offsetAngle);
+    let bestAngle = Math.random() * Math.PI * 2;
+    let bestMinDist = 0;
+    
+    for (let attempt = 0; attempt < 8; attempt++) {
+      const testAngle = Math.random() * Math.PI * 2;
+      let minDist = Math.PI * 2;
+      for (const existing of existingAngles) {
+        let diff = Math.abs(testAngle - existing);
+        if (diff > Math.PI) diff = Math.PI * 2 - diff;
+        minDist = Math.min(minDist, diff);
+      }
+      if (minDist > bestMinDist) {
+        bestMinDist = minDist;
+        bestAngle = testAngle;
+      }
+    }
+    
+    const newLobe = createLobe(cfg);
+    newLobe.offsetAngle = bestAngle;
+    newLobe.size = 0.15 + Math.random() * 0.2;
+    org.lobes.push(newLobe);
+  }
+}
+
 const ORGANELLE_TYPES: OrganelleType[] = ['nucleus', 'mitochondria', 'vacuole', 'chloroplast', 'ribosome'];
 const ORGANELLE_WEIGHTS = [0.15, 0.3, 0.2, 0.2, 0.15];
 

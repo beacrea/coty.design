@@ -1,5 +1,5 @@
 import type { SimulationState, SimulationConfig, OrganismData } from './types';
-import { createSimulationState, createOrganism, isOrganismDead } from './state';
+import { createSimulationState, createOrganism, isOrganismDead, scaleLobesWithSize } from './state';
 import { updateOrganismMovement, updateTendril, enforceMaxBounds, clampSpeed } from './systems/movement';
 import { applyFlocking, applyCollisionSeparation } from './systems/flocking';
 import { applyProximityInteractions } from './systems/interactions';
@@ -8,7 +8,7 @@ import { updateFoodSources, applyFoodAttraction } from './systems/food';
 import { createChainLink, updateChainLinks, remapChainLinkIndices } from './systems/chainlinks';
 import { updateSpatialHash, updateHover, applyGrabSpringPhysics, applySoftBodyCollisions, beginGrab as beginGrabImpl, endGrab as endGrabImpl, updatePointer as updatePointerImpl, findOrganismAtPoint } from './systems/user-input';
 import { updateDeformations } from './systems/deformation';
-import { updateOrganellePositions } from './systems/organelles';
+import { updateOrganellePositions, scaleOrganellesWithSize } from './systems/organelles';
 import { drawOrganism, drawConnections } from './renderers/organisms';
 import { drawParticles } from './renderers/particles';
 import { drawChainLinks } from './renderers/chainlinks';
@@ -70,6 +70,10 @@ export class Simulation {
     applySoftBodyCollisions(this.state, cfg);
     
     updateOrganellePositions(organisms, 1);
+    for (const org of organisms) {
+      scaleOrganellesWithSize(org, cfg.organelleMaxPerOrganism);
+      scaleLobesWithSize(org, cfg);
+    }
     updateDeformations(this.state, cfg);
     
     const target = cfg.populationTarget;

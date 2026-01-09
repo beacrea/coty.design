@@ -13,8 +13,20 @@ export function updateOrganellePositions(organisms: OrganismData[], dt: number):
   for (const org of organisms) {
     for (const organelle of org.organelles) {
       organelle.angle += organelle.rotationSpeed * dt;
-      organelle.pulsePhase += dt * 0.002;
+      organelle.pulsePhase += dt * 0.003;
     }
+  }
+}
+
+export function scaleOrganellesWithSize(org: OrganismData, maxOrganelles: number): void {
+  const sizeRatio = org.size / 40;
+  const targetOrganelleCount = Math.min(maxOrganelles, Math.floor(1 + sizeRatio * 3));
+  
+  if (org.organelles.length < targetOrganelleCount && Math.random() < 0.002) {
+    const newOrganelle = createOrganelle();
+    newOrganelle.radiusRatio = 0.2 + Math.random() * 0.5;
+    newOrganelle.sizeRatio = 0.03 + Math.random() * 0.06;
+    org.organelles.push(newOrganelle);
   }
 }
 
