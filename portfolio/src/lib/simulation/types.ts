@@ -84,6 +84,8 @@ export interface OrganismData {
   roll: number;
   pitchV: number;
   rollV: number;
+  elongation: number;
+  irregularity: number;
 }
 
 export interface Particle {

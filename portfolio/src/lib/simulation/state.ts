@@ -14,7 +14,7 @@ export function createDefaultGrabState(): GrabState {
   };
 }
 
-export function createVertices(count: number): Vertex[] {
+export function createVertices(count: number, irregularity: number = 0.5): Vertex[] {
   const verts: Vertex[] = [];
   const shapeStyle = Math.random();
   
@@ -23,15 +23,18 @@ export function createVertices(count: number): Vertex[] {
     let angleJitter: number;
     let distanceVariation: number;
     
-    if (shapeStyle < 0.3) {
-      angleJitter = (Math.random() - 0.5) * 0.15;
-      distanceVariation = 0.85 + Math.random() * 0.15;
-    } else if (shapeStyle < 0.6) {
-      angleJitter = (Math.random() - 0.5) * 0.5;
-      distanceVariation = 0.5 + Math.random() * 0.5;
+    if (shapeStyle < 0.25) {
+      angleJitter = (Math.random() - 0.5) * 0.1 * irregularity;
+      distanceVariation = 0.9 + Math.random() * 0.1 * irregularity;
+    } else if (shapeStyle < 0.5) {
+      angleJitter = (Math.random() - 0.5) * 0.6 * irregularity;
+      distanceVariation = 0.4 + Math.random() * 0.6;
+    } else if (shapeStyle < 0.75) {
+      angleJitter = (Math.random() - 0.5) * 0.4 * irregularity;
+      distanceVariation = 0.6 + Math.random() * 0.4;
     } else {
-      angleJitter = (Math.random() - 0.5) * 0.35;
-      distanceVariation = 0.65 + Math.random() * 0.35;
+      angleJitter = (Math.random() - 0.5) * 0.8 * irregularity;
+      distanceVariation = 0.3 + Math.random() * 0.7;
     }
     
     verts.push({
@@ -99,8 +102,32 @@ export function createOrganism(x: number, y: number, cfg: SimulationConfig): Org
   const angle = Math.random() * Math.PI * 2;
   const baseSize = cfg.minSize + Math.random() * (cfg.maxSize - cfg.minSize);
   const sizeMultiplier = 1 + (Math.random() - 0.5) * 2 * cfg.sizeVariation;
-  const vertexRange = cfg.maxStartVertices - cfg.minStartVertices + 1;
-  const startVertices = cfg.minStartVertices + Math.floor(Math.random() * vertexRange);
+  
+  const complexityRoll = Math.random();
+  let startVertices: number;
+  if (complexityRoll < 0.15) {
+    startVertices = 3;
+  } else if (complexityRoll < 0.35) {
+    startVertices = 4;
+  } else if (complexityRoll < 0.6) {
+    startVertices = 5;
+  } else if (complexityRoll < 0.8) {
+    startVertices = 6;
+  } else {
+    startVertices = 7;
+  }
+  
+  const elongationRoll = Math.random();
+  let elongation: number;
+  if (elongationRoll < 0.6) {
+    elongation = 1.0;
+  } else if (elongationRoll < 0.85) {
+    elongation = 1.2 + Math.random() * 0.4;
+  } else {
+    elongation = 1.8 + Math.random() * 0.7;
+  }
+  
+  const irregularity = 0.3 + Math.random() * 0.7;
   
   const lobes: Lobe[] = [];
   if (Math.random() < 0.25) {
@@ -134,7 +161,7 @@ export function createOrganism(x: number, y: number, cfg: SimulationConfig): Org
     glow: 0,
     depth: Math.random(),
     hue: UNDERWATER_HUES[Math.floor(Math.random() * UNDERWATER_HUES.length)] + (Math.random() - 0.5) * 20,
-    vertices: createVertices(startVertices),
+    vertices: createVertices(startVertices, irregularity),
     lobes,
     organelles: spawnOrganellesForOrganism(cfg.organelleSpawnChance, cfg.organelleMaxPerOrganism),
     grab: createDefaultGrabState(),
@@ -143,6 +170,8 @@ export function createOrganism(x: number, y: number, cfg: SimulationConfig): Org
     roll: 0,
     pitchV: 0,
     rollV: 0,
+    elongation,
+    irregularity,
   };
 }
 

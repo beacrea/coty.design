@@ -138,6 +138,7 @@ function generateOrganismMesh(org: OrganismData): { vertices: Point3D[]; edges: 
   const vertices: Point3D[] = [];
   const edges: [number, number][] = [];
   const n = org.vertices.length;
+  const elongation = org.elongation ?? 1.0;
   
   const layers = 2;
   const topZ = org.size * 0.35;
@@ -152,8 +153,11 @@ function generateOrganismMesh(org: OrganismData): { vertices: Point3D[]; edges: 
     
     for (let i = 0; i < n; i++) {
       const v = org.vertices[i];
-      const x = Math.cos(v.angle) * v.distance * org.size * radiusScale;
-      const y = Math.sin(v.angle) * v.distance * org.size * radiusScale;
+      const angle = v.angle;
+      const stretchX = Math.abs(Math.cos(angle)) * (elongation - 1) + 1;
+      const stretchY = Math.abs(Math.sin(angle)) * (1 / elongation - 1) + 1;
+      const x = Math.cos(angle) * v.distance * org.size * radiusScale * stretchX;
+      const y = Math.sin(angle) * v.distance * org.size * radiusScale * stretchY;
       vertices.push({ x, y, z });
     }
   }
