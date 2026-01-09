@@ -80,10 +80,10 @@ export interface OrganismData {
   organelles: Organelle[];
   grab: GrabState;
   hoverIntensity: number;
-  tiltX: number;
-  tiltY: number;
-  tiltVx: number;
-  tiltVy: number;
+  pitch: number;
+  roll: number;
+  pitchV: number;
+  rollV: number;
 }
 
 export interface Particle {

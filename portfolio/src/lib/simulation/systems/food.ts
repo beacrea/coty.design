@@ -60,8 +60,8 @@ export function applyFoodAttraction(
         org.size = Math.min(org.maxSize, org.size + 0.5);
         org.glow = Math.min(1, org.glow + 0.12);
         
-        org.tiltVx += (Math.random() - 0.5) * 0.04;
-        org.tiltVy += (Math.random() - 0.5) * 0.04;
+        org.pitchV += (Math.random() - 0.5) * 0.05;
+        org.rollV += (Math.random() - 0.5) * 0.05;
         
         grantOrganelleFromFood(org, cfg.organelleFoodGrantChance, cfg.organelleMaxPerOrganism, nearestFood.hue);
         
