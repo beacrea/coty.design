@@ -35,8 +35,9 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
     let angleDiff = movementAngle - org.rotation;
     while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
     while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-    const alignStrength = Math.min(0.08, 0.015 + speed * 0.02);
-    org.rotationSpeed += angleDiff * alignStrength * 0.1;
+    const alignStrength = Math.min(0.02, 0.005 + speed * 0.005);
+    org.rotationSpeed += angleDiff * alignStrength * 0.03;
+    org.rotationSpeed = Math.max(-0.008, Math.min(0.008, org.rotationSpeed));
   }
   
   org.rotationSpeed *= 0.92;
@@ -55,28 +56,26 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
   org.rotation += org.rotationSpeed;
   org.age++;
   
-  const targetPitch = org.vy * 0.3;
-  const targetRoll = -org.vx * 0.3;
+  const targetPitch = org.vy * 0.08;
+  const targetRoll = -org.vx * 0.08;
   
-  org.pitchV += (targetPitch - org.pitchV) * 0.003;
-  org.rollV += (targetRoll - org.rollV) * 0.003;
+  org.pitchV += (targetPitch - org.pitchV) * 0.0008;
+  org.rollV += (targetRoll - org.rollV) * 0.0008;
   
-  org.pitchV *= 0.998;
-  org.rollV *= 0.998;
+  org.pitchV *= 0.995;
+  org.rollV *= 0.995;
   
   org.pitch += org.pitchV;
   org.roll += org.rollV;
+  
+  const maxAngle = 0.15;
+  org.pitch = Math.max(-maxAngle, Math.min(maxAngle, org.pitch));
+  org.roll = Math.max(-maxAngle, Math.min(maxAngle, org.roll));
   
   if (!Number.isFinite(org.pitch)) org.pitch = 0;
   if (!Number.isFinite(org.roll)) org.roll = 0;
   if (!Number.isFinite(org.pitchV)) org.pitchV = 0;
   if (!Number.isFinite(org.rollV)) org.rollV = 0;
-  
-  const TWO_PI = Math.PI * 2;
-  while (org.pitch > TWO_PI) org.pitch -= TWO_PI;
-  while (org.pitch < -TWO_PI) org.pitch += TWO_PI;
-  while (org.roll > TWO_PI) org.roll -= TWO_PI;
-  while (org.roll < -TWO_PI) org.roll += TWO_PI;
   
   if (org.glow > 0) {
     org.glow *= 0.96;
