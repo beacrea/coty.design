@@ -33,7 +33,7 @@ function getColor(
 
 interface Point3D { x: number; y: number; z: number }
 
-function transform3D(p: Point3D, yaw: number, pitch: number, roll: number, perspective: number = 0.003): Point3D {
+function transform3D(p: Point3D, yaw: number, pitch: number, roll: number, perspective: number = 0.012): Point3D {
   const cosYaw = Math.cos(yaw);
   const sinYaw = Math.sin(yaw);
   const cosPitch = Math.cos(pitch);
@@ -61,7 +61,8 @@ function getLocalVertices3D(org: OrganismData): Point3D[] {
   return org.vertices.map((v) => {
     const localX = Math.cos(v.angle) * v.distance * org.size;
     const localY = Math.sin(v.angle) * v.distance * org.size;
-    return transform3D({ x: localX, y: localY, z: 0 }, org.rotation, org.pitch, org.roll);
+    const localZ = (1 - v.distance) * org.size * 0.3;
+    return transform3D({ x: localX, y: localY, z: localZ }, org.rotation, org.pitch, org.roll);
   });
 }
 
@@ -138,10 +139,11 @@ export function drawOrganism(
 
   org.lobes.forEach((lobe) => {
     const lobeAngle = lobe.offsetAngle;
+    const lobeZ = org.size * 0.15;
     const lobeCenterLocal = {
       x: Math.cos(lobeAngle) * org.size * lobe.offsetDistance,
       y: Math.sin(lobeAngle) * org.size * lobe.offsetDistance,
-      z: 0
+      z: lobeZ
     };
     const lobeCenter = transform3D(lobeCenterLocal, org.rotation, org.pitch, org.roll);
     const lobeRotation = lobe.rotationOffset;
@@ -150,7 +152,8 @@ export function drawOrganism(
     const lobeVerts = lobe.vertices.map((v) => {
       const x = lobeCenterLocal.x + Math.cos(v.angle + lobeRotation) * v.distance * lobeSize;
       const y = lobeCenterLocal.y + Math.sin(v.angle + lobeRotation) * v.distance * lobeSize;
-      return transform3D({ x, y, z: 0 }, org.rotation, org.pitch, org.roll);
+      const z = lobeZ + (1 - v.distance) * lobeSize * 0.2;
+      return transform3D({ x, y, z }, org.rotation, org.pitch, org.roll);
     });
     
     ctx.beginPath();
@@ -234,7 +237,8 @@ function drawOrganellesLocal(
     
     const localX = Math.cos(organelle.angle) * org.size * organelle.radiusRatio;
     const localY = Math.sin(organelle.angle) * org.size * organelle.radiusRatio;
-    const pos = transform3D({ x: localX, y: localY, z: 0 }, org.rotation, org.pitch, org.roll);
+    const localZ = org.size * 0.1;
+    const pos = transform3D({ x: localX, y: localY, z: localZ }, org.rotation, org.pitch, org.roll);
     const size = org.size * organelle.sizeRatio * pulse;
     
     const lightness = isDark ? 60 + org.depth * 20 : 35 + org.depth * 15;

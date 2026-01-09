@@ -55,20 +55,24 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
   org.rotation += org.rotationSpeed;
   org.age++;
   
-  const tiltForce = 0.012;
+  const time = org.age * 0.02;
+  const pitchOscillation = Math.sin(time * 0.7 + org.hue * 0.1) * 0.4;
+  const rollOscillation = Math.cos(time * 0.5 + org.hue * 0.15) * 0.35;
+  
+  const tiltForce = 0.025;
   org.pitchV += org.vy * tiltForce;
   org.rollV -= org.vx * tiltForce;
   
-  org.pitchV += (0 - org.pitch) * 0.025;
-  org.rollV += (0 - org.roll) * 0.025;
+  org.pitchV += (pitchOscillation - org.pitch) * 0.03;
+  org.rollV += (rollOscillation - org.roll) * 0.03;
   
-  org.pitchV *= 0.90;
-  org.rollV *= 0.90;
+  org.pitchV *= 0.92;
+  org.rollV *= 0.92;
   
   org.pitch += org.pitchV;
   org.roll += org.rollV;
   
-  const maxTilt = 0.35;
+  const maxTilt = 0.8;
   org.pitch = Math.max(-maxTilt, Math.min(maxTilt, org.pitch));
   org.roll = Math.max(-maxTilt, Math.min(maxTilt, org.roll));
   
