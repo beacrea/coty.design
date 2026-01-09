@@ -188,7 +188,10 @@ function generateOrganismMesh(org: OrganismData): { vertices: Point3D[]; edges: 
     const nextStart = 1 + (layer + 1) * n;
     for (let i = 0; i < n; i++) {
       edges.push([thisStart + i, nextStart + i]);
-      if (n >= 5 || elongation > 1.3) {
+    }
+    if (n >= 5 || elongation > 1.3) {
+      const offset = layer % 2;
+      for (let i = offset; i < n; i += 2) {
         const nextI = (i + 1) % n;
         edges.push([thisStart + i, nextStart + nextI]);
       }
