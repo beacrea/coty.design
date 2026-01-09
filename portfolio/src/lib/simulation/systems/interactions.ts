@@ -33,7 +33,15 @@ function evolve(org: OrganismData, maxVertices: number): void {
   if (org.vertices.length < maxVertices && Math.random() < 0.3) {
     const insertIndex = Math.floor(Math.random() * org.vertices.length);
     const nextIndex = (insertIndex + 1) % org.vertices.length;
-    const newAngle = (org.vertices[insertIndex].angle + org.vertices[nextIndex].angle) / 2;
+    const angle1 = org.vertices[insertIndex].angle;
+    const angle2 = org.vertices[nextIndex].angle;
+    const x1 = Math.cos(angle1);
+    const y1 = Math.sin(angle1);
+    const x2 = Math.cos(angle2);
+    const y2 = Math.sin(angle2);
+    const midX = x1 + x2;
+    const midY = y1 + y2;
+    const newAngle = Math.atan2(midY, midX);
     const newDistance = 0.7 + Math.random() * 0.3;
     org.vertices.splice(insertIndex + 1, 0, { 
       angle: newAngle, 
@@ -41,6 +49,7 @@ function evolve(org: OrganismData, maxVertices: number): void {
       baseDistance: newDistance,
       deformation: 0
     });
+    org.vertices.sort((a, b) => a.angle - b.angle);
   }
 }
 
