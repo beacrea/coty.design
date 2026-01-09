@@ -141,6 +141,8 @@ function generateOrganismMesh(org: OrganismData): { vertices: Point3D[]; edges: 
   const elongation = org.elongation ?? 1.0;
   const squash = 1 / Math.sqrt(elongation);
   
+  const sizeComplexity = Math.min(1, Math.max(0, (org.size - 30) / 50));
+  
   const heightScale = 0.35 + (elongation - 1) * 0.1;
   const topZ = org.size * heightScale;
   const bottomZ = -org.size * heightScale * 0.6;
@@ -158,6 +160,34 @@ function generateOrganismMesh(org: OrganismData): { vertices: Point3D[]; edges: 
   }
   
   vertices.push({ x: 0, y: 0, z: bottomZ });
+  
+  const midRingStart = vertices.length;
+  if (sizeComplexity > 0.3) {
+    const midZ = topZ * 0.3;
+    const midScale = 0.5 + sizeComplexity * 0.2;
+    for (let i = 0; i < n; i++) {
+      const v = org.vertices[i];
+      const baseX = Math.cos(v.angle) * v.distance * org.size * midScale;
+      const baseY = Math.sin(v.angle) * v.distance * org.size * midScale;
+      const x = baseX * elongation;
+      const y = baseY * squash;
+      vertices.push({ x, y, z: midZ });
+    }
+  }
+  
+  const innerRingStart = vertices.length;
+  if (sizeComplexity > 0.6) {
+    const innerZ = -topZ * 0.2;
+    const innerScale = 0.3 + sizeComplexity * 0.1;
+    for (let i = 0; i < n; i++) {
+      const v = org.vertices[i];
+      const baseX = Math.cos(v.angle) * v.distance * org.size * innerScale;
+      const baseY = Math.sin(v.angle) * v.distance * org.size * innerScale;
+      const x = baseX * elongation;
+      const y = baseY * squash;
+      vertices.push({ x, y, z: innerZ });
+    }
+  }
   
   const topApex = 0;
   const bottomApex = n + 1;
@@ -179,6 +209,32 @@ function generateOrganismMesh(org: OrganismData): { vertices: Point3D[]; edges: 
     for (let i = 0; i < n; i += 2) {
       const opposite = (i + Math.floor(n / 2)) % n;
       edges.push([1 + i, 1 + opposite]);
+    }
+  }
+  
+  if (sizeComplexity > 0.3) {
+    for (let i = 0; i < n; i++) {
+      edges.push([1 + i, midRingStart + i]);
+    }
+    for (let i = 0; i < n; i++) {
+      const next = (i + 1) % n;
+      edges.push([midRingStart + i, midRingStart + next]);
+    }
+    for (let i = 0; i < n; i++) {
+      edges.push([topApex, midRingStart + i]);
+    }
+  }
+  
+  if (sizeComplexity > 0.6) {
+    for (let i = 0; i < n; i++) {
+      edges.push([midRingStart + i, innerRingStart + i]);
+    }
+    for (let i = 0; i < n; i++) {
+      const next = (i + 1) % n;
+      edges.push([innerRingStart + i, innerRingStart + next]);
+    }
+    for (let i = 0; i < n; i++) {
+      edges.push([innerRingStart + i, bottomApex]);
     }
   }
   
