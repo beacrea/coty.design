@@ -77,7 +77,7 @@ The portfolio features a subtle canvas-based generative background (`GenerativeB
 - Environmental bubbles following flow field currents (top-down view)
 - Lobes, tendrils, chain links, and internal spokes
 - Population density control with configurable target and aggressiveness
-- 3D tilt/rotation effect: organisms subtly tilt based on movement and interactions, creating depth perception
+- 3D rotation effect: organisms use full 3-axis rotation (yaw, pitch, roll) with perspective projection, creating convincing depth as they navigate through fluid from a top-down view
 - Flow field background: drifting gradient bands with time-based displacement
 
 **Configuration**: `src/lib/generative-config.ts`
