@@ -118,10 +118,12 @@ function transform3D(p: Point3D, yaw: number, pitch: number, roll: number, persp
 }
 
 function getLocalVertices3D(org: OrganismData): Point3D[] {
-  return org.vertices.map((v) => {
+  return org.vertices.map((v, i) => {
     const localX = Math.cos(v.angle) * v.distance * org.size;
     const localY = Math.sin(v.angle) * v.distance * org.size;
-    const localZ = (1 - v.distance) * org.size * 0.3;
+    const zPhase = (i / org.vertices.length) * Math.PI * 2;
+    const zWave = Math.sin(zPhase) * 0.5 + Math.cos(zPhase * 2) * 0.3;
+    const localZ = org.size * 0.5 * v.distance * zWave;
     return transform3D({ x: localX, y: localY, z: localZ }, org.rotation, org.pitch, org.roll);
   });
 }
