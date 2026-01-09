@@ -22,7 +22,7 @@ export class Simulation {
   constructor(width: number, height: number, config: SimulationConfig) {
     this.config = config;
     this.state = createSimulationState(width, height, config);
-    initializeAmbientBubbles(this.state.particles, width, height, 100);
+    initializeAmbientBubbles(this.state.particles, width, height, 60, 0);
   }
   
   resize(newWidth: number, newHeight: number): void {
@@ -120,7 +120,7 @@ export class Simulation {
       this.state.lastEvolutionTime = timestamp;
     }
     
-    spawnAmbientBubbles(particles, width, height);
+    spawnAmbientBubbles(particles, width, height, 150, timestamp);
     updateParticles(this.state, timestamp);
     updateChainLinks(chainLinks, organisms, cfg);
     

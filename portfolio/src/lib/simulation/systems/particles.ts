@@ -42,35 +42,37 @@ export function initializeAmbientBubbles(
   particles: Particle[],
   width: number,
   height: number,
-  count: number = 100
+  count: number = 60,
+  currentTime: number = 0
 ): void {
   for (let i = 0; i < count; i++) {
+    const x = Math.random() * width;
+    const y = Math.random() * height;
+    
     const sizeRoll = Math.random();
     let size: number;
-    if (sizeRoll < 0.35) {
-      size = 1.5 + Math.random() * 2.0;
-    } else if (sizeRoll < 0.6) {
-      size = 2.5 + Math.random() * 3.5;
-    } else if (sizeRoll < 0.85) {
-      size = 4.5 + Math.random() * 4.0;
+    if (sizeRoll < 0.5) {
+      size = 1.0 + Math.random() * 1.5;
+    } else if (sizeRoll < 0.8) {
+      size = 2.0 + Math.random() * 2.0;
     } else {
-      size = 7.0 + Math.random() * 5.0;
+      size = 3.5 + Math.random() * 2.5;
     }
     
-    const buoyancy = 0.02 + (size / 15) * 0.04;
+    const flow = getFlowField(x, y, currentTime);
     
     particles.push({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.08,
-      vy: -buoyancy - Math.random() * 0.03,
+      x,
+      y,
+      vx: flow.vx * 1.2,
+      vy: flow.vy * 1.2,
       size,
-      life: 0.3 + Math.random() * 0.7,
-      maxLife: 800 + Math.floor(Math.random() * 1000),
-      depth: 0.1 + Math.random() * 0.8,
+      life: 0.4 + Math.random() * 0.6,
+      maxLife: 700 + Math.floor(Math.random() * 500),
+      depth: 0.15 + Math.random() * 0.7,
       isBubble: true,
       wobblePhase: Math.random() * Math.PI * 2,
-      wobbleSpeed: 0.02 + Math.random() * 0.03,
+      wobbleSpeed: 0.01 + Math.random() * 0.015,
     });
   }
 }
@@ -79,66 +81,40 @@ export function spawnAmbientBubbles(
   particles: Particle[],
   width: number,
   height: number,
-  maxParticles: number = 400
+  maxParticles: number = 150,
+  currentTime: number = 0
 ): void {
   if (particles.length >= maxParticles) return;
   
-  if (Math.random() < 0.25) {
+  if (Math.random() < 0.06) {
     const x = Math.random() * width;
-    const y = height + 10 + Math.random() * 30;
+    const y = Math.random() * height;
     
     const sizeRoll = Math.random();
     let size: number;
-    if (sizeRoll < 0.3) {
-      size = 1.5 + Math.random() * 2.0;
-    } else if (sizeRoll < 0.55) {
-      size = 2.5 + Math.random() * 3.5;
+    if (sizeRoll < 0.5) {
+      size = 1.0 + Math.random() * 1.5;
     } else if (sizeRoll < 0.8) {
-      size = 4.5 + Math.random() * 4.0;
+      size = 2.0 + Math.random() * 2.0;
     } else {
-      size = 7.0 + Math.random() * 6.0;
+      size = 3.5 + Math.random() * 2.5;
     }
     
-    const buoyancy = 0.025 + (size / 15) * 0.05;
+    const flow = getFlowField(x, y, currentTime);
     
     particles.push({
       x,
       y,
-      vx: (Math.random() - 0.5) * 0.06,
-      vy: -buoyancy,
+      vx: flow.vx * 1.5,
+      vy: flow.vy * 1.5,
       size,
       life: 1,
-      maxLife: 1200 + Math.floor(Math.random() * 800),
+      maxLife: 800 + Math.floor(Math.random() * 600),
       depth: 0.15 + Math.random() * 0.7,
       isBubble: true,
       wobblePhase: Math.random() * Math.PI * 2,
-      wobbleSpeed: 0.015 + Math.random() * 0.025,
+      wobbleSpeed: 0.01 + Math.random() * 0.015,
     });
-  }
-  
-  if (Math.random() < 0.08) {
-    const clusterX = Math.random() * width;
-    const clusterY = height + 5;
-    const clusterCount = 2 + Math.floor(Math.random() * 4);
-    
-    for (let i = 0; i < clusterCount && particles.length < maxParticles; i++) {
-      const size = 1.0 + Math.random() * 2.5;
-      const buoyancy = 0.02 + (size / 12) * 0.035;
-      
-      particles.push({
-        x: clusterX + (Math.random() - 0.5) * 30,
-        y: clusterY + Math.random() * 20,
-        vx: (Math.random() - 0.5) * 0.04,
-        vy: -buoyancy - Math.random() * 0.02,
-        size,
-        life: 1,
-        maxLife: 900 + Math.floor(Math.random() * 600),
-        depth: 0.2 + Math.random() * 0.5,
-        isBubble: true,
-        wobblePhase: Math.random() * Math.PI * 2,
-        wobbleSpeed: 0.02 + Math.random() * 0.03,
-      });
-    }
   }
 }
 
@@ -165,14 +141,12 @@ export function spawnBubbleStream(
     x: emitX,
     y: emitY,
     vx: Math.cos(spreadAngle) * bubbleSpeed,
-    vy: Math.sin(spreadAngle) * bubbleSpeed - 0.02,
+    vy: Math.sin(spreadAngle) * bubbleSpeed,
     size,
     life: 1,
     maxLife: 40 + Math.floor(Math.random() * 30),
     depth: org.depth,
     isBubble: true,
-    wobblePhase: Math.random() * Math.PI * 2,
-    wobbleSpeed: 0.04 + Math.random() * 0.03,
   });
 }
 
@@ -188,19 +162,10 @@ export function updateParticles(
     const flow = getFlowField(p.x, p.y, currentTime);
     
     if (p.isBubble) {
-      p.vx += flow.vx * 0.25;
-      p.vy += flow.vy * 0.12;
+      p.vx += flow.vx * 0.2;
+      p.vy += flow.vy * 0.2;
       
-      if (p.wobblePhase !== undefined && p.wobbleSpeed !== undefined) {
-        p.wobblePhase += p.wobbleSpeed;
-        const wobbleStrength = 0.3 + (p.size / 10) * 0.2;
-        p.vx += Math.sin(p.wobblePhase) * wobbleStrength * 0.02;
-      }
-      
-      const buoyancy = 0.0008 + (p.size / 20) * 0.001;
-      p.vy -= buoyancy;
-      
-      p.vx *= 0.992;
+      p.vx *= 0.995;
       p.vy *= 0.995;
     } else {
       p.vx += flow.vx * 0.15;
