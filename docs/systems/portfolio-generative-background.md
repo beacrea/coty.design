@@ -440,6 +440,27 @@ Organisms glow when stimulated:
 - **Decay**: 96% per frame (soft fade over ~25 frames)
 - **Color**: Theme-aware, matches organism stroke color (or hue in observation mode)
 
+### 3D Rotation Effect
+
+Organisms exhibit full 3-axis rotation (yaw, pitch, roll) with perspective projection:
+
+- **Yaw (Z-axis)**: Existing `rotation` property, turns organisms left/right
+- **Pitch (X-axis)**: Driven by vertical velocity (`vy`), organisms tilt forward when diving
+- **Roll (Y-axis)**: Driven by horizontal velocity (`-vx`), organisms bank when turning
+
+**Physics**:
+- Spring-damped relaxation: `pitchV += (targetPitch - pitch) × 0.08`
+- Max tilt: ±0.35 radians (~20°) for subtle effect
+- Impulses on interactions: eating food or colliding adds rotation jitter
+
+**Rendering**:
+- `transform3D(point, yaw, pitch, roll)`: applies rotation matrices in sequence
+- Perspective factor: 0.003 provides subtle depth scaling
+- All geometry (vertices, lobes, tendrils, organelles) uses consistent 3D pipeline
+- Physics/connections remain 2D for performance
+
+**Effect**: Creates convincing depth as organisms navigate through fluid from a top-down view, tilting naturally with movement direction.
+
 ### Depth Layers
 
 3D parallax effect through opacity variation:
