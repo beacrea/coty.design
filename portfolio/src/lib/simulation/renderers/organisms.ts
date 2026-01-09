@@ -31,6 +31,13 @@ function getColor(
   return `rgba(${strokeColor}, ${alpha})`;
 }
 
+function getLocalVertices(org: OrganismData): Array<{ x: number; y: number }> {
+  return org.vertices.map((v) => ({
+    x: Math.cos(v.angle + org.rotation) * v.distance * org.size,
+    y: Math.sin(v.angle + org.rotation) * v.distance * org.size,
+  }));
+}
+
 export function drawOrganism(
   ctx: CanvasRenderingContext2D,
   org: OrganismData,
@@ -40,7 +47,7 @@ export function drawOrganism(
   observationMode: boolean,
   isDark: boolean
 ): void {
-  const worldVerts = getWorldVertices(org);
+  const localVerts = getLocalVertices(org);
   
   const getOrgColor = (alpha: number): string => 
     getColor(strokeColor, alpha, observationMode, isDark, org.hue, org.depth);
@@ -59,28 +66,24 @@ export function drawOrganism(
   const skewY = org.tiltX * 0.12;
   
   ctx.transform(scaleX, skewY, skewX, scaleY, 0, 0);
-  ctx.translate(-org.x, -org.y);
+  
+  if (org.hoverIntensity > 0.05) {
+    const hoverScale = 1 + org.hoverIntensity * 0.08;
+    ctx.scale(hoverScale, hoverScale);
+  }
   
   const effectiveGlow = Math.max(org.glow, org.hoverIntensity * 0.3);
   if (effectiveGlow > 0.05 && observationMode) {
     const clampedGlow = Math.min(effectiveGlow, 0.5);
     const glowRadius = getBoundingRadius(org) * (1.1 + clampedGlow * 0.3);
     const glowAlpha = clampedGlow * 0.15;
-    const gradient = ctx.createRadialGradient(org.x, org.y, 0, org.x, org.y, glowRadius);
+    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, glowRadius);
     gradient.addColorStop(0, getOrgColor(glowAlpha));
     gradient.addColorStop(1, getOrgColor(0));
     ctx.beginPath();
-    ctx.arc(org.x, org.y, glowRadius, 0, Math.PI * 2);
+    ctx.arc(0, 0, glowRadius, 0, Math.PI * 2);
     ctx.fillStyle = gradient;
     ctx.fill();
-  }
-  
-  if (org.hoverIntensity > 0.05) {
-    const hoverScale = 1 + org.hoverIntensity * 0.08;
-    ctx.save();
-    ctx.translate(org.x, org.y);
-    ctx.scale(hoverScale, hoverScale);
-    ctx.translate(-org.x, -org.y);
   }
   
   if (org.vertices.length >= 4 && org.spokeIntensity > 0) {
@@ -90,23 +93,23 @@ export function drawOrganism(
     for (let i = 0; i < Math.floor(org.vertices.length / 2); i++) {
       const oppositeIdx = (i + Math.floor(org.vertices.length / 2)) % org.vertices.length;
       ctx.beginPath();
-      ctx.moveTo(worldVerts[i].x, worldVerts[i].y);
-      ctx.lineTo(worldVerts[oppositeIdx].x, worldVerts[oppositeIdx].y);
+      ctx.moveTo(localVerts[i].x, localVerts[i].y);
+      ctx.lineTo(localVerts[oppositeIdx].x, localVerts[oppositeIdx].y);
       ctx.stroke();
     }
   }
 
   ctx.beginPath();
-  ctx.moveTo(worldVerts[0].x, worldVerts[0].y);
-  for (let i = 1; i < worldVerts.length; i++) {
-    ctx.lineTo(worldVerts[i].x, worldVerts[i].y);
+  ctx.moveTo(localVerts[0].x, localVerts[0].y);
+  for (let i = 1; i < localVerts.length; i++) {
+    ctx.lineTo(localVerts[i].x, localVerts[i].y);
   }
   ctx.closePath();
   ctx.strokeStyle = getOrgColor(lineAlpha);
   ctx.lineWidth = strokeWidth;
   ctx.stroke();
 
-  worldVerts.forEach((v) => {
+  localVerts.forEach((v) => {
     ctx.beginPath();
     ctx.arc(v.x, v.y, vertexRadius, 0, Math.PI * 2);
     ctx.fillStyle = getOrgColor(vertexAlpha * 2);
@@ -115,8 +118,8 @@ export function drawOrganism(
 
   org.lobes.forEach((lobe) => {
     const lobeAngle = org.rotation + lobe.offsetAngle;
-    const lobeCenterX = org.x + Math.cos(lobeAngle) * org.size * lobe.offsetDistance;
-    const lobeCenterY = org.y + Math.sin(lobeAngle) * org.size * lobe.offsetDistance;
+    const lobeCenterX = Math.cos(lobeAngle) * org.size * lobe.offsetDistance;
+    const lobeCenterY = Math.sin(lobeAngle) * org.size * lobe.offsetDistance;
     const lobeRotation = org.rotation + lobe.rotationOffset;
     const lobeSize = org.size * lobe.size;
     
@@ -142,10 +145,10 @@ export function drawOrganism(
       ctx.fill();
     });
     
-    const nearestMainVert = worldVerts.reduce((nearest, v) => {
+    const nearestMainVert = localVerts.reduce((nearest, v) => {
       const d = Math.hypot(v.x - lobeCenterX, v.y - lobeCenterY);
       return d < nearest.dist ? { v, dist: d } : nearest;
-    }, { v: worldVerts[0], dist: Infinity });
+    }, { v: localVerts[0], dist: Infinity });
     
     ctx.beginPath();
     ctx.moveTo(nearestMainVert.v.x, nearestMainVert.v.y);
@@ -163,14 +166,14 @@ export function drawOrganism(
       const nx = dx / dist;
       const ny = dy / dist;
       
-      const endX = org.x + nx * org.tendril.length;
-      const endY = org.y + ny * org.tendril.length;
-      const ctrlX = (org.x + endX) / 2 + org.tendril.curveOffset * -ny;
-      const ctrlY = (org.y + endY) / 2 + org.tendril.curveOffset * nx;
+      const endX = nx * org.tendril.length;
+      const endY = ny * org.tendril.length;
+      const ctrlX = endX / 2 + org.tendril.curveOffset * -ny;
+      const ctrlY = endY / 2 + org.tendril.curveOffset * nx;
       
       const tendrilAlpha = lineAlpha * (org.tendril.length / org.tendril.maxLength) * 0.7;
       ctx.beginPath();
-      ctx.moveTo(org.x, org.y);
+      ctx.moveTo(0, 0);
       ctx.quadraticCurveTo(ctrlX, ctrlY, endX, endY);
       ctx.strokeStyle = getOrgColor(tendrilAlpha);
       ctx.lineWidth = 0.8;
@@ -184,17 +187,13 @@ export function drawOrganism(
   }
   
   if (observationMode && org.organelles.length > 0) {
-    drawOrganelles(ctx, org, lineAlpha, isDark);
-  }
-  
-  if (org.hoverIntensity > 0.05) {
-    ctx.restore();
+    drawOrganellesLocal(ctx, org, lineAlpha, isDark);
   }
   
   ctx.restore();
 }
 
-function drawOrganelles(
+function drawOrganellesLocal(
   ctx: CanvasRenderingContext2D,
   org: OrganismData,
   alpha: number,
@@ -206,8 +205,8 @@ function drawOrganelles(
     const saturation = organelle.customHue !== undefined ? 70 : defaultColors.s;
     const pulse = Math.sin(organelle.pulsePhase) * 0.12 + 1;
     
-    const x = org.x + Math.cos(organelle.angle + org.rotation) * org.size * organelle.radiusRatio;
-    const y = org.y + Math.sin(organelle.angle + org.rotation) * org.size * organelle.radiusRatio;
+    const x = Math.cos(organelle.angle + org.rotation) * org.size * organelle.radiusRatio;
+    const y = Math.sin(organelle.angle + org.rotation) * org.size * organelle.radiusRatio;
     const size = org.size * organelle.sizeRatio * pulse;
     
     const lightness = isDark ? 60 + org.depth * 20 : 35 + org.depth * 15;
