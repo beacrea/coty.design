@@ -73,6 +73,7 @@ export function initializeAmbientBubbles(
       isBubble: true,
       wobblePhase: Math.random() * Math.PI * 2,
       wobbleSpeed: 0.01 + Math.random() * 0.015,
+      fadeIn: Math.random() * 0.5,
     });
   }
 }
@@ -114,6 +115,7 @@ export function spawnAmbientBubbles(
       isBubble: true,
       wobblePhase: Math.random() * Math.PI * 2,
       wobbleSpeed: 0.01 + Math.random() * 0.015,
+      fadeIn: 0,
     });
   }
 }
@@ -147,6 +149,7 @@ export function spawnBubbleStream(
     maxLife: 40 + Math.floor(Math.random() * 30),
     depth: org.depth,
     isBubble: true,
+    fadeIn: 0,
   });
 }
 
@@ -198,6 +201,10 @@ export function updateParticles(
     p.x += p.vx;
     p.y += p.vy;
     p.life -= 1 / p.maxLife;
+    
+    if (p.fadeIn !== undefined && p.fadeIn < 1) {
+      p.fadeIn = Math.min(1, p.fadeIn + 0.05);
+    }
     
     if (p.life <= 0 || p.x < -30 || p.x > width + 30 || p.y < -50 || p.y > height + 50) {
       particles.splice(i, 1);

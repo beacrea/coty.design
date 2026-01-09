@@ -177,7 +177,7 @@ export function createOrganism(x: number, y: number, cfg: SimulationConfig): Org
 
 const FOOD_HUES = [320, 45, 280, 160, 30, 200, 350, 90, 270, 15];
 
-export function createFoodSource(width: number, height: number): FoodSource {
+export function createFoodSource(width: number, height: number, initialSpawn: boolean = false): FoodSource {
   return {
     x: 50 + Math.random() * (width - 100),
     y: 50 + Math.random() * (height - 100),
@@ -185,6 +185,7 @@ export function createFoodSource(width: number, height: number): FoodSource {
     respawnAt: 0,
     pulsePhase: Math.random() * Math.PI * 2,
     hue: FOOD_HUES[Math.floor(Math.random() * FOOD_HUES.length)] + (Math.random() - 0.5) * 20,
+    fadeIn: initialSpawn ? 1 : 0,
   };
 }
 
@@ -200,7 +201,7 @@ export function createSimulationState(width: number, height: number, cfg: Simula
 
   const foodSources: FoodSource[] = [];
   for (let i = 0; i < cfg.foodSourceCount; i++) {
-    foodSources.push(createFoodSource(width, height));
+    foodSources.push(createFoodSource(width, height, true));
   }
 
   const particles: import('./types').Particle[] = [];

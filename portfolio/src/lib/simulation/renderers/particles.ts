@@ -12,10 +12,11 @@ export function drawParticles(
     const depthFade = 0.4 + p.depth * 0.6;
     const minAlpha = 0.08;
     const effectiveBase = Math.max(baseAlpha, minAlpha);
-    const size = p.size * Math.min(1, p.life + 0.3);
+    const fadeIn = p.fadeIn ?? 1;
+    const size = p.size * Math.min(1, p.life + 0.3) * (0.5 + fadeIn * 0.5);
     
     if (p.isBubble) {
-      drawBubble(ctx, p.x, p.y, size, p.life, depthFade, isDark, observationMode);
+      drawBubble(ctx, p.x, p.y, size, p.life, depthFade, fadeIn, isDark, observationMode);
     } else {
       const alpha = p.life * effectiveBase * depthFade;
       ctx.beginPath();
@@ -33,10 +34,11 @@ function drawBubble(
   size: number,
   life: number,
   depthFade: number,
+  fadeIn: number,
   isDark: boolean,
   observationMode: boolean
 ): void {
-  const baseAlpha = life * depthFade * (observationMode ? 0.4 : 0.2);
+  const baseAlpha = life * depthFade * fadeIn * (observationMode ? 0.4 : 0.2);
   const lightness = isDark ? 70 : 50;
   
   ctx.beginPath();

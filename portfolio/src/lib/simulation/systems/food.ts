@@ -12,10 +12,15 @@ export function updateFoodSources(
   for (const food of foodSources) {
     food.pulsePhase += 0.02;
     
+    if (food.active && food.fadeIn < 1) {
+      food.fadeIn = Math.min(1, food.fadeIn + 0.03);
+    }
+    
     if (!food.active && timestamp > food.respawnAt) {
       food.x = 50 + Math.random() * (width - 100);
       food.y = 50 + Math.random() * (height - 100);
       food.active = true;
+      food.fadeIn = 0;
     }
   }
   
