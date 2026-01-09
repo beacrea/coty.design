@@ -141,16 +141,20 @@ function generateOrganismMesh(org: OrganismData): { vertices: Point3D[]; edges: 
   const elongation = org.elongation ?? 1.0;
   const squash = 1 / Math.sqrt(elongation);
   
-  const layers = 2;
-  const topZ = org.size * 0.35;
-  const bottomZ = -org.size * 0.25;
+  const complexity = n + (elongation > 1.5 ? 2 : 0);
+  const layers = complexity <= 4 ? 2 : complexity <= 6 ? 3 : 4;
+  
+  const heightScale = 0.3 + (elongation - 1) * 0.15;
+  const topZ = org.size * heightScale;
+  const bottomZ = -org.size * heightScale * 0.7;
   
   vertices.push({ x: 0, y: 0, z: topZ });
   
   for (let layer = 0; layer < layers; layer++) {
     const t = (layer + 1) / (layers + 1);
-    const z = topZ * (1 - t * 2.2);
-    const radiusScale = layer === 0 ? 1.0 : 0.7;
+    const z = topZ - t * (topZ - bottomZ);
+    const bulge = Math.sin(t * Math.PI);
+    const radiusScale = 0.5 + bulge * 0.5;
     
     for (let i = 0; i < n; i++) {
       const v = org.vertices[i];
@@ -184,12 +188,25 @@ function generateOrganismMesh(org: OrganismData): { vertices: Point3D[]; edges: 
     const nextStart = 1 + (layer + 1) * n;
     for (let i = 0; i < n; i++) {
       edges.push([thisStart + i, nextStart + i]);
+      if (n >= 5 || elongation > 1.3) {
+        const nextI = (i + 1) % n;
+        edges.push([thisStart + i, nextStart + nextI]);
+      }
     }
   }
   
   const lastLayerStart = 1 + (layers - 1) * n;
   for (let i = 0; i < n; i++) {
     edges.push([lastLayerStart + i, bottomApex]);
+  }
+  
+  if (n >= 5 && layers >= 3) {
+    const midLayer = Math.floor(layers / 2);
+    const midStart = 1 + midLayer * n;
+    for (let i = 0; i < n; i += 2) {
+      edges.push([topApex, midStart + i]);
+      edges.push([bottomApex, midStart + i]);
+    }
   }
   
   return { vertices, edges };
