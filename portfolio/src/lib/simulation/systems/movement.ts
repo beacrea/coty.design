@@ -1,31 +1,38 @@
 import type { OrganismData, SimulationConfig } from '../types';
 
 export function updateOrganismMovement(org: OrganismData, width: number, height: number, deathMultiplier: number = 1): void {
-  org.idlePhase += 0.004;
+  org.idlePhase += 0.012;
   
   if (org.idlePauseTimer > 0) {
     org.idlePauseTimer--;
     if (org.idlePauseTimer === 0) {
       org.isPaused = false;
-      org.wanderAngle += (Math.random() - 0.5) * Math.PI * 0.3;
+      org.wanderAngle += (Math.random() - 0.5) * Math.PI * 0.4;
     }
-  } else if (!org.isPaused && Math.random() < 0.0015) {
+  } else if (!org.isPaused && Math.random() < 0.0008) {
     org.isPaused = true;
-    org.idlePauseTimer = 90 + Math.floor(Math.random() * 180);
+    org.idlePauseTimer = 40 + Math.floor(Math.random() * 80);
   }
   
-  org.wanderAngle += (Math.random() - 0.5) * org.wanderRate * 0.6;
+  org.wanderAngle += (Math.random() - 0.5) * org.wanderRate * 0.8;
   
-  const bobX = Math.sin(org.idlePhase) * 0.0004;
-  const bobY = Math.cos(org.idlePhase * 0.7) * 0.0003;
+  const breathe = Math.sin(org.idlePhase * 0.5) * 0.002;
+  const bobX = Math.sin(org.idlePhase) * 0.0012 + breathe * Math.cos(org.wanderAngle);
+  const bobY = Math.cos(org.idlePhase * 0.7) * 0.001 + breathe * Math.sin(org.wanderAngle);
   
-  const pauseMultiplier = org.isPaused ? 0.08 : 1;
+  if (org.isPaused && Math.random() < 0.008) {
+    org.vx += (Math.random() - 0.5) * 0.003;
+    org.vy += (Math.random() - 0.5) * 0.003;
+    org.rotationSpeed += (Math.random() - 0.5) * 0.001;
+  }
+  
+  const pauseMultiplier = org.isPaused ? 0.2 : 1;
   const targetSpeed = org.baseSpeed * pauseMultiplier;
   
   const desiredVx = Math.cos(org.wanderAngle) * targetSpeed + bobX;
   const desiredVy = Math.sin(org.wanderAngle) * targetSpeed + bobY;
   
-  const steerStrength = org.isPaused ? 0.005 : 0.008;
+  const steerStrength = org.isPaused ? 0.008 : 0.015;
   org.vx += (desiredVx - org.vx) * steerStrength;
   org.vy += (desiredVy - org.vy) * steerStrength;
   
@@ -35,12 +42,12 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
     let angleDiff = movementAngle - org.rotation;
     while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
     while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-    const alignStrength = Math.min(0.01, 0.003 + speed * 0.003);
-    org.rotationSpeed += angleDiff * alignStrength * 0.02;
-    org.rotationSpeed = Math.max(-0.004, Math.min(0.004, org.rotationSpeed));
+    const alignStrength = Math.min(0.015, 0.004 + speed * 0.004);
+    org.rotationSpeed += angleDiff * alignStrength * 0.025;
+    org.rotationSpeed = Math.max(-0.006, Math.min(0.006, org.rotationSpeed));
   }
   
-  org.rotationSpeed *= 0.96;
+  org.rotationSpeed *= 0.94;
   
   if (org.stabilizing > 0) {
     org.stabilizing--;
@@ -56,14 +63,16 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
   org.rotation += org.rotationSpeed;
   org.age++;
   
-  const targetPitch = org.vy * 0.05;
-  const targetRoll = -org.vx * 0.05;
+  const breathePitch = Math.sin(org.idlePhase * 0.3) * 0.008;
+  const breatheRoll = Math.cos(org.idlePhase * 0.25) * 0.006;
+  const targetPitch = org.vy * 0.08 + breathePitch;
+  const targetRoll = -org.vx * 0.08 + breatheRoll;
   
-  org.pitchV += (targetPitch - org.pitchV) * 0.0004;
-  org.rollV += (targetRoll - org.rollV) * 0.0004;
+  org.pitchV += (targetPitch - org.pitchV) * 0.0012;
+  org.rollV += (targetRoll - org.rollV) * 0.0012;
   
-  org.pitchV *= 0.998;
-  org.rollV *= 0.998;
+  org.pitchV *= 0.995;
+  org.rollV *= 0.995;
   
   org.pitch += org.pitchV;
   org.roll += org.rollV;
@@ -78,9 +87,12 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
   if (!Number.isFinite(org.rollV)) org.rollV = 0;
   
   if (org.glow > 0) {
-    org.glow *= 0.98;
+    org.glow *= 0.97;
     if (org.glow < 0.01) org.glow = 0;
   }
+  
+  const breatheSize = Math.sin(org.idlePhase * 0.4) * org.size * 0.008;
+  org.size += breatheSize * 0.1;
   
   const sizeRatio = org.size / org.minSize;
   const sizeDecayMult = sizeRatio < 1.2 ? 2.0 : 1.0;
