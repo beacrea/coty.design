@@ -74,9 +74,11 @@ The portfolio features a subtle canvas-based generative background (`GenerativeB
 - Food competition system with aggressive speed boosts
 - Subtle bioluminescence glow on eating and interactions
 - Depth layers with 40-100% opacity variation
-- Environmental bubbles following flow field currents
+- Environmental bubbles following flow field currents (top-down view)
 - Lobes, tendrils, chain links, and internal spokes
 - Population density control with configurable target and aggressiveness
+- 3D tilt/rotation effect: organisms subtly tilt based on movement and interactions, creating depth perception
+- Flow field background: drifting gradient bands with time-based displacement
 
 **Configuration**: `src/lib/generative-config.ts`
 
