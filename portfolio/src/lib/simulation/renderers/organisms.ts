@@ -126,8 +126,53 @@ function getLocalVertices3D(org: OrganismData): Point3D[] {
   });
 }
 
+function generateOrganismMesh(org: OrganismData): { vertices: Point3D[]; faces: number[][] } {
+  const vertices: Point3D[] = [];
+  const faces: number[][] = [];
+  const n = org.vertices.length;
+  
+  const topZ = org.size * 0.4;
+  const bottomZ = -org.size * 0.3;
+  
+  for (const v of org.vertices) {
+    const x = Math.cos(v.angle) * v.distance * org.size;
+    const y = Math.sin(v.angle) * v.distance * org.size;
+    vertices.push({ x, y, z: topZ * v.distance });
+  }
+  
+  for (const v of org.vertices) {
+    const x = Math.cos(v.angle) * v.distance * org.size;
+    const y = Math.sin(v.angle) * v.distance * org.size;
+    vertices.push({ x, y, z: bottomZ * v.distance });
+  }
+  
+  vertices.push({ x: 0, y: 0, z: topZ });
+  vertices.push({ x: 0, y: 0, z: bottomZ });
+  
+  const topCenter = n * 2;
+  const bottomCenter = n * 2 + 1;
+  
+  for (let i = 0; i < n; i++) {
+    const next = (i + 1) % n;
+    faces.push([topCenter, i, next]);
+  }
+  
+  for (let i = 0; i < n; i++) {
+    const next = (i + 1) % n;
+    faces.push([bottomCenter, n + next, n + i]);
+  }
+  
+  for (let i = 0; i < n; i++) {
+    const next = (i + 1) % n;
+    faces.push([i, n + i, next]);
+    faces.push([next, n + i, n + next]);
+  }
+  
+  return { vertices, faces };
+}
+
 function getTransformedMesh(org: OrganismData): Face3D[] {
-  const mesh = generateIcosahedronMesh(org.size * 0.9);
+  const mesh = generateOrganismMesh(org);
   const faces: Face3D[] = [];
   
   for (const faceIndices of mesh.faces) {
@@ -161,35 +206,63 @@ function getTransformedMesh(org: OrganismData): Face3D[] {
   return faces;
 }
 
-function draw3DMesh(
+function drawOrganicBody(
   ctx: CanvasRenderingContext2D,
   org: OrganismData,
   getOrgColor: (alpha: number) => string,
-  lineAlpha: number
+  lineAlpha: number,
+  observationMode: boolean
 ): void {
-  const faces = getTransformedMesh(org);
+  const localVerts = getLocalVertices3D(org);
   
-  for (const face of faces) {
-    const pts = face.projected;
-    
-    const lightIntensity = 0.3 + (1 - face.normal.z) * 0.35;
-    const faceAlpha = face.isFront 
-      ? lineAlpha * lightIntensity 
-      : lineAlpha * 0.15;
-    
+  const strokeWidth = observationMode ? 1.4 : 1;
+  const vertexRadius = observationMode ? 2.2 : 2;
+  
+  const tiltAmount = Math.abs(org.pitch) + Math.abs(org.roll);
+  const depthShade = 0.03 * tiltAmount;
+  
+  if (depthShade > 0.005) {
     ctx.beginPath();
-    ctx.moveTo(pts[0].x, pts[0].y);
-    ctx.lineTo(pts[1].x, pts[1].y);
-    ctx.lineTo(pts[2].x, pts[2].y);
+    ctx.moveTo(localVerts[0].x, localVerts[0].y);
+    for (let i = 1; i < localVerts.length; i++) {
+      ctx.lineTo(localVerts[i].x, localVerts[i].y);
+    }
     ctx.closePath();
-    
-    ctx.fillStyle = getOrgColor(faceAlpha * 0.3);
+    ctx.fillStyle = getOrgColor(depthShade);
     ctx.fill();
-    
-    ctx.strokeStyle = getOrgColor(face.isFront ? lineAlpha : lineAlpha * 0.4);
-    ctx.lineWidth = face.isFront ? 1.2 : 0.6;
-    ctx.stroke();
   }
+  
+  if (org.vertices.length >= 4 && org.spokeIntensity > 0) {
+    const spokeAlpha = lineAlpha * org.spokeIntensity * 0.4;
+    ctx.strokeStyle = getOrgColor(spokeAlpha);
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i < Math.floor(org.vertices.length / 2); i++) {
+      const oppositeIdx = (i + Math.floor(org.vertices.length / 2)) % org.vertices.length;
+      ctx.beginPath();
+      ctx.moveTo(localVerts[i].x, localVerts[i].y);
+      ctx.lineTo(localVerts[oppositeIdx].x, localVerts[oppositeIdx].y);
+      ctx.stroke();
+    }
+  }
+
+  ctx.beginPath();
+  ctx.moveTo(localVerts[0].x, localVerts[0].y);
+  for (let i = 1; i < localVerts.length; i++) {
+    ctx.lineTo(localVerts[i].x, localVerts[i].y);
+  }
+  ctx.closePath();
+  ctx.strokeStyle = getOrgColor(lineAlpha);
+  ctx.lineWidth = strokeWidth;
+  ctx.stroke();
+
+  localVerts.forEach((v, i) => {
+    const depthFactor = 0.8 + (v.z * 0.01);
+    const adjustedRadius = vertexRadius * Math.max(0.6, Math.min(1.4, depthFactor));
+    ctx.beginPath();
+    ctx.arc(v.x, v.y, adjustedRadius, 0, Math.PI * 2);
+    ctx.fillStyle = getOrgColor(lineAlpha * 1.5);
+    ctx.fill();
+  });
 }
 
 export function drawOrganism(
@@ -229,7 +302,7 @@ export function drawOrganism(
     ctx.fill();
   }
   
-  draw3DMesh(ctx, org, getOrgColor, lineAlpha);
+  drawOrganicBody(ctx, org, getOrgColor, lineAlpha, observationMode);
 
   org.lobes.forEach((lobe) => {
     const lobeAngle = lobe.offsetAngle;
