@@ -31,11 +31,38 @@ function getColor(
   return `rgba(${strokeColor}, ${alpha})`;
 }
 
-function getLocalVertices(org: OrganismData): Array<{ x: number; y: number }> {
-  return org.vertices.map((v) => ({
-    x: Math.cos(v.angle + org.rotation) * v.distance * org.size,
-    y: Math.sin(v.angle + org.rotation) * v.distance * org.size,
-  }));
+interface Point3D { x: number; y: number; z: number }
+
+function transform3D(p: Point3D, yaw: number, pitch: number, roll: number, perspective: number = 0.003): Point3D {
+  const cosYaw = Math.cos(yaw);
+  const sinYaw = Math.sin(yaw);
+  const cosPitch = Math.cos(pitch);
+  const sinPitch = Math.sin(pitch);
+  const cosRoll = Math.cos(roll);
+  const sinRoll = Math.sin(roll);
+  
+  let { x, y, z } = p;
+  
+  const x1 = x * cosYaw - y * sinYaw;
+  const y1 = x * sinYaw + y * cosYaw;
+  
+  const y2 = y1 * cosPitch - z * sinPitch;
+  const z2 = y1 * sinPitch + z * cosPitch;
+  
+  const x3 = x1 * cosRoll + z2 * sinRoll;
+  const z3 = -x1 * sinRoll + z2 * cosRoll;
+  
+  const scale = 1 / (1 + z3 * perspective);
+  
+  return { x: x3 * scale, y: y2 * scale, z: z3 };
+}
+
+function getLocalVertices3D(org: OrganismData): Point3D[] {
+  return org.vertices.map((v) => {
+    const localX = Math.cos(v.angle) * v.distance * org.size;
+    const localY = Math.sin(v.angle) * v.distance * org.size;
+    return transform3D({ x: localX, y: localY, z: 0 }, org.rotation, org.pitch, org.roll);
+  });
 }
 
 export function drawOrganism(
@@ -47,7 +74,7 @@ export function drawOrganism(
   observationMode: boolean,
   isDark: boolean
 ): void {
-  const localVerts = getLocalVertices(org);
+  const localVerts = getLocalVertices3D(org);
   
   const getOrgColor = (alpha: number): string => 
     getColor(strokeColor, alpha, observationMode, isDark, org.hue, org.depth);
@@ -59,13 +86,6 @@ export function drawOrganism(
   
   ctx.save();
   ctx.translate(org.x, org.y);
-  
-  const scaleX = 1 - Math.abs(org.tiltX) * 0.15;
-  const scaleY = 1 - Math.abs(org.tiltY) * 0.15;
-  const skewX = org.tiltY * 0.12;
-  const skewY = org.tiltX * 0.12;
-  
-  ctx.transform(scaleX, skewY, skewX, scaleY, 0, 0);
   
   if (org.hoverIntensity > 0.05) {
     const hoverScale = 1 + org.hoverIntensity * 0.08;
@@ -117,16 +137,21 @@ export function drawOrganism(
   });
 
   org.lobes.forEach((lobe) => {
-    const lobeAngle = org.rotation + lobe.offsetAngle;
-    const lobeCenterX = Math.cos(lobeAngle) * org.size * lobe.offsetDistance;
-    const lobeCenterY = Math.sin(lobeAngle) * org.size * lobe.offsetDistance;
-    const lobeRotation = org.rotation + lobe.rotationOffset;
+    const lobeAngle = lobe.offsetAngle;
+    const lobeCenterLocal = {
+      x: Math.cos(lobeAngle) * org.size * lobe.offsetDistance,
+      y: Math.sin(lobeAngle) * org.size * lobe.offsetDistance,
+      z: 0
+    };
+    const lobeCenter = transform3D(lobeCenterLocal, org.rotation, org.pitch, org.roll);
+    const lobeRotation = lobe.rotationOffset;
     const lobeSize = org.size * lobe.size;
     
-    const lobeVerts = lobe.vertices.map((v) => ({
-      x: lobeCenterX + Math.cos(v.angle + lobeRotation) * v.distance * lobeSize,
-      y: lobeCenterY + Math.sin(v.angle + lobeRotation) * v.distance * lobeSize,
-    }));
+    const lobeVerts = lobe.vertices.map((v) => {
+      const x = lobeCenterLocal.x + Math.cos(v.angle + lobeRotation) * v.distance * lobeSize;
+      const y = lobeCenterLocal.y + Math.sin(v.angle + lobeRotation) * v.distance * lobeSize;
+      return transform3D({ x, y, z: 0 }, org.rotation, org.pitch, org.roll);
+    });
     
     ctx.beginPath();
     ctx.moveTo(lobeVerts[0].x, lobeVerts[0].y);
@@ -146,13 +171,13 @@ export function drawOrganism(
     });
     
     const nearestMainVert = localVerts.reduce((nearest, v) => {
-      const d = Math.hypot(v.x - lobeCenterX, v.y - lobeCenterY);
+      const d = Math.hypot(v.x - lobeCenter.x, v.y - lobeCenter.y);
       return d < nearest.dist ? { v, dist: d } : nearest;
     }, { v: localVerts[0], dist: Infinity });
     
     ctx.beginPath();
     ctx.moveTo(nearestMainVert.v.x, nearestMainVert.v.y);
-    ctx.lineTo(lobeCenterX, lobeCenterY);
+    ctx.lineTo(lobeCenter.x, lobeCenter.y);
     ctx.strokeStyle = getOrgColor(lineAlpha * 0.5);
     ctx.lineWidth = 0.6;
     ctx.stroke();
@@ -168,19 +193,21 @@ export function drawOrganism(
       
       const endX = nx * org.tendril.length;
       const endY = ny * org.tendril.length;
+      const end = transform3D({ x: endX, y: endY, z: 0 }, 0, org.pitch, org.roll);
       const ctrlX = endX / 2 + org.tendril.curveOffset * -ny;
       const ctrlY = endY / 2 + org.tendril.curveOffset * nx;
+      const ctrl = transform3D({ x: ctrlX, y: ctrlY, z: 0 }, 0, org.pitch, org.roll);
       
       const tendrilAlpha = lineAlpha * (org.tendril.length / org.tendril.maxLength) * 0.7;
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(ctrlX, ctrlY, endX, endY);
+      ctx.quadraticCurveTo(ctrl.x, ctrl.y, end.x, end.y);
       ctx.strokeStyle = getOrgColor(tendrilAlpha);
       ctx.lineWidth = 0.8;
       ctx.stroke();
       
       ctx.beginPath();
-      ctx.arc(endX, endY, 1.5, 0, Math.PI * 2);
+      ctx.arc(end.x, end.y, 1.5, 0, Math.PI * 2);
       ctx.fillStyle = getOrgColor(tendrilAlpha);
       ctx.fill();
     }
@@ -205,8 +232,9 @@ function drawOrganellesLocal(
     const saturation = organelle.customHue !== undefined ? 70 : defaultColors.s;
     const pulse = Math.sin(organelle.pulsePhase) * 0.12 + 1;
     
-    const x = Math.cos(organelle.angle + org.rotation) * org.size * organelle.radiusRatio;
-    const y = Math.sin(organelle.angle + org.rotation) * org.size * organelle.radiusRatio;
+    const localX = Math.cos(organelle.angle) * org.size * organelle.radiusRatio;
+    const localY = Math.sin(organelle.angle) * org.size * organelle.radiusRatio;
+    const pos = transform3D({ x: localX, y: localY, z: 0 }, org.rotation, org.pitch, org.roll);
     const size = org.size * organelle.sizeRatio * pulse;
     
     const lightness = isDark ? 60 + org.depth * 20 : 35 + org.depth * 15;
@@ -215,15 +243,15 @@ function drawOrganellesLocal(
     ctx.beginPath();
     
     if (organelle.type === 'nucleus') {
-      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.arc(pos.x, pos.y, size, 0, Math.PI * 2);
     } else if (organelle.type === 'mitochondria') {
-      ctx.ellipse(x, y, size * 1.5, size * 0.7, organelle.angle + org.rotation, 0, Math.PI * 2);
+      ctx.ellipse(pos.x, pos.y, size * 1.5, size * 0.7, organelle.angle + org.rotation, 0, Math.PI * 2);
     } else if (organelle.type === 'vacuole') {
-      ctx.arc(x, y, size * 1.2, 0, Math.PI * 2);
+      ctx.arc(pos.x, pos.y, size * 1.2, 0, Math.PI * 2);
     } else if (organelle.type === 'chloroplast') {
-      ctx.ellipse(x, y, size * 1.3, size * 0.6, organelle.angle + org.rotation + Math.PI / 4, 0, Math.PI * 2);
+      ctx.ellipse(pos.x, pos.y, size * 1.3, size * 0.6, organelle.angle + org.rotation + Math.PI / 4, 0, Math.PI * 2);
     } else {
-      ctx.arc(x, y, size * 0.5, 0, Math.PI * 2);
+      ctx.arc(pos.x, pos.y, size * 0.5, 0, Math.PI * 2);
     }
     
     ctx.fillStyle = `hsla(${hue}, ${saturation}%, ${lightness}%, ${organelleAlpha})`;
@@ -237,7 +265,7 @@ function drawOrganellesLocal(
     
     if (organelle.customHue !== undefined && size > 2) {
       ctx.beginPath();
-      ctx.arc(x - size * 0.2, y - size * 0.2, size * 0.2, 0, Math.PI * 2);
+      ctx.arc(pos.x - size * 0.2, pos.y - size * 0.2, size * 0.2, 0, Math.PI * 2);
       ctx.fillStyle = `hsla(${hue}, ${saturation - 15}%, ${lightness + 15}%, ${organelleAlpha * 0.4})`;
       ctx.fill();
     }
