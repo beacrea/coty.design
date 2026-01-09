@@ -55,28 +55,19 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
   org.rotation += org.rotationSpeed;
   org.age++;
   
-  const time = org.age * 0.025;
-  const phase = org.hue * 0.08;
+  const baseRotationSpeed = 0.008 + (org.hue % 100) * 0.0001;
+  const pitchSpeed = baseRotationSpeed * (0.7 + Math.sin(org.age * 0.003 + org.hue) * 0.3);
+  const rollSpeed = baseRotationSpeed * (0.6 + Math.cos(org.age * 0.004 + org.hue * 0.5) * 0.4);
   
-  const corkscrewSpeed = 0.8 + (org.hue % 60) * 0.02;
-  const corkscrewPhase = time * corkscrewSpeed + phase;
+  org.pitchV += pitchSpeed;
+  org.rollV += rollSpeed;
   
-  const pitchOscillation = Math.sin(corkscrewPhase) * 0.5 + 
-                           Math.sin(time * 0.3 + phase * 2) * 0.2;
-  const rollOscillation = Math.cos(corkscrewPhase + Math.PI * 0.3) * 0.45 + 
-                          Math.cos(time * 0.4 + phase) * 0.15;
+  const speedBoost = Math.min(0.5, speed * 8);
+  org.pitchV += org.vy * 0.02 * (1 + speedBoost);
+  org.rollV -= org.vx * 0.02 * (1 + speedBoost);
   
-  const speedBoost = Math.min(1, speed * 15);
-  
-  const tiltForce = 0.04;
-  org.pitchV += org.vy * tiltForce * (1 + speedBoost);
-  org.rollV -= org.vx * tiltForce * (1 + speedBoost);
-  
-  org.pitchV += (pitchOscillation - org.pitch) * 0.05;
-  org.rollV += (rollOscillation - org.roll) * 0.05;
-  
-  org.pitchV *= 0.88;
-  org.rollV *= 0.88;
+  org.pitchV *= 0.985;
+  org.rollV *= 0.985;
   
   org.pitch += org.pitchV;
   org.roll += org.rollV;
@@ -86,9 +77,11 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
   if (!Number.isFinite(org.pitchV)) org.pitchV = 0;
   if (!Number.isFinite(org.rollV)) org.rollV = 0;
   
-  const maxTilt = 0.8;
-  org.pitch = Math.max(-maxTilt, Math.min(maxTilt, org.pitch));
-  org.roll = Math.max(-maxTilt, Math.min(maxTilt, org.roll));
+  const TWO_PI = Math.PI * 2;
+  while (org.pitch > TWO_PI) org.pitch -= TWO_PI;
+  while (org.pitch < -TWO_PI) org.pitch += TWO_PI;
+  while (org.roll > TWO_PI) org.roll -= TWO_PI;
+  while (org.roll < -TWO_PI) org.roll += TWO_PI;
   
   if (org.glow > 0) {
     org.glow *= 0.96;
