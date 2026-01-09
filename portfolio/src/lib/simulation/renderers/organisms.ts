@@ -50,6 +50,17 @@ export function drawOrganism(
   const vertexRadius = observationMode ? 2.2 : 2;
   const lobeVertexRadius = observationMode ? 1.7 : 1.5;
   
+  ctx.save();
+  ctx.translate(org.x, org.y);
+  
+  const scaleX = 1 - Math.abs(org.tiltX) * 0.15;
+  const scaleY = 1 - Math.abs(org.tiltY) * 0.15;
+  const skewX = org.tiltY * 0.12;
+  const skewY = org.tiltX * 0.12;
+  
+  ctx.transform(scaleX, skewY, skewX, scaleY, 0, 0);
+  ctx.translate(-org.x, -org.y);
+  
   const effectiveGlow = Math.max(org.glow, org.hoverIntensity * 0.3);
   if (effectiveGlow > 0.05 && observationMode) {
     const clampedGlow = Math.min(effectiveGlow, 0.5);
@@ -179,6 +190,8 @@ export function drawOrganism(
   if (org.hoverIntensity > 0.05) {
     ctx.restore();
   }
+  
+  ctx.restore();
 }
 
 function drawOrganelles(

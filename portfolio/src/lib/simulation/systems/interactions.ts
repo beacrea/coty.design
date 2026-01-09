@@ -9,6 +9,8 @@ export interface InteractionResult {
 
 function triggerGlow(org: OrganismData, intensity: number = 1): void {
   org.glow = Math.min(1, org.glow + intensity);
+  org.tiltVx += (Math.random() - 0.5) * 0.05 * intensity;
+  org.tiltVy += (Math.random() - 0.5) * 0.05 * intensity;
 }
 
 function growTendril(org: OrganismData, targetX: number, targetY: number): void {
