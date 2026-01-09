@@ -55,6 +55,23 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
   org.rotation += org.rotationSpeed;
   org.age++;
   
+  const tiltForce = 0.008;
+  org.tiltVx += org.vx * tiltForce;
+  org.tiltVy += org.vy * tiltForce;
+  
+  org.tiltVx += (0 - org.tiltX) * 0.02;
+  org.tiltVy += (0 - org.tiltY) * 0.02;
+  
+  org.tiltVx *= 0.92;
+  org.tiltVy *= 0.92;
+  
+  org.tiltX += org.tiltVx;
+  org.tiltY += org.tiltVy;
+  
+  const maxTilt = 0.25;
+  org.tiltX = Math.max(-maxTilt, Math.min(maxTilt, org.tiltX));
+  org.tiltY = Math.max(-maxTilt, Math.min(maxTilt, org.tiltY));
+  
   if (org.glow > 0) {
     org.glow *= 0.96;
     if (org.glow < 0.01) org.glow = 0;

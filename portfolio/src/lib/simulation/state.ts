@@ -139,6 +139,10 @@ export function createOrganism(x: number, y: number, cfg: SimulationConfig): Org
     organelles: spawnOrganellesForOrganism(cfg.organelleSpawnChance, cfg.organelleMaxPerOrganism),
     grab: createDefaultGrabState(),
     hoverIntensity: 0,
+    tiltX: 0,
+    tiltY: 0,
+    tiltVx: 0,
+    tiltVy: 0,
   };
 }
 

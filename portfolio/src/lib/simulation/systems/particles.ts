@@ -86,7 +86,7 @@ export function spawnAmbientBubbles(
 ): void {
   if (particles.length >= maxParticles) return;
   
-  if (Math.random() < 0.06) {
+  if (Math.random() < 0.12) {
     const x = Math.random() * width;
     const y = Math.random() * height;
     
@@ -162,11 +162,16 @@ export function updateParticles(
     const flow = getFlowField(p.x, p.y, currentTime);
     
     if (p.isBubble) {
-      p.vx += flow.vx * 0.2;
-      p.vy += flow.vy * 0.2;
+      p.vx += flow.vx * 0.4;
+      p.vy += flow.vy * 0.4;
       
-      p.vx *= 0.995;
-      p.vy *= 0.995;
+      if (Math.random() < 0.03) {
+        p.vx += (Math.random() - 0.5) * 0.02;
+        p.vy += (Math.random() - 0.5) * 0.02;
+      }
+      
+      p.vx *= 0.99;
+      p.vy *= 0.99;
     } else {
       p.vx += flow.vx * 0.15;
       p.vy += flow.vy * 0.15;
