@@ -72,6 +72,11 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
   org.pitch += org.pitchV;
   org.roll += org.rollV;
   
+  if (!Number.isFinite(org.pitch)) org.pitch = 0;
+  if (!Number.isFinite(org.roll)) org.roll = 0;
+  if (!Number.isFinite(org.pitchV)) org.pitchV = 0;
+  if (!Number.isFinite(org.rollV)) org.rollV = 0;
+  
   const maxTilt = 0.8;
   org.pitch = Math.max(-maxTilt, Math.min(maxTilt, org.pitch));
   org.roll = Math.max(-maxTilt, Math.min(maxTilt, org.roll));

@@ -52,9 +52,17 @@ function transform3D(p: Point3D, yaw: number, pitch: number, roll: number, persp
   const x3 = x1 * cosRoll + z2 * sinRoll;
   const z3 = -x1 * sinRoll + z2 * cosRoll;
   
-  const scale = 1 / (1 + z3 * perspective);
+  const rawScale = 1 + z3 * perspective;
+  const scale = Math.max(0.5, Math.min(2, 1 / Math.max(0.1, rawScale)));
   
-  return { x: x3 * scale, y: y2 * scale, z: z3 };
+  const resultX = x3 * scale;
+  const resultY = y2 * scale;
+  
+  if (!Number.isFinite(resultX) || !Number.isFinite(resultY)) {
+    return { x: p.x, y: p.y, z: 0 };
+  }
+  
+  return { x: resultX, y: resultY, z: z3 };
 }
 
 function getLocalVertices3D(org: OrganismData): Point3D[] {
