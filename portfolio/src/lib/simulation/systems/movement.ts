@@ -55,19 +55,28 @@ export function updateOrganismMovement(org: OrganismData, width: number, height:
   org.rotation += org.rotationSpeed;
   org.age++;
   
-  const time = org.age * 0.02;
-  const pitchOscillation = Math.sin(time * 0.7 + org.hue * 0.1) * 0.4;
-  const rollOscillation = Math.cos(time * 0.5 + org.hue * 0.15) * 0.35;
+  const time = org.age * 0.025;
+  const phase = org.hue * 0.08;
   
-  const tiltForce = 0.025;
-  org.pitchV += org.vy * tiltForce;
-  org.rollV -= org.vx * tiltForce;
+  const corkscrewSpeed = 0.8 + (org.hue % 60) * 0.02;
+  const corkscrewPhase = time * corkscrewSpeed + phase;
   
-  org.pitchV += (pitchOscillation - org.pitch) * 0.03;
-  org.rollV += (rollOscillation - org.roll) * 0.03;
+  const pitchOscillation = Math.sin(corkscrewPhase) * 0.5 + 
+                           Math.sin(time * 0.3 + phase * 2) * 0.2;
+  const rollOscillation = Math.cos(corkscrewPhase + Math.PI * 0.3) * 0.45 + 
+                          Math.cos(time * 0.4 + phase) * 0.15;
   
-  org.pitchV *= 0.92;
-  org.rollV *= 0.92;
+  const speedBoost = Math.min(1, speed * 15);
+  
+  const tiltForce = 0.04;
+  org.pitchV += org.vy * tiltForce * (1 + speedBoost);
+  org.rollV -= org.vx * tiltForce * (1 + speedBoost);
+  
+  org.pitchV += (pitchOscillation - org.pitch) * 0.05;
+  org.rollV += (rollOscillation - org.roll) * 0.05;
+  
+  org.pitchV *= 0.88;
+  org.rollV *= 0.88;
   
   org.pitch += org.pitchV;
   org.roll += org.rollV;
