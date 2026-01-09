@@ -148,8 +148,8 @@ export const defaultStructuredConfig: StructuredConfig = {
     maxVertices: 8,
   },
   movement: {
-    minSpeed: 0.01,
-    maxSpeed: 0.04,
+    minSpeed: 0.006,
+    maxSpeed: 0.025,
     connectionDistance: 150,
     mergeDistance: 55,
   },
@@ -160,7 +160,7 @@ export const defaultStructuredConfig: StructuredConfig = {
   },
   food: {
     sourceCount: 3,
-    attractionStrength: 0.015,
+    attractionStrength: 0.008,
     size: 3,
     respawnTime: 4000,
     spawnInterval: 3000,
@@ -197,12 +197,12 @@ export const defaultStructuredConfig: StructuredConfig = {
     },
   },
   interaction: {
-    grabSpringStiffness: 0.12,
-    grabSpringDamping: 0.88,
-    softCollisionStrength: 0.5,
-    hoverEaseSpeed: 0.08,
-    deformationStiffness: 0.15,
-    deformationDamping: 0.92,
+    grabSpringStiffness: 0.06,
+    grabSpringDamping: 0.92,
+    softCollisionStrength: 0.3,
+    hoverEaseSpeed: 0.04,
+    deformationStiffness: 0.08,
+    deformationDamping: 0.96,
     maxDeformation: 0.35,
   },
 };

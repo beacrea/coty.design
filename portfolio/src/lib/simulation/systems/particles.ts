@@ -64,15 +64,15 @@ export function initializeAmbientBubbles(
     particles.push({
       x,
       y,
-      vx: flow.vx * 1.2,
-      vy: flow.vy * 1.2,
+      vx: flow.vx * 0.6,
+      vy: flow.vy * 0.6,
       size,
       life: 0.4 + Math.random() * 0.6,
-      maxLife: 700 + Math.floor(Math.random() * 500),
+      maxLife: 900 + Math.floor(Math.random() * 600),
       depth: 0.15 + Math.random() * 0.7,
       isBubble: true,
       wobblePhase: Math.random() * Math.PI * 2,
-      wobbleSpeed: 0.01 + Math.random() * 0.015,
+      wobbleSpeed: 0.005 + Math.random() * 0.008,
       fadeIn: Math.random() * 0.5,
     });
   }
@@ -106,15 +106,15 @@ export function spawnAmbientBubbles(
     particles.push({
       x,
       y,
-      vx: flow.vx * 1.5,
-      vy: flow.vy * 1.5,
+      vx: flow.vx * 0.7,
+      vy: flow.vy * 0.7,
       size,
       life: 1,
-      maxLife: 800 + Math.floor(Math.random() * 600),
+      maxLife: 1000 + Math.floor(Math.random() * 700),
       depth: 0.15 + Math.random() * 0.7,
       isBubble: true,
       wobblePhase: Math.random() * Math.PI * 2,
-      wobbleSpeed: 0.01 + Math.random() * 0.015,
+      wobbleSpeed: 0.005 + Math.random() * 0.008,
       fadeIn: 0,
     });
   }
@@ -165,21 +165,21 @@ export function updateParticles(
     const flow = getFlowField(p.x, p.y, currentTime);
     
     if (p.isBubble) {
-      p.vx += flow.vx * 0.4;
-      p.vy += flow.vy * 0.4;
+      p.vx += flow.vx * 0.2;
+      p.vy += flow.vy * 0.2;
       
-      if (Math.random() < 0.03) {
-        p.vx += (Math.random() - 0.5) * 0.02;
-        p.vy += (Math.random() - 0.5) * 0.02;
+      if (Math.random() < 0.02) {
+        p.vx += (Math.random() - 0.5) * 0.01;
+        p.vy += (Math.random() - 0.5) * 0.01;
       }
       
-      p.vx *= 0.99;
-      p.vy *= 0.99;
+      p.vx *= 0.995;
+      p.vy *= 0.995;
     } else {
-      p.vx += flow.vx * 0.15;
-      p.vy += flow.vy * 0.15;
-      p.vx *= 0.985;
-      p.vy *= 0.985;
+      p.vx += flow.vx * 0.08;
+      p.vy += flow.vy * 0.08;
+      p.vx *= 0.992;
+      p.vy *= 0.992;
     }
     
     for (const org of organisms) {
@@ -203,7 +203,7 @@ export function updateParticles(
     p.life -= 1 / p.maxLife;
     
     if (p.fadeIn !== undefined && p.fadeIn < 1) {
-      p.fadeIn = Math.min(1, p.fadeIn + 0.05);
+      p.fadeIn = Math.min(1, p.fadeIn + 0.02);
     }
     
     if (p.life <= 0 || p.x < -30 || p.x > width + 30 || p.y < -50 || p.y > height + 50) {
