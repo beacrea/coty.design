@@ -173,10 +173,10 @@ function buildPreviewJsonLd(corpus: any) {
         "name": corpus.identity.organization,
         "url": corpus.identity.organizationUrl
       },
-      "alumniOf": {
+      "alumniOf": corpus.identity.education.map((edu: any) => ({
         "@type": "CollegeOrUniversity",
-        "name": corpus.identity.education.institution
-      },
+        "name": edu.institution
+      })),
       "knowsAbout": corpus.expertiseDomains.map((d: any) => d.domain),
       "sameAs": [corpus.identity.linkedin, corpus.identity.github]
     }

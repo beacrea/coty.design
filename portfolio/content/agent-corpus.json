@@ -16,10 +16,19 @@
     "website": "https://coty.design",
     "linkedin": "https://linkedin.com/in/cbeasley0",
     "github": "https://github.com/beacrea",
-    "education": {
-      "degree": "B.S. in Computer Science",
-      "institution": "University of Missouri-Kansas City (UMKC)"
-    },
+    "education": [
+      {
+        "institution": "Metropolitan Community College - Kansas City (MCCKC)",
+        "degree": "Associate of Arts",
+        "completed": true
+      },
+      {
+        "institution": "University of Missouri-Kansas City (UMKC)",
+        "fieldOfStudy": "Computer Science",
+        "completed": false,
+        "note": "Attended but did not complete; left to pursue a lucrative early entrepreneurial venture and was dissuaded by the program's heavy reliance on .NET."
+      }
+    ],
     "description": "Design technologist, product leader, and co-founder of Underline. Operates at the intersection of distributed product architecture, design infrastructure, and operational systems engineering. Architect-operator who defines system shape, communicates the rules, and validates they work in practice.",
     "simultaneousModes": [
       "Design systems architect (foundational infrastructure)",

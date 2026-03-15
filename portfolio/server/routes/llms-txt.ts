@@ -23,7 +23,13 @@ function generateLlmsTxt(corpus: any): string {
 ## Key Information
 - **Current Role:** ${corpus.identity.jobTitle} at ${corpus.identity.organization}
 - **Location:** ${corpus.identity.currentLocation} (since ${corpus.identity.currentLocationSince})
-- **Education:** ${corpus.identity.education.degree}, ${corpus.identity.education.institution}
+- **Education:**
+${corpus.identity.education.map((edu: any) => {
+  if (edu.completed) {
+    return `  - ${edu.degree}, ${edu.institution}`;
+  }
+  return `  - ${edu.fieldOfStudy} (attended, did not complete), ${edu.institution}`;
+}).join('\n')}
 
 ## Links
 - Website: ${corpus.canonicalUrl}
@@ -67,7 +73,13 @@ ${corpus.identity.description}
 **Organization:** ${corpus.identity.organization} (${corpus.identity.organizationUrl})
 **Location:** ${corpus.identity.currentLocation} (since ${corpus.identity.currentLocationSince})
 **Born:** ${corpus.identity.birthYear}, ${corpus.identity.birthPlace}
-**Education:** ${corpus.identity.education.degree}, ${corpus.identity.education.institution}
+**Education:**
+${corpus.identity.education.map((edu: any) => {
+  if (edu.completed) {
+    return `- ${edu.degree}, ${edu.institution}`;
+  }
+  return `- ${edu.fieldOfStudy} (attended, did not complete), ${edu.institution} — ${edu.note}`;
+}).join('\n')}
 
 ### Simultaneous Professional Modes
 ${corpus.identity.simultaneousModes.map((m: string) => `- ${m}`).join('\n')}

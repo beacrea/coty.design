@@ -40,7 +40,18 @@ function run() {
     check('identity.jobTitle', !!corpus.identity.jobTitle, `jobTitle: ${corpus.identity.jobTitle || 'MISSING'}`);
     check('identity.organization', !!corpus.identity.organization, `organization: ${corpus.identity.organization || 'MISSING'}`);
     check('identity.currentLocation', !!corpus.identity.currentLocation, `currentLocation: ${corpus.identity.currentLocation || 'MISSING'}`);
-    check('identity.education', !!corpus.identity.education?.degree && !!corpus.identity.education?.institution, 'education has degree and institution');
+    check('identity.education', Array.isArray(corpus.identity.education) && corpus.identity.education.length > 0, `${corpus.identity.education?.length || 0} education entries`);
+    if (Array.isArray(corpus.identity.education)) {
+      for (const edu of corpus.identity.education) {
+        check(`education entry: ${edu.institution}`, !!edu.institution, `institution: ${edu.institution || 'MISSING'}`);
+        if (edu.completed) {
+          check(`education degree: ${edu.institution}`, !!edu.degree, `degree: ${edu.degree || 'MISSING'}`);
+        } else {
+          check(`education fieldOfStudy: ${edu.institution}`, !!edu.fieldOfStudy, `fieldOfStudy: ${edu.fieldOfStudy || 'MISSING'}`);
+          check(`education note: ${edu.institution}`, !!edu.note, `note: ${edu.note ? 'present' : 'MISSING'}`);
+        }
+      }
+    }
     check('identity.linkedin', !!corpus.identity.linkedin, `linkedin: ${corpus.identity.linkedin || 'MISSING'}`);
     check('identity.github', !!corpus.identity.github, `github: ${corpus.identity.github || 'MISSING'}`);
     check('identity.description', !!corpus.identity.description && corpus.identity.description.length > 50, `description length: ${corpus.identity.description?.length || 0}`);

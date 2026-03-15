@@ -35,14 +35,16 @@ function buildJsonLd(corpus: any) {
         "@type": "Place",
         "name": corpus.identity.currentLocation
       },
-      "alumniOf": {
+      "alumniOf": corpus.identity.education.map((edu: any) => ({
         "@type": "CollegeOrUniversity",
-        "name": corpus.identity.education.institution
-      },
-      "hasCredential": {
-        "@type": "EducationalOccupationalCredential",
-        "credentialCategory": corpus.identity.education.degree
-      },
+        "name": edu.institution
+      })),
+      "hasCredential": corpus.identity.education
+        .filter((edu: any) => edu.completed && edu.degree)
+        .map((edu: any) => ({
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": edu.degree
+        })),
       "worksFor": {
         "@type": "Organization",
         "name": corpus.identity.organization,
@@ -108,7 +110,12 @@ function buildDossierHtml(corpus: any, jsonLd: any): string {
 
     <section>
       <h2>Education</h2>
-      <p>${corpus.identity.education.degree}, ${corpus.identity.education.institution}</p>
+      ${corpus.identity.education.map((edu: any) => {
+        if (edu.completed) {
+          return `<p>${edu.degree}, ${edu.institution}</p>`;
+        }
+        return `<p>${edu.fieldOfStudy} (attended, did not complete), ${edu.institution}</p><p><em>${edu.note}</em></p>`;
+      }).join('\n      ')}
     </section>
 
     <section>
