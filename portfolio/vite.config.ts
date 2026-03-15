@@ -7,6 +7,11 @@ export default defineConfig({
   define: {
     __APP_VERSION__: JSON.stringify(pkg.version)
   },
+  build: {
+    modulePreload: {
+      polyfill: true
+    }
+  },
   server: {
     host: '0.0.0.0',
     port: 5001,

@@ -64,6 +64,11 @@ Key characteristics:
 - WCAG AA accessibility compliance
 - AI agent detection with enhanced structured data
 - Generative background with evolving geometric organisms
+- Deferred canvas initialization via requestIdleCallback for improved mobile TTI
+- Decorative elements (canvas, SVG icons) hidden from assistive technology via aria-hidden
+- Screen reader announcements for external links opening in new tabs (.sr-only utility)
+- Observe mode properly hides content from screen readers via aria-hidden on main landmark
+- Vite module preload polyfill enabled for faster LCP
 
 ### Generative Background
 

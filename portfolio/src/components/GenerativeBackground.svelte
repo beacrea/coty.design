@@ -157,7 +157,7 @@
     resetInteractionState();
   }
 
-  onMount(() => {
+  function initSimulation(): void {
     ctx = canvas.getContext('2d');
     
     motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -179,6 +179,13 @@
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('resize', resizeCanvas);
+  }
+
+  onMount(() => {
+    const deferInit = typeof requestIdleCallback === 'function'
+      ? requestIdleCallback
+      : (cb: () => void) => setTimeout(cb, 0);
+    deferInit(initSimulation);
   });
 
   onDestroy(() => {
@@ -198,6 +205,8 @@
   bind:this={canvas} 
   class="generative-background"
   class:observation-mode={observationMode}
+  aria-hidden="true"
+  role="presentation"
   on:pointerdown={handlePointerDown}
   on:pointermove={handlePointerMove}
   on:pointerup={handlePointerUp}

@@ -30,7 +30,7 @@
     title={observeMode ? 'Show content' : 'Observe organisms'}
   >
     {#key animateKey}
-    <svg class="microscope-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg class="microscope-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M6 18h8"></path>
       <path d="M3 22h18"></path>
       <path d="M14 22a7 7 0 1 0 0-14h-1"></path>
@@ -43,7 +43,7 @@
 </div>
 <div class:dark={isDark} class:observe-mode={observeMode}>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  <main class="page" id="main-content" tabindex="-1">
+  <main class="page" id="main-content" tabindex="-1" aria-hidden={observeMode || null}>
     <div class="content">
       <header class="header">
         <div class="opener-wrapper">
