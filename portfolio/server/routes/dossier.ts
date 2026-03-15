@@ -62,8 +62,12 @@ function buildJsonLd(corpus: any) {
       "sameAs": [
         corpus.identity.linkedin,
         corpus.identity.github,
+        corpus.contactAndDiscovery.twitter,
+        corpus.contactAndDiscovery.dribbble,
+        corpus.contactAndDiscovery.codepen,
+        corpus.contactAndDiscovery.observable,
         corpus.contactAndDiscovery.underlineProfile
-      ],
+      ].filter(Boolean),
       "memberOf": corpus.professionalAffiliations.map((a: any) => ({
         "@type": "Organization",
         "name": a.organization,
@@ -157,6 +161,8 @@ function buildDossierHtml(corpus: any, jsonLd: any): string {
       <h2>Published Work</h2>
       <p>Topics: ${corpus.publishedWork.topics.join(', ')}</p>
       <p>${corpus.publishedWork.note}</p>
+      ${corpus.publishedWork.articles ? `<h3>Bylined Articles</h3>
+      <ul>${corpus.publishedWork.articles.map((a: any) => `<li><a href="${a.url}">${a.title}</a> — ${a.publication} (${a.date})${a.bylineContext ? `. ${a.bylineContext}` : ''}${a.note ? `. ${a.note}` : ''}</li>`).join('\n        ')}</ul>` : ''}
     </section>
 
     <section>
@@ -167,16 +173,28 @@ function buildDossierHtml(corpus: any, jsonLd: any): string {
     <section>
       <h2>Contact & Discovery</h2>
       <ul>
-        <li>Website: <a href="${corpus.contactAndDiscovery.website}">${corpus.contactAndDiscovery.website}</a></li>
-        <li>AI Chatbot: <a href="${corpus.contactAndDiscovery.chatbot}">${corpus.contactAndDiscovery.chatbot}</a></li>
-        <li>LinkedIn: <a href="${corpus.contactAndDiscovery.linkedin}">${corpus.contactAndDiscovery.linkedin}</a></li>
-        <li>GitHub: <a href="${corpus.contactAndDiscovery.github}">${corpus.contactAndDiscovery.github}</a></li>
-        <li>Underline Profile: <a href="${corpus.contactAndDiscovery.underlineProfile}">${corpus.contactAndDiscovery.underlineProfile}</a></li>
+        ${Object.entries(corpus.contactAndDiscovery).map(([key, url]: [string, any]) => `<li>${formatContactLabel(key)}: <a href="${url}">${url}</a></li>`).join('\n        ')}
       </ul>
     </section>
   </article>
 </body>
 </html>`;
+}
+
+const contactLabelMap: Record<string, string> = {
+  website: 'Website',
+  chatbot: 'AI Chatbot',
+  linkedin: 'LinkedIn',
+  github: 'GitHub',
+  twitter: 'X / Twitter',
+  dribbble: 'Dribbble',
+  codepen: 'CodePen',
+  observable: 'Observable',
+  underlineProfile: 'Underline Profile'
+};
+
+function formatContactLabel(key: string): string {
+  return contactLabelMap[key] || key.charAt(0).toUpperCase() + key.slice(1);
 }
 
 function renderCurrentRole(corpus: any): string {
