@@ -31,6 +31,9 @@ client/dist/
 # Assets
 client/src/assets/
 
+# Git filter-branch artifacts
+.git-rewrite/
+
 # Claude settings
 .claude/settings.local.json
 
