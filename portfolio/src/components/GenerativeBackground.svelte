@@ -20,6 +20,9 @@
   let adaptedConfig: WorldConfig;
   let motionQuery: MediaQueryList | null = null;
   let motionHandler: ((e: MediaQueryListEvent) => void) | null = null;
+  let isMobileViewport = false;
+  let lastFrameTime = 0;
+  const MOBILE_FRAME_INTERVAL = 1000 / 30;
 
   function getAdaptedConfig(): WorldConfig {
     const width = window.innerWidth;
@@ -61,6 +64,7 @@
     
     logicalWidth = window.innerWidth;
     logicalHeight = window.innerHeight;
+    isMobileViewport = logicalWidth < 768;
     
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     
@@ -95,6 +99,13 @@
       return;
     }
 
+    animationId = requestAnimationFrame(animate);
+
+    if (isMobileViewport && timestamp - lastFrameTime < MOBILE_FRAME_INTERVAL) {
+      return;
+    }
+    lastFrameTime = timestamp;
+
     try {
       const isDark = $theme === 'dark';
       
@@ -103,8 +114,6 @@
     } catch (err) {
       console.error('Simulation error:', err);
     }
-
-    animationId = requestAnimationFrame(animate);
   }
   
   function getCanvasCoords(e: MouseEvent | Touch): { x: number; y: number } {

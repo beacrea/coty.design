@@ -1,4 +1,5 @@
 import express from 'express';
+import compression from 'compression';
 import http from 'http';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -17,6 +18,10 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const server = http.createServer(app);
 const PORT = parseInt(process.env.PORT || '5000', 10);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(compression());
+}
 
 initAnalyticsDb();
 
@@ -46,9 +51,24 @@ if (process.env.NODE_ENV === 'production') {
     next();
   });
 
-  app.use(express.static(distPath));
+  app.use('/assets', express.static(path.join(distPath, 'assets'), {
+    maxAge: '1y',
+    immutable: true,
+  }));
+
+  app.use(express.static(distPath, {
+    maxAge: '1h',
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith('.html')) {
+        res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+      } else {
+        res.setHeader('Cache-Control', 'public, max-age=3600, must-revalidate');
+      }
+    },
+  }));
 
   app.get('/{*splat}', (req, res) => {
+    res.setHeader('Cache-Control', 'no-cache, must-revalidate');
     res.sendFile(path.join(distPath, 'index.html'));
   });
 } else {
