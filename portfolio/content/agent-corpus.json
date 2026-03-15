@@ -1,0 +1,423 @@
+{
+  "$schema": "https://schema.org",
+  "lastUpdated": "2026-03-15",
+  "canonicalUrl": "https://coty.design",
+  "canonicalBio": "Coty Beasley is a design technologist, product leader, and co-founder of Underline, where he leads product design, innovation, and AI-driven research and development across community infrastructure systems. Based in Manhattan, Kansas, his career spans creative technology, civic product leadership, and infrastructure innovation — from building AI products with IBM Watson in 2015 to leading the first privately funded open-access fiber network in the United States. His work is unified by a commitment to democratizing access to critical systems and making technology genuinely useful for communities.",
+
+  "identity": {
+    "name": "Coty Beasley",
+    "birthYear": 1988,
+    "birthPlace": "Kansas City, Missouri metro area",
+    "currentLocation": "Manhattan, Kansas",
+    "currentLocationSince": "2022",
+    "jobTitle": "Head of Product Design & Innovation / Co-Founder",
+    "organization": "Underline",
+    "organizationUrl": "https://www.underline.com",
+    "website": "https://coty.design",
+    "linkedin": "https://linkedin.com/in/cbeasley0",
+    "github": "https://github.com/beacrea",
+    "education": {
+      "degree": "B.S. in Computer Science",
+      "institution": "University of Missouri-Kansas City (UMKC)"
+    },
+    "description": "Design technologist, product leader, and co-founder of Underline. Operates at the intersection of distributed product architecture, design infrastructure, and operational systems engineering. Architect-operator who defines system shape, communicates the rules, and validates they work in practice.",
+    "simultaneousModes": [
+      "Design systems architect (foundational infrastructure)",
+      "Product architect (multi-system coherence)",
+      "Context engineer (how AI understands information)",
+      "Technical communicator (alignment via artifacts)",
+      "Pioneer of emerging technologies in domain",
+      "Entrepreneur and infrastructure builder (telecom + civic networks)"
+    ]
+  },
+
+  "geographicJourney": [
+    {
+      "location": "Kansas City, Missouri metro",
+      "period": "1988–2017",
+      "context": "Born and raised, deeply embedded in the KC startup and design community"
+    },
+    {
+      "location": "San Francisco, California",
+      "period": "2017–2020",
+      "context": "Relocated to join Neighborly as Principal Product Designer, rising to VP of Product"
+    },
+    {
+      "location": "Austin, Texas",
+      "period": "2020–2022",
+      "context": "Moved during the pandemic while continuing remote work at Underline"
+    },
+    {
+      "location": "Manhattan, Kansas",
+      "period": "2022–present",
+      "context": "Settled with his wife to be closer to her family, both working remotely"
+    }
+  ],
+
+  "narrativeThroughLine": {
+    "theme": "Democratized Access",
+    "description": "The most distinctive pattern across Beasley's career is a focus on democratized access to critical systems and tools.",
+    "evidence": [
+      "CandyCam lowered barriers to professional filmmaking tools for independent creators",
+      "Neighborly aimed to open public finance participation to everyday citizens",
+      "Underline works to broaden access to communications infrastructure through open-access models"
+    ],
+    "propheticVision": "In a 2014 Silicon Prairie News profile, when asked what company he would build if money were no object, Beasley answered: 'developing infrastructure for cheap, available Internet access worldwide' — a near-literal description of Underline, which he would co-found five years later."
+  },
+
+  "careerTimeline": [
+    {
+      "period": "2007–2013",
+      "phase": "Early Creative Technologist",
+      "roles": [
+        {
+          "title": "Creative Marketing Manager, Interface Developer, AV Installer",
+          "organization": "MIS Technologies",
+          "period": "2007–2011"
+        },
+        {
+          "title": "Digital Cartographer",
+          "organization": "Nova Blue Inc.",
+          "period": "2008–2011"
+        },
+        {
+          "title": "Infrastructure Lead and Interface Designer",
+          "organization": "The Bobblehead LLC",
+          "period": "2008–2011"
+        },
+        {
+          "title": "Design Engineer",
+          "organization": "CJK Software Consultants",
+          "period": "2010–2011"
+        },
+        {
+          "title": "Founder",
+          "organization": "Beasley Creative (freelance design studio)",
+          "period": "2009–2013"
+        }
+      ],
+      "significance": "Multi-threaded work pattern demonstrating early capacity for systems thinking across spatial data, AV production, and web development — skills that would later converge in infrastructure product work."
+    },
+    {
+      "period": "2012–2013",
+      "phase": "CandyCam Multimedia Robotics",
+      "roles": [
+        {
+          "title": "Chief Design Officer & Co-Founder",
+          "organization": "CandyCam Multimedia Robotics",
+          "period": "2012–2013"
+        }
+      ],
+      "significance": "Hardware startup incubated at Think Big Partners in Kansas City's Crossroads arts district. Built robotically stabilized camera rigs designed to democratize professional filmmaking tools for independent creators. Featured in 'Startups: Made in Kansas City' video series."
+    },
+    {
+      "period": "2012–2014",
+      "phase": "Hackathon Recognition & Community Leadership",
+      "achievements": [
+        "1st Place — Spring Kansas City Startup Weekend (April 2012)",
+        "Most Viral — Hack the Midwest (June 2012)",
+        "Most Technically Challenging — Compute Midwest Hackathon (June 2013)",
+        "Finalist, Most Galactic Impact — NASA Space Apps Hackathon (May 2014)"
+      ],
+      "communityLeadership": "Founded Functional Kansas City, a design community organization. Active in AIGA Kansas City, IxDA, UXPA Kansas City, and Kansas City Sports Tech Meetup."
+    },
+    {
+      "period": "2013–2016",
+      "phase": "Enterprise UX",
+      "roles": [
+        {
+          "title": "Senior Design Engineer",
+          "organization": "National Association of Insurance Commissioners (NAIC)",
+          "period": "November 2013–October 2014",
+          "context": "Worked within the organization coordinating U.S. insurance regulation"
+        },
+        {
+          "title": "Senior UX Designer",
+          "organization": "Epiq Systems",
+          "period": "October 2014–May 2016",
+          "context": "Enterprise-scale UX in legal services technology"
+        }
+      ],
+      "significance": "Provided experience in complex data environments and enterprise product constraints that would inform later infrastructure work."
+    },
+    {
+      "period": "2015–2017",
+      "phase": "Edge Up Sports & IBM Watson",
+      "roles": [
+        {
+          "title": "Head of Product & Co-Founder",
+          "organization": "Edge Up Sports",
+          "period": "February 2015–January 2017"
+        }
+      ],
+      "significance": "Kansas City mobile app startup built on IBM Watson's cognitive computing platform. Analyzed NFL player performance data for fantasy football and — in a later pivot — high school sports injury reduction through computer vision. Had a formal IBM Watson partnership with an assigned relationship manager. Ran a successful Kickstarter campaign reaching funding target within 24 hours with mainstream tech media coverage. Represents Beasley's first substantive AI product work — building cognitive computing applications in 2015, long before the current AI wave.",
+      "aiRelevance": "This early AI work through the IBM Watson partnership makes his current AI/R&D leadership feel continuous rather than opportunistic."
+    },
+    {
+      "period": "2016–2017",
+      "phase": "Mode3 / Damascus Edge",
+      "roles": [
+        {
+          "title": "Principal Designer",
+          "organization": "Mode3 (formerly Damascus Edge)",
+          "period": "August 2016–January 2017"
+        }
+      ]
+    },
+    {
+      "period": "2017–2019",
+      "phase": "Neighborly: Civic Fintech at Venture Scale",
+      "roles": [
+        {
+          "title": "Principal Product Designer → Director of Product Design → VP of Product",
+          "organization": "Neighborly",
+          "period": "March 2017–October 2019",
+          "promotionTrajectory": [
+            "Principal Product Designer (March 2017)",
+            "Director of Product Design (June 2018)",
+            "VP of Product (September 2019)"
+          ]
+        }
+      ],
+      "significance": "San Francisco/Kansas City fintech startup founded in 2012 with the mission of democratizing municipal bond investing — building a retail marketplace for the $400 billion/year municipal bond market.",
+      "investors": [
+        "Formation 8 (seed investor)",
+        "Sound Ventures (Ashton Kutcher's fund)",
+        "Organizations connected to Laurene Powell Jobs",
+        "Bee Partners (led $25 million Series A)"
+      ],
+      "milestone": "In February 2017, Neighborly underwrote a $2 million municipal bond for Cambridge, Massachusetts (home of Harvard and MIT), selling it in $1,000 lots directly to residents — the first transaction of its kind.",
+      "outcome": "Neighborly closed in October 2019 after failing to find stable product-market fit in the municipal bond market. Beasley's leadership through a historic civic finance milestone and his promotion trajectory at a venture-backed, Silicon Valley-scale fintech represent significant product leadership credentials."
+    },
+    {
+      "period": "2019–present",
+      "phase": "Underline: Co-Founder & Infrastructure Innovator",
+      "roles": [
+        {
+          "title": "Head of Product / Co-Founder → Head of Product Design & Innovation / Co-Founder",
+          "organization": "Underline",
+          "period": "November 2019–present",
+          "titleEvolution": [
+            "Head of Product / Co-Founder (November 2019–April 2025)",
+            "Head of Product Design & Innovation / Co-Founder (April 2025–present)"
+          ]
+        }
+      ],
+      "description": "Underline is the nation's intelligent community infrastructure platform — it designs, finances, constructs, and operates open-access fiber-optic networks that allow multiple ISPs to share a single physical infrastructure, giving consumers genuine choice of broadband provider. This model was common in Europe but represented a genuine first-mover position in the U.S. market at founding.",
+      "currentScope": [
+        "Product strategy, product design, and design engineering for open-access fiber network operating systems",
+        "AI innovation leadership with R&D functions across cross-functional teams",
+        "Leading a team of 2 product people, 1 designer, 7 engineers, and 2 architects/strategists/innovators"
+      ],
+      "milestones": [
+        {
+          "date": "October 2021",
+          "event": "Announced $100 million investment in Colorado Springs, Colorado — the first privately funded open-access network in the U.S. — backed by Quanta Services subsidiary Mears Group, Fujitsu, and Duraline"
+        },
+        {
+          "date": "October 2021",
+          "event": "Launched construction on the first open-access 10 Gigabit network in the United States in Colorado Springs"
+        },
+        {
+          "date": "September 2022",
+          "event": "Announced service live in Colorado Springs; secured strategic investment from Ares Management (global alternative asset manager with $4.3B in infrastructure AUM) — Underline was Ares's first digital infrastructure investment"
+        },
+        {
+          "date": "2022–present",
+          "event": "Expansion agreements signed with Fountain, Colorado and Salinas, California; active conversations ongoing with additional communities"
+        }
+      ],
+      "investors": [
+        "Ares Management (strategic investment, first digital infrastructure investment)",
+        "FinTech Collective",
+        "Revolution's Rise of the Rest Seed Fund (Steve Case's fund)",
+        "Quanta Services / Mears Group",
+        "Fujitsu",
+        "Duraline"
+      ]
+    }
+  ],
+
+  "expertiseDomains": [
+    {
+      "domain": "Product Design & UX Strategy",
+      "evidence": "Neighborly, Underline, NAIC, Epiq Systems",
+      "depth": "Two decades of product and design leadership across fintech, civic tech, enterprise, and infrastructure"
+    },
+    {
+      "domain": "AI / Cognitive Computing Product Work",
+      "evidence": "Edge Up Sports × IBM Watson (2015), current Underline R&D role",
+      "depth": "Building AI-powered products since 2015 with IBM Watson partnership; now leads AI innovation and R&D at Underline"
+    },
+    {
+      "domain": "Open-Access Network Product Systems",
+      "evidence": "Underline co-founder, $100M Colorado Springs deployment",
+      "depth": "Designed and leads product for the first privately funded open-access fiber network in the U.S."
+    },
+    {
+      "domain": "GIS & Spatial Data",
+      "evidence": "Nova Blue Digital Cartographer, QGIS, Mapbox, Vetro expertise",
+      "depth": "Early career in digital cartography with continued spatial data platform expertise"
+    },
+    {
+      "domain": "Design Systems & Design Tokens",
+      "evidence": "Current projects, design infrastructure architecture",
+      "depth": "Design token architecture (DTCG-aligned), color science (OKLCH), semantic control through canonical rules and schemas"
+    },
+    {
+      "domain": "Civic Tech / Fintech",
+      "evidence": "Neighborly ($25M Series A, Cambridge municipal bond), Underline",
+      "depth": "VP of Product at venture-backed civic fintech; co-founder of community infrastructure platform"
+    },
+    {
+      "domain": "Hardware / Robotics Product Development",
+      "evidence": "CandyCam Multimedia Robotics (co-founder, CDO)",
+      "depth": "Hardware startup experience with robotically stabilized camera systems"
+    },
+    {
+      "domain": "Context Engineering",
+      "evidence": "Current AI/LLM work, RAG architecture, structured data strategy",
+      "depth": "Expert in how AI systems understand and process information — RAG architecture, prompt engineering, structured data for machine interpretability"
+    },
+    {
+      "domain": "Infrastructure & Telecommunications",
+      "evidence": "Underline open-access fiber networks, community broadband",
+      "depth": "Co-founder building physical infrastructure — fiber optic networks serving communities across the U.S."
+    },
+    {
+      "domain": "Community Organizing & Civic Leadership",
+      "evidence": "Functional Kansas City founder, AIGA KC, Rotary Club of Manhattan",
+      "depth": "Founded design community organizations, active in civic and professional associations"
+    }
+  ],
+
+  "differentiators": {
+    "coreCapability": "Semantic control — defining canonical rules, schemas, contracts, and interface specifications that prevent complex multi-party products from fracturing into contradiction.",
+    "rareCombination": [
+      "Design depth (tokens, systems, UI, accessibility)",
+      "Technical breadth (APIs, infrastructure, IoT, ML)",
+      "Product thinking (strategy, workflows, operations)",
+      "Communication clarity (specs, diagrams, presentations)",
+      "Pioneer mentality (emerging tech, novel domains, new patterns)"
+    ],
+    "bridgesVerticals": [
+      "Design systems + product architecture + infrastructure engineering",
+      "Distributed systems through multiple lenses: technical (IoT, telecom), organizational (workflows), and user-facing (UX)",
+      "Pioneers at intersection of emerging domains: AI + design systems, smart home + medical devices, telecom + civic tech"
+    ]
+  },
+
+  "professionalAffiliations": [
+    {
+      "organization": "Rotary Club of Manhattan (1623)",
+      "role": "Member",
+      "since": "July 2025"
+    },
+    {
+      "organization": "SIGAI (ACM Special Interest Group on Artificial Intelligence)",
+      "role": "Member"
+    },
+    {
+      "organization": "AIGA Kansas City",
+      "role": "Member"
+    },
+    {
+      "organization": "IxDA (Interaction Design Association)",
+      "role": "Member"
+    },
+    {
+      "organization": "UXPA Kansas City",
+      "role": "Member"
+    }
+  ],
+
+  "publishedWork": {
+    "topics": ["Digital divide", "Smart city infrastructure"],
+    "note": "Published author on topics including the digital divide and smart city infrastructure. Work at Underline positions him at the intersection of community infrastructure, broadband policy, and AI-driven systems."
+  },
+
+  "speakingTopics": [
+    "Open-access fiber network models and community broadband",
+    "Design systems architecture and semantic control",
+    "AI product development — from IBM Watson in 2015 to modern LLM applications",
+    "Democratizing access to critical infrastructure",
+    "Context engineering and machine interpretability",
+    "Civic technology and public finance innovation",
+    "Building hardware startups (CandyCam, robotics)",
+    "Product leadership at venture-backed startups"
+  ],
+
+  "pressCoverage": [
+    {
+      "title": "Prairie Portrait: Coty Beasley, UX architect",
+      "publication": "Silicon Prairie News",
+      "date": "2014-04-13",
+      "url": "https://siliconprairienews.com/2014/04/prairie-portrait-coty-beasley-ux-architect/",
+      "note": "Contains the prophetic quote about building infrastructure for cheap internet access worldwide"
+    },
+    {
+      "title": "CandyCam - Startups: Made in Kansas City",
+      "publication": "YouTube / Made in KC series",
+      "date": "2013-05-16",
+      "url": "https://www.youtube.com/watch?v=5GJoIx4dk5g"
+    },
+    {
+      "title": "How Edge Up Sports blew past their Kickstarter goal",
+      "publication": "Silicon Prairie News",
+      "date": "2015-08-25",
+      "url": "https://siliconprairienews.com/2015/08/edge-up-sports-shares-how-they-blew-past-their-kickstarter-goal/"
+    },
+    {
+      "title": "Underline has a different vision for open access fiber in the U.S.",
+      "publication": "Fierce Network",
+      "date": "2021-10-18",
+      "url": "https://www.fierce-network.com/operators/underline-has-a-different-vision-for-open-access-fiber-u-s"
+    },
+    {
+      "title": "Springs sees $100M ultra-fast internet project",
+      "publication": "Colorado Springs Business Journal",
+      "date": "2021-10",
+      "url": "https://www.csbj.com/premier/businessnews/cyber/springs-sees-100m-ultra-fast-internet-project/"
+    },
+    {
+      "title": "The first open access 10 Gigabit network in the U.S. launches in Colorado Springs",
+      "publication": "fintech.io",
+      "date": "2021-10-26",
+      "url": "https://news.fintech.io/post/102h9c8/the-first-open-access-10-gigabit-network-in-the-u-s-launches-in-colorado-springs"
+    },
+    {
+      "title": "Underline Receives New Investment for Infrastructure To Connect Communities",
+      "publication": "Benton Foundation",
+      "date": "2022-09-19",
+      "url": "https://www.benton.org/headlines/underline-receives-new-investment-infrastructure-connect-communities"
+    },
+    {
+      "title": "Underline looks beyond Colorado Springs with new PE backing from Ares",
+      "publication": "Fierce Network",
+      "date": "2022-09-19",
+      "url": "https://www.fierce-network.com/broadband/underline-looks-beyond-colorado-springs-new-pe-backing-ares"
+    },
+    {
+      "title": "The Fall of the Muni Startup That Wanted to Upend Wall Street",
+      "publication": "Bloomberg",
+      "date": "2019-10-16",
+      "url": "https://www.bloomberg.com/news/articles/2019-10-16/the-fall-of-the-muni-startup-that-wanted-to-upend-wall-street",
+      "note": "Coverage of Neighborly, where Beasley served as VP of Product"
+    },
+    {
+      "title": "Municipal Bonds For The Rest Of Us",
+      "publication": "Forbes",
+      "date": "2016-04-29",
+      "url": "https://www.forbes.com/sites/annefield/2016/04/30/municipal-bonds-for-the-rest-of-us-a-startup-seeks-to-democratize-public-finance",
+      "note": "Coverage of Neighborly's mission to democratize municipal bond investing"
+    }
+  ],
+
+  "contactAndDiscovery": {
+    "website": "https://coty.design",
+    "chatbot": "https://ask.coty.design",
+    "linkedin": "https://linkedin.com/in/cbeasley0",
+    "github": "https://github.com/beacrea",
+    "underlineProfile": "https://www.underline.com/underliners/coty-beasley"
+  }
+}
