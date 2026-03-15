@@ -56,3 +56,7 @@ run = ["npm", "run", "start", "--prefix", "portfolio"]
 [nix]
 channel = "stable-25_05"
 packages = ["imagemagick"]
+
+[postMerge]
+path = "scripts/post-merge.sh"
+timeoutMs = 120000
