@@ -212,12 +212,27 @@ function isPublicIP(ip: string): boolean {
   return true;
 }
 
+function normalizeIP(ip: string): string | null {
+  // Ensure the value is a syntactically valid IPv4 or IPv6 address.
+  // net.isIP returns 0 for invalid, 4 for IPv4, and 6 for IPv6.
+  if (net.isIP(ip) === 0) {
+    return null;
+  }
+  // For IPv6, ip-api.com expects the address wrapped in brackets.
+  // For IPv4, return as-is.
+  return ip.includes(":") ? `[${ip}]` : ip;
+}
+
 async function getLocationFromIP(ip: string): Promise<{ country: string; region: string; city: string } | null> {
   if (!isPublicIP(ip)) {
     return null;
   }
+  const normalizedIp = normalizeIP(ip);
+  if (!normalizedIp) {
+    return null;
+  }
   try {
-    const response = await fetch(`http://ip-api.com/json/${ip}?fields=country,regionName,city`);
+    const response = await fetch(`http://ip-api.com/json/${encodeURIComponent(normalizedIp)}?fields=country,regionName,city`);
     if (!response.ok) return null;
     const data = await response.json();
     if (data.country) {
