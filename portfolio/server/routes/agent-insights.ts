@@ -4,6 +4,18 @@ import { getDb } from '../middleware/analytics.js';
 export function agentInsightsData(_req: Request, res: Response) {
   const db = getDb();
 
+  if (!db) {
+    return res.json({
+      summary: { total: 0, last24h: 0, last7d: 0 },
+      byAgent: [],
+      byRole: [],
+      topPaths: [],
+      referrers: [],
+      recentVisits: [],
+      hourlyActivity: []
+    });
+  }
+
   const totalVisits = db.prepare('SELECT COUNT(*) as count FROM agent_visits').get() as any;
   const last24h = db.prepare("SELECT COUNT(*) as count FROM agent_visits WHERE timestamp > datetime('now', '-1 day')").get() as any;
   const last7d = db.prepare("SELECT COUNT(*) as count FROM agent_visits WHERE timestamp > datetime('now', '-7 days')").get() as any;

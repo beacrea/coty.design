@@ -10,42 +10,46 @@ const __dirname = path.dirname(__filename);
 
 const DB_PATH = path.resolve(__dirname, '../../data/agent-analytics.db');
 
-let db: Database.Database;
+let db: Database.Database | null = null;
 
 export function initAnalyticsDb() {
-  const dataDir = path.dirname(DB_PATH);
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
+  try {
+    const dataDir = path.dirname(DB_PATH);
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+
+    db = new Database(DB_PATH);
+    db.pragma('journal_mode = WAL');
+
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS agent_visits (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp TEXT NOT NULL DEFAULT (datetime('now')),
+        user_agent TEXT NOT NULL,
+        agent_name TEXT,
+        crawler_role TEXT,
+        request_path TEXT NOT NULL,
+        referrer TEXT,
+        response_type TEXT,
+        ip_address TEXT
+      )
+    `);
+
+    db.exec(`
+      CREATE INDEX IF NOT EXISTS idx_agent_visits_timestamp ON agent_visits(timestamp);
+      CREATE INDEX IF NOT EXISTS idx_agent_visits_agent_name ON agent_visits(agent_name);
+      CREATE INDEX IF NOT EXISTS idx_agent_visits_crawler_role ON agent_visits(crawler_role);
+    `);
+  } catch (err) {
+    console.error('Analytics DB init failed (non-fatal):', err);
   }
-
-  db = new Database(DB_PATH);
-  db.pragma('journal_mode = WAL');
-
-  db.exec(`
-    CREATE TABLE IF NOT EXISTS agent_visits (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      timestamp TEXT NOT NULL DEFAULT (datetime('now')),
-      user_agent TEXT NOT NULL,
-      agent_name TEXT,
-      crawler_role TEXT,
-      request_path TEXT NOT NULL,
-      referrer TEXT,
-      response_type TEXT,
-      ip_address TEXT
-    )
-  `);
-
-  db.exec(`
-    CREATE INDEX IF NOT EXISTS idx_agent_visits_timestamp ON agent_visits(timestamp);
-    CREATE INDEX IF NOT EXISTS idx_agent_visits_agent_name ON agent_visits(agent_name);
-    CREATE INDEX IF NOT EXISTS idx_agent_visits_crawler_role ON agent_visits(crawler_role);
-  `);
 }
 
 export function logAgentVisit(req: Request, res: Response, next: NextFunction) {
   const userAgent = req.headers['user-agent'] || '';
 
-  if (isAIAgent(userAgent)) {
+  if (db && isAIAgent(userAgent)) {
     const agentName = identifyAgent(userAgent);
     const crawlerRole = classifyCrawlerRole(userAgent);
 
@@ -71,6 +75,6 @@ export function logAgentVisit(req: Request, res: Response, next: NextFunction) {
   next();
 }
 
-export function getDb(): Database.Database {
+export function getDb(): Database.Database | null {
   return db;
 }

@@ -93,7 +93,7 @@ The portfolio features a subtle canvas-based generative background (`GenerativeB
 ## External Dependencies
 
 ### Portfolio (`/portfolio`)
-- **Svelte 4** + **Vite 5** — Framework and build tool
+- **Svelte 5** + **Vite 7** — Framework and build tool
 - **Red Hat Mono** — Typography (Google Fonts)
 - **Express.js** — Server for AI agent detection and dossier serving
 - **better-sqlite3** — Agent analytics logging
