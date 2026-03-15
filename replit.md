@@ -15,7 +15,7 @@ This is the monorepo for Coty Beasley's personal web presence, containing multip
 
 | Replit Project | Directory | Workflow | Port |
 |----------------|-----------|----------|------|
-| Main Site | `/portfolio` | `cd portfolio && npm run dev -- --port 5000` | 5000 |
+| Main Site | `/portfolio` | `cd portfolio && PORT=5000 npm run dev` | 5000 |
 | Ask Chatbot | `/ask` | `cd ask && npm run dev` | 5000 |
 
 Each app has its own subdirectory-specific documentation:
@@ -95,7 +95,19 @@ The portfolio features a subtle canvas-based generative background (`GenerativeB
 ### Portfolio (`/portfolio`)
 - **Svelte 4** + **Vite 5** — Framework and build tool
 - **Red Hat Mono** — Typography (Google Fonts)
+- **Express.js** — Server for AI agent detection and dossier serving
+- **better-sqlite3** — Agent analytics logging
 - **isbot** — AI agent detection
+
+### Agent Infrastructure (`/portfolio/server/`)
+- Agent detection middleware with crawler-role classification (training/search/user-retrieval)
+- Structured dossier HTML served to AI agents at `/` (humans get normal Svelte app)
+- Auto-generated `/llms.txt` and `/llms-full.txt` from corpus
+- `/agent-preview` — Diagnostic view of what AI agents see
+- `/agent-insights` — Analytics dashboard for agent visit tracking
+- `/api/dossier-preview` — API for rendered dossier content
+- Professional ontology corpus: `portfolio/content/agent-corpus.json`
+- Corpus validation: `npm run validate-corpus`
 
 ### Chatbot (`/ask`)
 - **React** + **Vite** — Frontend
@@ -107,8 +119,9 @@ The portfolio features a subtle canvas-based generative background (`GenerativeB
 
 ### Portfolio
 ```bash
-cd portfolio && npm run dev   # Development (port 5001, Replit overrides to 5000)
-cd portfolio && npm run build # Production build
+cd portfolio && PORT=5000 npm run dev       # Development (Express + Vite middleware)
+cd portfolio && npm run build               # Production build
+cd portfolio && npm run validate-corpus     # Validate agent corpus
 ```
 
 ### Chatbot
@@ -118,6 +131,24 @@ cd ask && npm run build       # Production build
 cd ask && npm run db:push     # Push Drizzle schema
 ```
 
+## Agent Content Maintenance
+
+The professional ontology corpus at `portfolio/content/agent-corpus.json` is the single source of truth for all AI-facing content. When updating professional information:
+
+1. Edit `agent-corpus.json`
+2. Run `npm run validate-corpus` to verify (all 53 checks should pass)
+3. The dossier, llms.txt, and llms-full.txt auto-generate from the corpus
+4. Check `/agent-preview` to see how AI agents will consume the content
+5. Monitor `/agent-insights` to track which agents are visiting
+
+### SEO Assets
+- `portfolio/public/robots.txt` — Crawler-role-aware rules with sitemap pointer
+- `portfolio/public/sitemap.xml` — XML sitemap for search engines
+- `portfolio/index.html` — Contains OG/Twitter meta tags, canonical URL, JSON-LD structured data
+
+### Deployment Note
+The Express server handles both AI agent and human traffic. In production mode it serves the Vite-built static files for humans and the structured dossier for AI agents. The deployment target should be set to `autoscale` (not static) since the server needs to run.
+
 ---
 
-_Last updated: 2025-12-28_
+_Last updated: 2026-03-15_
