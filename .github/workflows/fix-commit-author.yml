@@ -13,23 +13,32 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 20
+          fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check and fix Replit-authored commits
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
         run: |
           WRONG_EMAIL="51382616-beasles@users.noreply.replit.com"
           CORRECT_NAME="Coty Beasley"
           CORRECT_EMAIL="beacrea@users.noreply.github.com"
 
-          BAD_COUNT=$(git log --format='%ae' HEAD | grep -c "$WRONG_EMAIL" || true)
+          if [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            RANGE="$AFTER_SHA"
+          else
+            RANGE="$BEFORE_SHA..$AFTER_SHA"
+          fi
+
+          BAD_COUNT=$(git log --format='%ae' "$RANGE" | grep -c "$WRONG_EMAIL" || true)
 
           if [ "$BAD_COUNT" -eq 0 ]; then
-            echo "All commits have correct author. No action needed."
+            echo "All commits in push range have correct author. No action needed."
             exit 0
           fi
 
-          echo "Found $BAD_COUNT commit(s) with incorrect Replit author. Fixing..."
+          echo "Found $BAD_COUNT commit(s) with incorrect Replit author in range $RANGE. Fixing..."
 
           git config user.name "$CORRECT_NAME"
           git config user.email "$CORRECT_EMAIL"
@@ -41,7 +50,7 @@ jobs:
               export GIT_COMMITTER_NAME=\"$CORRECT_NAME\"
               export GIT_COMMITTER_EMAIL=\"$CORRECT_EMAIL\"
             fi
-          " -- --all
+          " -- "$RANGE"
 
           git push --force-with-lease origin main
           echo "Fixed $BAD_COUNT commit(s) with incorrect author."
