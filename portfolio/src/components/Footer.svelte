@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { fetchLatestVersion, getFallbackVersion } from '../lib/github-version';
+  import { fetchLatestVersion } from '../lib/github-version';
 
   export let legal: string;
   export let version: string;
