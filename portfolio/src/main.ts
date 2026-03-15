@@ -8,7 +8,11 @@ const placeholder = document.getElementById('app-placeholder');
 const app = mount(App, { target });
 
 if (placeholder && placeholder.parentNode) {
-  placeholder.remove();
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      placeholder.remove();
+    });
+  });
 }
 
 export default app;
