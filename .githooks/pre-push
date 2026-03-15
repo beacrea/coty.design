@@ -1,0 +1,29 @@
+#!/bin/bash
+CORRECT_NAME="Coty Beasley"
+CORRECT_EMAIL="beacrea@users.noreply.github.com"
+WRONG_EMAIL="51382616-beasles@users.noreply.replit.com"
+
+while read local_ref local_sha remote_ref remote_sha; do
+    if [ "$local_sha" = "0000000000000000000000000000000000000000" ]; then
+        continue
+    fi
+
+    range=""
+    if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
+        range="$local_sha"
+    else
+        range="$remote_sha..$local_sha"
+    fi
+
+    bad_commits=$(git log --format='%ae' "$range" 2>/dev/null | grep -c "$WRONG_EMAIL")
+    if [ "$bad_commits" -gt 0 ]; then
+        echo "WARNING: $bad_commits commit(s) have incorrect Replit author."
+        echo "Run: FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch -f --env-filter '"
+        echo "  if [ \"\$GIT_AUTHOR_EMAIL\" = \"$WRONG_EMAIL\" ]; then"
+        echo "    export GIT_AUTHOR_NAME=\"$CORRECT_NAME\""
+        echo "    export GIT_AUTHOR_EMAIL=\"$CORRECT_EMAIL\""
+        echo "    export GIT_COMMITTER_NAME=\"$CORRECT_NAME\""
+        echo "    export GIT_COMMITTER_EMAIL=\"$CORRECT_EMAIL\""
+        echo "  fi' -- $local_ref"
+    fi
+done
