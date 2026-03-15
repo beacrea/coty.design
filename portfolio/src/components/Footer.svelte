@@ -1,7 +1,16 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import { fetchLatestVersion, getFallbackVersion } from '../lib/github-version';
+
   export let legal: string;
   export let version: string;
   export let versionUrl: string;
+
+  onMount(async () => {
+    const latest = await fetchLatestVersion();
+    version = latest.version;
+    versionUrl = latest.versionUrl;
+  });
 </script>
 
 <footer class="footer animate-entrance">

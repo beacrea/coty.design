@@ -59,6 +59,7 @@ docs/
 **Portfolio:** v5.0 "Convergence" — See [DER-005](docs/eras/DER-005-convergence.md) for design philosophy
 
 Key characteristics:
+- Dynamic version display fetched from GitHub Releases API at runtime (`src/lib/github-version.ts`), with local `package.json` version as fallback
 - OKLCH color space for perceptual uniformity
 - DTCG v2025.10 compliant design tokens
 - WCAG AA accessibility compliance
