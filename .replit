@@ -40,9 +40,10 @@ externalPort = 3002
 expertMode = true
 
 [deployment]
-deploymentTarget = "static"
+deploymentTarget = "autoscale"
 build = ["npm", "run", "build", "--prefix", "portfolio"]
 publicDir = "portfolio/dist"
+run = ["npm", "run", "start", "--prefix", "portfolio"]
 
 [nix]
 channel = "stable-25_05"

@@ -1,4 +1,5 @@
 import express from 'express';
+import http from 'http';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { agentDetectionMiddleware } from './middleware/agent-detection.js';
@@ -12,6 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+const server = http.createServer(app);
 const PORT = parseInt(process.env.PORT || '5000', 10);
 
 initAnalyticsDb();
@@ -46,7 +48,10 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   const { createServer } = await import('vite');
   const vite = await createServer({
-    server: { middlewareMode: true },
+    server: {
+      middlewareMode: true,
+      hmr: { server },
+    },
     appType: 'spa',
     root: path.resolve(__dirname, '..'),
   });
@@ -61,7 +66,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(vite.middlewares);
 }
 
-app.listen(PORT, '0.0.0.0', () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`Portfolio server running on port ${PORT}`);
   console.log(`Agent preview: http://localhost:${PORT}/agent-preview`);
   console.log(`Agent insights: http://localhost:${PORT}/agent-insights`);

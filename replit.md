@@ -146,8 +146,12 @@ The professional ontology corpus at `portfolio/content/agent-corpus.json` is the
 - `portfolio/public/sitemap.xml` — XML sitemap for search engines
 - `portfolio/index.html` — Contains OG/Twitter meta tags, canonical URL, JSON-LD structured data
 
-### Deployment Note
-The Express server handles both AI agent and human traffic. In production mode it serves the Vite-built static files for humans and the structured dossier for AI agents. The deployment target should be set to `autoscale` (not static) since the server needs to run.
+### Deployment
+The Express server handles both AI agent and human traffic. Deployment target is `autoscale`:
+- **Build:** `npm run build --prefix portfolio` (Vite builds static assets to `portfolio/dist`)
+- **Run:** `npm run start --prefix portfolio` (starts Express with `NODE_ENV=production`)
+- In production, Express serves Vite-built static files for humans and the structured dossier for AI agents
+- In dev, Vite runs in middleware mode through Express with HMR websocket sharing the same HTTP server
 
 ---
 
