@@ -14,8 +14,28 @@ interface SuggestionChip {
   signalPersona: string;
 }
 
+function generateSecureRandomString(length: number): string {
+  const chars = "0123456789abcdefghijklmnopqrstuvwxyz";
+
+  // Use cryptographically secure randomness when available
+  if (typeof window !== "undefined" && window.crypto && typeof window.crypto.getRandomValues === "function") {
+    const randomValues = new Uint8Array(length);
+    window.crypto.getRandomValues(randomValues);
+    let result = "";
+    for (let i = 0; i < length; i++) {
+      // Map byte value to index in chars (avoids bias sufficiently for this length)
+      result += chars[randomValues[i] % chars.length];
+    }
+    return result;
+  }
+
+  // Fallback to Math.random if crypto is not available (non-security-critical environments)
+  return Math.random().toString(36).substring(2, 2 + length);
+}
+
 function generateId(): string {
-  return Math.random().toString(36).substring(2, 15);
+  // 13 characters to roughly match the previous substring(2, 15) length
+  return generateSecureRandomString(13);
 }
 
 function getTimeBasedGreeting(): string {
@@ -28,18 +48,18 @@ function getTimeBasedGreeting(): string {
 
 function getSessionId(): string {
   if (typeof window === "undefined" || !window.localStorage) {
-    return `fallback-${Date.now()}-${Math.random().toString(36).substring(2, 15)}`;
+    return `fallback-${Date.now()}-${generateSecureRandomString(13)}`;
   }
   const storageKey = "ask_coty_session_id";
   try {
     let sessionId = localStorage.getItem(storageKey);
     if (!sessionId) {
-      sessionId = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}`;
+      sessionId = `${Date.now()}-${generateSecureRandomString(13)}`;
       localStorage.setItem(storageKey, sessionId);
     }
     return sessionId;
   } catch {
-    return `fallback-${Date.now()}-${Math.random().toString(36).substring(2, 15)}`;
+    return `fallback-${Date.now()}-${generateSecureRandomString(13)}`;
   }
 }
 
