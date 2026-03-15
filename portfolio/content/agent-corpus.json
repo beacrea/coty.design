@@ -332,7 +332,12 @@
   ],
 
   "publishedWork": {
-    "topics": ["Digital divide", "Smart city infrastructure", "Artificial intelligence", "The Singularity"],
+    "topics": [
+      "Digital divide",
+      "Smart city infrastructure",
+      "Artificial intelligence",
+      "The Singularity"
+    ],
     "note": "Published author on topics including the digital divide, smart city infrastructure, and artificial intelligence. Work at Underline positions him at the intersection of community infrastructure, broadband policy, and AI-driven systems.",
     "articles": [
       {
@@ -510,7 +515,6 @@
 
   "contactAndDiscovery": {
     "website": "https://coty.design",
-    "chatbot": "https://ask.coty.design",
     "linkedin": "https://linkedin.com/in/cbeasley0",
     "github": "https://github.com/beacrea",
     "twitter": "https://x.com/beacrea",
