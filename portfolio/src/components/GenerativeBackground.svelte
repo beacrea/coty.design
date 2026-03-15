@@ -211,8 +211,8 @@
     top: 0;
     left: 0;
     z-index: 0;
-    pointer-events: auto;
-    touch-action: none;
+    pointer-events: none;
+    touch-action: auto;
     cursor: default;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -223,6 +223,8 @@
   }
   
   .generative-background.observation-mode {
+    pointer-events: auto;
+    touch-action: none;
     cursor: grab;
   }
   
