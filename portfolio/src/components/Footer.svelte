@@ -15,7 +15,7 @@
 
 <footer class="footer animate-entrance">
   <span class="legal">{legal}</span>
-  <a href={versionUrl} target="_blank" rel="noopener noreferrer" class="version" aria-label="View changelog, {version}">{version}<span class="sr-only"> (opens in new tab)</span></a>
+  <a href={versionUrl} target="_blank" rel="noopener noreferrer" class="version" aria-label="{version}, view changelog (opens in new tab)">{version}<span class="sr-only"> (opens in new tab)</span></a>
 </footer>
 
 <style>

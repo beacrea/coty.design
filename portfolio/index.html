@@ -15,11 +15,15 @@
     <style>
       html, body { margin: 0; padding: 0; }
       html { background-color: #ffffff; }
+      #app-placeholder { color: #1d1d1d; }
       @media (prefers-color-scheme: dark) {
         html { background-color: #1d1d1d; }
+        #app-placeholder { color: #e8e8e8; }
       }
       html.dark { background-color: #1d1d1d !important; }
+      html.dark #app-placeholder { color: #e8e8e8; }
       html.light { background-color: #ffffff !important; }
+      html.light #app-placeholder { color: #1d1d1d; }
     </style>
     <script>
       (function() {
@@ -112,7 +116,12 @@
     </script>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div id="app-placeholder" style="min-height:100vh;padding:2rem;">
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:680;line-height:1.1;margin:0 0 0.5em;">Coty Beasley</h1>
+        <p style="font-size:clamp(1rem,2vw,1.25rem);margin:0;">Design and Product Leader</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
