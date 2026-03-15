@@ -13,17 +13,67 @@
     <meta name="theme-color" id="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)" />
     <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       html, body { margin: 0; padding: 0; }
-      html { background-color: #ffffff; }
-      #app-placeholder { color: #1d1d1d; }
+      html {
+        background-color: #ffffff;
+        font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        -webkit-font-smoothing: antialiased;
+      }
+      body { background-color: inherit; min-height: 100vh; }
+      #app-placeholder {
+        color: #1d1d1d;
+        min-height: 100vh;
+        padding: 47.78px 55px 33.178px 27.65px;
+      }
+      #app-placeholder h1 {
+        font-size: 33.178px;
+        font-weight: 680;
+        line-height: 1.1;
+        margin-bottom: 0.5em;
+        color: oklch(0.55 0.180 45);
+      }
+      #app-placeholder .placeholder-role {
+        font-size: 19.2px;
+        font-weight: 460;
+        color: oklch(0.145 0 0);
+        margin-bottom: 1em;
+      }
+      #app-placeholder .placeholder-summary {
+        font-size: 16px;
+        font-weight: 400;
+        color: oklch(0.208 0 0);
+        line-height: 1.6;
+      }
       @media (prefers-color-scheme: dark) {
         html { background-color: #1d1d1d; }
         #app-placeholder { color: #e8e8e8; }
+        #app-placeholder h1 { color: oklch(0.68 0.213 277); }
+        #app-placeholder .placeholder-role { color: oklch(0.961 0 0); }
+        #app-placeholder .placeholder-summary { color: oklch(0.847 0 0); }
       }
       html.dark { background-color: #1d1d1d !important; }
       html.dark #app-placeholder { color: #e8e8e8; }
+      html.dark #app-placeholder h1 { color: oklch(0.68 0.213 277); }
+      html.dark #app-placeholder .placeholder-role { color: oklch(0.961 0 0); }
+      html.dark #app-placeholder .placeholder-summary { color: oklch(0.847 0 0); }
       html.light { background-color: #ffffff !important; }
       html.light #app-placeholder { color: #1d1d1d; }
+      html.light #app-placeholder h1 { color: oklch(0.55 0.180 45); }
+      html.light #app-placeholder .placeholder-role { color: oklch(0.145 0 0); }
+      html.light #app-placeholder .placeholder-summary { color: oklch(0.208 0 0); }
+      @media (min-width: 640px) {
+        #app-placeholder { padding: 64.5px 48px 33.178px 48px; }
+        #app-placeholder h1 { font-size: 37.325px; }
+        #app-placeholder .placeholder-role { font-size: 21.6px; }
+        #app-placeholder .placeholder-summary { font-size: 18px; }
+      }
+      @media (min-width: 1024px) {
+        #app-placeholder { padding: 80px 64px 33.178px 64px; }
+        #app-placeholder h1 { font-size: 41.472px; }
+        #app-placeholder .placeholder-role { font-size: 24px; }
+        #app-placeholder .placeholder-summary { font-size: 20px; }
+      }
     </style>
     <script>
       (function() {
@@ -66,11 +116,7 @@
     <link rel="me" href="https://linkedin.com/in/cbeasley0" />
     <link rel="me" href="https://github.com/beacrea" />
     
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400..700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400..700&display=swap" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;" />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400..700&display=swap" rel="stylesheet" /></noscript>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/red-hat-mono-latin.woff2" crossorigin />
     
     <script type="application/ld+json">
     {
@@ -117,9 +163,10 @@
   </head>
   <body>
     <div id="app">
-      <div id="app-placeholder" style="min-height:100vh;padding:2rem;">
-        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:680;line-height:1.1;margin:0 0 0.5em;">Coty Beasley</h1>
-        <p style="font-size:clamp(1rem,2vw,1.25rem);margin:0;">Design and Product Leader</p>
+      <div id="app-placeholder">
+        <h1>Coty Beasley</h1>
+        <p class="placeholder-role">Design and Product Leader</p>
+        <p class="placeholder-summary">Good design brings clarity to complexity and makes technology actually useful. With this in mind, I work at the intersection of systems, people, and innovation to help organizations and communities connect, collaborate, and grow.</p>
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>

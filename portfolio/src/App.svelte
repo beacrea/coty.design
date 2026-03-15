@@ -6,7 +6,7 @@
   import FamilyExplainer from './components/FamilyExplainer.svelte';
   import ConnectSection from './components/ConnectSection.svelte';
   import Footer from './components/Footer.svelte';
-  import GenerativeBackground from './components/GenerativeBackground.svelte';
+  import LazyBackground from './components/LazyBackground.svelte';
   import { siteContent } from './lib/content';
 
   $: isDark = $theme === 'dark';
@@ -20,7 +20,7 @@
   }
 </script>
 
-<GenerativeBackground enhancedContrast={observeMode} observationMode={observeMode} />
+<LazyBackground enhancedContrast={observeMode} observationMode={observeMode} />
 <div class="toggle-wrapper" class:observe-active={observeMode}>
   <ThemeToggle />
   <button 
