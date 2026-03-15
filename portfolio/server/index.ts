@@ -7,7 +7,9 @@ import { serveDossier } from './routes/dossier.js';
 import { agentPreview } from './routes/agent-preview.js';
 import { agentInsights, agentInsightsData } from './routes/agent-insights.js';
 import { serveLlmsTxt, serveLlmsFullTxt } from './routes/llms-txt.js';
+import { serveSitemap } from './routes/sitemap.js';
 import { logAgentVisit, initAnalyticsDb } from './middleware/analytics.js';
+import { registerRoute, mountRegisteredRoutes } from './lib/routes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,12 +20,16 @@ const PORT = parseInt(process.env.PORT || '5000', 10);
 
 initAnalyticsDb();
 
-app.use('/agent-preview', agentPreview);
-app.get('/agent-insights', (req, res, next) => { res.setHeader('X-Robots-Tag', 'noindex'); next(); }, agentInsights);
-app.get('/api/agent-insights', (req, res, next) => { res.setHeader('X-Robots-Tag', 'noindex'); next(); }, agentInsightsData);
+registerRoute({ path: '/', method: 'get', handlers: [], noindex: false, changefreq: 'monthly', priority: 1.0, mountManually: true });
+registerRoute({ path: '/agent-preview', method: 'use', handlers: [agentPreview], noindex: false, changefreq: 'monthly', priority: 0.5 });
+registerRoute({ path: '/agent-insights', method: 'get', handlers: [agentInsights], noindex: true, changefreq: 'weekly', priority: 0.0 });
+registerRoute({ path: '/api/agent-insights', method: 'get', handlers: [agentInsightsData], noindex: true, changefreq: 'weekly', priority: 0.0 });
+registerRoute({ path: '/llms.txt', method: 'get', handlers: [serveLlmsTxt], noindex: false, changefreq: 'monthly', priority: 0.8 });
+registerRoute({ path: '/llms-full.txt', method: 'get', handlers: [serveLlmsFullTxt], noindex: false, changefreq: 'monthly', priority: 0.7 });
 
-app.get('/llms.txt', serveLlmsTxt);
-app.get('/llms-full.txt', serveLlmsFullTxt);
+mountRegisteredRoutes(app);
+
+app.get('/sitemap.xml', serveSitemap);
 
 app.get('/api/dossier-preview', (req, res) => serveDossier(req, res));
 
