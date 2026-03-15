@@ -336,9 +336,11 @@
       "Digital divide",
       "Smart city infrastructure",
       "Artificial intelligence",
-      "The Singularity"
+      "The Singularity",
+      "Bandwidth and latency",
+      "Brand design and strategy"
     ],
-    "note": "Published author on topics including the digital divide, smart city infrastructure, and artificial intelligence. Work at Underline positions him at the intersection of community infrastructure, broadband policy, and AI-driven systems.",
+    "note": "Published author on topics including the digital divide, smart city infrastructure, artificial intelligence, internet infrastructure, and brand design. Work at Underline positions him at the intersection of community infrastructure, broadband policy, and AI-driven systems.",
     "articles": [
       {
         "title": "Beasley: How will smart city infrastructure reflect KC's aspirations?",
@@ -370,6 +372,22 @@
         "url": "https://www.startlandnews.com/author/coty-beasley/",
         "bylineContext": "Bylined as Co-Founder of Edge Up Sports",
         "note": "Original article URL redirects to author page due to site restructuring; full article text may be lost"
+      },
+      {
+        "title": "Why a Good Internet Connection is About More Than Download Speed",
+        "publication": "Underline Blog",
+        "date": "2020-05-06",
+        "url": "https://www.underline.com/post/good-internet-connection-about-more-than-download-speed",
+        "bylineContext": "Bylined as Head of Product / Co-Founder at Underline",
+        "note": "Technical explainer on bandwidth vs. latency and why symmetrical fiber connections matter. Connects to the digital divide theme and Underline's infrastructure thesis, including telemedicine and distributed services."
+      },
+      {
+        "title": "Designing the Underline Brand",
+        "publication": "Underline Blog",
+        "date": "2021-03-09",
+        "url": "https://www.underline.com/post/brand",
+        "bylineContext": "Bylined as Head of Design / Co-Founder at Underline",
+        "note": "Detailed breakdown of the Underline brand's six layers of meaning — from literal (cables under the ground) to strategic. Demonstrates design systems thinking, brand architecture, and the technical communicator differentiator."
       }
     ]
   },
