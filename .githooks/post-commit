@@ -1,0 +1,9 @@
+#!/bin/bash
+CORRECT_NAME="Coty Beasley"
+CORRECT_EMAIL="beacrea@users.noreply.github.com"
+
+CURRENT_EMAIL=$(git log -1 --format='%ae' HEAD)
+
+if [ "$CURRENT_EMAIL" = "51382616-beasles@users.noreply.replit.com" ]; then
+    git commit --amend --no-edit --author="$CORRECT_NAME <$CORRECT_EMAIL>" > /dev/null 2>&1
+fi
