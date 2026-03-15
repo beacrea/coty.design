@@ -1,0 +1,66 @@
+# Edge Up Sports — Press Coverage
+
+The main press wave hit in **August 2015** around the IBM Watson partnership announcement and Kickstarter launch. Edge Up Sports was founded in Kansas City by CEO Ilya Tabakh, building a fantasy football analytics platform powered by Watson's cognitive computing and NLP.
+
+---
+
+## Major Publications
+
+- **[WIRED — "IBM's Watson AI Wants to Coach Your Fantasy Football Team"](https://www.wired.com/2015/08/ibms-watson-ai-wants-coach-fantasy-football-team/)** · Aug 12, 2015  
+  The splashy launch piece. Described Edge Up as an "AI-powered Rotten Tomatoes for fantasy football" using Watson's entity extraction, sentiment analysis, and Personality Insights APIs.
+
+- **[WIRED — "All the Apps You Should Be Using to Rule Fantasy Football"](https://www.wired.com/2015/09/apps-using-rule-fantasy-football/)** · Sep 12, 2015  
+  Follow-up roundup piece: "You're pretty smart, but Watson is smarter."
+
+- **[Quartz — "There's finally a great use for IBM's Watson: making fantasy football picks"](https://qz.com/477323/theres-finally-a-great-use-for-ibms-watson-making-fantasy-football-picks)** · Aug 12, 2015  
+  Detailed breakdown of the "cognitive news radar," Watson sentiment analysis on both players and pundits, and the Kickstarter structure.
+
+- **[NBC News — "IBM's Watson Could Help You Win at Fantasy Football"](https://www.nbcnews.com/tech/mobile/ibms-watson-could-help-you-win-fantasy-football-n408496)** · Aug 12, 2015  
+  Broad audience tech coverage of the Watson-powered roster decision tools.
+
+- **[Fast Company — "IBM's Watson Can Now Help You Kick Ass In Fantasy Football"](https://www.fastcompany.com/3049711/ibms-watson-can-now-help-you-kick-ass-in-fantasy-football)** · Aug 12, 2015  
+  Featured Edge Up as an example of Watson's consumer and entertainment applications.
+
+- **[CIO Magazine — "IBM Watson brings cognitive computing to fantasy football"](https://www.cio.com/article/244823/ibm-watson-bring-cognitive-computing-to-fantasy-football.html)** · Aug 13, 2015  
+  IT-focused coverage with extended Ilya Tabakh quotes and fantasy sports market sizing.
+
+- **[eWeek — "IBM's Watson Takes on Fantasy Football"](https://www.eweek.com/database/ibm-s-watson-takes-on-fantasy-football/)** · Aug 2015  
+  Enterprise tech angle, with analyst commentary from Charles King of Pund-IT calling it "a great venue for demonstrating Watson's value."
+
+---
+
+## Local & Regional Coverage
+
+- **[Kansas City Star — "Kansas City startup aims to give fantasy football fans an edge"](https://www.kansascity.com/news/business/technology/article30782823.html)** · Aug 11, 2015  
+  Hometown paper coverage ahead of the Kickstarter launch.
+
+- **[Kansas City Star — "A dozen Kansas City area tech entrepreneurs are among the..."](https://www.kansascity.com/news/business/technology/article33385803.html)** · Sep 2, 2015  
+  Follow-up feature listing Edge Up Sports among notable KC tech startups.
+
+- **[Silicon Prairie News — "How Edge Up Sports blew past their Kickstarter goal"](https://siliconprairienews.com/2015/08/edge-up-sports-shares-how-they-blew-past-their-kickstarter-goal/)** · Aug 26, 2015  
+  Post-campaign analysis: over 50% funded in 24 hours, fully funded 14 days early with a $65k stretch goal set.
+
+- **[Startland News — "Edge Up Sports launches hilarious crowdfunding campaign"](https://www.startlandnews.com/2015/08/edge-up-sports-launches-hilarious-crowdfunding-campaign/)** · Aug 2015  
+  KC startup media coverage confirming $25,000 grant from Digital Sandbox KC incubator and $30,000 in SEC-filed funding.
+
+- **[WUWF/NPR — "In Kansas City, Superfast Internet And A Digital Divide"](https://www.wuwf.org/2015-03-09/in-kansas-city-superfast-internet-and-a-digital-divide)** · 2015  
+  Pre-launch mention of Edge Up Sports as part of the Kansas City startup scene leveraging Google Fiber.
+
+---
+
+## Industry / Syndicated
+
+- **[TelecomTV — "Edge Up Sports Drafts IBM Watson to Help Build a Championship Fantasy Football Team"](https://www.telecomtv.com/content/tracker/edge-up-sports-drafts-ibm-watson-to-help-build-a-championship-fantasy-football-team-17857/)** · Aug 12, 2015  
+  Full IBM press release syndication with Watson VP Lauri Saft quote on opening up the ecosystem.
+
+- **[F6S — Edge Up Sports Startup Profile](https://www.f6s.com/edgeupsports)**  
+  Startup directory listing with athletic trainer / high school safety angle.
+
+---
+
+## Key Facts
+
+- **Kickstarter goal:** $35,000 — funded within days, exceeded with a $65k stretch goal
+- **Pricing:** $22/season (stat tier) or $55/season (cognitive/Watson tier), $550 for a whole league
+- **Funding:** $25k Digital Sandbox KC grant + $30k additional (SEC filing)
+- The product was consistently described as a "cognitive news radar" and supplemental tool for Yahoo/CBS fantasy platforms
