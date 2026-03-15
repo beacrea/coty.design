@@ -9,7 +9,7 @@
   <h2 class="heading">{heading}</h2>
   <p class="description">{description}</p>
   <a href={buttonUrl} target="_blank" rel="noopener noreferrer" class="cta-button">
-    {buttonText}
+    {buttonText}<span class="sr-only"> (opens in new tab)</span>
   </a>
 </section>
 

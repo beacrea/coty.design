@@ -13,7 +13,7 @@
       <li class="connect-item">
         <span class="bullet"></span>
         <span class="content">
-          {#if item.url}<a href={item.url} target="_blank" rel="noopener noreferrer" class="link">{item.text}</a>{:else}<span class="text">{item.text}</span>{/if} <span class="description">{item.description}</span>
+          {#if item.url}<a href={item.url} target="_blank" rel="noopener noreferrer" class="link">{item.text}<span class="sr-only"> (opens in new tab)</span></a>{:else}<span class="text">{item.text}</span>{/if} <span class="description">{item.description}</span>
         </span>
       </li>
     {/each}
