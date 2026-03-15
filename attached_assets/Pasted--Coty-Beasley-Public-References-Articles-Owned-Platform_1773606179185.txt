@@ -1,0 +1,51 @@
+# Coty Beasley — Public References & Articles
+
+---
+
+## Owned Platforms & Profiles
+
+| Platform | URL | Description |
+|---|---|---|
+| Personal Site | [coty.design](https://coty.design) | Primary professional portfolio and bio |
+| LinkedIn | [linkedin.com/in/cbeasley0](https://www.linkedin.com/in/cbeasley0) | Full career history, Co-Founder/Head of Product Design & Innovation at Underline |
+| X / Twitter | [x.com/beacrea](https://x.com/beacrea) | Active account — "Head of Product & Design @UnderlineInfra, Creative Coder, Digital Privacy Enthusiast, Gamer" |
+| GitHub | [github.com/beacrea](https://github.com/beacrea) | 70+ public repositories; self-tagged as "Product designer, front-end, design technologist" |
+| Dribbble | [dribbble.com/beacrea](https://dribbble.com/beacrea) | Design work; ~237 followers |
+| CodePen | [codepen.io/beacrea](https://codepen.io/beacrea) | Self-described as "Design Technologist, Design Systems Architect, Front-End Designer, Product Designer" |
+| Observable | [observablehq.com/@beacrea](https://observablehq.com/@beacrea) | Data viz notebooks: *Temporal force-directed graph*, *Disjoint force-directed graph* |
+| IndieWeb Wiki | [indieweb.org/User:Coty.design](https://indieweb.org/User:Coty.design) | IndieWeb member profile linking coty.design, Twitter, CodePen, Last.fm |
+
+---
+
+## Authored Articles
+
+### Startland News — "Words that Frustrate (WTF)" series + commentary
+
+All bylined as *Co-Founder of Edge Up Sports* during the 2016 KC tech community writing period:
+
+| Title | Date | URL |
+|---|---|---|
+| *Beasley: How will smart city infrastructure reflect KC's aspirations?* | July 2016 | [startlandnews.com](https://www.startlandnews.com/2016/07/beasley-will-smart-city-infrastructure-reflect-kcs-aspirations/) |
+| *Coty Beasley consoles dystopic critics of artificial intelligence* | June 7, 2016 | [startlandnews.com/author/coty-beasley](https://www.startlandnews.com/author/coty-beasley/) |
+| *Coty Beasley addresses 'the Singularity' and our impending doom* | ~July 2016 | (via author page) |
+| *Coty Beasley: Digital divides threaten Kansas City's future* | September 8, 2016 | (via author page) |
+
+---
+
+## Third-Party Profiles & Directory Listings
+
+| Source | URL | Notes |
+|---|---|---|
+| Underline Team Profile | [underline.com/underliners/coty-beasley](https://www.underline.com/underliners/coty-beasley) | Official bio page |
+| Underline Team Dossier | [underline.com/misc/dossiers](https://www.underline.com/misc/dossiers) | Listed alongside full leadership team |
+| The Org | [theorg.com](https://theorg.com/org/underline-infrastructure/org-chart/coty-beasley) | Org chart entry with full career history |
+| ZoomInfo | [zoominfo.com](https://www.zoominfo.com/p/Coty-Beasley/3854206291) | Contact aggregator |
+| RocketReach | [rocketreach.co](https://rocketreach.co/coty-beasley-email_562504) | Career/contact aggregator |
+
+---
+
+## Notable Gaps
+
+- The *Singularity* and *AI consolation* Startland pieces redirect to the author page rather than individual article URLs — the full article text appears lost to site restructuring
+- No bylined Underline blog posts were found — all Underline editorial is currently attributed to CEO Bob Thompson
+- No press articles connecting your name directly to Underline's major milestones (Ares Management investment, Fountain CO network launch) despite those events being covered in trade press
