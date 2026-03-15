@@ -7,6 +7,7 @@ import { storage } from "./storage";
 import { analyzeIntent, isUnproductiveResponse, type IntentAnalysisResult, type ConversationMessage } from "./intent-analyzer";
 import { personaEngine } from "./persona-engine";
 import { evaluateResponse, evaluateResponseWithLLM, type EvaluationResult } from "./response-evaluator";
+import * as net from "net";
 
 // Using gpt-4o-mini for cost efficiency
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -174,8 +175,45 @@ function getFollowUpSuggestions(
   return null;
 }
 
+function isPublicIP(ip: string): boolean {
+  if (!ip || ip === "unknown") {
+    return false;
+  }
+
+  // Ensure it is a valid IP address
+  const ipVersion = net.isIP(ip);
+  if (ipVersion === 0) {
+    return false;
+  }
+
+  // Normalize IPv6 loopback
+  if (ip === "::1") {
+    return false;
+  }
+
+  // Reject common private/loopback ranges for IPv4
+  if (
+    ip.startsWith("10.") || // 10.0.0.0/8
+    ip.startsWith("192.168.") || // 192.168.0.0/16
+    ip.startsWith("172.16.") || ip.startsWith("172.17.") || ip.startsWith("172.18.") || ip.startsWith("172.19.") ||
+    ip.startsWith("172.20.") || ip.startsWith("172.21.") || ip.startsWith("172.22.") || ip.startsWith("172.23.") ||
+    ip.startsWith("172.24.") || ip.startsWith("172.25.") || ip.startsWith("172.26.") || ip.startsWith("172.27.") ||
+    ip.startsWith("172.28.") || ip.startsWith("172.29.") || ip.startsWith("172.30.") || ip.startsWith("172.31.") ||
+    ip === "127.0.0.1"
+  ) {
+    return false;
+  }
+
+  // Basic check for link-local / unspecified IPv6 addresses
+  if (ip.startsWith("fe80:") || ip === "::" || ip.toLowerCase().startsWith("fc") || ip.toLowerCase().startsWith("fd")) {
+    return false;
+  }
+
+  return true;
+}
+
 async function getLocationFromIP(ip: string): Promise<{ country: string; region: string; city: string } | null> {
-  if (!ip || ip === "unknown" || ip === "127.0.0.1" || ip.startsWith("192.168.") || ip.startsWith("10.")) {
+  if (!isPublicIP(ip)) {
     return null;
   }
   try {
