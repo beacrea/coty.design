@@ -6,8 +6,8 @@
 
 <div class="opener">
   <h1 class="name">{name}</h1>
-  <p class="role animate-entrance">{role}</p>
-  <p class="summary animate-entrance stagger-1">{summary}</p>
+  <p class="role">{role}</p>
+  <p class="summary">{summary}</p>
 </div>
 
 <style>

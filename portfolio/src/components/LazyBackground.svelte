@@ -4,14 +4,21 @@
   export let enhancedContrast = false;
   export let observationMode = false;
 
-  let mounted = false;
+  let ready = false;
 
   onMount(() => {
-    mounted = true;
+    const start = () => { ready = true; };
+    if ('requestIdleCallback' in window) {
+      setTimeout(() => {
+        (window as any).requestIdleCallback(start);
+      }, 3000);
+    } else {
+      setTimeout(start, 3500);
+    }
   });
 </script>
 
-{#if mounted}
+{#if ready}
   {#await import('./GenerativeBackground.svelte') then mod}
     <svelte:component this={mod.default} {enhancedContrast} {observationMode} />
   {/await}
