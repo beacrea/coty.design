@@ -42,7 +42,6 @@
     color: var(--semantic-header);
     margin-bottom: var(--list-item-gap);
     transition: color var(--transition-theme);
-    text-wrap: balance;
   }
 
   .description {
@@ -52,7 +51,6 @@
     line-height: 1.6;
     margin-bottom: 1.25rem;
     transition: color var(--transition-theme);
-    text-wrap: wrap;
   }
 
   .cta-button {

@@ -29,12 +29,6 @@ function preservePlaceholderPlugin(): Plugin {
         );
       }
 
-      html = html.replace(
-        /<link rel="stylesheet" crossorigin href="(\/assets\/[^"]+\.css)">/g,
-        '<link rel="stylesheet" crossorigin href="$1" media="print" onload="this.media=\'all\'">' +
-        '<noscript><link rel="stylesheet" crossorigin href="$1"></noscript>'
-      );
-
       return html;
     }
   };
