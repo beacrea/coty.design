@@ -1,12 +1,15 @@
 ---
 title: "AI Optimization Architecture"
-version: "1.0.0"
+version: "1.1.0"
 status: "Accepted"
 date: "2026-03-16"
 authors:
   - "Coty Beasley"
 supersedes: null
 revision_history:
+  - version: "1.1.0"
+    date: "2026-03-16"
+    changes: "Added Section 8: Passive Agent Discoverability — layered signals for tool-using agents that bypass UA-based detection (GitHub issue #80, Task #26)"
   - version: "1.0.0"
     date: "2026-03-16"
     changes: "Initial ADR documenting AI optimization system architecture, research basis, and design rationale"
@@ -141,6 +144,53 @@ The `agentDetectionMiddleware` function sets `res.locals.isAIAgent`, `res.locals
 
 **Rationale:** AI optimization is invisible by nature — the outputs are consumed by machines, not humans. A preview page provides transparency and debugging capability, making the AI layer auditable.
 
+### 8. Passive Agent Discoverability
+
+**The human-facing response includes multiple layered signals that passively advertise agent-optimized content, independent of user-agent detection.**
+
+#### The Gap: Tool-Using Agents
+
+The UA-based agent detection system (Section 3) works reliably for known crawlers, but a growing class of AI agents falls outside this model entirely. **Tool-using agents** — Claude Code (via `WebFetch`), ChatGPT with function calling, MCP-connected agents, and similar — fetch URLs through HTTP client tools that send generic browser-like user-agent strings. These agents:
+
+- Are not in any UA allowlist and never will be (there's no standard UA string for this category)
+- Receive the human-facing SPA with zero indication that richer content exists
+- Must guess paths like `/llms.txt` — a convention new enough that many agents won't try it
+
+This gap was discovered empirically: Claude Code hit `coty.design`, received the standard SPA, and had no way to discover `/llms.txt` until it speculatively tried the path. The full dossier at `/llms-full.txt` was only found because `llms.txt` contained a text pointer to it. (Source: GitHub issue #80)
+
+#### Solution: Layered Passive Signals
+
+Rather than attempting to detect more agents (an arms race with no stable solution), the architecture embeds discoverability signals directly into the response that *any* agent receives — the human-facing page itself. Multiple layers ensure coverage across different agent capabilities:
+
+| Signal | Where | Works For | Implementation Cost |
+|--------|-------|-----------|-------------------|
+| HTTP `Link` header | Root route response headers | Any HTTP client, before DOM parsing | ~4 lines server code |
+| HTML `<link rel="alternate">` | `index.html` `<head>` | DOM-parsing agents | 2 tags in HTML |
+| JSON-LD `subjectOf` | Existing `Person` schema in `index.html` | Structured-data-aware agents, search engines | Extend existing schema |
+| `/.well-known/ai-plugin.json` | Static file with explicit Express route | OpenAI ecosystem agents, convention-following tools | New JSON file + route |
+| YAML frontmatter in `llms.txt` | Top of generated output | Frontmatter-aware parsers (most Markdown tools) | Prepend to generator |
+
+**Implementation details:**
+
+1. **HTTP `Link` headers** (`portfolio/server/index.ts`) — Both the production and dev root route handlers set `Link` headers before any agent detection logic runs. The headers use the standard `rel="alternate"` mechanism defined in RFC 8288 for advertising alternative representations of a resource. This is the highest-value signal because it works at the HTTP level — an agent doesn't need to parse HTML at all.
+
+   ```
+   Link: </llms.txt>; rel="alternate"; type="text/plain"; title="LLM-optimized content",
+         </llms-full.txt>; rel="alternate"; type="text/plain"; title="Full LLM dossier"
+   ```
+
+2. **HTML `<link rel="alternate">` tags** (`portfolio/index.html`) — Standard HTML mechanism for alternate representations. Any agent that parses the DOM will find these in the `<head>`. The `type="text/plain"` attribute signals that the alternate content is plain text, not another HTML page.
+
+3. **JSON-LD `subjectOf`** (`portfolio/index.html`) — The existing `Person` schema is extended with `subjectOf`, a Schema.org property that means "this Person is the subject of this Document." The linked document is typed as `TextDigitalDocument` with `encodingFormat: "text/plain"`. This is semantically precise and follows Schema.org conventions for linking a person to content about them.
+
+4. **`/.well-known/ai-plugin.json`** (`portfolio/public/.well-known/ai-plugin.json`) — Follows the convention established by OpenAI for ChatGPT plugins. Contains `schema_version`, `name`, `description`, and explicit URLs for both `llms_txt` and `llms_full_txt`. Served via an explicit Express route with `dotfiles: 'allow'` because Express's default static middleware ignores dot-prefixed directories.
+
+5. **YAML frontmatter in `llms.txt`** (`portfolio/server/routes/llms-txt.ts`) — The generated `llms.txt` output now starts with a YAML frontmatter block containing `full:` (URL to `llms-full.txt`) and `updated:` (corpus last-updated date). This allows agents that find `llms.txt` to programmatically discover the full version without parsing prose.
+
+**Rationale:** There is no standard yet for how agents discover machine-readable content. Different agents have different parsing capabilities — some inspect headers only, some parse HTML, some understand Schema.org, some check well-known paths. By layering signals across all these channels, the architecture maximizes the probability that any given agent will find the optimized content. The cost of each additional signal is minimal (a few lines of code), while the coverage gain is significant.
+
+**Validation:** The `validate-agent.ts` test suite includes five dedicated checks for discoverability signals (29 checks total), verifying Link header presence and structure, HTML link tag presence, JSON-LD `subjectOf` structure, `.well-known/ai-plugin.json` validity, and `llms.txt` frontmatter parsing.
+
 ## Alternatives Considered
 
 ### Block training crawlers, allow only search and retrieval
@@ -185,7 +235,7 @@ The `isbot` npm package detects a broad range of bots. Using it alone would be s
 
 ### Negative
 
-- **Maintenance burden** — The agent detection lists require updating as new AI crawlers emerge; user-agent strings may change
+- **Maintenance burden** — The agent detection lists require updating as new AI crawlers emerge; user-agent strings may change. The passive discoverability signals partially mitigate this by working regardless of UA matching.
 - **Corpus coupling** — All outputs depend on the corpus schema; schema changes require updating all transformation functions
 - **SQLite limitations** — The analytics database is local and ephemeral; it doesn't survive container resets without backup
 - **Emergent standards** — The llms.txt convention and AI crawler landscape are evolving rapidly; the architecture may need adaptation as standards mature
@@ -194,6 +244,7 @@ The `isbot` npm package detects a broad range of bots. Using it alone would be s
 
 - **No content differentiation by role** — Currently, all AI agents receive the same content regardless of role. The classification is used for analytics only. Future iterations could serve different content depths based on crawler role.
 - **No rate limiting** — AI crawlers are not rate-limited. If aggressive crawling becomes an issue, rate limiting can be added at the middleware layer.
+- **Dual detection model** — The system now uses both active detection (UA matching for known crawlers) and passive discoverability (signals embedded in responses). These are complementary: active detection enables role classification and analytics, while passive signals ensure coverage for the growing population of tool-using agents that can't be identified by UA.
 
 ## Related
 
@@ -202,4 +253,4 @@ The `isbot` npm package detects a broad range of bots. Using it alone would be s
 
 ## Status
 
-**Accepted** — System implemented and operational across Tasks #4, #5, #7, and #14.
+**Accepted** — System implemented and operational across Tasks #4, #5, #7, #14, and #26. Passive discoverability signals added in v1.1.0 (Task #26, GitHub issue #80).
