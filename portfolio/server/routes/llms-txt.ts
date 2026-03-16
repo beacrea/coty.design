@@ -16,7 +16,12 @@ export function serveLlmsFullTxt(_req: Request, res: Response) {
 }
 
 function generateLlmsTxt(corpus: any): string {
-  return `# ${corpus.identity.name}
+  return `---
+full: ${corpus.canonicalUrl}/llms-full.txt
+updated: ${corpus.lastUpdated}
+---
+
+# ${corpus.identity.name}
 
 > ${corpus.canonicalBio}
 

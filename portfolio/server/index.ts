@@ -38,6 +38,10 @@ app.get('/sitemap.xml', serveSitemap);
 
 app.get('/api/dossier-preview', (req, res) => serveDossier(req, res));
 
+app.use('/.well-known', express.static(path.resolve(__dirname, '../public/.well-known'), {
+  dotfiles: 'allow',
+}));
+
 app.use(logAgentVisit);
 app.use(agentDetectionMiddleware);
 
@@ -45,6 +49,10 @@ if (process.env.NODE_ENV === 'production') {
   const distPath = path.resolve(__dirname, '../dist');
 
   app.get('/', (req, res, next) => {
+    res.setHeader('Link', [
+      '</llms.txt>; rel="alternate"; type="text/plain"; title="LLM-optimized content"',
+      '</llms-full.txt>; rel="alternate"; type="text/plain"; title="Full LLM dossier"',
+    ].join(', '));
     if (res.locals.isAIAgent) {
       return serveDossier(req, res);
     }
@@ -83,6 +91,10 @@ if (process.env.NODE_ENV === 'production') {
   });
 
   app.get('/', (req, res, next) => {
+    res.setHeader('Link', [
+      '</llms.txt>; rel="alternate"; type="text/plain"; title="LLM-optimized content"',
+      '</llms-full.txt>; rel="alternate"; type="text/plain"; title="Full LLM dossier"',
+    ].join(', '));
     if (res.locals.isAIAgent) {
       return serveDossier(req, res);
     }

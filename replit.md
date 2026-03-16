@@ -110,7 +110,15 @@ The portfolio features a subtle canvas-based generative background (`GenerativeB
 - `/api/dossier-preview` — API for rendered dossier content
 - Professional ontology corpus: `portfolio/content/agent-corpus.json`
 - Corpus validation: `npm run validate-corpus`
-- Agent endpoint validation: `npm run validate-agent` (tests all agent-facing endpoints against corpus)
+- Agent endpoint validation: `npm run validate-agent` (tests all agent-facing endpoints against corpus, 29 checks)
+
+### Agent Discoverability (passive signals for tool-using agents)
+Tool-using agents (Claude Code, ChatGPT browsing, MCP tools) use generic User-Agent strings and bypass active agent detection. Five layered passive signals ensure they can still discover agent-optimized content:
+1. **HTTP `Link` headers** — Root route returns `Link` headers pointing to `/llms.txt` and `/llms-full.txt` (works before any DOM parsing)
+2. **HTML `<link rel="alternate">` tags** — In `index.html` `<head>`, visible to any DOM-parsing agent
+3. **JSON-LD `subjectOf`** — The `Person` schema in `index.html` includes `subjectOf` pointing to `llms.txt` as a `TextDigitalDocument`
+4. **`/.well-known/ai-plugin.json`** — Static manifest advertising agent-optimized endpoints (OpenAI plugin convention)
+5. **YAML frontmatter in `llms.txt`** — Machine-readable `full:` URL and `updated:` date at the top of the generated output
 
 ### Chatbot (`/ask`)
 - **React** + **Vite** — Frontend

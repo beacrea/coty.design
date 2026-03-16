@@ -303,8 +303,11 @@ async function testLlmsTxt() {
 
     const issues: string[] = [];
 
-    if (!body.startsWith(`# ${corpus.identity.name}`)) {
-      issues.push(`Expected to start with "# ${corpus.identity.name}"`);
+    if (!body.startsWith('---')) {
+      issues.push('Expected to start with YAML frontmatter delimiter "---"');
+    }
+    if (!body.includes(`# ${corpus.identity.name}`)) {
+      issues.push(`Expected to contain heading "# ${corpus.identity.name}"`);
     }
     if (!body.includes(corpus.canonicalBio)) {
       issues.push('Missing canonicalBio');
@@ -656,6 +659,213 @@ async function testNoUserAgentDoesNotGetDossier() {
   }
 }
 
+async function testHttpLinkHeaders() {
+  const testName = 'Root response includes Link headers for LLM content';
+  try {
+    const { headers } = await fetchText('/', BROWSER_UA);
+    const linkHeader = headers.get('link') ?? '';
+
+    const issues: string[] = [];
+
+    if (!linkHeader.includes('/llms.txt')) {
+      issues.push('Missing Link header entry for /llms.txt');
+    }
+    if (!linkHeader.includes('/llms-full.txt')) {
+      issues.push('Missing Link header entry for /llms-full.txt');
+    }
+    if (!linkHeader.includes('rel="alternate"')) {
+      issues.push('Link header missing rel="alternate"');
+    }
+    if (!linkHeader.includes('type="text/plain"')) {
+      issues.push('Link header missing type="text/plain"');
+    }
+
+    if (issues.length > 0) {
+      fail(testName, `Link header issues:\n    - ${issues.join('\n    - ')}`);
+    } else {
+      pass(testName);
+    }
+  } catch (err: unknown) {
+    fail(testName, `Request failed: ${getErrorMessage(err)}`);
+  }
+}
+
+async function testHtmlLinkAlternateTags() {
+  const testName = 'SPA HTML contains <link rel="alternate"> tags for LLM content';
+  try {
+    const { body } = await fetchText('/', BROWSER_UA);
+
+    const issues: string[] = [];
+
+    const llmsTxtPattern = /<link[^>]+rel="alternate"[^>]+href="\/llms\.txt"[^>]*>/;
+    const llmsFullTxtPattern = /<link[^>]+rel="alternate"[^>]+href="\/llms-full\.txt"[^>]*>/;
+
+    if (!llmsTxtPattern.test(body)) {
+      issues.push('Missing <link rel="alternate" href="/llms.txt"> tag');
+    }
+    if (!llmsFullTxtPattern.test(body)) {
+      issues.push('Missing <link rel="alternate" href="/llms-full.txt"> tag');
+    }
+
+    if (issues.length > 0) {
+      fail(testName, `HTML link tag issues:\n    - ${issues.join('\n    - ')}`);
+    } else {
+      pass(testName);
+    }
+  } catch (err: unknown) {
+    fail(testName, `Request failed: ${getErrorMessage(err)}`);
+  }
+}
+
+async function testJsonLdSubjectOf() {
+  const testName = 'SPA JSON-LD contains subjectOf pointing to llms.txt';
+  try {
+    const { body } = await fetchText('/', BROWSER_UA);
+
+    const jsonLdMatch = body.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    if (!jsonLdMatch) {
+      fail(testName, 'No JSON-LD script tag found in SPA HTML');
+      return;
+    }
+
+    let jsonLd: Record<string, unknown>;
+    try {
+      jsonLd = JSON.parse(jsonLdMatch[1]) as Record<string, unknown>;
+    } catch {
+      fail(testName, 'JSON-LD is not valid JSON');
+      return;
+    }
+
+    const issues: string[] = [];
+
+    const subjectOf = jsonLd.subjectOf as Record<string, unknown> | undefined;
+    if (!subjectOf) {
+      fail(testName, 'JSON-LD missing subjectOf property');
+      return;
+    }
+
+    if (subjectOf['@type'] !== 'TextDigitalDocument') {
+      issues.push(`Expected subjectOf.@type "TextDigitalDocument", got "${subjectOf['@type']}"`);
+    }
+    if (typeof subjectOf.url !== 'string' || !subjectOf.url.includes('/llms.txt')) {
+      issues.push(`Expected subjectOf.url to contain "/llms.txt", got "${subjectOf.url}"`);
+    }
+    if (subjectOf.encodingFormat !== 'text/plain') {
+      issues.push(`Expected subjectOf.encodingFormat "text/plain", got "${subjectOf.encodingFormat}"`);
+    }
+
+    if (issues.length > 0) {
+      fail(testName, `subjectOf issues:\n    - ${issues.join('\n    - ')}`);
+    } else {
+      pass(testName);
+    }
+  } catch (err: unknown) {
+    fail(testName, `Request failed: ${getErrorMessage(err)}`);
+  }
+}
+
+interface AiPluginManifest {
+  schema_version: string;
+  name: string;
+  description: string;
+  llms_txt: string;
+  llms_full_txt: string;
+}
+
+async function testWellKnownAiPlugin() {
+  const testName = '.well-known/ai-plugin.json is valid';
+  try {
+    const { status, headers, body } = await fetchText('/.well-known/ai-plugin.json');
+    if (status !== 200) {
+      fail(testName, `Expected status 200, got ${status}`);
+      return;
+    }
+
+    const contentType = headers.get('content-type') ?? '';
+    if (!contentType.includes('json')) {
+      fail(testName, `Expected JSON content type, got: ${contentType}`);
+      return;
+    }
+
+    let manifest: AiPluginManifest;
+    try {
+      manifest = JSON.parse(body) as AiPluginManifest;
+    } catch {
+      fail(testName, 'Response is not valid JSON');
+      return;
+    }
+
+    const issues: string[] = [];
+
+    if (!manifest.schema_version) {
+      issues.push('Missing schema_version');
+    }
+    if (!manifest.name) {
+      issues.push('Missing name');
+    }
+    if (!manifest.description) {
+      issues.push('Missing description');
+    }
+    if (!manifest.llms_txt || !manifest.llms_txt.includes('/llms.txt')) {
+      issues.push(`llms_txt should point to /llms.txt, got: "${manifest.llms_txt}"`);
+    }
+    if (!manifest.llms_full_txt || !manifest.llms_full_txt.includes('/llms-full.txt')) {
+      issues.push(`llms_full_txt should point to /llms-full.txt, got: "${manifest.llms_full_txt}"`);
+    }
+
+    if (issues.length > 0) {
+      fail(testName, `ai-plugin.json issues:\n    - ${issues.join('\n    - ')}`);
+    } else {
+      pass(testName);
+    }
+  } catch (err: unknown) {
+    fail(testName, `Request failed: ${getErrorMessage(err)}`);
+  }
+}
+
+async function testLlmsTxtFrontmatter() {
+  const testName = 'llms.txt contains YAML frontmatter with full URL and updated date';
+  try {
+    const { body } = await fetchText('/llms.txt');
+
+    const issues: string[] = [];
+
+    if (!body.startsWith('---')) {
+      issues.push('Does not start with YAML frontmatter delimiter "---"');
+    }
+
+    const frontmatterMatch = body.match(/^---\n([\s\S]*?)\n---/);
+    if (!frontmatterMatch) {
+      fail(testName, 'No valid YAML frontmatter block found (expected --- ... ---)');
+      return;
+    }
+
+    const frontmatter = frontmatterMatch[1];
+
+    const fullMatch = frontmatter.match(/^full:\s*(.+)$/m);
+    if (!fullMatch) {
+      issues.push('Missing "full:" field in frontmatter');
+    } else if (!fullMatch[1].includes('/llms-full.txt')) {
+      issues.push(`"full:" should point to /llms-full.txt, got: "${fullMatch[1]}"`);
+    }
+
+    const updatedMatch = frontmatter.match(/^updated:\s*(.+)$/m);
+    if (!updatedMatch) {
+      issues.push('Missing "updated:" field in frontmatter');
+    } else if (updatedMatch[1].trim() !== corpus.lastUpdated) {
+      issues.push(`"updated:" should be "${corpus.lastUpdated}", got: "${updatedMatch[1].trim()}"`);
+    }
+
+    if (issues.length > 0) {
+      fail(testName, `Frontmatter issues:\n    - ${issues.join('\n    - ')}`);
+    } else {
+      pass(testName);
+    }
+  } catch (err: unknown) {
+    fail(testName, `Request failed: ${getErrorMessage(err)}`);
+  }
+}
+
 function printReport() {
   const passed = results.filter(r => r.passed).length;
   const failed = results.filter(r => !r.passed).length;
@@ -716,10 +926,15 @@ async function main() {
   await testJsonLdMatchesCorpus();
   await testLlmsTxt();
   await testLlmsFullTxt();
+  await testLlmsTxtFrontmatter();
   await testRobotsTxt();
   await testSitemapXml();
   await testDossierPreviewEndpoint();
   await testContentTypes();
+  await testHttpLinkHeaders();
+  await testHtmlLinkAlternateTags();
+  await testJsonLdSubjectOf();
+  await testWellKnownAiPlugin();
   await testBrowserDoesNotGetDossier();
   await testNoUserAgentDoesNotGetDossier();
 

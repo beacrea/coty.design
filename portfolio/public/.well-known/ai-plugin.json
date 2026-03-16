@@ -1,0 +1,9 @@
+{
+  "schema_version": "v1",
+  "name": "Coty Beasley",
+  "description": "Professional dossier with agent-optimized content for Coty Beasley — design technologist, product leader, and co-founder of Underline.",
+  "llms_txt": "https://coty.design/llms.txt",
+  "llms_full_txt": "https://coty.design/llms-full.txt",
+  "contact_email": "",
+  "legal_info_url": ""
+}
