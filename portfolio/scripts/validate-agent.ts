@@ -1,40 +1,85 @@
 import { readFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import {
+  TRAINING_CRAWLERS,
+  SEARCH_CRAWLERS,
+  USER_RETRIEVAL_AGENTS,
+  ALL_AI_AGENTS,
+} from '../server/middleware/agent-detection.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const BASE_URL = process.env.VALIDATE_AGENT_URL || 'http://localhost:5000';
 
-const corpus = JSON.parse(
+interface Corpus {
+  lastUpdated: string;
+  canonicalUrl: string;
+  canonicalBio: string;
+  identity: {
+    name: string;
+    jobTitle: string;
+    organization: string;
+    organizationUrl: string;
+    currentLocation: string;
+    currentLocationSince: string;
+    birthPlace: string;
+    description: string;
+    linkedin: string;
+    github: string;
+    education: Array<{
+      institution: string;
+      degree?: string;
+      fieldOfStudy?: string;
+      completed: boolean;
+      note?: string;
+    }>;
+    simultaneousModes: string[];
+  };
+  narrativeThroughLine: {
+    theme: string;
+    description: string;
+    evidence: string[];
+    propheticVision: string;
+  };
+  expertiseDomains: Array<{ domain: string; evidence: string; depth: string }>;
+  differentiators: {
+    coreCapability: string;
+    rareCombination: string[];
+    bridgesVerticals: string[];
+  };
+  professionalAffiliations: Array<{ organization: string; role: string; since?: string }>;
+  geographicJourney: Array<{ location: string; period: string; context: string }>;
+  contactAndDiscovery: Record<string, string>;
+  careerTimeline: Array<Record<string, unknown>>;
+  speakingTopics: string[];
+  publishedWork: { topics: string[]; note: string; articles?: Array<Record<string, string>> };
+  pressCoverage: Array<{ title: string; publication: string; date: string; url: string; note?: string }>;
+}
+
+interface JsonLdPerson {
+  '@type': string;
+  name: string;
+  jobTitle: string;
+  description: string;
+  worksFor?: { name: string };
+  homeLocation?: { name: string };
+  alumniOf?: Array<{ name: string }>;
+  knowsAbout?: Array<{ name: string } | string>;
+  sameAs?: string[];
+}
+
+interface JsonLdProfile {
+  '@context': string;
+  '@type': string;
+  name: string;
+  mainEntity?: JsonLdPerson;
+}
+
+const corpus: Corpus = JSON.parse(
   readFileSync(resolve(__dirname, '../content/agent-corpus.json'), 'utf-8')
 );
-
-const TRAINING_CRAWLERS = [
-  'GPTBot',
-  'ClaudeBot',
-  'Google-Extended',
-  'anthropic-ai',
-  'CCBot',
-  'Bytespider',
-  'Meta-ExternalAgent',
-  'Amazonbot',
-];
-
-const SEARCH_CRAWLERS = [
-  'OAI-SearchBot',
-  'Claude-SearchBot',
-  'PerplexityBot',
-];
-
-const USER_RETRIEVAL_AGENTS = [
-  'ChatGPT-User',
-  'Claude-User',
-  'Claude-Web',
-];
-
-const ALL_AI_AGENTS = [...TRAINING_CRAWLERS, ...SEARCH_CRAWLERS, ...USER_RETRIEVAL_AGENTS];
 
 const BROWSER_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
@@ -60,6 +105,11 @@ async function fetchText(path: string, userAgent?: string): Promise<{ status: nu
   const res = await fetch(`${BASE_URL}${path}`, { headers, redirect: 'follow' });
   const body = await res.text();
   return { status: res.status, headers: res.headers, body };
+}
+
+function getErrorMessage(err: unknown): string {
+  if (err instanceof Error) return err.message;
+  return String(err);
 }
 
 async function testAgentDossierServed() {
@@ -91,8 +141,8 @@ async function testAgentDossierServed() {
         }
 
         pass(testName);
-      } catch (e: any) {
-        fail(testName, `Request failed: ${e.message}`);
+      } catch (err: unknown) {
+        fail(testName, `Request failed: ${getErrorMessage(err)}`);
       }
     }
   }
@@ -103,7 +153,7 @@ async function testDossierContentMatchesCorpus() {
   try {
     const { body } = await fetchText('/', 'GPTBot');
 
-    const checks: { field: string; expected: string }[] = [
+    const checks = [
       { field: 'identity.name', expected: corpus.identity.name },
       { field: 'identity.jobTitle', expected: corpus.identity.jobTitle },
       { field: 'identity.organization', expected: corpus.identity.organization },
@@ -144,8 +194,8 @@ async function testDossierContentMatchesCorpus() {
     } else {
       pass(testName);
     }
-  } catch (e: any) {
-    fail(testName, `Request failed: ${e.message}`);
+  } catch (err: unknown) {
+    fail(testName, `Request failed: ${getErrorMessage(err)}`);
   }
 }
 
@@ -160,9 +210,9 @@ async function testJsonLdMatchesCorpus() {
       return;
     }
 
-    let jsonLd: any;
+    let jsonLd: JsonLdProfile;
     try {
-      jsonLd = JSON.parse(jsonLdMatch[1]);
+      jsonLd = JSON.parse(jsonLdMatch[1]) as JsonLdProfile;
     } catch {
       fail(testName, 'JSON-LD is not valid JSON');
       return;
@@ -205,14 +255,16 @@ async function testJsonLdMatchesCorpus() {
       issues.push(`mainEntity.homeLocation mismatch: expected "${corpus.identity.currentLocation}", got "${person.homeLocation?.name}"`);
     }
 
-    const alumniNames = (person.alumniOf || []).map((a: any) => a.name);
+    const alumniNames = (person.alumniOf ?? []).map((a) => a.name);
     for (const edu of corpus.identity.education) {
       if (!alumniNames.includes(edu.institution)) {
         issues.push(`Missing alumniOf institution: "${edu.institution}"`);
       }
     }
 
-    const knowsAboutNames = (person.knowsAbout || []).map((k: any) => k.name || k);
+    const knowsAboutNames = (person.knowsAbout ?? []).map((k) =>
+      typeof k === 'string' ? k : k.name
+    );
     for (const domain of corpus.expertiseDomains) {
       if (!knowsAboutNames.includes(domain.domain)) {
         issues.push(`Missing knowsAbout domain: "${domain.domain}"`);
@@ -235,8 +287,8 @@ async function testJsonLdMatchesCorpus() {
     } else {
       pass(testName);
     }
-  } catch (e: any) {
-    fail(testName, `Request failed: ${e.message}`);
+  } catch (err: unknown) {
+    fail(testName, `Request failed: ${getErrorMessage(err)}`);
   }
 }
 
@@ -287,8 +339,8 @@ async function testLlmsTxt() {
     } else {
       pass(testName);
     }
-  } catch (e: any) {
-    fail(testName, `Request failed: ${e.message}`);
+  } catch (err: unknown) {
+    fail(testName, `Request failed: ${getErrorMessage(err)}`);
   }
 }
 
@@ -310,10 +362,10 @@ async function testLlmsFullTxt() {
       issues.push('Missing canonicalBio');
     }
     if (!body.includes(corpus.identity.jobTitle)) {
-      issues.push(`Missing jobTitle`);
+      issues.push('Missing jobTitle');
     }
     if (!body.includes(corpus.identity.organization)) {
-      issues.push(`Missing organization`);
+      issues.push('Missing organization');
     }
     if (!body.includes(corpus.identity.description)) {
       issues.push('Missing identity.description');
@@ -351,13 +403,13 @@ async function testLlmsFullTxt() {
     } else {
       pass(testName);
     }
-  } catch (e: any) {
-    fail(testName, `Request failed: ${e.message}`);
+  } catch (err: unknown) {
+    fail(testName, `Request failed: ${getErrorMessage(err)}`);
   }
 }
 
 async function testRobotsTxt() {
-  const testName = 'robots.txt allows all known AI agents';
+  const testName = 'robots.txt explicitly allows all known AI agents';
   try {
     const { status, body } = await fetchText('/robots.txt');
     if (status !== 200) {
@@ -366,18 +418,12 @@ async function testRobotsTxt() {
     }
 
     const issues: string[] = [];
-    const warnings: string[] = [];
-
-    const hasWildcardAllow = /User-agent:\s*\*[\s\S]*?Allow:\s*\//m.test(body);
 
     for (const agent of ALL_AI_AGENTS) {
-      const pattern = new RegExp(`User-agent:\\s*${agent.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i');
+      const escapedAgent = agent.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const pattern = new RegExp(`User-agent:\\s*${escapedAgent}`, 'i');
       if (!pattern.test(body)) {
-        if (hasWildcardAllow) {
-          warnings.push(`No explicit User-agent directive for ${agent} (covered by wildcard)`);
-        } else {
-          issues.push(`Missing User-agent directive for: ${agent} (and no wildcard Allow rule)`);
-        }
+        issues.push(`Missing explicit User-agent directive for: ${agent}`);
       }
     }
 
@@ -396,14 +442,71 @@ async function testRobotsTxt() {
     if (issues.length > 0) {
       fail(testName, `robots.txt issues:\n    - ${issues.join('\n    - ')}`);
     } else {
-      const detail = warnings.length > 0
-        ? `Warnings (non-blocking):\n    - ${warnings.join('\n    - ')}`
-        : undefined;
-      pass(testName, detail);
+      pass(testName);
     }
-  } catch (e: any) {
-    fail(testName, `Request failed: ${e.message}`);
+  } catch (err: unknown) {
+    fail(testName, `Request failed: ${getErrorMessage(err)}`);
   }
+}
+
+function parseXmlSitemap(xml: string): { valid: boolean; error?: string; urls: string[] } {
+  const urls: string[] = [];
+  const trimmed = xml.trimStart();
+
+  if (!trimmed.startsWith('<?xml')) {
+    return { valid: false, error: 'Missing XML declaration', urls };
+  }
+
+  const urlsetOpen = xml.match(/<urlset[^>]*>/);
+  if (!urlsetOpen) {
+    return { valid: false, error: 'Missing <urlset> element', urls };
+  }
+  if (!xml.includes('</urlset>')) {
+    return { valid: false, error: 'Missing closing </urlset> tag', urls };
+  }
+
+  const urlsetContent = xml.slice(
+    xml.indexOf(urlsetOpen[0]) + urlsetOpen[0].length,
+    xml.indexOf('</urlset>')
+  );
+
+  const urlBlocks = urlsetContent.match(/<url>[\s\S]*?<\/url>/g);
+  if (!urlBlocks || urlBlocks.length === 0) {
+    return { valid: false, error: 'No <url> entries found', urls };
+  }
+
+  for (const block of urlBlocks) {
+    const locMatch = block.match(/<loc>([\s\S]*?)<\/loc>/);
+    if (!locMatch) {
+      return { valid: false, error: `<url> block missing <loc>: ${block.slice(0, 80)}`, urls };
+    }
+    urls.push(locMatch[1].trim());
+
+    if (!block.includes('<lastmod>') || !block.includes('</lastmod>')) {
+      return { valid: false, error: `<url> block missing <lastmod> for ${locMatch[1]}`, urls };
+    }
+  }
+
+  const requiredClosingTags = ['</url>', '</loc>', '</lastmod>', '</urlset>'];
+  for (const tag of requiredClosingTags) {
+    if (!xml.includes(tag)) {
+      return { valid: false, error: `Missing required closing tag: ${tag}`, urls };
+    }
+  }
+
+  const urlOpenCount = (xml.match(/<url>/g) ?? []).length;
+  const urlCloseCount = (xml.match(/<\/url>/g) ?? []).length;
+  if (urlOpenCount !== urlCloseCount) {
+    return { valid: false, error: `<url> tag mismatch: ${urlOpenCount} open vs ${urlCloseCount} close`, urls };
+  }
+
+  const locOpenCount = (xml.match(/<loc>/g) ?? []).length;
+  const locCloseCount = (xml.match(/<\/loc>/g) ?? []).length;
+  if (locOpenCount !== locCloseCount) {
+    return { valid: false, error: `<loc> tag mismatch: ${locOpenCount} open vs ${locCloseCount} close`, urls };
+  }
+
+  return { valid: true, urls };
 }
 
 async function testSitemapXml() {
@@ -417,46 +520,33 @@ async function testSitemapXml() {
 
     const issues: string[] = [];
 
-    const contentType = headers.get('content-type') || '';
+    const contentType = headers.get('content-type') ?? '';
     if (!contentType.includes('xml')) {
       issues.push(`Expected XML content type, got: ${contentType}`);
     }
 
-    if (!body.includes('<?xml')) {
-      issues.push('Missing XML declaration');
-    }
-    if (!body.includes('<urlset')) {
-      issues.push('Missing <urlset> element');
-    }
-    if (!body.includes('</urlset>')) {
-      issues.push('Missing closing </urlset> element');
-    }
-    if (!body.includes('<url>')) {
-      issues.push('No <url> entries found');
-    }
-    if (!body.includes('<loc>')) {
-      issues.push('No <loc> entries found');
+    const parsed = parseXmlSitemap(body);
+    if (!parsed.valid) {
+      fail(testName, `XML parsing failed: ${parsed.error}`);
+      return;
     }
 
     const baseUrl = corpus.canonicalUrl;
-    if (!body.includes(baseUrl)) {
-      issues.push(`Sitemap does not reference canonical URL: ${baseUrl}`);
-    }
-
     const expectedPaths = ['/', '/llms.txt', '/llms-full.txt'];
     for (const path of expectedPaths) {
-      if (!body.includes(`${baseUrl}${path}`)) {
-        issues.push(`Missing expected URL: ${baseUrl}${path}`);
+      const expectedUrl = `${baseUrl}${path}`;
+      if (!parsed.urls.includes(expectedUrl)) {
+        issues.push(`Missing expected URL: ${expectedUrl}`);
       }
     }
 
     if (issues.length > 0) {
       fail(testName, `sitemap.xml issues:\n    - ${issues.join('\n    - ')}`);
     } else {
-      pass(testName);
+      pass(testName, `${parsed.urls.length} URLs found`);
     }
-  } catch (e: any) {
-    fail(testName, `Request failed: ${e.message}`);
+  } catch (err: unknown) {
+    fail(testName, `Request failed: ${getErrorMessage(err)}`);
   }
 }
 
@@ -481,8 +571,8 @@ async function testBrowserDoesNotGetDossier() {
     }
 
     pass(testName);
-  } catch (e: any) {
-    fail(testName, `Request failed: ${e.message}`);
+  } catch (err: unknown) {
+    fail(testName, `Request failed: ${getErrorMessage(err)}`);
   }
 }
 
@@ -497,7 +587,7 @@ async function testDossierPreviewEndpoint() {
 
     const issues: string[] = [];
 
-    const contentType = headers.get('content-type') || '';
+    const contentType = headers.get('content-type') ?? '';
     if (!contentType.includes('text/html')) {
       issues.push(`Expected text/html content type, got: ${contentType}`);
     }
@@ -517,30 +607,30 @@ async function testDossierPreviewEndpoint() {
     } else {
       pass(testName);
     }
-  } catch (e: any) {
-    fail(testName, `Request failed: ${e.message}`);
+  } catch (err: unknown) {
+    fail(testName, `Request failed: ${getErrorMessage(err)}`);
   }
 }
 
 async function testContentTypes() {
   const testName = 'Endpoints return correct Content-Type headers';
-  const endpoints: { path: string; expectedType: string; ua?: string }[] = [
+  const endpoints = [
     { path: '/', expectedType: 'text/html', ua: 'GPTBot' },
-    { path: '/llms.txt', expectedType: 'text/plain' },
-    { path: '/llms-full.txt', expectedType: 'text/plain' },
-    { path: '/sitemap.xml', expectedType: 'application/xml' },
+    { path: '/llms.txt', expectedType: 'text/plain', ua: undefined },
+    { path: '/llms-full.txt', expectedType: 'text/plain', ua: undefined },
+    { path: '/sitemap.xml', expectedType: 'application/xml', ua: undefined },
   ];
 
   const issues: string[] = [];
   for (const ep of endpoints) {
     try {
       const { headers } = await fetchText(ep.path, ep.ua);
-      const ct = headers.get('content-type') || '';
+      const ct = headers.get('content-type') ?? '';
       if (!ct.includes(ep.expectedType)) {
         issues.push(`${ep.path}: expected ${ep.expectedType}, got ${ct}`);
       }
-    } catch (e: any) {
-      issues.push(`${ep.path}: request failed — ${e.message}`);
+    } catch (err: unknown) {
+      issues.push(`${ep.path}: request failed — ${getErrorMessage(err)}`);
     }
   }
 
@@ -561,8 +651,8 @@ async function testNoUserAgentDoesNotGetDossier() {
       return;
     }
     pass(testName);
-  } catch (e: any) {
-    fail(testName, `Request failed: ${e.message}`);
+  } catch (err: unknown) {
+    fail(testName, `Request failed: ${getErrorMessage(err)}`);
   }
 }
 
@@ -582,7 +672,7 @@ function printReport() {
   if (failed > 0) {
     console.log(`  FAILURES (${failed}):\n`);
     for (const r of results.filter(r => !r.passed)) {
-      console.log(`  ✗ ${r.name}`);
+      console.log(`  \u2717 ${r.name}`);
       if (r.details) {
         console.log(`    ${r.details}`);
       }
@@ -591,17 +681,17 @@ function printReport() {
     console.log('-'.repeat(70) + '\n');
   }
 
-  const passesWithWarnings = results.filter(r => r.passed && r.details);
+  const passesWithDetails = results.filter(r => r.passed && r.details);
   const passesClean = results.filter(r => r.passed && !r.details);
 
   console.log(`  PASSES (${passed}):\n`);
   for (const r of passesClean) {
-    console.log(`  ✓ ${r.name}`);
+    console.log(`  \u2713 ${r.name}`);
   }
-  if (passesWithWarnings.length > 0) {
+  if (passesWithDetails.length > 0) {
     console.log('');
-    for (const r of passesWithWarnings) {
-      console.log(`  ✓ ${r.name}`);
+    for (const r of passesWithDetails) {
+      console.log(`  \u2713 ${r.name}`);
       if (r.details) {
         console.log(`    ${r.details}`);
       }
@@ -639,7 +729,7 @@ async function main() {
   process.exit(failed > 0 ? 1 : 0);
 }
 
-main().catch(err => {
+main().catch((err: unknown) => {
   console.error('Validation script crashed:', err);
   process.exit(2);
 });
