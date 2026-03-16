@@ -110,6 +110,7 @@ The portfolio features a subtle canvas-based generative background (`GenerativeB
 - `/api/dossier-preview` — API for rendered dossier content
 - Professional ontology corpus: `portfolio/content/agent-corpus.json`
 - Corpus validation: `npm run validate-corpus`
+- Agent endpoint validation: `npm run validate-agent` (tests all agent-facing endpoints against corpus)
 
 ### Chatbot (`/ask`)
 - **React** + **Vite** — Frontend
@@ -139,9 +140,10 @@ The professional ontology corpus at `portfolio/content/agent-corpus.json` is the
 
 1. Edit `agent-corpus.json`
 2. Run `npm run validate-corpus` to verify (all 53 checks should pass)
-3. The dossier, llms.txt, and llms-full.txt auto-generate from the corpus
-4. Check `/agent-preview` to see how AI agents will consume the content
-5. Monitor `/agent-insights` to track which agents are visiting
+3. Run `npm run validate-agent` to verify all endpoints serve correct data (requires server running)
+4. The dossier, llms.txt, and llms-full.txt auto-generate from the corpus
+5. Check `/agent-preview` to see how AI agents will consume the content
+6. Monitor `/agent-insights` to track which agents are visiting
 
 ### SEO Assets
 - `portfolio/public/robots.txt` — Crawler-role-aware rules with sitemap pointer

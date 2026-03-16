@@ -11,6 +11,7 @@
     "preview": "vite preview",
     "migrate-sqlite-to-pg": "tsx scripts/migrate-sqlite-to-pg.ts",
     "validate-corpus": "tsx scripts/validate-corpus.ts",
+    "validate-agent": "tsx scripts/validate-agent.ts",
     "lighthouse:local": "lighthouse http://localhost:5000 --chrome-flags='--headless --no-sandbox --disable-gpu' --output=json --output=html --output-path=./lighthouse-report --quiet",
     "lighthouse:prod": "lighthouse https://coty.design --chrome-flags='--headless --no-sandbox --disable-gpu' --output=json --output=html --output-path=./lighthouse-report --quiet"
   },
