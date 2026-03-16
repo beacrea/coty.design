@@ -1,80 +1,90 @@
 import type { Request, Response } from 'express';
-import { getDb } from '../middleware/analytics.js';
+import { getPool } from '../middleware/analytics.js';
 
-export function agentInsightsData(_req: Request, res: Response) {
-  const db = getDb();
+const EMPTY_RESPONSE = {
+  summary: { total: 0, last24h: 0, last7d: 0 },
+  byAgent: [],
+  byRole: [],
+  topPaths: [],
+  referrers: [],
+  recentVisits: [],
+  dailyTrend: []
+};
 
-  if (!db) {
-    return res.json({
-      summary: { total: 0, last24h: 0, last7d: 0 },
-      byAgent: [],
-      byRole: [],
-      topPaths: [],
-      referrers: [],
-      recentVisits: [],
-      hourlyActivity: []
-    });
+export async function agentInsightsData(_req: Request, res: Response) {
+  const pool = getPool();
+
+  if (!pool) {
+    return res.json(EMPTY_RESPONSE);
   }
 
-  const totalVisits = db.prepare('SELECT COUNT(*) as count FROM agent_visits').get() as any;
-  const last24h = db.prepare("SELECT COUNT(*) as count FROM agent_visits WHERE timestamp > datetime('now', '-1 day')").get() as any;
-  const last7d = db.prepare("SELECT COUNT(*) as count FROM agent_visits WHERE timestamp > datetime('now', '-7 days')").get() as any;
+  try {
+    const [totalVisits, last24h, last7d, byAgent, byRole, topPaths, referrers, recentVisits, dailyTrend] = await Promise.all([
+      pool.query('SELECT COUNT(*) as count FROM agent_visits'),
+      pool.query("SELECT COUNT(*) as count FROM agent_visits WHERE timestamp > NOW() - INTERVAL '1 day'"),
+      pool.query("SELECT COUNT(*) as count FROM agent_visits WHERE timestamp > NOW() - INTERVAL '7 days'"),
+      pool.query(`
+        SELECT agent_name, COUNT(*) as count
+        FROM agent_visits
+        GROUP BY agent_name
+        ORDER BY count DESC
+      `),
+      pool.query(`
+        SELECT crawler_role, COUNT(*) as count
+        FROM agent_visits
+        GROUP BY crawler_role
+        ORDER BY count DESC
+      `),
+      pool.query(`
+        SELECT request_path, COUNT(*) as count
+        FROM agent_visits
+        GROUP BY request_path
+        ORDER BY count DESC
+        LIMIT 10
+      `),
+      pool.query(`
+        SELECT referrer, COUNT(*) as count
+        FROM agent_visits
+        WHERE referrer IS NOT NULL AND referrer != ''
+        GROUP BY referrer
+        ORDER BY count DESC
+        LIMIT 10
+      `),
+      pool.query(`
+        SELECT timestamp, agent_name, crawler_role, request_path, referrer
+        FROM agent_visits
+        ORDER BY timestamp DESC
+        LIMIT 50
+      `),
+      pool.query(`
+        SELECT DATE(timestamp) as day, COUNT(*) as count
+        FROM agent_visits
+        WHERE timestamp > NOW() - INTERVAL '30 days'
+        GROUP BY DATE(timestamp)
+        ORDER BY day
+      `),
+    ]);
 
-  const byAgent = db.prepare(`
-    SELECT agent_name, COUNT(*) as count
-    FROM agent_visits
-    GROUP BY agent_name
-    ORDER BY count DESC
-  `).all();
+    interface CountRow { count: string; [key: string]: string }
+    const castCount = (rows: CountRow[]) => rows.map(r => ({ ...r, count: parseInt(r.count) }));
 
-  const byRole = db.prepare(`
-    SELECT crawler_role, COUNT(*) as count
-    FROM agent_visits
-    GROUP BY crawler_role
-    ORDER BY count DESC
-  `).all();
-
-  const topPaths = db.prepare(`
-    SELECT request_path, COUNT(*) as count
-    FROM agent_visits
-    GROUP BY request_path
-    ORDER BY count DESC
-    LIMIT 10
-  `).all();
-
-  const referrers = db.prepare(`
-    SELECT referrer, COUNT(*) as count
-    FROM agent_visits
-    WHERE referrer IS NOT NULL AND referrer != ''
-    GROUP BY referrer
-    ORDER BY count DESC
-    LIMIT 10
-  `).all();
-
-  const recentVisits = db.prepare(`
-    SELECT timestamp, agent_name, crawler_role, request_path, referrer
-    FROM agent_visits
-    ORDER BY timestamp DESC
-    LIMIT 50
-  `).all();
-
-  const dailyTrend = db.prepare(`
-    SELECT date(timestamp) as day, COUNT(*) as count
-    FROM agent_visits
-    WHERE timestamp > datetime('now', '-30 days')
-    GROUP BY date(timestamp)
-    ORDER BY day
-  `).all();
-
-  res.json({
-    summary: { total: totalVisits.count, last24h: last24h.count, last7d: last7d.count },
-    byAgent,
-    byRole,
-    topPaths,
-    referrers,
-    recentVisits,
-    dailyTrend
-  });
+    res.json({
+      summary: {
+        total: parseInt(totalVisits.rows[0].count),
+        last24h: parseInt(last24h.rows[0].count),
+        last7d: parseInt(last7d.rows[0].count),
+      },
+      byAgent: castCount(byAgent.rows),
+      byRole: castCount(byRole.rows),
+      topPaths: castCount(topPaths.rows),
+      referrers: castCount(referrers.rows),
+      recentVisits: recentVisits.rows,
+      dailyTrend: castCount(dailyTrend.rows),
+    });
+  } catch (err) {
+    console.error('Failed to fetch agent insights:', err);
+    res.json(EMPTY_RESPONSE);
+  }
 }
 
 export function agentInsights(_req: Request, res: Response) {
@@ -232,7 +242,7 @@ export function agentInsights(_req: Request, res: Response) {
               <tbody>
                 \${data.recentVisits.map(v => \`
                   <tr>
-                    <td>\${esc(new Date(v.timestamp + 'Z').toLocaleString())}</td>
+                    <td>\${esc(new Date(v.timestamp).toLocaleString())}</td>
                     <td>\${esc(v.agent_name || '—')}</td>
                     <td><span class="role-badge \${safeRoleClass(v.crawler_role)}">\${esc(v.crawler_role)}</span></td>
                     <td>\${esc(v.request_path)}</td>

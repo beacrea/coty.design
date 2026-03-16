@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(compression());
 }
 
-initAnalyticsDb();
+await initAnalyticsDb();
 
 registerRoute({ path: '/', method: 'get', handlers: [], noindex: false, changefreq: 'monthly', priority: 1.0, mountManually: true });
 registerRoute({ path: '/agent-preview', method: 'use', handlers: [agentPreview], noindex: false, changefreq: 'monthly', priority: 0.5 });

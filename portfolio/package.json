@@ -9,6 +9,7 @@
     "build": "vite build",
     "start": "NODE_ENV=production tsx server/index.ts",
     "preview": "vite preview",
+    "migrate-sqlite-to-pg": "tsx scripts/migrate-sqlite-to-pg.ts",
     "validate-corpus": "tsx scripts/validate-corpus.ts",
     "lighthouse:local": "lighthouse http://localhost:5000 --chrome-flags='--headless --no-sandbox --disable-gpu' --output=json --output=html --output-path=./lighthouse-report --quiet",
     "lighthouse:prod": "lighthouse https://coty.design --chrome-flags='--headless --no-sandbox --disable-gpu' --output=json --output=html --output-path=./lighthouse-report --quiet"
@@ -19,6 +20,8 @@
     "@types/better-sqlite3": "^7.6.13",
     "@types/compression": "^1.8.1",
     "@types/express": "^5.0.6",
+    "@types/pg": "^8.15.4",
+    "better-sqlite3": "^12.8.0",
     "lighthouse": "^12.8.2",
     "svelte": "^5.53.6",
     "tsx": "^4.21.0",
@@ -26,9 +29,9 @@
     "vite": "^7.3.0"
   },
   "dependencies": {
-    "better-sqlite3": "^12.8.0",
     "compression": "^1.8.1",
     "express": "^5.2.1",
-    "isbot": "^5.1.36"
+    "isbot": "^5.1.36",
+    "pg": "^8.20.0"
   }
 }

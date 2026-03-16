@@ -34,6 +34,9 @@ client/src/assets/
 # Git filter-branch artifacts
 .git-rewrite/
 
+# SQLite analytics (migrated to PostgreSQL)
+portfolio/data/*.db*
+
 # Claude settings
 .claude/settings.local.json
 

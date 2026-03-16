@@ -12,6 +12,7 @@ A pixel-perfect clone of coty.design portfolio built with Svelte + Vite. This pr
 - AI agent detection utilities ready
 
 ## Recent Changes
+- March 16, 2026: Migrated analytics from SQLite (better-sqlite3) to PostgreSQL (pg) using DATABASE_URL. Data persists across deployments.
 - December 27, 2025: Accessibility improvements - focus states, skip link, prefers-reduced-motion, optimized content width (580px/640px), improved caption contrast
 - December 27, 2025: Complete portfolio implementation with AI agent detection, DTCG token files, and variable font support
 
