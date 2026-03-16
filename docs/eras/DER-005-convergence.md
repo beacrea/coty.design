@@ -81,11 +81,11 @@ This paradigm shift doesn't diminish human judgment—it amplifies it. The desig
 **Rationale:** Mobile users need direct access; desktop users benefit from persistent access without scroll. The toggle becomes a subtle interactive element that signals polish.  
 **Tradeoffs:** Fixed positioning can conflict with some scroll behaviors
 
-### Decision 6: AI Agent Detection
+### Decision 6: AI Optimization Architecture
 
-**Choice:** Detect AI crawlers via user-agent and serve enhanced JSON-LD  
-**Rationale:** AI systems increasingly surface portfolio content in summaries and recommendations. Providing structured, machine-readable data ensures accurate representation.  
-**Tradeoffs:** Maintenance burden as AI agent landscape evolves; potential for gaming
+**Choice:** Comprehensive AI optimization system — corpus-driven multi-format outputs (llms.txt, HTML dossier with JSON-LD, sitemap), three-tier agent detection and classification middleware, analytics pipeline tracking AI visitor behavior, and deliberately permissive robots.txt  
+**Rationale:** AI systems increasingly mediate professional discovery through training data, search indexing, and real-time retrieval. A portfolio that provides structured, machine-readable data across multiple formats ensures accurate representation regardless of how an AI system consumes it. The corpus-driven architecture (single `agent-corpus.json` driving all outputs) eliminates content drift between formats. See [ADR-004: AI Optimization Architecture](../adrs/ADR-004-AI-Optimization-Architecture.md) for the full system design, research basis, and alternatives considered.  
+**Tradeoffs:** Maintenance burden as AI agent landscape evolves; corpus schema coupling across output formats; analytics database is ephemeral
 
 ## Design Language
 
@@ -122,8 +122,9 @@ This paradigm shift doesn't diminish human judgment—it amplifies it. The desig
 - [Design Tokens](../../portfolio/src/tokens/) — DTCG-compliant token definitions
 - [ADR-001: Monorepo Structure](../adrs/ADR-001-Monorepo-Structure.md)
 - [ADR-002: Port Allocation](../adrs/ADR-002-Port-Allocation.md)
+- [ADR-004: AI Optimization Architecture](../adrs/ADR-004-AI-Optimization-Architecture.md) — Corpus-driven AI optimization system, agent detection, analytics, and research basis
 
 ---
 
-_Last updated: 2024-12-28_
-_Revised: Added paradigm shift context_
+_Last updated: 2026-03-16_
+_Revised: Expanded Decision 6 to reflect full AI optimization architecture; added ADR-004 cross-reference_
