@@ -55,7 +55,7 @@ run = ["npm", "run", "start", "--prefix", "portfolio"]
 
 [nix]
 channel = "stable-25_05"
-packages = ["imagemagick"]
+packages = ["imagemagick", "chromium"]
 
 [postMerge]
 path = "scripts/post-merge.sh"
