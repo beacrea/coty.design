@@ -9,7 +9,9 @@
     "build": "vite build",
     "start": "NODE_ENV=production tsx server/index.ts",
     "preview": "vite preview",
-    "validate-corpus": "tsx scripts/validate-corpus.ts"
+    "validate-corpus": "tsx scripts/validate-corpus.ts",
+    "lighthouse:local": "lighthouse http://localhost:5000 --chrome-flags='--headless --no-sandbox --disable-gpu' --output=json --output=html --output-path=./lighthouse-report --quiet",
+    "lighthouse:prod": "lighthouse https://coty.design --chrome-flags='--headless --no-sandbox --disable-gpu' --output=json --output=html --output-path=./lighthouse-report --quiet"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^6.2.4",

@@ -70,6 +70,8 @@ Key characteristics:
 - Screen reader announcements for external links opening in new tabs (.sr-only utility)
 - Observe mode properly hides content from screen readers via aria-hidden on main landmark
 - Vite module preload polyfill enabled for faster LCP
+- Lighthouse CLI available: `npm run lighthouse:local` (local server) and `npm run lighthouse:prod` (production)
+- App placeholder renders as fixed overlay outside `#app` for proper LCP detection
 
 ### Generative Background
 
@@ -155,4 +157,4 @@ The Express server handles both AI agent and human traffic. Deployment target is
 
 ---
 
-_Last updated: 2026-03-15_
+_Last updated: 2026-03-16_

@@ -39,3 +39,4 @@ client/src/assets/
 
 # Replit configuration (each project has its own local config)
 .replit
+lighthouse-report*

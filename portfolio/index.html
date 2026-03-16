@@ -22,7 +22,13 @@
       }
       body { background-color: inherit; min-height: 100vh; }
       #app-placeholder {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10;
         color: #1d1d1d;
+        background-color: #ffffff;
         min-height: 100vh;
         padding: 47.78px 55px 33.178px 27.65px;
       }
@@ -47,13 +53,13 @@
       }
       @media (prefers-color-scheme: dark) {
         html { background-color: #1d1d1d; }
-        #app-placeholder { color: #e8e8e8; }
+        #app-placeholder { color: #e8e8e8; background-color: #1d1d1d; }
         #app-placeholder h1 { color: oklch(0.68 0.213 277); }
         #app-placeholder .placeholder-role { color: oklch(0.961 0 0); }
         #app-placeholder .placeholder-summary { color: oklch(0.847 0 0); }
       }
       html.dark { background-color: #1d1d1d !important; }
-      html.dark #app-placeholder { color: #e8e8e8; }
+      html.dark #app-placeholder { color: #e8e8e8; background-color: #1d1d1d; }
       html.dark #app-placeholder h1 { color: oklch(0.68 0.213 277); }
       html.dark #app-placeholder .placeholder-role { color: oklch(0.961 0 0); }
       html.dark #app-placeholder .placeholder-summary { color: oklch(0.847 0 0); }
@@ -162,13 +168,12 @@
     </script>
   </head>
   <body>
-    <div id="app">
-      <div id="app-placeholder">
-        <h1>Coty Beasley</h1>
-        <p class="placeholder-role">Design and Product Leader</p>
-        <p class="placeholder-summary">Good design brings clarity to complexity and makes technology actually useful. With this in mind, I work at the intersection of systems, people, and innovation to help organizations and communities connect, collaborate, and grow.</p>
-      </div>
+    <div id="app-placeholder">
+      <h1>Coty Beasley</h1>
+      <p class="placeholder-role">Design and Product Leader</p>
+      <p class="placeholder-summary">Good design brings clarity to complexity and makes technology actually useful. With this in mind, I work at the intersection of systems, people, and innovation to help organizations and communities connect, collaborate, and grow.</p>
     </div>
+    <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
