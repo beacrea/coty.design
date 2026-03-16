@@ -9,6 +9,8 @@ const app = mount(App, { target });
 
 if (placeholder && placeholder.parentNode) {
   requestAnimationFrame(() => {
+    placeholder.style.visibility = 'hidden';
+    placeholder.style.pointerEvents = 'none';
     requestAnimationFrame(() => {
       placeholder.remove();
     });

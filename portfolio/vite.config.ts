@@ -4,9 +4,11 @@ import pkg from './package.json';
 
 function preservePlaceholderPlugin(): Plugin {
   const placeholderHtml = `<div id="app-placeholder">
-      <h1>Coty Beasley</h1>
-      <p class="placeholder-role">Design and Product Leader</p>
-      <p class="placeholder-summary">Good design brings clarity to complexity and makes technology actually useful. With this in mind, I work at the intersection of systems, people, and innovation to help organizations and communities connect, collaborate, and grow.</p>
+      <div class="placeholder-content">
+        <h1>Coty Beasley</h1>
+        <p class="placeholder-role">Design and Product Leader</p>
+        <p class="placeholder-summary">Good design brings clarity to complexity and makes technology actually useful. With this in mind, I work at the intersection of systems, people, and innovation to help organizations and communities connect, collaborate, and grow.</p>
+      </div>
     </div>`;
 
   return {
