@@ -34,4 +34,13 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
+User-agent: Bytespider
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
 Sitemap: https://coty.design/sitemap.xml
