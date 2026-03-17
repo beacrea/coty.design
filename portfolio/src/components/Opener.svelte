@@ -29,6 +29,7 @@
     color: var(--semantic-subtitle);
     margin-bottom: 1em;
     transition: color var(--transition-theme);
+    text-wrap: balance;
   }
 
   .summary {
@@ -37,5 +38,6 @@
     color: var(--semantic-body);
     line-height: 1.6;
     transition: color var(--transition-theme);
+    text-wrap: pretty;
   }
 </style>

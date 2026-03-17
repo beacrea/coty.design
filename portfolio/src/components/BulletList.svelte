@@ -41,5 +41,6 @@
     color: var(--semantic-body);
     line-height: 1.6;
     transition: color var(--transition-theme);
+    text-wrap: pretty;
   }
 </style>
