@@ -73,7 +73,7 @@
   }
 
   .item {
-    text-wrap: nowrap;
+    text-wrap: pretty;
   }
 
   .item:not(:last-child)::after {
