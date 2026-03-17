@@ -46,6 +46,34 @@ agentPreview.get('/', (_req: Request, res: Response) => {
     .stat { text-align: center; }
     .stat .num { font-size: 28px; font-weight: bold; color: #00d4aa; }
     .stat .label { font-size: 12px; color: #888; text-transform: uppercase; }
+    .meta-card .value { overflow-wrap: anywhere; word-break: break-word; }
+
+    @media (max-width: 768px) {
+      .tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .tabs::-webkit-scrollbar { display: none; }
+      .tab { white-space: nowrap; flex-shrink: 0; padding: 12px 16px; }
+      .content { padding: 24px 16px; }
+      .meta-grid { grid-template-columns: 1fr; }
+      .dossier-frame { padding: 20px; }
+      .dossier-frame h1 { font-size: 22px; }
+      .dossier-frame h2 { font-size: 18px; }
+      pre { padding: 14px; font-size: 12px; }
+      .stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+      .stat .num { font-size: 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .banner { padding: 12px 16px; }
+      .banner p { font-size: 12px; }
+      .tab { padding: 10px 12px; font-size: 12px; }
+      .content { padding: 16px 12px; }
+      .dossier-frame { padding: 16px; }
+      .dossier-frame h1 { font-size: 20px; }
+      pre { padding: 12px; font-size: 11px; }
+      .stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .stat .num { font-size: 22px; }
+      .meta-card .value { font-size: 16px; }
+    }
   </style>
 </head>
 <body>
