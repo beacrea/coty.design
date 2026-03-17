@@ -45,7 +45,7 @@ export const siteContent = {
         "VP\u00A0Product, Neighborly (civic\u00A0fintech)",
         "Co\u2011Founder &\u00A0Head\u00A0of\u00A0Product, Edge\u00A0Up\u00A0Sports \u00D7\u00A0IBM\u00A0Watson"
       ]},
-      { label: "Press", items: [
+      { label: "Featured In", items: [
         "Wired", "Fast\u00A0Company", "Bloomberg", "NBC\u00A0News", "Forbes", "NPR"
       ]},
       { label: "Sectors", items: [
