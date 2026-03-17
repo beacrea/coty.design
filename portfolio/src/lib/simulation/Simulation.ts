@@ -190,8 +190,7 @@ export class Simulation {
     
     const time = this.state.currentTime;
     const baseLightness = isDark ? 6 : 98;
-    ctx.fillStyle = isDark ? '#0a0c10' : '#f8fbff';
-    ctx.fillRect(0, 0, width, height);
+    ctx.clearRect(0, 0, width, height);
     
     this.drawFlowFieldBackground(ctx, width, height, time, isDark);
     
