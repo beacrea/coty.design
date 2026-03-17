@@ -17,7 +17,7 @@ export const siteContent = {
   },
   
   capabilities: {
-    heading: "What I Define",
+    heading: "What I Work On",
     items: [
       "Product vision, strategy, and architecture for complex multiparty\u00A0platforms",
       "AI\u2011enabled workflow design, advancing productive and responsible use of AI in real\u00A0products",
@@ -57,7 +57,7 @@ export const siteContent = {
   domainExperience: {
     heading: "Domain Experience",
     items: [
-      "Networks and telecommunications\u00A0infrastructure",
+      "Telecom and network\u00A0infrastructure",
       "Financial technology and civic\u00A0fintech",
       "Civic and government technology\u00A0platforms",
       "AI systems, context engineering, and intelligent\u00A0workflows",
