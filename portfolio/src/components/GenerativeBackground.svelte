@@ -238,6 +238,12 @@
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: transparent;
+    animation: canvas-fade-in 1.8s ease-out;
+  }
+
+  @keyframes canvas-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
   
   .generative-background.observation-mode {

@@ -11,9 +11,9 @@
     if ('requestIdleCallback' in window) {
       setTimeout(() => {
         (window as any).requestIdleCallback(start);
-      }, 3000);
+      }, 800);
     } else {
-      setTimeout(start, 3500);
+      setTimeout(start, 1200);
     }
   });
 </script>
