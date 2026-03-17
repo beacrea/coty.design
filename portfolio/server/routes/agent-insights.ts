@@ -130,6 +130,22 @@ export function agentInsights(_req: Request, res: Response) {
     .refresh { margin-top: 16px; text-align: center; }
     .refresh button { background: #6366f1; color: white; border: none; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-size: 13px; }
     .refresh button:hover { background: #4f46e5; }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    @media (max-width: 768px) {
+      .summary { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .role-legend { flex-wrap: wrap; gap: 8px; }
+      .bar-chart .bar-label { flex: 0 0 100px; font-size: 12px; }
+      .content { padding: 20px 16px; }
+      .summary-card .num { font-size: 28px; }
+    }
+    @media (max-width: 480px) {
+      .bar-chart .bar-label { flex: 0 0 80px; font-size: 11px; }
+      .bar-chart .bar-item { gap: 8px; }
+      .card { padding: 14px; }
+      .content { padding: 16px 12px; }
+      th, td { padding: 6px 8px; font-size: 11px; }
+    }
   </style>
 </head>
 <body>
@@ -237,6 +253,7 @@ export function agentInsights(_req: Request, res: Response) {
           <h2>Recent Visits</h2>
           <div class="card">
             \${data.recentVisits.length ? \`
+            <div class="table-scroll">
             <table>
               <thead><tr><th>Time</th><th>Agent</th><th>Role</th><th>Path</th><th>Referrer</th></tr></thead>
               <tbody>
@@ -250,7 +267,8 @@ export function agentInsights(_req: Request, res: Response) {
                   </tr>
                 \`).join('')}
               </tbody>
-            </table>\` : '<div class="empty">No visits recorded yet. AI agents will appear here when they visit your site.</div>'}
+            </table>
+            </div>\` : '<div class="empty">No visits recorded yet. AI agents will appear here when they visit your site.</div>'}
           </div>
         </div>
 
