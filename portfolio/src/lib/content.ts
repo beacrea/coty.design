@@ -32,7 +32,9 @@ export const siteContent = {
     heading: "Background",
     items: [
       "Co\u2011founder at Underline, where I lead product strategy, AI innovation, and design engineering for the first privately funded open\u2011access fiber network in the\u00A0US.",
-      "My work across two decades has been shaped by one consistent idea: critical systems \u2014 infrastructure, finance, data \u2014 should be accessible to the people who depend on\u00A0them."
+      "Our mission is to make essential infrastructure accessible, competitive, and responsive to real human\u00A0needs.",
+      "My work is built on a foundation in computer science, combined with two decades in product and design leadership. Each engagement aims for technical rigor, empathy, and\u00A0entrepreneurship.",
+      "Across every domain, one consistent idea shapes my approach: critical systems \u2014 infrastructure, finance, data \u2014 should be accessible to the people who depend on\u00A0them."
     ]
   },
 
@@ -50,6 +52,19 @@ export const siteContent = {
         "Infrastructure", "Fintech", "Civic\u00A0Tech", "Enterprise", "AI\u00A0Systems"
       ]}
     ] as ProofRow[]
+  },
+
+  domainExperience: {
+    heading: "Domain Experience",
+    items: [
+      "Networks and telecommunications\u00A0infrastructure",
+      "Financial technology and civic\u00A0fintech",
+      "Civic and government technology\u00A0platforms",
+      "AI systems, context engineering, and intelligent\u00A0workflows",
+      "Medical platforms and connected\u00A0devices",
+      "Digital mapping, GIS, and spatial\u00A0systems",
+      "Multimedia, interface, and brand\u00A0systems"
+    ]
   },
 
   connect: {

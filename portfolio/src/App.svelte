@@ -72,6 +72,12 @@
         rows={siteContent.proofStrip.rows}
       />
       
+      <Section 
+        heading={siteContent.domainExperience.heading}
+        items={siteContent.domainExperience.items}
+        variant="bullet"
+      />
+      
       <ConnectSection 
         heading={siteContent.connect.heading}
         items={siteContent.connect.items}
