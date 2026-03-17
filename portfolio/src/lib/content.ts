@@ -4,6 +4,11 @@ export interface ConnectItem {
   url: string | null;
 }
 
+export interface ProofRow {
+  label: string;
+  value: string;
+}
+
 export const siteContent = {
   opener: {
     name: "Coty Beasley",
@@ -33,11 +38,11 @@ export const siteContent = {
 
   proofStrip: {
     heading: "Track Record",
-    items: [
-      "Previously: VP Product, Neighborly (civic fintech) \u00B7 Co\u2011Founder & Head of Product, Edge\u00A0Up\u00A0Sports \u00D7 IBM\u00A0Watson",
-      "Press: Wired \u00B7 Fast\u00A0Company \u00B7 Bloomberg \u00B7 NBC\u00A0News \u00B7 Forbes \u00B7\u00A0NPR",
-      "Sector experience spanning infrastructure, fintech, civic tech, enterprise, and AI\u00A0systems"
-    ]
+    rows: [
+      { label: "Previously", value: "VP\u00A0Product, Neighborly (civic fintech) · Co\u2011Founder &\u00A0Head\u00A0of\u00A0Product, Edge\u00A0Up\u00A0Sports ×\u00A0IBM\u00A0Watson" },
+      { label: "Press", value: "Wired · Fast\u00A0Company · Bloomberg · NBC\u00A0News · Forbes ·\u00A0NPR" },
+      { label: "Sectors", value: "Infrastructure · Fintech · Civic\u00A0Tech · Enterprise ·\u00A0AI\u00A0Systems" }
+    ] as ProofRow[]
   },
 
   connect: {

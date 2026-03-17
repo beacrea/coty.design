@@ -3,6 +3,7 @@
   import ThemeToggle from './components/ThemeToggle.svelte';
   import Opener from './components/Opener.svelte';
   import Section from './components/Section.svelte';
+  import ProofStrip from './components/ProofStrip.svelte';
   import ConnectSection from './components/ConnectSection.svelte';
   import Footer from './components/Footer.svelte';
   import LazyBackground from './components/LazyBackground.svelte';
@@ -66,10 +67,9 @@
         variant="paragraph"
       />
       
-      <Section 
+      <ProofStrip 
         heading={siteContent.proofStrip.heading}
-        items={siteContent.proofStrip.items}
-        variant="paragraph"
+        rows={siteContent.proofStrip.rows}
       />
       
       <ConnectSection 
