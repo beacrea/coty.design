@@ -92,6 +92,8 @@
   }
 
   .page {
+    position: relative;
+    z-index: 1;
     min-height: 100vh;
     padding: var(--page-padding-top) var(--page-padding-right) var(--page-padding-bottom) var(--page-padding-x);
     background-color: var(--background);
