@@ -1,0 +1,234 @@
+# coty.design — Content Strategy Refinement
+**Direction:** Product Architecture & Principal Roles
+**Constraint:** Single page, no portfolio, no case studies
+**Last reviewed:** 2026-03-16
+
+---
+
+## Core positioning problem
+
+The current page works as a professional dossier and reads
+authentically. The refinement needed is one of emphasis, not
+structure. "Design and Product Leader" is accurate but positions
+you as a generalist leader. The market roles that maximize
+compensation — VP Product, Director of Product Design
+(architecture-framed), Principal Product Architect,
+Head of Product Architecture — reward signals of system
+ownership, AI strategy, and operating model definition more
+than craft or design org management.
+
+The site should answer one question before anything else:
+"What does Coty own and define?"
+Currently it answers: "Who is Coty and what has he done?"
+Both are valid. The first one pays more.
+
+---
+
+## Headline / Title
+
+**Current:**
+Coty Beasley — Design and Product Leader
+
+**Directional:**
+Coty Beasley — Product Architect & Co-Founder
+or
+Coty Beasley — Head of Product Architecture
+
+**Reasoning:**
+"Product Architect" is the highest-signal, shortest-path
+label for the roles you're targeting. It front-loads
+systems thinking and ownership rather than design
+management. Co-Founder following it adds market
+credibility that IC titles alone don't carry.
+
+---
+
+## Opening sentence / subhead
+
+**Current framing (paraphrased):**
+"Good design brings clarity to complexity and makes
+technology genuinely useful."
+
+**Directional:**
+Keep the clarity-and-complexity idea but broaden it
+beyond design:
+
+> "I define how complex products fit together —
+> aligning strategy, AI behavior, workflows, and
+> interface rules so platforms scale without
+> losing coherence."
+
+**Reasoning:**
+This is a product architecture statement, not a design
+statement. It immediately signals principal-level
+thinking and matches the language hiring managers
+and recruiters use when filling Head of Product
+Architecture and VP Product roles.
+
+---
+
+## "What I do" / Capabilities section
+
+**Current approach:**
+A list of professional modes and expertise domains,
+which is comprehensive but reads as a long inventory.
+
+**Directional:**
+Trim to 5 operating capabilities, framed as things
+you *define and own*, not skills you possess:
+
+- Product architecture across multi-party, multi-system
+  platforms
+- AI-enabled workflow design and context engineering
+- Semantic governance — canonical schemas, contracts,
+  and interface specifications
+- Design infrastructure (tokens, systems, component
+  architecture, design-code alignment)
+- Operating model definition for cross-functional
+  product teams
+
+**Reasoning:**
+Five focused capabilities read as principal-level.
+Ten broad domain labels read as generalist. The
+current list is accurate and useful for AI/LLM
+retrieval (keep it in llms.txt and llms-full.txt),
+but on the visible page it diffuses the primary
+signal you want human readers and recruiters to
+take away.
+
+---
+
+## Biography / narrative block
+
+**Current approach:**
+Founder at Underline, two decades of product and
+design leadership, democratic access theme,
+computer science background.
+
+**Directional:**
+Keep the democratic access narrative — it is
+genuinely distinctive and emotionally resonant —
+but compress it to 2–3 sentences. Lead with the
+present-tense role and scope before the history.
+
+Example shape:
+> "Co-founder at Underline, where I lead product
+> strategy, AI innovation, and design engineering
+> for the first privately funded open-access fiber
+> network in the United States. My work across two
+> decades has been shaped by one consistent idea:
+> critical systems — infrastructure, finance, data —
+> should be accessible to the people who depend on
+> them."
+
+**Reasoning:**
+Current version leads with history. Directional
+version leads with present scope and then earns
+the backstory. That inversion is how principal
+and executive candidates position themselves.
+
+---
+
+## Proof / signals section
+
+**Current approach:**
+Full press list, affiliations, published work topics,
+and career timeline are all visible or near-visible
+on the page.
+
+**Directional:**
+Collapse external validation into one short strip:
+
+> Previously: VP Product, Neighborly (civic fintech,
+> $25M Series A) · Co-Founder & Head of Product,
+> Edge Up Sports × IBM Watson · Co-Founder, Underline
+> ($100M Colorado Springs open-access network, Ares
+> Management investment)
+>
+> Press: Wired · Fast Company · Bloomberg · NBC News ·
+> Forbes · NPR
+
+Keep the full press list and timeline in the
+machine-readable layer (llms.txt / llms-full.txt)
+where it has maximum value for AI retrieval without
+cluttering the human reading path.
+
+**Reasoning:**
+For principal and VP-level roles, proof via brand-name
+companies, dollar amounts, and press outlets works
+faster than detailed narrative. One well-formatted
+strip with Wired, Bloomberg, and $100M communicates
+credibility in 3 seconds.
+
+---
+
+## Domain experience
+
+**Current approach:**
+Listed by vertical: fintech, civic, consumer
+robotics, medical, networks, GIS, multimedia.
+
+**Directional:**
+Compress to a single sentence:
+> "Sector experience across infrastructure, fintech,
+> civic tech, enterprise, and AI systems."
+
+Or keep as a short comma list with no sub-bullets.
+
+**Reasoning:**
+The long vertical list is strong for LLM/search
+indexing but creates visual weight on the human
+page. It also emphasizes breadth when you want
+to signal depth in product architecture specifically.
+Short reference is enough; the full detail lives
+in the machine-readable layer.
+
+---
+
+## Contact / CTA
+
+**Current approach:**
+LinkedIn, GitHub, email available on request.
+
+**Directional:**
+Add one sentence that signals what kinds of
+conversations you want:
+> "Open to product architecture, principal product,
+> and VP Product opportunities — remote."
+
+**Reasoning:**
+Stating the kind of conversation you want helps
+both human readers (recruiters, hiring managers)
+and AI systems matching your profile to roles.
+It is a soft call-to-action that requires no
+visual complexity.
+
+---
+
+## What stays the same
+
+- Single page. No portfolio. No case studies.
+- Plain, readable text-first layout.
+- Tone: direct, not self-promotional.
+- The opening philosophical sentence (refined but
+  kept — it differentiates you from typical résumé-
+  style pages).
+- Machine-readable layer (llms.txt, llms-full.txt)
+  continues to carry the full dossier detail. The
+  visible page is the distilled signal; the data
+  layer is the evidence.
+
+---
+
+## What moves to the data layer only
+
+- Full career timeline
+- Full press list with individual article citations
+- Full professional affiliations list
+- Full domain taxonomy (10+ verticals)
+- Hackathon wins and early career entries
+
+These remain canonically present on coty.design
+via the machine-readable files — they are not
+deleted, just moved off the primary human reading
+path.
