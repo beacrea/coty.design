@@ -7,58 +7,37 @@ export interface ConnectItem {
 export const siteContent = {
   opener: {
     name: "Coty Beasley",
-    role: "Design and Product Leader",
-    summary: "Good design brings clarity to complexity and makes technology actually useful. With this in mind, I work at the intersection of systems, people, and innovation to help organizations and communities connect, collaborate, and grow."
+    role: "Product Architect & Co-Founder",
+    summary: "I define how complex products fit together, aligning strategy, AI behavior, workflows, and interface rules so platforms scale without losing coherence."
   },
   
-  recentFocus: {
-    heading: "Recent Focus",
+  capabilities: {
+    heading: "What I Define",
     items: [
-      "Setting product vision and strategy",
-      "Leading cross-functional teams",
-      "Humanizing complex digital experiences",
-      "Building design systems and development workflows",
-      "Advancing productive and responsible use of emerging AI",
-      "Developing and mentoring talent",
-      "Driving innovation for network, civic, and social impact"
+      "Product vision, strategy, and architecture across complex, multi-party platforms",
+      "AI-enabled workflow design, advancing productive and responsible use of AI in real products",
+      "Design infrastructure: scalable systems, component architecture, and design-engineering alignment",
+      "Humanizing complex systems, making technology genuinely useful and coherent for the people it serves",
+      "Operating model definition, shaping how cross-functional product teams work together",
+      "Semantic governance: canonical schemas, contracts, and interface specifications that keep platforms consistent at scale"
     ]
   },
   
-  currentStatus: {
-    heading: "Current Status",
+  bio: {
+    heading: "Background",
     items: [
-      "Founder at Underline Technologies (est. 2019), where I create an open-access fiber network platform serving residents, businesses, and institutions.",
-      "Our mission is to make essential infrastructure accessible, competitive, and responsive to real human needs.",
-      "I serve as Head of Product Design and Innovation."
+      "Co-founder at Underline, where I lead product strategy, AI innovation, and design engineering for the first privately funded open-access fiber network in the United States.",
+      "My work across two decades has been shaped by one consistent idea: critical systems \u2014 infrastructure, finance, data \u2014 should be accessible to the people who depend on them."
     ]
   },
-  
-  foundations: {
-    heading: "Foundations",
+
+  proofStrip: {
+    heading: "Track Record",
     items: [
-      "My work is built on a strong foundation in computer science, combined with two decades in product and design leadership. Each project aims for technical rigor, empathy, and entrepreneurship.",
-      "I bring experience across civic technology, infrastructure, artificial intelligence, and emerging platforms, with a consistent commitment to the people and communities these systems serve."
+      "Previously: VP Product, Neighborly (civic fintech) \u00B7 Co-Founder & Head of Product, Edge Up Sports \u00D7 IBM Watson",
+      "Press: Wired \u00B7 Fast Company \u00B7 Bloomberg \u00B7 NBC News \u00B7 Forbes \u00B7 NPR",
+      "Sector experience across infrastructure, fintech, civic tech, enterprise, and AI systems"
     ]
-  },
-  
-  domainExpertise: {
-    heading: "Domain Expertise",
-    items: [
-      "Financial technology",
-      "Civic and government technology",
-      "Consumer robotics and smart devices",
-      "Medical platforms and devices",
-      "Networks and telecommunications",
-      "Digital mapping and GIS",
-      "Multimedia, interface, and brand systems"
-    ]
-  },
-  
-  familyExplainer: {
-    heading: "Family Explainer Tool",
-    description: "Cornered at the grocery store? Neighbors asking questions? Need to explain what I do and \"I think he does something with computers\" isn't cutting it? This AI translates my work into plain English.",
-    buttonText: "Ask My AI Assistant",
-    buttonUrl: "https://ask.coty.design"
   },
 
   connect: {
@@ -71,7 +50,7 @@ export const siteContent = {
   },
   
   metadata: {
-    legal: "© Coty Beasley 2025",
+    legal: "\u00A9 Coty Beasley 2025",
     version: `v${__APP_VERSION__}`,
     versionUrl: `https://github.com/beacrea/coty.design/releases/tag/portfolio-v${__APP_VERSION__}`
   }

@@ -2,7 +2,7 @@
   "$schema": "https://schema.org",
   "lastUpdated": "2026-03-15",
   "canonicalUrl": "https://coty.design",
-  "canonicalBio": "Coty Beasley is a design technologist, product leader, and co-founder of Underline, where he leads product design, innovation, and AI-driven research and development across community infrastructure systems. Based in Manhattan, Kansas, his career spans creative technology, civic product leadership, and infrastructure innovation — from building AI products with IBM Watson in 2015 to leading the first privately funded open-access fiber network in the United States. His work is unified by a commitment to democratizing access to critical systems and making technology genuinely useful for communities.",
+  "canonicalBio": "Coty Beasley is a product architect and co-founder of Underline, where he leads product strategy, AI innovation, and design engineering across community infrastructure systems. Based in Manhattan, Kansas, his career spans creative technology, civic product leadership, and infrastructure innovation — from building AI products with IBM Watson in 2015 to leading the first privately funded open-access fiber network in the United States. His work is unified by a commitment to democratizing access to critical systems and making technology genuinely useful for communities.",
 
   "identity": {
     "name": "Coty Beasley",
@@ -10,7 +10,7 @@
     "birthPlace": "Kansas City, Missouri metro area",
     "currentLocation": "Manhattan, Kansas",
     "currentLocationSince": "2022",
-    "jobTitle": "Head of Product Design & Innovation / Co-Founder",
+    "jobTitle": "Product Architect & Co-Founder",
     "organization": "Underline",
     "organizationUrl": "https://www.underline.com",
     "website": "https://coty.design",
@@ -29,7 +29,7 @@
         "note": "Attended but did not complete; left to pursue a lucrative early entrepreneurial venture and was dissuaded by the program's heavy reliance on .NET."
       }
     ],
-    "description": "Design technologist, product leader, and co-founder of Underline. Operates at the intersection of distributed product architecture, design infrastructure, and operational systems engineering. Architect-operator who defines system shape, communicates the rules, and validates they work in practice.",
+    "description": "Product architect and co-founder of Underline. Defines how complex products fit together, aligning strategy, AI behavior, workflows, and interface rules so platforms scale without losing coherence. Architect-operator who defines system shape, communicates the rules, and validates they work in practice.",
     "simultaneousModes": [
       "Design systems architect (foundational infrastructure)",
       "Product architect (multi-system coherence)",

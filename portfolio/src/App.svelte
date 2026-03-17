@@ -3,7 +3,6 @@
   import ThemeToggle from './components/ThemeToggle.svelte';
   import Opener from './components/Opener.svelte';
   import Section from './components/Section.svelte';
-  import FamilyExplainer from './components/FamilyExplainer.svelte';
   import ConnectSection from './components/ConnectSection.svelte';
   import Footer from './components/Footer.svelte';
   import LazyBackground from './components/LazyBackground.svelte';
@@ -56,34 +55,21 @@
       </header>
       
       <Section 
-        heading={siteContent.recentFocus.heading}
-        items={siteContent.recentFocus.items}
+        heading={siteContent.capabilities.heading}
+        items={siteContent.capabilities.items}
         variant="bullet"
       />
       
       <Section 
-        heading={siteContent.currentStatus.heading}
-        items={siteContent.currentStatus.items}
+        heading={siteContent.bio.heading}
+        items={siteContent.bio.items}
         variant="paragraph"
       />
       
       <Section 
-        heading={siteContent.foundations.heading}
-        items={siteContent.foundations.items}
+        heading={siteContent.proofStrip.heading}
+        items={siteContent.proofStrip.items}
         variant="paragraph"
-      />
-      
-      <Section 
-        heading={siteContent.domainExpertise.heading}
-        items={siteContent.domainExpertise.items}
-        variant="bullet"
-      />
-
-      <FamilyExplainer 
-        heading={siteContent.familyExplainer.heading}
-        description={siteContent.familyExplainer.description}
-        buttonText={siteContent.familyExplainer.buttonText}
-        buttonUrl={siteContent.familyExplainer.buttonUrl}
       />
       
       <ConnectSection 
