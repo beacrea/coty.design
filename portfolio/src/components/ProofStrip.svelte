@@ -11,7 +11,13 @@
     {#each rows as row}
       <div class="row">
         <dt class="label">{row.label}</dt>
-        <dd class="value">{row.value}</dd>
+        <dd class="value">
+          <ul class="items">
+            {#each row.items as item}
+              <li class="item">{item}</li>
+            {/each}
+          </ul>
+        </dd>
       </div>
     {/each}
   </dl>
@@ -57,7 +63,21 @@
     color: var(--semantic-caption);
     line-height: 1.6;
     transition: color var(--transition-theme);
-    text-wrap: pretty;
+  }
+
+  .items {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .item {
+    text-wrap: nowrap;
+  }
+
+  .item:not(:last-child)::after {
+    content: ",\00a0";
   }
 
   @media (min-width: 640px) {

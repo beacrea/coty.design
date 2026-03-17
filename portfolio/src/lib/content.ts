@@ -6,7 +6,7 @@ export interface ConnectItem {
 
 export interface ProofRow {
   label: string;
-  value: string;
+  items: string[];
 }
 
 export const siteContent = {
@@ -39,9 +39,16 @@ export const siteContent = {
   proofStrip: {
     heading: "Track Record",
     rows: [
-      { label: "Previously", value: "VP\u00A0Product, Neighborly (civic fintech) · Co\u2011Founder &\u00A0Head\u00A0of\u00A0Product, Edge\u00A0Up\u00A0Sports ×\u00A0IBM\u00A0Watson" },
-      { label: "Press", value: "Wired · Fast\u00A0Company · Bloomberg · NBC\u00A0News · Forbes ·\u00A0NPR" },
-      { label: "Sectors", value: "Infrastructure · Fintech · Civic\u00A0Tech · Enterprise ·\u00A0AI\u00A0Systems" }
+      { label: "Previously", items: [
+        "VP\u00A0Product, Neighborly (civic\u00A0fintech)",
+        "Co\u2011Founder &\u00A0Head\u00A0of\u00A0Product, Edge\u00A0Up\u00A0Sports \u00D7\u00A0IBM\u00A0Watson"
+      ]},
+      { label: "Press", items: [
+        "Wired", "Fast\u00A0Company", "Bloomberg", "NBC\u00A0News", "Forbes", "NPR"
+      ]},
+      { label: "Sectors", items: [
+        "Infrastructure", "Fintech", "Civic\u00A0Tech", "Enterprise", "AI\u00A0Systems"
+      ]}
     ] as ProofRow[]
   },
 
