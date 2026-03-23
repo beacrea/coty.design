@@ -1,0 +1,134 @@
+<script lang="ts">
+  import type { ProofRow } from '../lib/content';
+
+  export let heading: string;
+  export let framing: string;
+  export let rows: ProofRow[];
+</script>
+
+<section class="section animate-entrance">
+  <h2 class="heading">{heading}</h2>
+
+  <p class="framing">
+    <span class="inline-bullet"></span>
+    {framing}
+  </p>
+
+  <dl class="rows">
+    {#each rows as row}
+      <div class="row">
+        <dt class="label">{row.label}</dt>
+        <dd class="value">
+          <ul class="items">
+            {#each row.items as item}
+              <li class="item">{item}</li>
+            {/each}
+          </ul>
+        </dd>
+      </div>
+    {/each}
+  </dl>
+</section>
+
+<style>
+  .section {
+    margin-bottom: var(--section-spacing);
+  }
+
+  .heading {
+    font-size: var(--text-size-header);
+    font-weight: 460;
+    color: var(--semantic-header);
+    margin-bottom: var(--list-item-gap);
+    transition: color var(--transition-theme);
+  }
+
+  .framing {
+    font-size: var(--text-size-body);
+    font-weight: 400;
+    color: var(--semantic-body);
+    line-height: 1.6;
+    margin-bottom: var(--list-item-gap);
+    transition: color var(--transition-theme);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75em;
+  }
+
+  .inline-bullet {
+    flex-shrink: 0;
+    width: var(--bullet-size);
+    height: var(--bullet-size);
+    border-radius: 50%;
+    background-color: var(--semantic-bullet);
+    margin-top: var(--bullet-y-offset);
+    transition: background-color var(--transition-theme);
+  }
+
+  .rows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--list-item-spacing);
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .label {
+    font-size: var(--text-size-body);
+    font-weight: 600;
+    color: var(--semantic-body);
+    letter-spacing: 0.02em;
+    transition: color var(--transition-theme);
+    flex-shrink: 0;
+  }
+
+  .value {
+    font-size: var(--text-size-body);
+    font-weight: 400;
+    color: var(--semantic-caption);
+    line-height: 1.6;
+    transition: color var(--transition-theme);
+  }
+
+  .items {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .item {
+    text-wrap: pretty;
+  }
+
+  .item:not(:last-child)::after {
+    content: ",\00a0";
+  }
+
+  @media (min-width: 640px) {
+    .row {
+      flex-direction: row;
+      gap: 0;
+    }
+
+    .label {
+      width: 130px;
+      min-width: 130px;
+    }
+
+    .value {
+      flex: 1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .label {
+      width: 150px;
+      min-width: 150px;
+    }
+  }
+</style>

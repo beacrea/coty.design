@@ -4,6 +4,7 @@
   import Opener from './components/Opener.svelte';
   import Section from './components/Section.svelte';
   import ProofStrip from './components/ProofStrip.svelte';
+  import AdvisorySection from './components/AdvisorySection.svelte';
   import ConnectSection from './components/ConnectSection.svelte';
   import Footer from './components/Footer.svelte';
   import LazyBackground from './components/LazyBackground.svelte';
@@ -76,6 +77,12 @@
         heading={siteContent.domainExperience.heading}
         items={siteContent.domainExperience.items}
         variant="bullet"
+      />
+
+      <AdvisorySection
+        heading={siteContent.advisory.heading}
+        framing={siteContent.advisory.framing}
+        rows={siteContent.advisory.rows}
       />
       
       <ConnectSection 

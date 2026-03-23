@@ -9,6 +9,7 @@ export interface ProofRow {
   items: string[];
 }
 
+
 export const siteContent = {
   opener: {
     name: "Coty Beasley",
@@ -67,11 +68,29 @@ export const siteContent = {
     ]
   },
 
+  advisory: {
+    heading: "Advisory &\u00A0Speaking",
+    framing: "Drawing on two decades across infrastructure, fintech, and AI\u00A0systems, I occasionally take on a small number of advisory and speaking\u00A0engagements.",
+    rows: [
+      { label: "Advisory", items: [
+        "Product architecture\u00A0review",
+        "AI product\u00A0strategy",
+        "Systems\u00A0coherence"
+      ]},
+      { label: "Speaking", items: [
+        "Product architecture and platform\u00A0coherence",
+        "AI integration in product\u00A0organizations",
+        "Infrastructure access and democratized\u00A0systems"
+      ]}
+    ] as ProofRow[]
+  },
+
   connect: {
     heading: "Connect",
     items: [
       { text: "LinkedIn", description: "for professional conversations", url: "https://linkedin.com/in/cbeasley0" },
       { text: "GitHub", description: "for code and collaborations", url: "https://github.com/beacrea" },
+      { text: "Advisory &\u00A0speaking", description: "inquiries via LinkedIn", url: "https://linkedin.com/in/cbeasley0" },
       { text: "Email", description: "available upon request", url: null }
     ] as ConnectItem[]
   },
