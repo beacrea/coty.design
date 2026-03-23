@@ -118,6 +118,12 @@ ${corpus.geographicJourney.map((g: any) => `- **${g.location} (${g.period}):** $
       for (const role of phase.roles) {
         content += `**${role.title}** at ${role.organization} (${role.period})\n`;
         if (role.context) content += `${role.context}\n`;
+        if (role.titleEvolution) {
+          content += `\nTitle evolution:\n`;
+          for (const t of role.titleEvolution) {
+            content += `- ${t}\n`;
+          }
+        }
         if (role.promotionTrajectory) {
           content += `\nPromotion trajectory:\n`;
           for (const p of role.promotionTrajectory) {
@@ -137,6 +143,10 @@ ${corpus.geographicJourney.map((g: any) => `- **${g.location} (${g.period}):** $
         content += `- ${a}\n`;
       }
       content += '\n';
+    }
+
+    if (phase.communityLeadership) {
+      content += `Community leadership: ${phase.communityLeadership}\n\n`;
     }
 
     if (phase.currentScope) {
@@ -209,6 +219,14 @@ ${corpus.professionalAffiliations.map((a: any) => `- ${a.organization} — ${a.r
 Topics: ${corpus.publishedWork.topics.join(', ')}
 ${corpus.publishedWork.note}
 
+### Articles
+${corpus.publishedWork.articles?.map((a: any) => {
+  let line = `- [${a.title}](${a.url}) — ${a.publication} (${a.date})`;
+  if (a.bylineContext) line += `. ${a.bylineContext}`;
+  if (a.note) line += `. ${a.note}`;
+  return line;
+}).join('\n') || ''}
+
 ---
 
 ## Press Coverage & Third-Party Validation
@@ -223,6 +241,10 @@ ${corpus.pressCoverage.map((p: any) => `- [${p.title}](${p.url}) — ${p.publica
 - AI Chatbot: ${corpus.contactAndDiscovery.chatbot}
 - LinkedIn: ${corpus.contactAndDiscovery.linkedin}
 - GitHub: ${corpus.contactAndDiscovery.github}
+- Twitter/X: ${corpus.contactAndDiscovery.twitter}
+- Dribbble: ${corpus.contactAndDiscovery.dribbble}
+- CodePen: ${corpus.contactAndDiscovery.codepen}
+- Observable: ${corpus.contactAndDiscovery.observable}
 - Underline Profile: ${corpus.contactAndDiscovery.underlineProfile}
 `;
 
