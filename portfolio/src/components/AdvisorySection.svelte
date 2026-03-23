@@ -9,10 +9,7 @@
 <section class="section animate-entrance">
   <h2 class="heading">{heading}</h2>
 
-  <p class="framing">
-    <span class="inline-bullet"></span>
-    {framing}
-  </p>
+  <p class="framing">{framing}</p>
 
   <dl class="rows">
     {#each rows as row}
@@ -46,23 +43,10 @@
   .framing {
     font-size: var(--text-size-body);
     font-weight: 400;
-    color: var(--semantic-body);
+    color: var(--semantic-caption);
     line-height: 1.6;
     margin-bottom: var(--list-item-gap);
     transition: color var(--transition-theme);
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75em;
-  }
-
-  .inline-bullet {
-    flex-shrink: 0;
-    width: var(--bullet-size);
-    height: var(--bullet-size);
-    border-radius: 50%;
-    background-color: var(--semantic-bullet);
-    margin-top: var(--bullet-y-offset);
-    transition: background-color var(--transition-theme);
   }
 
   .rows {
@@ -97,16 +81,12 @@
   .items {
     list-style: none;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 0;
   }
 
   .item {
     text-wrap: pretty;
-  }
-
-  .item:not(:last-child)::after {
-    content: ",\00a0";
   }
 
   @media (min-width: 640px) {
