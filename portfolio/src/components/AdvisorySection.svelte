@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { ProofRow } from '../lib/content';
+  import BulletList from './BulletList.svelte';
 
   export let heading: string;
   export let framing: string;
@@ -11,20 +12,12 @@
 
   <p class="framing">{framing}</p>
 
-  <dl class="rows">
-    {#each rows as row}
-      <div class="row">
-        <dt class="label">{row.label}</dt>
-        <dd class="value">
-          <ul class="items">
-            {#each row.items as item}
-              <li class="item">{item}</li>
-            {/each}
-          </ul>
-        </dd>
-      </div>
-    {/each}
-  </dl>
+  {#each rows as row}
+    <div class="subsection">
+      <h3 class="label">{row.label}</h3>
+      <BulletList items={row.items} />
+    </div>
+  {/each}
 </section>
 
 <style>
@@ -49,16 +42,12 @@
     transition: color var(--transition-theme);
   }
 
-  .rows {
-    display: flex;
-    flex-direction: column;
-    gap: var(--list-item-spacing);
+  .subsection {
+    margin-bottom: var(--list-item-gap);
   }
 
-  .row {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  .subsection:last-child {
+    margin-bottom: 0;
   }
 
   .label {
@@ -66,53 +55,7 @@
     font-weight: 600;
     color: var(--semantic-body);
     letter-spacing: 0.02em;
+    margin-bottom: var(--list-item-spacing);
     transition: color var(--transition-theme);
-    flex-shrink: 0;
-  }
-
-  .value {
-    font-size: var(--text-size-body);
-    font-weight: 400;
-    color: var(--semantic-caption);
-    line-height: 1.6;
-    transition: color var(--transition-theme);
-  }
-
-  .items {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0;
-  }
-
-  .item {
-    text-wrap: pretty;
-  }
-
-  .item:not(:last-child)::after {
-    content: ",\00a0";
-  }
-
-  @media (min-width: 640px) {
-    .row {
-      flex-direction: row;
-      gap: 0;
-    }
-
-    .label {
-      width: 130px;
-      min-width: 130px;
-    }
-
-    .value {
-      flex: 1;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .label {
-      width: 150px;
-      min-width: 150px;
-    }
   }
 </style>
