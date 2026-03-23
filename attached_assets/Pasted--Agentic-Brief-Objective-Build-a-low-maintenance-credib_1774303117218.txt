@@ -1,0 +1,37 @@
+# Agentic Brief
+
+## Objective
+
+Build a low-maintenance credibility layer for side consulting that supplements income, while keeping Coty Beasley primarily positioned as Product Architect and Co-Founder at Underline. [cite:52][cite:16]
+
+## Primary Outcome
+
+Make it immediately clear what kinds of advisory work Coty takes on, who it is for, and why he is credible, without making the site or profile look like he is leaving Underline or launching an agency. [cite:52][cite:16][cite:17][cite:19]
+
+## Secondary Outcome
+
+Increase trust for warm introductions, inbound interest, and occasional outreach by packaging existing credibility into a cleaner, buyer-facing format. [cite:52][cite:19][cite:53]
+
+## Context
+
+Coty leads AI innovation and other R&D-heavy, cross-functional work at Underline, so any consulting offer should be framed as selective senior advisory work rather than broad execution services. [cite:17]  
+His strongest public positioning assets are product architecture, AI product thinking, systems coherence, and design/product leadership, which fit high-leverage advisory work better than freelance-style implementation. [cite:16][cite:17]  
+His current website preference is to keep coty.design simple and single-page, so the solution should prioritize restructuring and tightening the existing surface rather than expanding into a large multi-page consulting site. [cite:19][cite:53]
+
+## Constraints
+
+Do not position Coty as a full-time consultant, agency founder, or person seeking volume client work, because consulting is secondary to his main role at Underline. [cite:52][cite:16][cite:17]  
+Do not recommend a heavy portfolio build, a large case-study library, or a complex site architecture, because he prefers a straightforward single-page format. [cite:19][cite:53]  
+Do not create offers that imply deep weekly time commitments; favor advisory sessions, audits, reviews, retainers with clear boundaries, or short diagnostics that fit around a senior operating role. [cite:17][cite:52]
+
+## Deliverables
+
+Produce a concise website strategy for coty.design that includes a revised homepage hierarchy, a limited-availability advisory section, a short positioning statement, and 2–4 tightly defined service offers aligned to product architecture and AI advisory. [cite:53][cite:19][cite:17]  
+Create credibility assets that fit this model: proof-snippet templates, testimonial request templates, a short bio for advisory use, and light outreach copy for referrals or warm intros. [cite:52][cite:53]  
+Optimize for trust, clarity, and selectivity, so the final presentation feels like “experienced operator available for a few high-fit engagements” rather than “independent consultant looking for work.” [cite:16][cite:17][cite:52]
+
+## Success Criteria
+
+A qualified prospect should be able to understand within one scroll who Coty helps, what problems he solves, and what a first engagement looks like. [cite:19][cite:53]  
+The positioning should reinforce, not dilute, his credibility as a co-founder and AI/product leader at Underline. [cite:16][cite:17]  
+The final system should be easy to maintain, compatible with a single-page site, and useful for referral-driven consulting that supplements income without becoming a second full-time job. [cite:19][cite:52][cite:53]
