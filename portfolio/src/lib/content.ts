@@ -75,7 +75,7 @@ export const siteContent = {
       { label: "Advisory", items: [
         "Product architecture\u00A0review",
         "AI product\u00A0strategy",
-        "Systems\u00A0coherence"
+        "Design system\u00A0architecture"
       ]},
       { label: "Speaking", items: [
         "Product architecture and platform\u00A0coherence",
