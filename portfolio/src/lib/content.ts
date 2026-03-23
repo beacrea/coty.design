@@ -78,9 +78,9 @@ export const siteContent = {
         "Design system\u00A0architecture"
       ]},
       { label: "Speaking", items: [
-        "Product architecture at\u00A0scale",
-        "AI integration in product\u00A0organizations",
-        "Infrastructure access and democratized\u00A0systems"
+        "Building infrastructure for public\u00A0benefit",
+        "AI as a product\u00A0discipline",
+        "Scaling design systems across\u00A0organizations"
       ]}
     ] as ProofRow[]
   },
