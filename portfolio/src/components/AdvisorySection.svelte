@@ -81,12 +81,16 @@
   .items {
     list-style: none;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 0;
   }
 
   .item {
     text-wrap: pretty;
+  }
+
+  .item:not(:last-child)::after {
+    content: ",\00a0";
   }
 
   @media (min-width: 640px) {
