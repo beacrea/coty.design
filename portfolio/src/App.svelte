@@ -119,7 +119,12 @@
   .header {
     position: relative;
     margin-bottom: var(--section-spacing);
-    padding-right: calc(var(--toggle-size) + 12px);
+  }
+
+  @media (max-width: 639px) {
+    .header {
+      padding-right: calc(var(--toggle-size) + 12px);
+    }
   }
 
   .opener-wrapper {
