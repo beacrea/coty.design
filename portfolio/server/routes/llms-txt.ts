@@ -38,7 +38,6 @@ ${corpus.identity.education.map((edu: any) => {
 
 ## Links
 - Website: ${corpus.canonicalUrl}
-- AI Chatbot (ask questions about Coty): ${corpus.contactAndDiscovery.chatbot}
 - LinkedIn: ${corpus.identity.linkedin}
 - GitHub: ${corpus.identity.github}
 - Underline Company Profile: ${corpus.contactAndDiscovery.underlineProfile}
@@ -238,7 +237,6 @@ ${corpus.pressCoverage.map((p: any) => `- [${p.title}](${p.url}) — ${p.publica
 ## Contact & Discovery
 
 - Website: ${corpus.contactAndDiscovery.website}
-- AI Chatbot: ${corpus.contactAndDiscovery.chatbot}
 - LinkedIn: ${corpus.contactAndDiscovery.linkedin}
 - GitHub: ${corpus.contactAndDiscovery.github}
 - Twitter/X: ${corpus.contactAndDiscovery.twitter}
