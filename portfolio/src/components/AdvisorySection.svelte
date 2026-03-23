@@ -38,12 +38,12 @@
     font-weight: 400;
     color: var(--semantic-caption);
     line-height: 1.6;
-    margin-bottom: var(--list-item-gap);
+    margin-bottom: calc(var(--section-spacing) * 0.5);
     transition: color var(--transition-theme);
   }
 
   .subsection {
-    margin-bottom: var(--list-item-gap);
+    margin-bottom: calc(var(--section-spacing) * 0.5);
   }
 
   .subsection:last-child {
