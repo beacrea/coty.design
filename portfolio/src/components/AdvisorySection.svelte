@@ -1,10 +1,9 @@
 <script lang="ts">
-  import type { ProofRow } from '../lib/content';
   import BulletList from './BulletList.svelte';
 
   export let heading: string;
   export let framing: string;
-  export let rows: ProofRow[];
+  export let items: string[];
 </script>
 
 <section class="section animate-entrance">
@@ -12,12 +11,7 @@
 
   <p class="framing">{framing}</p>
 
-  {#each rows as row}
-    <div class="subsection">
-      <h3 class="label">{row.label}</h3>
-      <BulletList items={row.items} />
-    </div>
-  {/each}
+  <BulletList {items} />
 </section>
 
 <style>
@@ -38,24 +32,7 @@
     font-weight: 400;
     color: var(--semantic-caption);
     line-height: 1.6;
-    margin-bottom: calc(var(--section-spacing) * 0.5);
-    transition: color var(--transition-theme);
-  }
-
-  .subsection {
-    margin-bottom: calc(var(--section-spacing) * 0.5);
-  }
-
-  .subsection:last-child {
-    margin-bottom: 0;
-  }
-
-  .label {
-    font-size: var(--text-size-body);
-    font-weight: 600;
-    color: var(--semantic-body);
-    letter-spacing: 0.02em;
-    margin-bottom: var(--list-item-spacing);
+    margin-bottom: var(--list-item-gap);
     transition: color var(--transition-theme);
   }
 </style>

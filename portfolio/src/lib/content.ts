@@ -71,18 +71,12 @@ export const siteContent = {
   advisory: {
     heading: "Advisory &\u00A0Speaking",
     framing: "Drawing on two decades across infrastructure, fintech, and AI\u00A0systems, I occasionally take on a small number of advisory and speaking\u00A0engagements.",
-    rows: [
-      { label: "Advisory", items: [
-        "Product architecture\u00A0review",
-        "AI product\u00A0strategy",
-        "Design system\u00A0architecture"
-      ]},
-      { label: "Speaking", items: [
-        "Building infrastructure for public\u00A0benefit",
-        "AI as a product\u00A0discipline",
-        "Scaling design systems across\u00A0organizations"
-      ]}
-    ] as ProofRow[]
+    items: [
+      "Product architecture and\u00A0strategy",
+      "AI product\u00A0thinking",
+      "Design system\u00A0architecture",
+      "Building infrastructure for public\u00A0benefit"
+    ]
   },
 
   connect: {

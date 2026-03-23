@@ -82,7 +82,7 @@
       <AdvisorySection
         heading={siteContent.advisory.heading}
         framing={siteContent.advisory.framing}
-        rows={siteContent.advisory.rows}
+        items={siteContent.advisory.items}
       />
       
       <ConnectSection 
