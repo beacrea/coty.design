@@ -14,7 +14,7 @@ export const siteContent = {
   opener: {
     name: "Coty Beasley",
     role: "Product Architect &\u00A0Co\u2011Founder",
-    summary: "I define how complex products fit together, aligning strategy, AI behavior, workflows, and interface rules so platforms scale without losing\u00A0coherence."
+    summary: "I define how complex products fit together, aligning strategy, AI behavior, workflows, and interface rules so platforms scale without losing\u00A0clarity."
   },
   
   capabilities: {
