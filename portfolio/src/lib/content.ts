@@ -78,7 +78,7 @@ export const siteContent = {
         "Design system\u00A0architecture"
       ]},
       { label: "Speaking", items: [
-        "Product architecture and platform\u00A0coherence",
+        "Product architecture at\u00A0scale",
         "AI integration in product\u00A0organizations",
         "Infrastructure access and democratized\u00A0systems"
       ]}
