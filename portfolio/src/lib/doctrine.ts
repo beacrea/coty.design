@@ -24,6 +24,11 @@ export interface Observation {
   notes: string[];
 }
 
+export interface Reference {
+  label: string;
+  url: string;
+}
+
 export interface Claim {
   id: string;
   claimNumber: string;
@@ -37,6 +42,7 @@ export interface Claim {
   challenges: string[];
   evaluationCriteria: string[];
   observations: Observation[];
+  references: Reference[];
   splitFrom?: string;
   splitVersion?: string;
 }
@@ -92,6 +98,10 @@ export async function fetchDoctrine(): Promise<DoctrineData> {
       observations: (c.observations ?? []).map((o: any) => ({
         period: o.period,
         notes: o.notes ?? [],
+      })),
+      references: (c.references ?? []).map((r: any) => ({
+        label: r.label,
+        url: r.url,
       })),
       splitFrom: c.splitFrom,
       splitVersion: c.splitVersion,

@@ -94,6 +94,19 @@
       </ul>
     </section>
   {/if}
+
+  {#if claim.references && claim.references.length > 0}
+    <section class="references-section">
+      <h2 class="section-label">References</h2>
+      <ol class="references-list">
+        {#each claim.references as ref}
+          <li>
+            <a href={ref.url} target="_blank" rel="noopener noreferrer">{ref.label}</a>
+          </li>
+        {/each}
+      </ol>
+    </section>
+  {/if}
 </div>
 
 <style>
@@ -320,5 +333,47 @@
     position: absolute;
     left: 0;
     color: var(--semantic-caption);
+  }
+
+  .references-section {
+    margin-bottom: 32px;
+  }
+
+  .references-list {
+    list-style: none;
+    counter-reset: ref-counter;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+    background: var(--surface-card-bg);
+    border: 1px solid var(--surface-card-border);
+    border-radius: 8px;
+  }
+
+  .references-list li {
+    font-size: 13px;
+    line-height: 1.5;
+    padding-left: 28px;
+    position: relative;
+    counter-increment: ref-counter;
+  }
+
+  .references-list li::before {
+    content: counter(ref-counter) '.';
+    position: absolute;
+    left: 0;
+    color: var(--semantic-caption);
+    font-weight: 600;
+    min-width: 20px;
+  }
+
+  .references-list a {
+    color: var(--semantic-link);
+    text-decoration: none;
+  }
+
+  .references-list a:hover {
+    text-decoration: underline;
   }
 </style>

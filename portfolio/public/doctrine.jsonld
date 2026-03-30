@@ -38,6 +38,9 @@
     "observations": "oo:observations",
     "splitFrom": "oo:splitFrom",
     "splitVersion": "oo:splitVersion",
+    "references": "oo:references",
+    "label": "oo:label",
+    "url": "schema:url",
 
     "term": "oo:term",
     "period": "oo:period",
@@ -129,6 +132,16 @@
             "No new Tier A evidence contradicts the claim. Promotion to Supported blocked by lack of instrumented internal metrics on framing-vs-implementation ratio."
           ]
         }
+      ],
+      "references": [
+        {
+          "label": "METR: Measuring AI Ability to Complete Long Tasks (RCT with experienced developers)",
+          "url": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"
+        },
+        {
+          "label": "GitHub: Research Quantifying GitHub Copilot's Impact on Developer Productivity",
+          "url": "https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness/"
+        }
       ]
     },
     {
@@ -162,6 +175,16 @@
             "Agent frameworks (LangChain, CrewAI, Anthropic SDK) universally require explicit tool/resource schemas. Agents that lack a shared ontology with their environment fail reliably.",
             "Directional strengthening, but evidence remains mostly Tier B. No Tier A study yet isolates ontological architecture as the causal variable."
           ]
+        }
+      ],
+      "references": [
+        {
+          "label": "Anthropic: Model Context Protocol (MCP) Introduction",
+          "url": "https://www.anthropic.com/news/model-context-protocol"
+        },
+        {
+          "label": "Model Context Protocol Specification",
+          "url": "https://modelcontextprotocol.io/introduction"
         }
       ]
     },
@@ -197,6 +220,20 @@
             "No demotion signals. Status remains appropriate at highest level."
           ]
         }
+      ],
+      "references": [
+        {
+          "label": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+          "url": "https://www.swebench.com/"
+        },
+        {
+          "label": "Thoughtworks Technology Radar: Spec-Driven Development",
+          "url": "https://www.thoughtworks.com/radar/techniques/spec-driven-development"
+        },
+        {
+          "label": "Martin Fowler: Specification by Example",
+          "url": "https://martinfowler.com/bliki/SpecificationByExample.html"
+        }
       ]
     },
     {
@@ -230,6 +267,16 @@
             "Spec-driven development moved from interesting pattern to widely discussed practice (Thoughtworks, Fowler, tool vendors building spec-first workflows).",
             "Promotion to Supported still requires Tier A evidence on the authority mechanism specifically. Existing sources remain Tier B/C."
           ]
+        }
+      ],
+      "references": [
+        {
+          "label": "Anthropic: Building Effective Agents",
+          "url": "https://www.anthropic.com/research/building-effective-agents"
+        },
+        {
+          "label": "Cognition AI: Introducing Devin",
+          "url": "https://www.cognition.ai/blog/introducing-devin"
         }
       ]
     },
@@ -267,6 +314,16 @@
             "The pattern of one person + AI doing the work of a small team became a widespread narrative in Q1 2026 (indie developers, solo founders, small product teams). Directionally supportive, but largely Tier C/D evidence.",
             "No Tier A study yet isolates the causal mechanism in this specific context."
           ]
+        }
+      ],
+      "references": [
+        {
+          "label": "Brynjolfsson et al. – Generative AI at Work (NBER Working Paper / QJE)",
+          "url": "https://www.nber.org/papers/w31161"
+        },
+        {
+          "label": "LinkedIn Economic Graph: The New Era of Career Development (Aneesh Raman)",
+          "url": "https://economicgraph.linkedin.com/research/the-new-era-of-career-development"
         }
       ]
     },
@@ -309,6 +366,24 @@
             "This claim is deliberately positioned as Proposed to flag it for rigorous tracking without overstating confidence."
           ]
         }
+      ],
+      "references": [
+        {
+          "label": "Stanford HAI: Canaries in the Coal Mine – AI and the Future of Work",
+          "url": "https://hai.stanford.edu/news/canaries-coal-mine-ai-future-work"
+        },
+        {
+          "label": "NY Fed: Artificial Intelligence and the Labor Market",
+          "url": "https://www.newyorkfed.org/research/staff_reports/sr1116"
+        },
+        {
+          "label": "MIT Sloan Management Review: AI Is Not Going to Automate Everything",
+          "url": "https://sloanreview.mit.edu/article/ai-is-not-going-to-automate-everything/"
+        },
+        {
+          "label": "ADP Research Institute: Workforce Vitality Report",
+          "url": "https://adpri.org/research/workforce-vitality-report/"
+        }
       ]
     },
     {
@@ -344,6 +419,20 @@
             "The Klarna cautionary case (autonomy without adequate validation → service quality regression) continues to be cited as a canonical failure mode.",
             "Status promoted from Early validation to Emerging based on: 1 Tier A/B source (Veracode) + 2+ Tier B sources on the mechanism; counter-evidence reviewed."
           ]
+        }
+      ],
+      "references": [
+        {
+          "label": "Veracode: State of Software Security – AI-Generated Code and Security Risk",
+          "url": "https://www.veracode.com/state-of-software-security-report"
+        },
+        {
+          "label": "Anthropic: Building Effective Agents",
+          "url": "https://www.anthropic.com/research/building-effective-agents"
+        },
+        {
+          "label": "Bloomberg: Klarna Says AI Does the Job of 700 Workers. Now It Regrets Cutting Too Deep",
+          "url": "https://www.bloomberg.com/news/articles/2024-08-28/klarna-ceo-says-ai-is-doing-the-work-of-700-customer-service-agents"
         }
       ]
     }
