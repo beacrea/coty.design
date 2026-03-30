@@ -72,6 +72,12 @@ Key characteristics:
 - Vite module preload polyfill enabled for faster LCP
 - Lighthouse CLI available: `npm run lighthouse:local` (local server) and `npm run lighthouse:prod` (production)
 - App placeholder renders as fixed overlay outside `#app` for proper LCP detection
+- **Doctrine page** (`/doctrine`) — Structured claims about AI-assisted development, rendered from `public/doctrine.jsonld`
+  - Client-side routing via `src/stores/router.ts` (path-based, supports `/`, `/doctrine`, `/doctrine/:claimId`)
+  - Dashboard view with thesis banner, confidence distribution bar, claims grid, definitions
+  - Claim detail view with statement, rationale, confidence bar, evidence, observations
+  - Components: `src/components/doctrine/` (DoctrinePage, DoctrineDashboard, ClaimDetail, StatusBadge, ConfidenceMeter, ConfidenceBar, DistributionBar)
+  - Registered in route registry for sitemap inclusion; referenced in llms.txt/llms-full.txt and index.html structured data
 
 ### Generative Background
 

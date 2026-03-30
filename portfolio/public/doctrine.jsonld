@@ -1,0 +1,391 @@
+{
+  "@context": {
+    "oo": "https://underline.tech/ns/ontological-orchestration/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Doctrine": "oo:Doctrine",
+    "Claim": "oo:Claim",
+    "Definition": "oo:Definition",
+    "Observation": "oo:Observation",
+    "StatusRule": "oo:StatusRule",
+    "EvidenceTier": "oo:EvidenceTier",
+
+    "version": "schema:version",
+    "name": "schema:name",
+    "description": "schema:description",
+    "dateModified": "schema:dateModified",
+    "dateCreated": "schema:dateCreated",
+    "author": "schema:author",
+    "status": "oo:status",
+    "reviewCadence": "oo:reviewCadence",
+
+    "thesis": "oo:thesis",
+    "definitions": "oo:definitions",
+    "claims": "oo:claims",
+    "statusRules": "oo:statusRules",
+    "evidenceQualityRubric": "oo:evidenceQualityRubric",
+
+    "claimNumber": "oo:claimNumber",
+    "shortName": "oo:shortName",
+    "title": "dcterms:title",
+    "statement": "oo:statement",
+    "rationale": "oo:rationale",
+    "statusLastChanged": "oo:statusLastChanged",
+    "supportingSignals": "oo:supportingSignals",
+    "challenges": "oo:challenges",
+    "evaluationCriteria": "oo:evaluationCriteria",
+    "observations": "oo:observations",
+    "splitFrom": "oo:splitFrom",
+    "splitVersion": "oo:splitVersion",
+
+    "term": "oo:term",
+    "period": "oo:period",
+    "notes": "oo:notes",
+    "tierLevel": "oo:tierLevel",
+    "promotionThreshold": "oo:promotionThreshold",
+    "demotionThreshold": "oo:demotionThreshold",
+    "splitRule": "oo:splitRule",
+    "statusDefinitions": "oo:statusDefinitions"
+  },
+
+  "@type": "Doctrine",
+  "@id": "https://underline.tech/doctrine/ontological-orchestration",
+
+  "name": "Doctrine: Ontological Orchestration in AI-Assisted Development",
+  "description": "A structured set of claims about how AI-assisted development is changing the nature of work, paired with explicit assumptions, supporting evidence, counter-evidence, and evaluation criteria.",
+  "version": "v1.0.0",
+  "dateCreated": "2025-12",
+  "dateModified": "2026-03-30",
+  "status": "Active",
+  "reviewCadence": "Quarterly",
+
+  "author": {
+    "@type": "schema:Person",
+    "name": "Coty Beasley",
+    "schema:affiliation": {
+      "@type": "schema:Organization",
+      "name": "Underline Infrastructure",
+      "description": "Telecommunications, software-driven platform"
+    }
+  },
+
+  "thesis": "Technology roles are shifting from discrete execution to ontological orchestration: the definition, constraint, and sequencing of meaning in systems where execution is increasingly abundant.",
+
+  "definitions": [
+    {
+      "@type": "Definition",
+      "term": "Ontological orchestration",
+      "description": "The act of defining what exists, what matters, how components relate, and what constitutes correctness in a system—before and during execution."
+    },
+    {
+      "@type": "Definition",
+      "term": "Harness",
+      "description": "A structured package of intent, constraints, artifacts, and validation mechanisms that bounds and guides execution (human or agentic)."
+    },
+    {
+      "@type": "Definition",
+      "term": "Intent hypothesis",
+      "description": "A falsifiable statement describing a believed problem, its context, constraints, and success criteria."
+    },
+    {
+      "@type": "Definition",
+      "term": "Situated authorship",
+      "description": "Authorship determined by surface-area expertise and problem context rather than formal role."
+    }
+  ],
+
+  "claims": [
+    {
+      "@type": "Claim",
+      "@id": "#claim-1",
+      "claimNumber": "1",
+      "shortName": "execution-constraint",
+      "title": "Execution is no longer the dominant constraint",
+      "statement": "For most software-driven organizations, the cost of producing artifacts (code, designs, drafts) is falling faster than the cost of deciding what should exist and how it should behave.",
+      "rationale": "AI systems dramatically reduce realization latency, enabling rapid generation and iteration. This amplifies the cost of poor framing and weak constraints.",
+      "status": "Active",
+      "statusLastChanged": "v0.1.0",
+      "supportingSignals": [
+        "Rapid artifact generation with minimal marginal cost",
+        "Increased verification and correction overhead in mature systems",
+        "Shift in effort toward review, alignment, and validation"
+      ],
+      "challenges": [
+        "Expert slowdowns due to verification tax",
+        "Tool brittleness in complex, stateful systems"
+      ],
+      "evaluationCriteria": [
+        "Time spent framing vs implementing over time",
+        "Ratio of rework due to misalignment vs technical defects"
+      ],
+      "observations": [
+        {
+          "@type": "Observation",
+          "period": "Q1 2026",
+          "notes": [
+            "AI coding tools (Claude Code, Cursor, Windsurf, GitHub Copilot Workspace) continued maturing, further compressing execution cost for bounded tasks.",
+            "The METR RCT finding (experienced devs slower with AI in mature codebases) remains unrebutted and increasingly cited as the canonical counter-signal. Notably, it supports the claim: verification and context—not coding—are the bottleneck.",
+            "No new Tier A evidence contradicts the claim. Promotion to Supported blocked by lack of instrumented internal metrics on framing-vs-implementation ratio."
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "Claim",
+      "@id": "#claim-2",
+      "claimNumber": "2",
+      "shortName": "ontological-architecture",
+      "title": "Architecture becomes ontological, not just structural",
+      "statement": "The primary architectural work shifts from pipelines and components to shared ontologies: vocabularies, invariants, constraints, and mental models.",
+      "rationale": "Without shared meaning, faster execution increases divergence and coordination cost.",
+      "status": "Active",
+      "statusLastChanged": "v0.1.0",
+      "supportingSignals": [
+        "Need for registries, schemas, and canonical definitions",
+        "Emergence of planning planes (intent, decision, execution, verification)"
+      ],
+      "challenges": [
+        "Risk of over-formalization",
+        "Cultural resistance to explicit modeling"
+      ],
+      "evaluationCriteria": [
+        "Frequency of semantic vs technical disagreements",
+        "Stability of interfaces and concepts over time"
+      ],
+      "observations": [
+        {
+          "@type": "Observation",
+          "period": "Q1 2026",
+          "notes": [
+            "Model Context Protocol (MCP) emerged as an open standard for agent-tool interfaces—essentially an ontological contract defining what tools exist, what they do, and how to invoke them.",
+            "Agent frameworks (LangChain, CrewAI, Anthropic SDK) universally require explicit tool/resource schemas. Agents that lack a shared ontology with their environment fail reliably.",
+            "Directional strengthening, but evidence remains mostly Tier B. No Tier A study yet isolates ontological architecture as the causal variable."
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "Claim",
+      "@id": "#claim-3",
+      "claimNumber": "3",
+      "shortName": "vagueness-penalty",
+      "title": "AI punishes vague thinking faster than humans do",
+      "statement": "AI systems amplify ambiguity: unclear intent yields plausible but misaligned outcomes at higher velocity.",
+      "rationale": "Probabilistic systems optimize for plausibility, not intention.",
+      "status": "Strongly supported",
+      "statusLastChanged": "v0.1.0",
+      "supportingSignals": [
+        "Correct-looking but contextually wrong outputs",
+        "High cleanup cost from underspecified tasks"
+      ],
+      "challenges": [
+        "Short-term productivity gains on bounded tasks"
+      ],
+      "evaluationCriteria": [
+        "Correlation between intent clarity and output quality",
+        "Reduction in hallucination incidents with stronger constraints"
+      ],
+      "observations": [
+        {
+          "@type": "Observation",
+          "period": "Q1 2026",
+          "notes": [
+            "Instruction files (CLAUDE.md, .cursorrules, .windsurfrules) became standard practice across AI coding tools. Teams that invest in explicit context and constraints consistently report better outcomes.",
+            "SWE-bench results continue to show specification quality as the dominant predictor of AI solve rates, even as model capability improves.",
+            "Spec-driven development adoption expanded (Thoughtworks, Fowler, multiple tool vendors). The pattern is moving from emerging to conventional.",
+            "No demotion signals. Status remains appropriate at highest level."
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "Claim",
+      "@id": "#claim-4",
+      "claimNumber": "4",
+      "shortName": "authority-shift",
+      "title": "Authority shifts toward harness authorship and outcomes",
+      "statement": "Organizational authority increasingly derives from defining effective harnesses and delivering outcomes, not positional hierarchy or execution volume.",
+      "rationale": "Harnesses encode bets, constraints, and governance. Those who define them shape reality.",
+      "status": "Emerging",
+      "statusLastChanged": "v0.1.0",
+      "supportingSignals": [
+        "Reputation-based authorship",
+        "Outcome-driven legitimacy"
+      ],
+      "challenges": [
+        "Risk of informal power concentration",
+        "Need for arbitration mechanisms"
+      ],
+      "evaluationCriteria": [
+        "Who defines constraints vs who executes",
+        "How conflicts are resolved"
+      ],
+      "observations": [
+        {
+          "@type": "Observation",
+          "period": "Q1 2026",
+          "notes": [
+            "Plan-then-execute is now the default pattern in agentic workflows. Claude Code's planning mode, Devin-style agents, and Copilot Workspace all structurally separate the person defining intent/constraints from the agent executing.",
+            "Spec-driven development moved from interesting pattern to widely discussed practice (Thoughtworks, Fowler, tool vendors building spec-first workflows).",
+            "Promotion to Supported still requires Tier A evidence on the authority mechanism specifically. Existing sources remain Tier B/C."
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "Claim",
+      "@id": "#claim-5a",
+      "claimNumber": "5a",
+      "shortName": "role-convergence",
+      "title": "Roles converge upward in greenfield and small-team contexts",
+      "statement": "In greenfield, startup, and small-team contexts, AI makes narrowly defined execution functions economically obsolete faster than it creates new narrow roles, increasing demand for generalists with architectural judgment.",
+      "rationale": "Small teams already reward breadth. AI amplifies this by collapsing the cost of tasks that previously justified specialists. The result is fewer, broader roles—not a hollowed middle.",
+      "status": "Emerging",
+      "statusLastChanged": "v1.0.0",
+      "splitFrom": "claim-5",
+      "splitVersion": "v1.0.0",
+      "supportingSignals": [
+        "Brynjolfsson et al. (NBER/QJE): AI tools compress skill differentials, enabling faster upward mobility—most pronounced in smaller, less hierarchical settings.",
+        "Practitioner reports from startups and small product teams consistently describe broadening role scopes.",
+        "LinkedIn data on lattice career paths replacing ladders (Aneesh Raman)."
+      ],
+      "challenges": [
+        "Survivorship bias: small teams that succeed with generalists are more visible than those that fail.",
+        "Selection effect: generalists may self-select into small teams, not be created by AI."
+      ],
+      "evaluationCriteria": [
+        "Worktype breadth per person in small-team settings",
+        "Time-to-impact for new generalist contributors",
+        "Ratio of specialist vs generalist hires in sub-50-person orgs"
+      ],
+      "observations": [
+        {
+          "@type": "Observation",
+          "period": "Q1 2026",
+          "notes": [
+            "The pattern of one person + AI doing the work of a small team became a widespread narrative in Q1 2026 (indie developers, solo founders, small product teams). Directionally supportive, but largely Tier C/D evidence.",
+            "No Tier A study yet isolates the causal mechanism in this specific context."
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "Claim",
+      "@id": "#claim-5b",
+      "claimNumber": "5b",
+      "shortName": "role-bifurcation",
+      "title": "Roles bifurcate in large enterprise and regulated contexts",
+      "statement": "In large enterprises and regulated industries, AI may produce role bifurcation rather than convergence: a smaller tier of elite generalists who define harnesses and systems, and a larger tier of commoditized execution roles whose tasks are increasingly AI-mediated and narrowly scoped.",
+      "rationale": "Large organizations have structural incentives to specialize and stratify. AI may reinforce this by making junior execution cheaper (not eliminated), while concentrating judgment and autonomy at the top.",
+      "status": "Proposed",
+      "statusLastChanged": "v1.0.0",
+      "splitFrom": "claim-5",
+      "splitVersion": "v1.0.0",
+      "supportingSignals": [
+        "Reports of reduced junior developer hiring at some large tech companies (Q4 2025–Q1 2026).",
+        "ADP payroll data showing routine cognitive tasks declining faster than manual ones.",
+        "The broken bottom rung concern: if AI handles entry-level tasks, how do juniors develop the judgment to become seniors?",
+        "Stanford Canaries in the Coal Mine paper: specific task categories declining while orchestration roles grow—but growth is concentrated at senior levels."
+      ],
+      "challenges": [
+        "NY Fed research: aggregate employment stable so far; macro data does not yet show bifurcation.",
+        "MIT Sloan analysis: AI effects are gradual, task-specific, and often complementary.",
+        "Some enterprises report increased junior hiring for AI-augmented roles (data labeling, prompt engineering, validation)."
+      ],
+      "evaluationCriteria": [
+        "Junior-to-senior hiring ratio changes in enterprises with >500 employees",
+        "Skill distribution changes within large engineering orgs (breadth vs depth)",
+        "Wage distribution shifts (compression vs polarization)",
+        "Broken bottom rung indicator: time-to-senior for new hires over time"
+      ],
+      "observations": [
+        {
+          "@type": "Observation",
+          "period": "Q1 2026",
+          "notes": [
+            "The bifurcation narrative gained traction in Q1 2026 industry discourse, but remains under-evidenced at Tier A level.",
+            "No longitudinal labor dataset yet confirms or refutes bifurcation in enterprise contexts specifically.",
+            "This claim is deliberately positioned as Proposed to flag it for rigorous tracking without overstating confidence."
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "Claim",
+      "@id": "#claim-6",
+      "claimNumber": "6",
+      "shortName": "safe-autonomy",
+      "title": "Safe autonomy requires seasoned intent and explicit validation",
+      "statement": "Agent autonomy is viable only when direction, reasoning, and validation are established before execution.",
+      "rationale": "Autonomy applies to execution, not thinking.",
+      "status": "Emerging",
+      "statusLastChanged": "v1.0.0",
+      "supportingSignals": [
+        "Success of phase-bounded autonomous runs",
+        "Failure of free-form agent behavior"
+      ],
+      "challenges": [
+        "Overconfidence in tooling",
+        "Governance gaps"
+      ],
+      "evaluationCriteria": [
+        "Error rates in autonomous vs supervised runs",
+        "Quality of post-hoc review"
+      ],
+      "observations": [
+        {
+          "@type": "Observation",
+          "period": "Q1 2026",
+          "notes": [
+            "Multiple independent vendors converged on phase-bounded autonomy with explicit validation gates: Claude Code (plan mode + human approval checkpoints), Devin (task decomposition with verification), Copilot Workspace (spec → plan → implement → validate pipeline).",
+            "Anthropic's Agent SDK documentation and Building Effective Agents guidance explicitly recommend human-in-the-loop checkpoints and bounded autonomy scopes.",
+            "The Veracode study (48% of AI-assisted tasks introducing vulnerabilities without strong validation) remains unrebutted.",
+            "The Klarna cautionary case (autonomy without adequate validation → service quality regression) continues to be cited as a canonical failure mode.",
+            "Status promoted from Early validation to Emerging based on: 1 Tier A/B source (Veracode) + 2+ Tier B sources on the mechanism; counter-evidence reviewed."
+          ]
+        }
+      ]
+    }
+  ],
+
+  "statusRules": {
+    "@type": "StatusRule",
+    "statusDefinitions": {
+      "Proposed": "Articulated but not yet anchored in Tier A/B evidence.",
+      "Active": "Plausible and internally observed; evidence mixed or incomplete.",
+      "Emerging": "Early external evidence supports directionality; counter-evidence exists.",
+      "Supported": "Multiple independent sources support; contradictions are bounded.",
+      "Strongly supported": "Supported + repeatedly replicated across contexts; counter-evidence is edge-case or tool-generation specific.",
+      "Contentious": "High-quality evidence exists on both sides; mechanism unclear.",
+      "Refuted (for now)": "Best available Tier A/B evidence contradicts the claim in the relevant scope.",
+      "Retired": "Claim is no longer useful or has been subsumed by a more precise claim."
+    },
+    "promotionThreshold": "At least 2 independent Tier A sources OR 1 Tier A + 2 Tier B sources directly support the claim's mechanism. At least 1 credible counter-source has been reviewed. The claim has at least one operational metric that can be measured internally.",
+    "demotionThreshold": "A Tier A result contradicts the claim in the doctrine's stated scope and cannot be re-scoped without gutting the claim. OR internal measures consistently move opposite the prediction for 2 consecutive quarters. OR the claim cannot be translated into observable predictions.",
+    "splitRule": "If both support and counter-evidence remain strong, split the claim by context rather than averaging them into mush."
+  },
+
+  "evidenceQualityRubric": [
+    {
+      "@type": "EvidenceTier",
+      "tierLevel": "A",
+      "description": "Peer-reviewed or strong preprint with methods + data; official datasets/benchmarks."
+    },
+    {
+      "@type": "EvidenceTier",
+      "tierLevel": "B",
+      "description": "Vendor research with methods; reputable org reports."
+    },
+    {
+      "@type": "EvidenceTier",
+      "tierLevel": "C",
+      "description": "High-quality journalism or practitioner essays with concrete examples."
+    },
+    {
+      "@type": "EvidenceTier",
+      "tierLevel": "D",
+      "description": "Anecdotes (useful prompts for hypotheses; never decisive)."
+    }
+  ]
+}

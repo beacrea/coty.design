@@ -1,5 +1,6 @@
 <script lang="ts">
   import { theme } from './stores/theme';
+  import { route } from './stores/router';
   import ThemeToggle from './components/ThemeToggle.svelte';
   import Opener from './components/Opener.svelte';
   import Section from './components/Section.svelte';
@@ -8,9 +9,13 @@
   import ConnectSection from './components/ConnectSection.svelte';
   import Footer from './components/Footer.svelte';
   import LazyBackground from './components/LazyBackground.svelte';
+  import DoctrinePage from './components/doctrine/DoctrinePage.svelte';
+  import FamilyExplainer from './components/FamilyExplainer.svelte';
   import { siteContent } from './lib/content';
 
   $: isDark = $theme === 'dark';
+  $: isHome = $route.page === 'home';
+  $: isDoctrine = $route.page === 'doctrine' || $route.page === 'claim-detail';
   
   let observeMode = false;
   let animateKey = 0;
@@ -21,9 +26,12 @@
   }
 </script>
 
+{#if isHome}
 <LazyBackground enhancedContrast={observeMode} observationMode={observeMode} />
+{/if}
 <div class="toggle-wrapper" class:observe-active={observeMode}>
   <ThemeToggle />
+  {#if isHome}
   <button 
     class="observe-toggle"
     on:click={toggleObserveMode}
@@ -41,62 +49,75 @@
     </svg>
     {/key}
   </button>
+  {/if}
 </div>
-<div class:dark={isDark} class:observe-mode={observeMode}>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  <main class="page" id="main-content" tabindex="-1" aria-hidden={observeMode || null}>
-    <div class="content">
-      <header class="header">
-        <div class="opener-wrapper">
-          <Opener 
-            name={siteContent.opener.name}
-            role={siteContent.opener.role}
-            summary={siteContent.opener.summary}
-          />
-        </div>
-      </header>
-      
-      <Section 
-        heading={siteContent.capabilities.heading}
-        items={siteContent.capabilities.items}
-        variant="bullet"
-      />
-      
-      <Section 
-        heading={siteContent.bio.heading}
-        items={siteContent.bio.items}
-        variant="paragraph"
-      />
-      
-      <ProofStrip 
-        heading={siteContent.proofStrip.heading}
-        rows={siteContent.proofStrip.rows}
-      />
-      
-      <Section 
-        heading={siteContent.domainExperience.heading}
-        items={siteContent.domainExperience.items}
-        variant="bullet"
-      />
+<div class:dark={isDark} class:observe-mode={observeMode && isHome}>
+  {#if isDoctrine}
+    <DoctrinePage />
+  {:else}
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <main class="page" id="main-content" tabindex="-1" aria-hidden={observeMode || null}>
+      <div class="content">
+        <header class="header">
+          <div class="opener-wrapper">
+            <Opener 
+              name={siteContent.opener.name}
+              role={siteContent.opener.role}
+              summary={siteContent.opener.summary}
+            />
+          </div>
+        </header>
+        
+        <Section 
+          heading={siteContent.capabilities.heading}
+          items={siteContent.capabilities.items}
+          variant="bullet"
+        />
+        
+        <Section 
+          heading={siteContent.bio.heading}
+          items={siteContent.bio.items}
+          variant="paragraph"
+        />
+        
+        <ProofStrip 
+          heading={siteContent.proofStrip.heading}
+          rows={siteContent.proofStrip.rows}
+        />
+        
+        <Section 
+          heading={siteContent.domainExperience.heading}
+          items={siteContent.domainExperience.items}
+          variant="bullet"
+        />
 
-      <AdvisorySection
-        heading={siteContent.advisory.heading}
-        framing={siteContent.advisory.framing}
-        items={siteContent.advisory.items}
-      />
-      
-      <ConnectSection 
-        heading={siteContent.connect.heading}
-        items={siteContent.connect.items}
-      />
-      
-      <Footer 
-        legal={siteContent.metadata.legal}
-        version={siteContent.metadata.version}
-        versionUrl={siteContent.metadata.versionUrl}
-      />
-    </div>
-  </main>
+        <AdvisorySection
+          heading={siteContent.advisory.heading}
+          framing={siteContent.advisory.framing}
+          items={siteContent.advisory.items}
+        />
+        
+        <ConnectSection 
+          heading={siteContent.connect.heading}
+          items={siteContent.connect.items}
+        />
+
+        <FamilyExplainer
+          heading="Doctrine"
+          description="I maintain a structured set of claims about how AI‑assisted development is changing the nature of work — with explicit evidence standards, quarterly observations, and confidence tracking."
+          buttonText="View Doctrine →"
+          buttonUrl="/doctrine"
+          internal
+        />
+
+        <Footer 
+          legal={siteContent.metadata.legal}
+          version={siteContent.metadata.version}
+          versionUrl={siteContent.metadata.versionUrl}
+        />
+      </div>
+    </main>
+  {/if}
 </div>
 
 <style>
@@ -199,4 +220,5 @@
     pointer-events: none;
     transition: opacity 0.3s ease;
   }
+
 </style>

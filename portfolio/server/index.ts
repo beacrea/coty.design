@@ -29,6 +29,7 @@ registerRoute({ path: '/', method: 'get', handlers: [], noindex: false, changefr
 registerRoute({ path: '/agent-preview', method: 'use', handlers: [agentPreview], noindex: false, changefreq: 'monthly', priority: 0.5 });
 registerRoute({ path: '/agent-insights', method: 'get', handlers: [agentInsights], noindex: true, changefreq: 'weekly', priority: 0.0 });
 registerRoute({ path: '/api/agent-insights', method: 'get', handlers: [agentInsightsData], noindex: true, changefreq: 'weekly', priority: 0.0 });
+registerRoute({ path: '/doctrine', method: 'get', handlers: [], noindex: false, changefreq: 'monthly', priority: 0.8, mountManually: true });
 registerRoute({ path: '/llms.txt', method: 'get', handlers: [serveLlmsTxt], noindex: false, changefreq: 'monthly', priority: 0.8 });
 registerRoute({ path: '/llms-full.txt', method: 'get', handlers: [serveLlmsFullTxt], noindex: false, changefreq: 'monthly', priority: 0.7 });
 

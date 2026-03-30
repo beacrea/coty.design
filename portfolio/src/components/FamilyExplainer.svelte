@@ -3,14 +3,21 @@
   export let description: string;
   export let buttonText: string;
   export let buttonUrl: string;
+  export let internal: boolean = false;
 </script>
 
 <section class="family-section animate-entrance">
   <h2 class="heading">{heading}</h2>
   <p class="description">{description}</p>
-  <a href={buttonUrl} target="_blank" rel="noopener noreferrer" class="cta-button">
-    {buttonText}<span class="sr-only"> (opens in new tab)</span>
-  </a>
+  {#if internal}
+    <a href={buttonUrl} data-route class="cta-button">
+      {buttonText}
+    </a>
+  {:else}
+    <a href={buttonUrl} target="_blank" rel="noopener noreferrer" class="cta-button">
+      {buttonText}<span class="sr-only"> (opens in new tab)</span>
+    </a>
+  {/if}
 </section>
 
 <style>

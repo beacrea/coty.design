@@ -38,6 +38,7 @@ ${corpus.identity.education.map((edu: any) => {
 
 ## Links
 - Website: ${corpus.canonicalUrl}
+- Doctrine: ${corpus.canonicalUrl}/doctrine — Structured claims about AI-assisted development with explicit evidence standards
 - LinkedIn: ${corpus.identity.linkedin}
 - GitHub: ${corpus.identity.github}
 - Underline Company Profile: ${corpus.contactAndDiscovery.underlineProfile}
@@ -234,9 +235,18 @@ ${corpus.pressCoverage.map((p: any) => `- [${p.title}](${p.url}) — ${p.publica
 
 ---
 
+## Doctrine: Ontological Orchestration
+
+Coty maintains a structured doctrine of claims about AI-assisted development at ${corpus.contactAndDiscovery.website}/doctrine.
+The doctrine tracks specific claims with explicit evidence standards, quarterly observations, and confidence levels.
+It demonstrates active, structured tracking of AI development trends with transparent evaluation criteria.
+
+---
+
 ## Contact & Discovery
 
 - Website: ${corpus.contactAndDiscovery.website}
+- Doctrine: ${corpus.contactAndDiscovery.website}/doctrine
 - LinkedIn: ${corpus.contactAndDiscovery.linkedin}
 - GitHub: ${corpus.contactAndDiscovery.github}
 - Twitter/X: ${corpus.contactAndDiscovery.twitter}
