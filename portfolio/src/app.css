@@ -9,24 +9,24 @@
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.208 0 0);
-  --semantic-title: oklch(0.45 0.180 300);
-  --semantic-header: oklch(0.45 0.180 300);
+  --semantic-title: oklch(0.45 0.180 264);
+  --semantic-header: oklch(0.45 0.180 264);
   --semantic-subtitle: oklch(0.145 0 0);
   --semantic-body: oklch(0.208 0 0);
   --semantic-caption: oklch(0.35 0 0);
   --semantic-bullet: oklch(0.208 0 0);
-  --semantic-link: oklch(0.45 0.180 300);
-  --semantic-link-hover: oklch(0.38 0.160 305);
+  --semantic-link: oklch(0.45 0.180 264);
+  --semantic-link-hover: oklch(0.38 0.160 264);
   
   --toggle-border: oklch(0 0 0 / 0.15);
-  --toggle-fill: oklch(0.42 0.160 305);
-  --toggle-stroke: oklch(0.45 0.180 300);
-  --toggle-rays: oklch(0.75 0.110 310);
+  --toggle-fill: oklch(0.42 0.160 264);
+  --toggle-stroke: oklch(0.45 0.180 264);
+  --toggle-rays: oklch(0.75 0.110 264);
   
-  --surface-card-bg: oklch(0.97 0.005 300);
-  --surface-card-border: oklch(0.91 0.010 300);
-  --surface-cta-bg: oklch(0.42 0.18 300);
-  --surface-cta-bg-hover: oklch(0.36 0.16 300);
+  --surface-card-bg: oklch(0.97 0.005 264);
+  --surface-card-border: oklch(0.91 0.010 264);
+  --surface-cta-bg: oklch(0.42 0.18 264);
+  --surface-cta-bg-hover: oklch(0.36 0.16 264);
   --surface-cta-text: oklch(1 0 0);
   
   --text-size-title: 33.178px;
