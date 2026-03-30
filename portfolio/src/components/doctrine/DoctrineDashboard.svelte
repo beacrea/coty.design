@@ -3,7 +3,6 @@
   import { navigateTo } from '../../stores/router';
   import type { DoctrineData } from '../../lib/doctrine';
   import StatusBadge from './StatusBadge.svelte';
-  import ConfidenceMeter from './ConfidenceMeter.svelte';
   import DistributionBar from './DistributionBar.svelte';
 
   export let data: DoctrineData;
@@ -23,7 +22,7 @@
   <header class="doctrine-header">
     <h1 class="doctrine-title">Doctrine</h1>
     <p class="doctrine-subtitle">{data.name.replace('Doctrine: ', '')}</p>
-    <p class="doctrine-attribution">Coty Beasley's predicted evolutions in AI-assisted development — positions he has taken and is actively tracking against real-world evidence.</p>
+    <p class="doctrine-attribution">Coty Beasley's predicted evolutions in AI-assisted development: positions he has taken and is actively tracking against real-world evidence.</p>
     <div class="doctrine-meta">
       <span>v{data.version.replace('v', '')}</span>
       <span>·</span>
@@ -57,13 +56,16 @@
             <StatusBadge status={claim.status} />
           </div>
           <h3 class="claim-title">{claim.title}</h3>
-          <p class="claim-preview">{claim.statement.slice(0, 120)}{claim.statement.length > 120 ? '…' : ''}</p>
+          <p class="claim-preview">{claim.statement}</p>
           <div class="card-footer">
-            <ConfidenceMeter status={claim.status} />
-            <div class="evidence-counts">
-              <span class="evidence-count supporting" title="Supporting signals">+{claim.supportingSignals.length}</span>
-              <span class="evidence-count counter" title="Challenges">−{claim.challenges.length}</span>
+            <div class="evidence-summary">
+              <span class="evidence-label">{claim.supportingSignals.length} supporting</span>
+              {#if claim.challenges.length > 0}
+                <span class="evidence-sep">·</span>
+                <span class="evidence-label">{claim.challenges.length} {claim.challenges.length === 1 ? 'challenge' : 'challenges'}</span>
+              {/if}
             </div>
+            <span class="view-details">View details →</span>
           </div>
         </button>
       {/each}
@@ -134,7 +136,7 @@
   }
 
   .doctrine-attribution {
-    font-size: 14px;
+    font-size: var(--text-size-caption);
     color: var(--semantic-caption);
     line-height: 1.5;
     margin-bottom: 12px;
@@ -145,12 +147,12 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    font-size: 12px;
+    font-size: var(--text-size-caption);
     color: var(--semantic-caption);
   }
 
   .section-label {
-    font-size: 12px;
+    font-size: var(--text-size-caption);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -185,20 +187,14 @@
   .claims-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  @media (min-width: 640px) {
-    .claims-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    gap: 20px;
   }
 
   .claim-card {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 16px;
+    gap: 14px;
+    padding: 24px;
     background: var(--surface-card-bg);
     border: 1px solid var(--surface-card-border);
     border-radius: 8px;
@@ -222,55 +218,52 @@
   }
 
   .claim-number {
-    font-size: 12px;
+    font-size: var(--text-size-caption);
     font-weight: 700;
     color: var(--semantic-caption);
   }
 
   .claim-title {
-    font-size: 14px;
+    font-size: var(--text-size-body);
     font-weight: 600;
-    color: var(--semantic-header);
-    line-height: 1.3;
+    color: var(--semantic-body);
+    line-height: 1.4;
+    text-wrap: pretty;
   }
 
   .claim-preview {
-    font-size: 12px;
+    font-size: var(--text-size-caption);
     color: var(--semantic-caption);
-    line-height: 1.5;
+    line-height: 1.6;
     flex: 1;
+    text-wrap: pretty;
   }
 
   .card-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
-    padding-top: 8px;
+    margin-top: 4px;
+    padding-top: 14px;
     border-top: 1px solid var(--surface-card-border);
   }
 
-  .evidence-counts {
+  .evidence-summary {
     display: flex;
-    gap: 8px;
-    font-size: 11px;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--semantic-caption);
+  }
+
+  .evidence-sep {
+    color: var(--semantic-caption);
+  }
+
+  .view-details {
+    font-size: 14px;
     font-weight: 600;
-  }
-
-  .evidence-count.supporting {
-    color: oklch(0.55 0.18 145);
-  }
-
-  .evidence-count.counter {
-    color: oklch(0.55 0.18 25);
-  }
-
-  :global(.dark) .evidence-count.supporting {
-    color: oklch(0.70 0.16 145);
-  }
-
-  :global(.dark) .evidence-count.counter {
-    color: oklch(0.70 0.16 25);
+    color: var(--semantic-link);
   }
 
   .definitions-section {
@@ -291,14 +284,14 @@
   }
 
   .def-term {
-    font-size: 14px;
+    font-size: var(--text-size-body);
     font-weight: 600;
     color: var(--semantic-header);
     margin-bottom: 4px;
   }
 
   .def-desc {
-    font-size: 13px;
+    font-size: var(--text-size-caption);
     color: var(--semantic-body);
     line-height: 1.5;
   }
@@ -313,13 +306,13 @@
   }
 
   .footer-author {
-    font-size: 13px;
+    font-size: var(--text-size-caption);
     color: var(--semantic-body);
     margin-bottom: 4px;
   }
 
   .footer-cadence {
-    font-size: 11px;
+    font-size: var(--text-size-caption);
     color: var(--semantic-caption);
   }
 </style>

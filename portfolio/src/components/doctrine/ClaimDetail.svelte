@@ -141,7 +141,7 @@
   }
 
   .claim-number {
-    font-size: 13px;
+    font-size: var(--text-size-caption);
     font-weight: 700;
     color: var(--semantic-caption);
     text-transform: uppercase;
@@ -157,7 +157,7 @@
 
   .claim-attribution {
     margin-top: 6px;
-    font-size: 13px;
+    font-size: var(--text-size-caption);
     color: var(--semantic-caption);
     font-weight: 500;
     letter-spacing: 0.02em;
@@ -165,13 +165,13 @@
 
   .split-note {
     margin-top: 8px;
-    font-size: 12px;
+    font-size: var(--text-size-caption);
     color: var(--semantic-caption);
     font-style: italic;
   }
 
   .section-label {
-    font-size: 12px;
+    font-size: var(--text-size-caption);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -227,7 +227,7 @@
   }
 
   .evidence-list li {
-    font-size: 13px;
+    font-size: var(--text-size-body);
     color: var(--semantic-body);
     line-height: 1.5;
     padding-left: 16px;
@@ -273,7 +273,7 @@
   }
 
   .obs-period {
-    font-size: 14px;
+    font-size: var(--text-size-body);
     font-weight: 600;
     color: var(--semantic-header);
     margin-bottom: 10px;
@@ -287,7 +287,7 @@
   }
 
   .obs-notes li {
-    font-size: 13px;
+    font-size: var(--text-size-body);
     color: var(--semantic-body);
     line-height: 1.6;
     padding-left: 16px;
@@ -321,7 +321,7 @@
   }
 
   .criteria-list li {
-    font-size: 13px;
+    font-size: var(--text-size-body);
     color: var(--semantic-body);
     line-height: 1.5;
     padding-left: 16px;
@@ -352,7 +352,7 @@
   }
 
   .references-list li {
-    font-size: 13px;
+    font-size: var(--text-size-body);
     line-height: 1.5;
     padding-left: 28px;
     position: relative;

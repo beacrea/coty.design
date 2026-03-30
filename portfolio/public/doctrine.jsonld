@@ -56,7 +56,7 @@
   "@id": "https://underline.tech/doctrine/ontological-orchestration",
 
   "name": "Doctrine: Ontological Orchestration in AI-Assisted Development",
-  "description": "Coty Beasley's personal predictions about how AI-assisted development is changing the nature of work — evolutions he has predicted and is actively tracking against real-world evidence, paired with explicit assumptions, supporting evidence, counter-evidence, and evaluation criteria.",
+  "description": "Coty Beasley's personal predictions about how AI-assisted development is changing the nature of work: evolutions he has predicted and is actively tracking against real-world evidence, paired with explicit assumptions, supporting evidence, counter-evidence, and evaluation criteria.",
   "version": "v1.0.0",
   "dateCreated": "2025-12",
   "dateModified": "2026-03-30",
@@ -79,7 +79,7 @@
     {
       "@type": "Definition",
       "term": "Ontological orchestration",
-      "description": "The act of defining what exists, what matters, how components relate, and what constitutes correctness in a system—before and during execution."
+      "description": "The act of defining what exists, what matters, how components relate, and what constitutes correctness in a system, before and during execution."
     },
     {
       "@type": "Definition",
@@ -128,7 +128,7 @@
           "period": "Q1 2026",
           "notes": [
             "AI coding tools (Claude Code, Cursor, Windsurf, GitHub Copilot Workspace) continued maturing, further compressing execution cost for bounded tasks.",
-            "The METR RCT finding (experienced devs slower with AI in mature codebases) remains unrebutted and increasingly cited as the canonical counter-signal. Notably, it supports the claim: verification and context—not coding—are the bottleneck.",
+            "The METR RCT finding (experienced devs slower with AI in mature codebases) remains unrebutted and increasingly cited as the canonical counter-signal. Notably, it supports the claim: verification and context, not coding, are the bottleneck.",
             "No new Tier A evidence contradicts the claim. Promotion to Supported blocked by lack of instrumented internal metrics on framing-vs-implementation ratio."
           ]
         }
@@ -171,7 +171,7 @@
           "@type": "Observation",
           "period": "Q1 2026",
           "notes": [
-            "Model Context Protocol (MCP) emerged as an open standard for agent-tool interfaces—essentially an ontological contract defining what tools exist, what they do, and how to invoke them.",
+            "Model Context Protocol (MCP) emerged as an open standard for agent-tool interfaces, essentially an ontological contract defining what tools exist, what they do, and how to invoke them.",
             "Agent frameworks (LangChain, CrewAI, Anthropic SDK) universally require explicit tool/resource schemas. Agents that lack a shared ontology with their environment fail reliably.",
             "Directional strengthening, but evidence remains mostly Tier B. No Tier A study yet isolates ontological architecture as the causal variable."
           ]
@@ -287,13 +287,13 @@
       "shortName": "role-convergence",
       "title": "Roles converge upward in greenfield and small-team contexts",
       "statement": "In greenfield, startup, and small-team contexts, AI makes narrowly defined execution functions economically obsolete faster than it creates new narrow roles, increasing demand for generalists with architectural judgment.",
-      "rationale": "Small teams already reward breadth. AI amplifies this by collapsing the cost of tasks that previously justified specialists. The result is fewer, broader roles—not a hollowed middle.",
+      "rationale": "Small teams already reward breadth. AI amplifies this by collapsing the cost of tasks that previously justified specialists. The result is fewer, broader roles, not a hollowed middle.",
       "status": "Emerging",
       "statusLastChanged": "v1.0.0",
       "splitFrom": "claim-5",
       "splitVersion": "v1.0.0",
       "supportingSignals": [
-        "Brynjolfsson et al. (NBER/QJE): AI tools compress skill differentials, enabling faster upward mobility—most pronounced in smaller, less hierarchical settings.",
+        "Brynjolfsson et al. (NBER/QJE): AI tools compress skill differentials, enabling faster upward mobility, most pronounced in smaller, less hierarchical settings.",
         "Practitioner reports from startups and small product teams consistently describe broadening role scopes.",
         "LinkedIn data on lattice career paths replacing ladders (Aneesh Raman)."
       ],
@@ -318,7 +318,7 @@
       ],
       "references": [
         {
-          "label": "Brynjolfsson et al. – Generative AI at Work (NBER Working Paper / QJE)",
+          "label": "Brynjolfsson et al., Generative AI at Work (NBER Working Paper / QJE)",
           "url": "https://www.nber.org/papers/w31161"
         },
         {
@@ -340,10 +340,10 @@
       "splitFrom": "claim-5",
       "splitVersion": "v1.0.0",
       "supportingSignals": [
-        "Reports of reduced junior developer hiring at some large tech companies (Q4 2025–Q1 2026).",
+        "Reports of reduced junior developer hiring at some large tech companies (Q4 2025 to Q1 2026).",
         "ADP payroll data showing routine cognitive tasks declining faster than manual ones.",
         "The broken bottom rung concern: if AI handles entry-level tasks, how do juniors develop the judgment to become seniors?",
-        "Stanford Canaries in the Coal Mine paper: specific task categories declining while orchestration roles grow—but growth is concentrated at senior levels."
+        "Stanford Canaries in the Coal Mine paper: specific task categories declining while orchestration roles grow, but growth is concentrated at senior levels."
       ],
       "challenges": [
         "NY Fed research: aggregate employment stable so far; macro data does not yet show bifurcation.",
@@ -369,7 +369,7 @@
       ],
       "references": [
         {
-          "label": "Stanford HAI: Canaries in the Coal Mine – AI and the Future of Work",
+          "label": "Stanford HAI: Canaries in the Coal Mine, AI and the Future of Work",
           "url": "https://hai.stanford.edu/news/canaries-coal-mine-ai-future-work"
         },
         {
@@ -423,7 +423,7 @@
       ],
       "references": [
         {
-          "label": "Veracode: State of Software Security – AI-Generated Code and Security Risk",
+          "label": "Veracode: State of Software Security, AI-Generated Code and Security Risk",
           "url": "https://www.veracode.com/state-of-software-security-report"
         },
         {
