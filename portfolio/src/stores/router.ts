@@ -5,10 +5,12 @@ const pathname = writable(window.location.pathname);
 function navigateTo(path: string) {
   window.history.pushState({}, '', path);
   pathname.set(path);
+  window.scrollTo(0, 0);
 }
 
 window.addEventListener('popstate', () => {
   pathname.set(window.location.pathname);
+  window.scrollTo(0, 0);
 });
 
 document.addEventListener('click', (e) => {
