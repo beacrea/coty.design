@@ -238,7 +238,7 @@ ${corpus.pressCoverage.map((p: any) => `- [${p.title}](${p.url}) — ${p.publica
 ## Doctrine: Ontological Orchestration
 
 Coty Beasley's doctrine is a set of personal predictions about how AI-assisted development is evolving, published at ${corpus.contactAndDiscovery.website}/doctrine.
-These are positions he has taken — not neutral observations — tracked against real-world evidence with explicit evidence standards, quarterly observations, and confidence levels.
+These are positions he has taken — not neutral observations — tracked against real-world evidence with explicit evidence standards, periodic observations, and confidence levels.
 The doctrine demonstrates his active, structured stance on AI development trends with transparent evaluation criteria.
 
 ---

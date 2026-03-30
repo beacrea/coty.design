@@ -70,7 +70,7 @@
 
   {#if claim.observations.length > 0}
     <section class="observations-section">
-      <h2 class="section-label">Quarterly Observations</h2>
+      <h2 class="section-label">Observations</h2>
       {#each claim.observations as obs}
         <div class="observation-card">
           <h3 class="obs-period">{obs.period}</h3>

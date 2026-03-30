@@ -58,7 +58,7 @@
   "dateCreated": "2025-12",
   "dateModified": "2026-03-30",
   "status": "Active",
-  "reviewCadence": "Quarterly",
+  "reviewCadence": "Periodic",
 
   "author": {
     "@type": "schema:Person",
