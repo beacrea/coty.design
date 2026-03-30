@@ -130,6 +130,9 @@
             {#if formatCitation(ev)}
               <p class="ev-citation">{formatCitation(ev)}</p>
             {/if}
+            {#if ev.sourceUrl}
+              <p class="ev-url"><a href={ev.sourceUrl} target="_blank" rel="noopener noreferrer">{ev.sourceUrl}</a></p>
+            {/if}
             {#if ev.summary}
               <p class="ev-summary">{ev.summary}</p>
             {/if}
@@ -407,7 +410,26 @@
   .ev-citation {
     font-size: var(--text-size-caption);
     color: var(--semantic-caption);
+    margin-bottom: 4px;
+  }
+
+  .ev-url {
+    font-size: 11px;
     margin-bottom: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ev-url a {
+    color: var(--semantic-caption);
+    text-decoration: none;
+    opacity: 0.7;
+  }
+
+  .ev-url a:hover {
+    text-decoration: underline;
+    opacity: 1;
   }
 
   .ev-summary {
