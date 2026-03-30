@@ -6,7 +6,7 @@
   export let internal: boolean = false;
 </script>
 
-<section class="family-section animate-entrance">
+<section class="doctrine-promo animate-entrance">
   <h2 class="heading">{heading}</h2>
   <p class="description">{description}</p>
   {#if internal}
@@ -21,7 +21,7 @@
 </section>
 
 <style>
-  .family-section {
+  .doctrine-promo {
     margin-bottom: var(--section-spacing);
     padding: 1rem 1.25rem 1.25rem;
     border-radius: 0.75rem;
@@ -31,14 +31,14 @@
   }
 
   @media (hover: hover) {
-    .family-section:hover {
+    .doctrine-promo:hover {
       transform: translateY(calc(var(--animation-hover-lift) * -1));
       box-shadow: 0 4px 16px oklch(0 0 0 / 0.08);
     }
   }
 
   @media (min-width: 640px) {
-    .family-section {
+    .doctrine-promo {
       padding: 1.25rem 1.5rem 1.5rem;
     }
   }

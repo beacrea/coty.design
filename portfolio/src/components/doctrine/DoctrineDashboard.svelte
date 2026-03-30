@@ -23,6 +23,7 @@
   <header class="doctrine-header">
     <h1 class="doctrine-title">Doctrine</h1>
     <p class="doctrine-subtitle">{data.name.replace('Doctrine: ', '')}</p>
+    <p class="doctrine-attribution">Coty Beasley's predicted evolutions in AI-assisted development — positions he has taken and is actively tracking against real-world evidence.</p>
     <div class="doctrine-meta">
       <span>v{data.version.replace('v', '')}</span>
       <span>·</span>
@@ -129,7 +130,15 @@
     font-size: var(--text-size-body);
     color: var(--semantic-body);
     line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .doctrine-attribution {
+    font-size: 14px;
+    color: var(--semantic-caption);
+    line-height: 1.5;
     margin-bottom: 12px;
+    font-style: italic;
   }
 
   .doctrine-meta {

@@ -10,7 +10,7 @@
   import Footer from './components/Footer.svelte';
   import LazyBackground from './components/LazyBackground.svelte';
   import DoctrinePage from './components/doctrine/DoctrinePage.svelte';
-  import FamilyExplainer from './components/FamilyExplainer.svelte';
+  import DoctrinePromo from './components/DoctrinePromo.svelte';
   import { siteContent } from './lib/content';
 
   $: isDark = $theme === 'dark';
@@ -102,9 +102,9 @@
           items={siteContent.connect.items}
         />
 
-        <FamilyExplainer
+        <DoctrinePromo
           heading="Doctrine"
-          description="I maintain a structured set of claims about how AI‑assisted development is changing the nature of work — with explicit evidence standards, quarterly observations, and confidence tracking."
+          description="Predictions I've established about how AI‑assisted development is changing the nature of work — evolutions I've predicted and am actively tracking with explicit evidence standards, quarterly observations, and confidence levels."
           buttonText="View Doctrine →"
           buttonUrl="/doctrine"
           internal

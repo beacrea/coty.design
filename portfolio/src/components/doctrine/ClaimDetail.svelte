@@ -25,6 +25,7 @@
       <StatusBadge status={claim.status} />
     </div>
     <h1 class="claim-title">{claim.title}</h1>
+    <p class="claim-attribution">Predicted by Coty Beasley</p>
     {#if claim.splitFrom}
       <p class="split-note">
         Split from <strong>{claim.splitFrom}</strong> in {claim.splitVersion}
@@ -139,6 +140,14 @@
     font-weight: 680;
     color: var(--semantic-title);
     line-height: 1.15;
+  }
+
+  .claim-attribution {
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--semantic-caption);
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
 
   .split-note {

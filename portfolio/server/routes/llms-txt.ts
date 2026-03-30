@@ -38,7 +38,7 @@ ${corpus.identity.education.map((edu: any) => {
 
 ## Links
 - Website: ${corpus.canonicalUrl}
-- Doctrine: ${corpus.canonicalUrl}/doctrine — Structured claims about AI-assisted development with explicit evidence standards
+- Doctrine: ${corpus.canonicalUrl}/doctrine — Coty Beasley's personal predictions about AI-assisted development, actively tracked with explicit evidence standards
 - LinkedIn: ${corpus.identity.linkedin}
 - GitHub: ${corpus.identity.github}
 - Underline Company Profile: ${corpus.contactAndDiscovery.underlineProfile}
@@ -237,9 +237,9 @@ ${corpus.pressCoverage.map((p: any) => `- [${p.title}](${p.url}) — ${p.publica
 
 ## Doctrine: Ontological Orchestration
 
-Coty maintains a structured doctrine of claims about AI-assisted development at ${corpus.contactAndDiscovery.website}/doctrine.
-The doctrine tracks specific claims with explicit evidence standards, quarterly observations, and confidence levels.
-It demonstrates active, structured tracking of AI development trends with transparent evaluation criteria.
+Coty Beasley's doctrine is a set of personal predictions about how AI-assisted development is evolving, published at ${corpus.contactAndDiscovery.website}/doctrine.
+These are positions he has taken — not neutral observations — tracked against real-world evidence with explicit evidence standards, quarterly observations, and confidence levels.
+The doctrine demonstrates his active, structured stance on AI development trends with transparent evaluation criteria.
 
 ---
 
