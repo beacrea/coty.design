@@ -91,7 +91,7 @@
   <footer class="doctrine-footer">
     <div class="footer-content">
       <p class="footer-author">
-        {data.author.name} · {data.author.affiliation.name}
+        {data.author.name}
       </p>
       <p class="footer-cadence">
         Review cadence: {data.reviewCadence} · Status: {data.status}
