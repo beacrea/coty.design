@@ -212,7 +212,7 @@
 
   @media (max-width: 639px) {
     .segment-label {
-      font-size: calc(var(--text-size-caption) * 0.57);
+      font-size: calc(var(--text-size-caption) * 0.72);
     }
 
     .tooltip {
