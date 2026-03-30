@@ -187,7 +187,7 @@
   .claims-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 32px;
   }
 
   .claim-card {
@@ -237,6 +237,7 @@
     line-height: 1.6;
     flex: 1;
     text-wrap: pretty;
+    margin-bottom: 1rem;
   }
 
   .card-footer {
