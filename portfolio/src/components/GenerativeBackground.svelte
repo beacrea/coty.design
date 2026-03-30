@@ -214,7 +214,7 @@
   bind:this={canvas} 
   class="generative-background"
   class:observation-mode={observationMode}
-  style="position:fixed;top:0;left:0;pointer-events:none"
+  style="position:fixed;top:0;left:0"
   aria-hidden="true"
   role="presentation"
   on:pointerdown={handlePointerDown}
