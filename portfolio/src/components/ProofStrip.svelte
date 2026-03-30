@@ -81,11 +81,6 @@
   }
 
   @media (min-width: 640px) {
-    .row {
-      flex-direction: row;
-      gap: 0;
-    }
-
     .label {
       width: 130px;
       min-width: 130px;

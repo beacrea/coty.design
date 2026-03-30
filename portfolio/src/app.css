@@ -48,7 +48,7 @@
   --bullet-size: 8px;
   --bullet-y-offset: 9.65px;
   --list-item-gap: 16.67px;
-  --list-item-spacing: 13.89px;
+  --list-item-spacing: 16px;
   /* Transitions - source: tokens/components.tokens.json → component.transition */
   --transition-theme: 300ms;
   --transition-toggle: 200ms;
