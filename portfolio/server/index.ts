@@ -1,5 +1,6 @@
 import express from 'express';
 import compression from 'compression';
+import fs from 'fs';
 import http from 'http';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -11,6 +12,7 @@ import { serveLlmsTxt, serveLlmsFullTxt } from './routes/llms-txt.js';
 import { serveSitemap } from './routes/sitemap.js';
 import { logAgentVisit, initAnalyticsDb } from './middleware/analytics.js';
 import { registerRoute, mountRegisteredRoutes } from './lib/routes.js';
+import { resolvePageMeta, injectMetaTags, getIndexHtml } from './lib/og-meta.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -57,7 +59,12 @@ if (process.env.NODE_ENV === 'production') {
     if (res.locals.isAIAgent) {
       return serveDossier(req, res);
     }
-    next();
+    res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+    const meta = resolvePageMeta('/');
+    const html = getIndexHtml(distPath);
+    const injected = injectMetaTags(html, meta);
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.send(injected);
   });
 
   app.use('/assets', express.static(path.join(distPath, 'assets'), {
@@ -78,7 +85,11 @@ if (process.env.NODE_ENV === 'production') {
 
   app.get('/{*splat}', (req, res) => {
     res.setHeader('Cache-Control', 'no-cache, must-revalidate');
-    res.sendFile(path.join(distPath, 'index.html'));
+    const meta = resolvePageMeta(req.path);
+    const html = getIndexHtml(distPath);
+    const injected = injectMetaTags(html, meta);
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.send(injected);
   });
 } else {
   const { createServer } = await import('vite');
@@ -100,6 +111,28 @@ if (process.env.NODE_ENV === 'production') {
       return serveDossier(req, res);
     }
     next();
+  });
+
+  const rootPath = path.resolve(__dirname, '..');
+
+  app.use((req, res, next) => {
+    const accept = req.headers['accept'] ?? '';
+    const isHtmlRequest = accept.includes('text/html');
+    const hasExtension = /\.\w+$/.test(req.path);
+    const isApiRoute = req.path.startsWith('/api/');
+
+    if (!isHtmlRequest || hasExtension || isApiRoute) {
+      return next();
+    }
+
+    const meta = resolvePageMeta(req.path);
+    const sourceHtml = fs.readFileSync(path.join(rootPath, 'index.html'), 'utf-8');
+    vite.transformIndexHtml(req.url, sourceHtml)
+      .then((html) => {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.send(injectMetaTags(html, meta));
+      })
+      .catch(next);
   });
 
   app.use(vite.middlewares);
