@@ -10,13 +10,14 @@
     <title>Coty Beasley - Design and Product Leader</title>
     <meta name="description" content="Good design brings clarity to complexity and makes technology actually useful. Design and product leadership portfolio of Coty Beasley." />
     
+    <meta name="theme-color" content="#1d1d1d" />
     <meta name="theme-color" id="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#1d1d1d" media="(prefers-color-scheme: dark)" />
     <style>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       html, body { margin: 0; padding: 0; }
       html {
-        background-color: #ffffff;
+        background-color: #1d1d1d;
         font-family: 'Red Hat Mono', 'Red Hat Mono Fallback', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
         -webkit-font-smoothing: antialiased;
       }
@@ -27,8 +28,8 @@
         left: 0;
         width: 100%;
         z-index: 10;
-        color: #1d1d1d;
-        background-color: #ffffff;
+        color: #e8e8e8;
+        background-color: #1d1d1d;
         min-height: 100vh;
         padding: 47.78px 27.65px 33.178px 27.65px;
       }
@@ -41,19 +42,26 @@
         font-weight: 680;
         line-height: 1.1;
         margin-bottom: 0.5em;
-        color: oklch(0.55 0.180 45);
+        color: oklch(0.68 0.213 277);
       }
       #app-placeholder .placeholder-role {
         font-size: 19.2px;
         font-weight: 460;
-        color: oklch(0.145 0 0);
+        color: oklch(0.961 0 0);
         margin-bottom: 1em;
       }
       #app-placeholder .placeholder-summary {
         font-size: 16px;
         font-weight: 400;
-        color: oklch(0.208 0 0);
+        color: oklch(0.847 0 0);
         line-height: 1.6;
+      }
+      @media (prefers-color-scheme: light) {
+        html { background-color: #ffffff; }
+        #app-placeholder { color: #1d1d1d; background-color: #ffffff; }
+        #app-placeholder h1 { color: oklch(0.55 0.180 45); }
+        #app-placeholder .placeholder-role { color: oklch(0.145 0 0); }
+        #app-placeholder .placeholder-summary { color: oklch(0.208 0 0); }
       }
       @media (prefers-color-scheme: dark) {
         html { background-color: #1d1d1d; }

@@ -32,7 +32,7 @@ function createThemeStore() {
     ? window.matchMedia('(prefers-color-scheme: dark)') 
     : null;
   
-  const prefersDark = mediaQuery?.matches ?? false;
+  const prefersDark = mediaQuery?.matches ?? true;
   
   const initialTheme: Theme = storedTheme || (prefersDark ? 'dark' : 'light');
   
