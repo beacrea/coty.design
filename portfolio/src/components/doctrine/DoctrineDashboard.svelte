@@ -266,6 +266,22 @@
     color: var(--semantic-link);
   }
 
+  @media (max-width: 639px) {
+    .evidence-summary {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+
+    .evidence-sep {
+      display: none;
+    }
+
+    .view-details {
+      align-self: center;
+    }
+  }
+
   .definitions-section {
     margin-bottom: var(--section-spacing);
   }
