@@ -10,14 +10,17 @@
   <dl class="rows">
     {#each rows as row}
       <div class="row">
-        <dt class="label">{row.label}</dt>
-        <dd class="value">
-          <ul class="items">
-            {#each row.items as item}
-              <li class="item">{item}</li>
-            {/each}
-          </ul>
-        </dd>
+        <span class="bullet" aria-hidden="true"></span>
+        <div class="row-content">
+          <dt class="label">{row.label}</dt>
+          <dd class="value">
+            <ul class="items">
+              {#each row.items as item}
+                <li class="item">{item}</li>
+              {/each}
+            </ul>
+          </dd>
+        </div>
       </div>
     {/each}
   </dl>
@@ -44,8 +47,25 @@
 
   .row {
     display: flex;
+    align-items: flex-start;
+    gap: 0.75em;
+  }
+
+  .bullet {
+    flex-shrink: 0;
+    width: var(--bullet-size);
+    height: var(--bullet-size);
+    border-radius: 50%;
+    background-color: var(--semantic-bullet);
+    margin-top: var(--bullet-y-offset);
+    transition: background-color var(--transition-theme);
+  }
+
+  .row-content {
+    display: flex;
     flex-direction: column;
     gap: 4px;
+    flex: 1;
   }
 
   .label {
@@ -84,10 +104,6 @@
     .label {
       width: 130px;
       min-width: 130px;
-    }
-
-    .value {
-      flex: 1;
     }
   }
 
