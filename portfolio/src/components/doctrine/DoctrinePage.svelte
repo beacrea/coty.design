@@ -40,7 +40,7 @@
   {:else if data}
     {#if $route.page === 'claim-detail' && $route.claimId}
       {#if currentClaim}
-        <ClaimDetail claim={currentClaim} />
+        <ClaimDetail claim={currentClaim} statusDefinitions={data.statusDefinitions} />
       {:else}
         <div class="not-found">
           <nav class="back-nav">

@@ -7,6 +7,7 @@
   import ConfidenceBar from './ConfidenceBar.svelte';
 
   export let claim: Claim;
+  export let statusDefinitions: Record<string, string> = {};
 
   $: isDark = $theme === 'dark';
   $: sortedEvidence = sortEvidenceByRole(claim.evidence);
@@ -74,7 +75,7 @@
 
   <section class="confidence-section">
     <h2 class="section-label">Confidence Level</h2>
-    <ConfidenceBar status={claim.status} />
+    <ConfidenceBar status={claim.status} {statusDefinitions} />
   </section>
 
   <div class="evidence-columns">
@@ -237,13 +238,13 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--semantic-caption);
-    margin-bottom: 10px;
+    margin-bottom: 14px;
   }
 
   .statement-card,
   .rationale-card {
-    margin-bottom: 28px;
-    padding: 18px 20px;
+    margin-bottom: 32px;
+    padding: 24px;
     background: var(--surface-card-bg);
     border: 1px solid var(--surface-card-border);
     border-radius: 8px;
@@ -263,7 +264,7 @@
   .evidence-columns {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 24px;
     margin-bottom: 32px;
   }
 
@@ -274,7 +275,7 @@
   }
 
   .evidence-col {
-    padding: 16px;
+    padding: 24px;
     background: var(--surface-card-bg);
     border: 1px solid var(--surface-card-border);
     border-radius: 8px;
@@ -284,7 +285,7 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
 
   .signal-list li {
@@ -348,11 +349,11 @@
   .evidence-items {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
   }
 
   .evidence-card {
-    padding: 16px 18px;
+    padding: 24px;
     background: var(--surface-card-bg);
     border: 1px solid var(--surface-card-border);
     border-radius: 8px;
@@ -362,7 +363,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   .ev-badges {
@@ -376,7 +377,7 @@
     align-items: center;
     padding: 2px 8px;
     border-radius: 100px;
-    font-size: 11px;
+    font-size: var(--text-size-caption);
     font-weight: 600;
     letter-spacing: 0.02em;
     white-space: nowrap;
@@ -384,7 +385,7 @@
   }
 
   .role-indicator {
-    font-size: 11px;
+    font-size: var(--text-size-caption);
     font-weight: 600;
     letter-spacing: 0.02em;
     text-transform: uppercase;
@@ -395,7 +396,7 @@
     font-weight: 600;
     color: var(--semantic-header);
     line-height: 1.4;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 
   .ev-title a {
@@ -414,8 +415,8 @@
   }
 
   .ev-url {
-    font-size: 11px;
-    margin-bottom: 6px;
+    font-size: var(--text-size-caption);
+    margin-bottom: 8px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -443,25 +444,29 @@
   }
 
   .observation-card {
-    padding: 16px;
+    padding: 24px;
     background: var(--surface-card-bg);
     border: 1px solid var(--surface-card-border);
     border-radius: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+  }
+
+  .observation-card:last-child {
+    margin-bottom: 0;
   }
 
   .obs-period {
     font-size: var(--text-size-body);
     font-weight: 600;
     color: var(--semantic-header);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .obs-notes {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
 
   .obs-notes li {
@@ -491,8 +496,8 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 16px;
+    gap: 10px;
+    padding: 24px;
     background: var(--surface-card-bg);
     border: 1px solid var(--surface-card-border);
     border-radius: 8px;
@@ -507,9 +512,13 @@
   }
 
   .criteria-list li::before {
-    content: '→';
+    content: '';
     position: absolute;
     left: 0;
-    color: var(--semantic-caption);
+    top: 7px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--semantic-bullet);
   }
 </style>
