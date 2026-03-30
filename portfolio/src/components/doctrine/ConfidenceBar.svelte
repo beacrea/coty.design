@@ -30,11 +30,7 @@
     activeTooltip = activeTooltip === label ? null : label;
   }
 
-  function handleKeydown(e: KeyboardEvent, label: string) {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggleTooltip(label);
-    }
+  function handleKeydown(e: KeyboardEvent) {
     if (e.key === 'Escape') {
       activeTooltip = null;
     }
@@ -69,7 +65,7 @@
             class="segment-label has-tooltip"
             class:tooltip-open={activeTooltip === seg.label}
             on:click|stopPropagation={() => toggleTooltip(seg.label)}
-            on:keydown={(e) => handleKeydown(e, seg.label)}
+            on:keydown={handleKeydown}
             aria-expanded={activeTooltip === seg.label}
             aria-describedby="tooltip-{seg.level}"
           >
@@ -128,7 +124,7 @@
   }
 
   .segment-label {
-    font-size: 10px;
+    font-size: calc(var(--text-size-caption) * 0.72);
     color: var(--semantic-caption);
     text-align: center;
     line-height: 1.2;
@@ -181,7 +177,7 @@
     padding: 8px 12px;
     background: var(--foreground);
     color: var(--background);
-    font-size: 12px;
+    font-size: calc(var(--text-size-caption) * 0.86);
     font-weight: 400;
     line-height: 1.5;
     border-radius: 6px;
@@ -216,7 +212,7 @@
 
   @media (max-width: 639px) {
     .segment-label {
-      font-size: 8px;
+      font-size: calc(var(--text-size-caption) * 0.57);
     }
 
     .tooltip {
@@ -228,7 +224,7 @@
       transform: none;
       max-width: none;
       width: auto;
-      font-size: 13px;
+      font-size: var(--text-size-caption);
       padding: 12px 16px;
       box-shadow: 0 -2px 12px oklch(0 0 0 / 0.15);
     }
