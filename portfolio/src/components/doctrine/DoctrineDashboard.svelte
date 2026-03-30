@@ -40,7 +40,7 @@
 
   <section class="distribution-section">
     <h2 class="section-label">Evidence Confidence Distribution</h2>
-    <DistributionBar claims={data.claims} />
+    <DistributionBar claims={data.claims} statusDefinitions={data.statusDefinitions} />
   </section>
 
   <section class="claims-section">

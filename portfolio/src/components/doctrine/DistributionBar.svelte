@@ -1,14 +1,16 @@
 <script lang="ts">
   import { theme } from '../../stores/theme';
   import type { Claim } from '../../lib/doctrine';
-  import { getStatusColor, getStatusColorDark } from '../../lib/doctrine';
+  import { getStatusColor, getStatusColorDark, confidenceLevel } from '../../lib/doctrine';
 
   export let claims: Claim[];
+  export let statusDefinitions: Record<string, string> = {};
 
   interface StatusGroup {
     status: string;
     count: number;
     color: string;
+    definition: string;
   }
 
   $: isDark = $theme === 'dark';
@@ -21,8 +23,18 @@
     const result: StatusGroup[] = [];
     for (const [status, count] of Object.entries(counts)) {
       const colors = isDark ? getStatusColorDark(status) : getStatusColor(status);
-      result.push({ status, count, color: colors.dot });
+      result.push({
+        status,
+        count,
+        color: colors.dot,
+        definition: statusDefinitions[status] ?? '',
+      });
     }
+    result.sort((a, b) => {
+      const levelDiff = confidenceLevel(a.status) - confidenceLevel(b.status);
+      if (levelDiff !== 0) return levelDiff;
+      return a.status.localeCompare(b.status);
+    });
     return result;
   })();
 
@@ -44,6 +56,9 @@
       <div class="legend-item">
         <span class="legend-dot" style="background-color: {group.color};"></span>
         <span class="legend-label">{group.status} ({group.count})</span>
+        {#if group.definition}
+          <span class="info-icon" aria-label="{group.status} definition" title={group.definition}>?</span>
+        {/if}
       </div>
     {/each}
   </div>
@@ -90,5 +105,26 @@
   .legend-label {
     font-size: 11px;
     color: var(--semantic-caption);
+  }
+
+  .info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--semantic-caption);
+    color: var(--surface-card-bg);
+    font-size: 9px;
+    font-weight: 700;
+    flex-shrink: 0;
+    cursor: help;
+    opacity: 0.65;
+    line-height: 1;
+  }
+
+  .info-icon:hover {
+    opacity: 1;
   }
 </style>
