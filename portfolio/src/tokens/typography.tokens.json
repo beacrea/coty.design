@@ -4,34 +4,34 @@
     "$type": "dimension",
     "fontFamily": {
       "$type": "fontFamily",
-      "$value": "'Red Hat Mono', monospace"
+      "$value": "'Source Sans 3', sans-serif"
     },
     "fontWeight": {
       "regular": { "$value": 400 },
-      "medium": { "$value": 460 },
-      "bold": { "$value": 680 }
+      "medium": { "$value": 500 },
+      "bold": { "$value": 700 }
     },
     "size": {
       "sm": {
-        "title": { "$value": "33.178px" },
-        "subtitle": { "$value": "19.2px" },
-        "header": { "$value": "19.2px" },
+        "title": { "$value": "28px" },
+        "subtitle": { "$value": "18px" },
+        "header": { "$value": "18px" },
         "body": { "$value": "16px" },
-        "caption": { "$value": "16px" }
+        "caption": { "$value": "14px" }
       },
       "md": {
-        "title": { "$value": "37.325px" },
-        "subtitle": { "$value": "21.6px" },
-        "header": { "$value": "21.6px" },
-        "body": { "$value": "18px" },
-        "caption": { "$value": "15px" }
+        "title": { "$value": "32px" },
+        "subtitle": { "$value": "20px" },
+        "header": { "$value": "20px" },
+        "body": { "$value": "17px" },
+        "caption": { "$value": "14px" }
       },
       "lg": {
-        "title": { "$value": "41.472px" },
-        "subtitle": { "$value": "24px" },
-        "header": { "$value": "24px" },
-        "body": { "$value": "20px" },
-        "caption": { "$value": "16.667px" }
+        "title": { "$value": "36px" },
+        "subtitle": { "$value": "22px" },
+        "header": { "$value": "22px" },
+        "body": { "$value": "18px" },
+        "caption": { "$value": "15px" }
       }
     }
   }

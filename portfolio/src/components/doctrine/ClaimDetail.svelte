@@ -211,7 +211,7 @@
 
   .claim-title {
     font-size: var(--text-size-title);
-    font-weight: 680;
+    font-weight: 700;
     color: var(--semantic-title);
     line-height: 1.15;
   }

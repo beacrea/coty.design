@@ -16,7 +16,7 @@
 
   .name {
     font-size: var(--text-size-title);
-    font-weight: 680;
+    font-weight: 700;
     color: var(--semantic-title);
     line-height: 1.1;
     margin-bottom: 0.5em;
@@ -25,7 +25,7 @@
 
   .role {
     font-size: var(--text-size-subtitle);
-    font-weight: 460;
+    font-weight: 500;
     color: var(--semantic-subtitle);
     margin-bottom: 1em;
     transition: color var(--transition-theme);

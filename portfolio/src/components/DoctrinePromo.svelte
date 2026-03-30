@@ -45,7 +45,7 @@
 
   .heading {
     font-size: var(--text-size-header);
-    font-weight: 460;
+    font-weight: 500;
     color: var(--semantic-header);
     margin-bottom: var(--list-item-gap);
     transition: color var(--transition-theme);
