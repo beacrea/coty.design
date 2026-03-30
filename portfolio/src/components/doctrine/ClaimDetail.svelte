@@ -2,15 +2,44 @@
   import { theme } from '../../stores/theme';
   import { navigateTo } from '../../stores/router';
   import type { Claim } from '../../lib/doctrine';
+  import { sortEvidenceByRole, getTierColor, getTierColorDark, getRoleColor, getRoleColorDark } from '../../lib/doctrine';
   import StatusBadge from './StatusBadge.svelte';
   import ConfidenceBar from './ConfidenceBar.svelte';
 
   export let claim: Claim;
 
   $: isDark = $theme === 'dark';
+  $: sortedEvidence = sortEvidenceByRole(claim.evidence);
+  $: supportingCount = claim.evidence.filter(e => e.role === 'supporting').length;
+  $: challengingCount = claim.evidence.filter(e => e.role === 'challenging').length;
+  $: contextualCount = claim.evidence.filter(e => e.role === 'contextual').length;
 
   function goBack() {
     navigateTo('/doctrine');
+  }
+
+  function tierColors(tier: string) {
+    return isDark ? getTierColorDark(tier) : getTierColor(tier);
+  }
+
+  function roleColor(role: string) {
+    return isDark ? getRoleColorDark(role) : getRoleColor(role);
+  }
+
+  function roleLabel(role: string): string {
+    const labels: Record<string, string> = {
+      supporting: 'Supporting',
+      challenging: 'Challenging',
+      contextual: 'Contextual',
+    };
+    return labels[role] ?? role;
+  }
+
+  function formatCitation(ev: { sourceAuthor?: string; sourceDate?: string }): string {
+    const parts: string[] = [];
+    if (ev.sourceAuthor) parts.push(ev.sourceAuthor);
+    if (ev.sourceDate) parts.push(ev.sourceDate);
+    return parts.join(', ');
   }
 </script>
 
@@ -51,7 +80,7 @@
   <div class="evidence-columns">
     <section class="evidence-col">
       <h2 class="section-label">Supporting Signals ({claim.supportingSignals.length})</h2>
-      <ul class="evidence-list supporting">
+      <ul class="signal-list supporting">
         {#each claim.supportingSignals as signal}
           <li>{signal}</li>
         {/each}
@@ -60,13 +89,55 @@
 
     <section class="evidence-col">
       <h2 class="section-label">Challenges ({claim.challenges.length})</h2>
-      <ul class="evidence-list challenges">
+      <ul class="signal-list challenges">
         {#each claim.challenges as challenge}
           <li>{challenge}</li>
         {/each}
       </ul>
     </section>
   </div>
+
+  {#if sortedEvidence.length > 0}
+    <section class="evidence-section">
+      <h2 class="section-label">
+        Evidence ({sortedEvidence.length})
+        <span class="evidence-breakdown">
+          {#if supportingCount > 0}<span class="eb-supporting">{supportingCount} supporting</span>{/if}
+          {#if challengingCount > 0}<span class="eb-challenging">{challengingCount} challenging</span>{/if}
+          {#if contextualCount > 0}<span class="eb-contextual">{contextualCount} contextual</span>{/if}
+        </span>
+      </h2>
+      <div class="evidence-items">
+        {#each sortedEvidence as ev}
+          <div class="evidence-card">
+            <div class="ev-header">
+              <div class="ev-badges">
+                <span class="tier-badge" style="background-color: {tierColors(ev.tier).bg}; color: {tierColors(ev.tier).fg};">
+                  Tier {ev.tier}
+                </span>
+                <span class="role-indicator" style="color: {roleColor(ev.role).fg};">
+                  {roleLabel(ev.role)}
+                </span>
+              </div>
+            </div>
+            <h3 class="ev-title">
+              {#if ev.sourceUrl}
+                <a href={ev.sourceUrl} target="_blank" rel="noopener noreferrer">{ev.sourceTitle}</a>
+              {:else}
+                {ev.sourceTitle}
+              {/if}
+            </h3>
+            {#if formatCitation(ev)}
+              <p class="ev-citation">{formatCitation(ev)}</p>
+            {/if}
+            {#if ev.summary}
+              <p class="ev-summary">{ev.summary}</p>
+            {/if}
+          </div>
+        {/each}
+      </div>
+    </section>
+  {/if}
 
   {#if claim.observations.length > 0}
     <section class="observations-section">
@@ -92,19 +163,6 @@
           <li>{criterion}</li>
         {/each}
       </ul>
-    </section>
-  {/if}
-
-  {#if claim.references && claim.references.length > 0}
-    <section class="references-section">
-      <h2 class="section-label">References</h2>
-      <ol class="references-list">
-        {#each claim.references as ref}
-          <li>
-            <a href={ref.url} target="_blank" rel="noopener noreferrer">{ref.label}</a>
-          </li>
-        {/each}
-      </ol>
     </section>
   {/if}
 </div>
@@ -219,14 +277,14 @@
     border-radius: 8px;
   }
 
-  .evidence-list {
+  .signal-list {
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
 
-  .evidence-list li {
+  .signal-list li {
     font-size: var(--text-size-body);
     color: var(--semantic-body);
     line-height: 1.5;
@@ -234,7 +292,7 @@
     position: relative;
   }
 
-  .evidence-list li::before {
+  .signal-list li::before {
     content: '';
     position: absolute;
     left: 0;
@@ -244,20 +302,118 @@
     border-radius: 50%;
   }
 
-  .evidence-list.supporting li::before {
+  .signal-list.supporting li::before {
     background-color: oklch(0.55 0.18 145);
   }
 
-  .evidence-list.challenges li::before {
+  .signal-list.challenges li::before {
     background-color: oklch(0.55 0.18 25);
   }
 
-  :global(.dark) .evidence-list.supporting li::before {
+  :global(.dark) .signal-list.supporting li::before {
     background-color: oklch(0.70 0.16 145);
   }
 
-  :global(.dark) .evidence-list.challenges li::before {
+  :global(.dark) .signal-list.challenges li::before {
     background-color: oklch(0.70 0.16 25);
+  }
+
+  .evidence-section {
+    margin-bottom: 32px;
+  }
+
+  .evidence-breakdown {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-left: 8px;
+  }
+
+  .eb-supporting { color: oklch(0.55 0.18 145); }
+  .eb-challenging { color: oklch(0.55 0.18 25); }
+  .eb-contextual { color: oklch(0.55 0.10 200); }
+
+  :global(.dark) .eb-supporting { color: oklch(0.70 0.16 145); }
+  :global(.dark) .eb-challenging { color: oklch(0.70 0.16 25); }
+  :global(.dark) .eb-contextual { color: oklch(0.70 0.10 200); }
+
+  .evidence-breakdown span + span::before {
+    content: ' · ';
+    color: var(--semantic-caption);
+  }
+
+  .evidence-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .evidence-card {
+    padding: 16px 18px;
+    background: var(--surface-card-bg);
+    border: 1px solid var(--surface-card-border);
+    border-radius: 8px;
+  }
+
+  .ev-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .ev-badges {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tier-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    line-height: 1.4;
+  }
+
+  .role-indicator {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .ev-title {
+    font-size: var(--text-size-body);
+    font-weight: 600;
+    color: var(--semantic-header);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+
+  .ev-title a {
+    color: var(--semantic-link);
+    text-decoration: none;
+  }
+
+  .ev-title a:hover {
+    text-decoration: underline;
+  }
+
+  .ev-citation {
+    font-size: var(--text-size-caption);
+    color: var(--semantic-caption);
+    margin-bottom: 6px;
+  }
+
+  .ev-summary {
+    font-size: var(--text-size-caption);
+    color: var(--semantic-body);
+    line-height: 1.55;
   }
 
   .observations-section {
@@ -333,47 +489,5 @@
     position: absolute;
     left: 0;
     color: var(--semantic-caption);
-  }
-
-  .references-section {
-    margin-bottom: 32px;
-  }
-
-  .references-list {
-    list-style: none;
-    counter-reset: ref-counter;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 16px;
-    background: var(--surface-card-bg);
-    border: 1px solid var(--surface-card-border);
-    border-radius: 8px;
-  }
-
-  .references-list li {
-    font-size: var(--text-size-body);
-    line-height: 1.5;
-    padding-left: 28px;
-    position: relative;
-    counter-increment: ref-counter;
-  }
-
-  .references-list li::before {
-    content: counter(ref-counter) '.';
-    position: absolute;
-    left: 0;
-    color: var(--semantic-caption);
-    font-weight: 600;
-    min-width: 20px;
-  }
-
-  .references-list a {
-    color: var(--semantic-link);
-    text-decoration: none;
-  }
-
-  .references-list a:hover {
-    text-decoration: underline;
   }
 </style>

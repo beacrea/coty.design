@@ -3,14 +3,13 @@
     "oo": "https://underline.tech/ns/ontological-orchestration/",
     "schema": "https://schema.org/",
     "dcterms": "http://purl.org/dc/terms/",
-
     "Doctrine": "oo:Doctrine",
     "Claim": "oo:Claim",
     "Definition": "oo:Definition",
     "Observation": "oo:Observation",
     "StatusRule": "oo:StatusRule",
     "EvidenceTier": "oo:EvidenceTier",
-
+    "EvidenceReference": "oo:EvidenceReference",
     "version": "schema:version",
     "name": "schema:name",
     "description": "schema:description",
@@ -19,13 +18,11 @@
     "author": "schema:author",
     "status": "oo:status",
     "reviewCadence": "oo:reviewCadence",
-
     "thesis": "oo:thesis",
     "definitions": "oo:definitions",
     "claims": "oo:claims",
     "statusRules": "oo:statusRules",
     "evidenceQualityRubric": "oo:evidenceQualityRubric",
-
     "claimNumber": "oo:claimNumber",
     "shortName": "oo:shortName",
     "title": "dcterms:title",
@@ -38,10 +35,7 @@
     "observations": "oo:observations",
     "splitFrom": "oo:splitFrom",
     "splitVersion": "oo:splitVersion",
-    "references": "oo:references",
-    "label": "oo:label",
-    "url": "schema:url",
-
+    "evidence": "oo:evidence",
     "term": "oo:term",
     "period": "oo:period",
     "notes": "oo:notes",
@@ -49,20 +43,30 @@
     "promotionThreshold": "oo:promotionThreshold",
     "demotionThreshold": "oo:demotionThreshold",
     "splitRule": "oo:splitRule",
-    "statusDefinitions": "oo:statusDefinitions"
+    "statusDefinitions": "oo:statusDefinitions",
+    "sourceTitle": "oo:sourceTitle",
+    "sourceAuthor": "oo:sourceAuthor",
+    "sourceDate": "oo:sourceDate",
+    "sourceUrl": "oo:sourceUrl",
+    "tier": "oo:tier",
+    "role": "oo:role",
+    "annotation": "oo:annotation",
+    "captureStatus": "oo:captureStatus",
+    "archivePath": "oo:archivePath",
+    "summary": "oo:summary",
+    "sharedWith": "oo:sharedWith",
+    "captureDate": "oo:captureDate",
+    "captureNotes": "oo:captureNotes"
   },
-
   "@type": "Doctrine",
   "@id": "https://underline.tech/doctrine/ontological-orchestration",
-
   "name": "Doctrine: Ontological Orchestration in AI-Assisted Development",
-  "description": "Coty Beasley's personal predictions about how AI-assisted development is changing the nature of work: evolutions he has predicted and is actively tracking against real-world evidence, paired with explicit assumptions, supporting evidence, counter-evidence, and evaluation criteria.",
-  "version": "v1.0.0",
+  "description": "A structured set of claims about how AI-assisted development is changing the nature of work, paired with explicit assumptions, supporting evidence, counter-evidence, and evaluation criteria. Evidence is graded using a four-tier quality rubric (A=peer-reviewed/benchmarks, B=vendor research with methods, C=quality journalism, D=anecdotes). Claims are promoted or demoted based on explicit thresholds and a split rule for contextual divergence.",
+  "version": "v1.1.0",
   "dateCreated": "2025-12",
   "dateModified": "2026-03-30",
   "status": "Active",
-  "reviewCadence": "Periodic",
-
+  "reviewCadence": "Quarterly",
   "author": {
     "@type": "schema:Person",
     "name": "Coty Beasley",
@@ -72,14 +76,12 @@
       "description": "Telecommunications, software-driven platform"
     }
   },
-
   "thesis": "Technology roles are shifting from discrete execution to ontological orchestration: the definition, constraint, and sequencing of meaning in systems where execution is increasingly abundant.",
-
   "definitions": [
     {
       "@type": "Definition",
       "term": "Ontological orchestration",
-      "description": "The act of defining what exists, what matters, how components relate, and what constitutes correctness in a system, before and during execution."
+      "description": "The act of defining what exists, what matters, how components relate, and what constitutes correctness in a system—before and during execution."
     },
     {
       "@type": "Definition",
@@ -97,7 +99,6 @@
       "description": "Authorship determined by surface-area expertise and problem context rather than formal role."
     }
   ],
-
   "claims": [
     {
       "@type": "Claim",
@@ -122,25 +123,229 @@
         "Time spent framing vs implementing over time",
         "Ratio of rework due to misalignment vs technical defects"
       ],
+      "evidence": [
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "The Mythical Man-Month",
+          "sourceAuthor": "Frederick P. Brooks",
+          "sourceDate": "1975",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "foundational argument that communication and coordination, not coding, dominate software effort",
+          "captureStatus": "placeholder",
+          "archivePath": "src/evidence/claim-1/brooks-1975-mythical-man-month.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Brooks's law demonstrates that adding developers to late projects makes them later because communication overhead, not coding, dominates software effort. This foundational insight prefigures the doctrine's claim that coordination and decision quality are the real constraints, a pattern AI amplifies by making execution even cheaper.",
+          "captureNotes": "Foundational software engineering text. Book — requires manual capture of relevant excerpts."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Code Complete",
+          "sourceAuthor": "Steve McConnell",
+          "sourceDate": "1993",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "design decisions and requirements clarity matter more than raw coding speed",
+          "captureStatus": "placeholder",
+          "archivePath": "src/evidence/claim-1/mcconnell-1993-code-complete.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "McConnell's empirical data shows that defect cost escalates 10-100x when requirements errors propagate to implementation, establishing that design decisions and requirements clarity matter more than coding speed. This directly supports the claim that the dominant constraint has always been upstream of execution.",
+          "captureNotes": "Comprehensive software construction guide. Book — requires manual capture of relevant excerpts."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot",
+          "sourceAuthor": "Sida Peng, Eirini Kalliamvakou, Peter Cihon, Mert Demirer",
+          "sourceDate": "2023-02",
+          "sourceUrl": "https://www.microsoft.com/en-us/research/publication/the-impact-of-ai-on-developer-productivity-evidence-from-github-copilot/",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "55.8% speedup on bounded coding tasks; heterogeneous effects suggest execution is not the only variable",
+          "captureStatus": "captured",
+          "archivePath": "src/evidence/claim-1/microsoft-2023-copilot-productivity-rct.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-3"
+          ],
+          "summary": "A randomized controlled trial found GitHub Copilot users completed a bounded HTTP server task 55.8% faster than controls, but effects were heterogeneous across developer groups. The speed gain on isolated tasks combined with uneven benefits suggests execution acceleration is real but insufficient to address the harder constraints of verification and system-level reasoning.",
+          "captureNotes": "Randomized controlled trial. Captured from Microsoft Research publication page."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity",
+          "sourceAuthor": "Becker, Rush, Barnes, Rein",
+          "sourceDate": "2025-07-10",
+          "sourceUrl": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "experienced devs slower with AI in mature codebases; validates verification and context as the bottleneck, not coding",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-1/metr-2025-experienced-dev-ai-study.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "In a gold-standard RCT, experienced open-source developers using AI tools (Cursor + Claude) were approximately 19% slower on realistic 20min-4hr tasks in mature codebases, despite self-reporting 20-24% perceived speedups. This is the strongest evidence that verification, context management, and integration overhead — not coding — are the binding constraint in complex systems.",
+          "captureNotes": "Rigorous RCT. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity (arXiv)",
+          "sourceAuthor": "Becker, Rush, Barnes, Rein",
+          "sourceDate": "2025",
+          "sourceUrl": "https://arxiv.org/abs/2507.09089",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "full academic preprint with complete methodology for the METR RCT",
+          "captureStatus": "placeholder",
+          "archivePath": "src/evidence/claim-1/metr-2025-arxiv-preprint.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "The full academic preprint of the METR study with complete statistical methodology and analysis. Provides peer-reviewable Tier A rigor for the finding that AI tools slow experienced developers in mature codebases, confirming the verification-tax mechanism.",
+          "captureNotes": "Academic preprint with full methodology. PDF — requires manual download."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "AI | 2025 Stack Overflow Developer Survey",
+          "sourceAuthor": "Stack Overflow",
+          "sourceDate": "2025",
+          "sourceUrl": "https://survey.stackoverflow.co/2025/ai/",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "65K+ developers report understanding existing code and system context as primary friction, not writing code",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-1/stackoverflow-2025-developer-survey.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Survey of 65,000+ developers finds that understanding existing code and system context are the primary friction points, not writing code. This large-sample practitioner data confirms that execution is not what developers struggle with, directly supporting the constraint-shift thesis.",
+          "captureNotes": "Annual survey of 65,000+ developers. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Developer Experience Report 2025",
+          "sourceAuthor": "Atlassian",
+          "sourceDate": "2025-07-09",
+          "sourceUrl": "https://www.atlassian.com/blog/developer/developer-experience-report-2025",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "context switching and unclear requirements are top productivity drains",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-1/atlassian-2025-developer-experience-report.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Industry report finding that context switching and unclear requirements are the top productivity drains for developers, not coding speed. Supports the claim that the dominant constraint is upstream of execution.",
+          "captureNotes": "Industry report on developer productivity. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "The State of Developer Experience in 2025",
+          "sourceAuthor": "Atlassian",
+          "sourceDate": "2025",
+          "sourceUrl": "https://dam-cdn.atl.orangelogic.com/AssetLink/85sxf1ilee4qpav1236gkfke5wmm33gj.pdf",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "quantitative data on where developer time actually goes",
+          "captureStatus": "placeholder",
+          "archivePath": "src/evidence/claim-1/atlassian-2025-state-of-devex.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Quantitative companion data on where developer time actually goes, showing that non-coding activities (understanding requirements, navigating codebases, context switching) consume the majority of effort.",
+          "captureNotes": "Full research PDF companion. Gated PDF — requires manual download and capture."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Is AI Creating a New Code Review Bottleneck for Senior Engineers?",
+          "sourceAuthor": "The New Stack",
+          "sourceDate": "2025",
+          "sourceUrl": "https://thenewstack.io/is-ai-creating-a-new-code-review-bottleneck-for-senior-engineers/",
+          "tier": "C",
+          "role": "supporting",
+          "annotation": "AI creates code review bottleneck for senior engineers, confirming verification is the constraint",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/cross-cutting/thenewstack-2025-review-bottleneck.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-5b"
+          ],
+          "summary": "Reports that AI-generated code is creating a new review bottleneck for senior engineers, confirming that faster execution shifts the constraint to verification and review. Senior engineers spend disproportionate time validating AI-augmented output.",
+          "captureNotes": "Industry reporting. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Generative AI, Productivity and the Future of Work",
+          "sourceAuthor": "St. Louis Fed",
+          "sourceDate": "2025-10",
+          "sourceUrl": "https://www.stlouisfed.org/open-vault/2025/oct/generative-ai-productivity-future-work",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "realized benefits depend on redesigning work toward higher-order decision-making; task reallocation > job loss",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-1/stlouisfed-2025-genai-productivity.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Federal Reserve analysis finding that realized AI productivity benefits depend on redesigning work toward higher-order decision-making rather than simply adding more AI-mediated activity. Supports the framing that task reallocation matters more than raw speed.",
+          "captureNotes": "Regional Fed analysis. Emphasizes realized benefits depend on redesigning work so human effort moves into higher-order decision-making rather than adding more AI-mediated activity. Supports task reallocation > job loss framing."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "How much does AI impact development speed? An enterprise-based randomized controlled trial",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "96 Google SEs; ~21% reduced time-on-task; enterprise-realistic, not toy task",
+          "summary": "Enterprise-style RCT with 96 full-time Google software engineers found AI assistance reduced time-on-task by approximately 21%, though with wide confidence intervals. More realistic than toy-task studies, suggesting execution speedups are real but noisy in professional settings.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "Enterprise-style RCT with 96 full-time Google SEs. Best estimate ~21% reduced time-on-task with wide CI. More realistic than toy-task studies. Quality not fully captured in metrics.",
+          "archivePath": "src/evidence/claim-1/google-2024-enterprise-rct.md",
+          "sourceAuthor": "Paradis et al. (Google)",
+          "sourceDate": "2024-10",
+          "sourceUrl": "https://arxiv.org/html/2410.12944v1"
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "The Effects of Generative AI on High-Skilled Work: Evidence from Three Field Experiments with Software Developers",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "4,867 devs across Microsoft/Accenture/Fortune 100; +26% throughput; bigger gains for juniors",
+          "summary": "Three randomized field experiments at Microsoft, Accenture, and a Fortune 100 firm with 4,867 developers found a pooled +26.08% increase in completed tasks with AI assistance. Gains were significantly larger for less experienced developers, implying AI compresses skill differentials while shifting senior work toward oversight.",
+          "sharedWith": [
+            "claim-5a"
+          ],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "Three randomized field experiments across real companies. Pooled estimate: +26.08% completed tasks. Bigger gains for less experienced developers. 4,867 developers total. Strongest multi-company field evidence to date.",
+          "archivePath": "src/evidence/claim-1/cui-2025-three-company-field-experiments.md",
+          "sourceAuthor": "Cui et al. (Microsoft, Accenture, Fortune 100)",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.microsoft.com/en-us/research/publication/the-effects-of-generative-ai-on-high-skilled-work-evidence-from-three-field-experiments-with-software-developers/"
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Measuring Program Comprehension: A Large-Scale Field Study with Professionals",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "78 devs, 3,148 hrs telemetry; ~58% of time on comprehension; pre-AI baseline proving execution was never the dominant time sink",
+          "summary": "Large-scale field study tracking 78 professional developers across 7 projects (3,148 hours of telemetry) found approximately 58% of development time is spent on program comprehension, not writing code. Pre-AI baseline that directly demonstrates execution was never the dominant time sink.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "IEEE TSE. 78 developers across 7 projects, 3,148 hours of telemetry. Found developers spend ~58% of time on program comprehension. Pre-AI but directly supports the claim that execution (writing code) was never the dominant time sink.",
+          "archivePath": "src/evidence/claim-1/xia-2017-program-comprehension.md",
+          "sourceAuthor": "Xia et al.",
+          "sourceDate": "2017",
+          "sourceUrl": "https://xin-xia.github.io/publication/TSE17.pdf"
+        }
+      ],
       "observations": [
         {
           "@type": "Observation",
           "period": "Q1 2026",
           "notes": [
             "AI coding tools (Claude Code, Cursor, Windsurf, GitHub Copilot Workspace) continued maturing, further compressing execution cost for bounded tasks.",
-            "The METR RCT finding (experienced devs slower with AI in mature codebases) remains unrebutted and increasingly cited as the canonical counter-signal. Notably, it supports the claim: verification and context, not coding, are the bottleneck.",
+            "The METR RCT finding (experienced devs slower with AI in mature codebases) remains unrebutted and increasingly cited as the canonical counter-signal. Notably, it supports the claim: verification and context—not coding—are the bottleneck.",
             "No new Tier A evidence contradicts the claim. Promotion to Supported blocked by lack of instrumented internal metrics on framing-vs-implementation ratio."
           ]
-        }
-      ],
-      "references": [
-        {
-          "label": "METR: Measuring AI Ability to Complete Long Tasks (RCT with experienced developers)",
-          "url": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"
-        },
-        {
-          "label": "GitHub: Research Quantifying GitHub Copilot's Impact on Developer Productivity",
-          "url": "https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness/"
         }
       ]
     },
@@ -166,25 +371,178 @@
         "Frequency of semantic vs technical disagreements",
         "Stability of interfaces and concepts over time"
       ],
+      "evidence": [
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Overview • Ontology",
+          "sourceAuthor": "Palantir",
+          "sourceUrl": "https://www.palantir.com/docs/foundry/ontology/overview",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "semantic framework where business objects are defined once and reused across applications, collapsing integration complexity",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-2/palantir-foundry-ontology-overview.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Palantir's Foundry platform uses a semantic ontology where business objects are defined once and reused across all applications, eliminating per-application integration. A production-scale example of ontological architecture replacing structural wiring as the primary coordination mechanism.",
+          "captureNotes": "Palantir Foundry documentation. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Ontologies • Overview",
+          "sourceAuthor": "Palantir",
+          "sourceUrl": "https://www.palantir.com/docs/foundry/ontologies/ontologies-overview",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "shared meaning (not shared pipelines) enables coordination at scale",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-2/palantir-ontologies-overview.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Technical documentation showing how shared meaning structures (not shared data pipelines) enable coordination at scale. Demonstrates that defining relationships and types ontologically collapses integration complexity across applications and teams.",
+          "captureNotes": "Technical documentation on building ontologies. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Ontology SDK (OSDK) • Overview",
+          "sourceAuthor": "Palantir",
+          "sourceUrl": "https://www.palantir.com/docs/foundry/ontology-sdk/overview",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "code generation from ontological definitions accelerates agent development; define once semantically, generate automatically",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-2/palantir-osdk-overview.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "The Ontology SDK generates application code directly from ontological definitions, accelerating agent and application development. Demonstrates the 'define once semantically, generate automatically' pattern that the doctrine predicts becomes dominant.",
+          "captureNotes": "Developer SDK for ontology-driven applications. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Spec-Driven Development: From Code to Contract in the Age of AI",
+          "sourceAuthor": "arXiv authors",
+          "sourceDate": "2025",
+          "sourceUrl": "https://arxiv.org/html/2602.00180v1",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "formalizes spec-as-source; positions schemas, invariants, and constraints as the \"real\" system with code as compiled by-product",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-2/arxiv-2025-spec-driven-development.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-4"
+          ],
+          "summary": "Academic paper formalizing spec-driven development as a design-by-contract methodology where schemas, invariants, and constraints constitute the 'real' system and code is a compiled by-product. First Tier A source directly supporting the shift from structural to ontological architecture.",
+          "captureNotes": "Academic paper formalizing spec-as-source workflows. Connects to Design by Contract. Positions vocabularies, invariants, and constraints as the 'real' system with code as a compiled by-product. First Tier A source for claim 2. LLM coding agents benefit immensely from SDD because structured specs reduce ambiguity."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Tools - Model Context Protocol Specification",
+          "sourceAuthor": "Model Context Protocol",
+          "sourceDate": "2025-06-18",
+          "sourceUrl": "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "primary protocol spec defining machine-readable ontology of tool capabilities that agents discover and invoke",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-2/mcp-2025-specification-tools.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "The Model Context Protocol specification defines a machine-readable ontology of tool capabilities that agents discover and invoke via structured schemas. MCP functions as a shared ontological contract between agents and their environment, directly evidencing the claim.",
+          "captureNotes": "Primary source: the actual MCP specification for tool definitions. Tools enable models to interact with external systems via a shared schema that agents discover and invoke. Effectively a machine-readable ontology of capabilities."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Spec-driven development | Technology Radar",
+          "sourceAuthor": "Thoughtworks",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.thoughtworks.com/en-us/radar/techniques/spec-driven-development",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "Technology Radar adoption signal: specs, constitutions, and schemas as primary maintained artifacts",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-2/thoughtworks-2025-radar-sdd.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-4"
+          ],
+          "summary": "Thoughtworks Technology Radar elevates spec-driven development as an emerging technique, signaling industry adoption of specifications, constitutions, and schemas as primary maintained artifacts rather than code.",
+          "captureNotes": "Thoughtworks Technology Radar entry for SDD as an emerging technique. Different from the blog post — the Radar carries broader adoption signal. Teams maintain specifications, constitutions, and schemas as primary artifacts."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Model context protocol (MCP) - OpenAI Agents SDK",
+          "sourceAuthor": "OpenAI",
+          "sourceDate": "2025",
+          "sourceUrl": "https://openai.github.io/openai-agents-python/mcp/",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "cross-vendor convergence; OpenAI implementing the same shared ontological schema for agent-tool interaction",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-2/openai-2025-agents-sdk-mcp.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "OpenAI's Agents SDK implements MCP, demonstrating cross-vendor convergence on shared ontological schemas for agent-tool interaction. Multiple independent vendors adopting the same ontological contract strengthens the claim that this is a structural shift, not a single vendor's bet.",
+          "captureNotes": "OpenAI's Agents SDK implementing MCP. Demonstrates cross-vendor convergence on shared ontological schemas for agent-tool interaction. MCP standardizes how applications expose tools and context to language models."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Unifying Large Language Models and Knowledge Graphs: A Roadmap",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "LLMs are black-box on factual knowledge; KGs provide structured semantics; roadmap for integration",
+          "summary": "Roadmap for integrating LLMs with knowledge graphs, arguing that LLMs are black-box on factual knowledge while KGs explicitly store structured facts. Demonstrates that explicit semantics and structured knowledge become more valuable as AI systems need external grounding to reduce hallucination and maintain consistency.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "TKDE reference. LLMs are black-box and fall short on factual knowledge; knowledge graphs explicitly store structured facts. Roadmap for integration. Supports claim that explicit semantics and structured knowledge become more valuable alongside LLMs.",
+          "archivePath": "src/evidence/claim-2/pan-2023-llm-kg-roadmap.md",
+          "sourceAuthor": "Pan et al.",
+          "sourceDate": "2023-06",
+          "sourceUrl": "https://arxiv.org/abs/2306.08302"
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "OWL 2 Web Ontology Language Document Overview (Second Edition)",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "W3C standard defining what \"ontological\" means with formal semantics; foundational reference",
+          "summary": "W3C standard defining ontology concepts (classes, properties, individuals, axioms) with formally defined meaning in the RDF ecosystem. The authoritative reference for what \"ontological architecture\" actually means — formal semantics, not hand-wavy vendor language.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "W3C standard. Defines ontology concepts with formally defined meaning — classes, properties, individuals in RDF ecosystem. The cleanest reference for what 'ontological architecture' actually means vs. hand-wavy vendor language. Foundational.",
+          "archivePath": "src/evidence/claim-2/w3c-2012-owl2-overview.md",
+          "sourceAuthor": "W3C",
+          "sourceDate": "2012-12-11",
+          "sourceUrl": "https://www.w3.org/TR/owl2-overview/"
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "A survey on augmenting knowledge graphs (KGs) with large language models (LLMs): models, evaluation metrics, benchmarks, and challenges",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "peer-reviewed taxonomy of hybrid KG/LLM paradigms; breadth for ontological architecture argument",
+          "summary": "Peer-reviewed survey framing three paradigms: KG-augmented LLMs, LLM-augmented KGs, and synergized frameworks. Adds taxonomic breadth to the ontological architecture argument, showing the field converging on hybrid semantic-plus-neural approaches rather than pure LLM pipelines.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "Peer-reviewed survey. Frames paradigms: KG-augmented LLMs, LLM-augmented KGs, synergized frameworks. Adds breadth and taxonomy for hybrid semantic architecture. Supports need for explicit ontological structure alongside LLMs.",
+          "archivePath": "src/evidence/claim-2/springer-2024-kg-llm-survey.md",
+          "sourceAuthor": "Springer (survey authors)",
+          "sourceDate": "2024",
+          "sourceUrl": "https://link.springer.com/article/10.1007/s44163-024-00175-8"
+        }
+      ],
       "observations": [
         {
           "@type": "Observation",
           "period": "Q1 2026",
           "notes": [
-            "Model Context Protocol (MCP) emerged as an open standard for agent-tool interfaces, essentially an ontological contract defining what tools exist, what they do, and how to invoke them.",
+            "Model Context Protocol (MCP) emerged as an open standard for agent-tool interfaces—essentially an ontological contract defining what tools exist, what they do, and how to invoke them.",
             "Agent frameworks (LangChain, CrewAI, Anthropic SDK) universally require explicit tool/resource schemas. Agents that lack a shared ontology with their environment fail reliably.",
             "Directional strengthening, but evidence remains mostly Tier B. No Tier A study yet isolates ontological architecture as the causal variable."
           ]
-        }
-      ],
-      "references": [
-        {
-          "label": "Anthropic: Model Context Protocol (MCP) Introduction",
-          "url": "https://www.anthropic.com/news/model-context-protocol"
-        },
-        {
-          "label": "Model Context Protocol Specification",
-          "url": "https://modelcontextprotocol.io/introduction"
         }
       ]
     },
@@ -209,6 +567,195 @@
         "Correlation between intent clarity and output quality",
         "Reduction in hallucination incidents with stronger constraints"
       ],
+      "evidence": [
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+          "sourceAuthor": "SWE-bench authors",
+          "sourceDate": "2024",
+          "sourceUrl": "https://github.com/swe-bench/SWE-bench",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "specification quality is the dominant predictor of AI solve rates, even as model capability improves",
+          "captureStatus": "captured",
+          "archivePath": "src/evidence/claim-3/swe-bench-repo.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-6"
+          ],
+          "summary": "Benchmark data shows AI agents achieve 80-95% solve rates on well-specified, curated tasks but drop sharply on harder, more ambiguous problem sets. Specification quality is the dominant predictor of AI resolution rates even as model capability improves, directly demonstrating that vague thinking produces worse AI outcomes.",
+          "captureNotes": "GitHub repository README. Captured via automated fetch."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot",
+          "sourceAuthor": "Sida Peng, Eirini Kalliamvakou, Peter Cihon, Mert Demirer",
+          "sourceDate": "2023-02",
+          "sourceUrl": "https://www.microsoft.com/en-us/research/publication/the-impact-of-ai-on-developer-productivity-evidence-from-github-copilot/",
+          "tier": "A",
+          "role": "contextual",
+          "annotation": "heterogeneous effects across developer groups suggest task clarity moderates AI productivity gains",
+          "captureStatus": "captured",
+          "archivePath": "src/evidence/claim-1/microsoft-2023-copilot-productivity-rct.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-1"
+          ],
+          "summary": "Heterogeneous productivity effects across developer groups suggest that task clarity moderates AI productivity gains. Developers working on well-scoped tasks saw large speedups while those on ambiguous tasks saw smaller or no gains, consistent with the vagueness penalty.",
+          "captureNotes": "Randomized controlled trial. Captured from Microsoft Research publication page."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "AI writes code faster. Your job is still to prove it works.",
+          "sourceAuthor": "Addy Osmani",
+          "sourceDate": "2026-01-07",
+          "sourceUrl": "https://addyosmani.com/blog/code-review-ai/",
+          "tier": "C",
+          "role": "supporting",
+          "annotation": "poor specs create \"plausible garbage\" at scale; review becomes the valued activity",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-3/osmani-2026-ai-code-review.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-4",
+            "claim-6"
+          ],
+          "summary": "Chrome DevRel lead argues that underspecified prompts create 'plausible garbage' at scale and that review — not generation — becomes the valued activity. Illustrates the vagueness penalty in day-to-day AI coding workflows.",
+          "captureNotes": "Chrome DevRel lead blog post. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Developers remain willing but reluctant to use AI… The 2025 Developer Survey Results Are Here",
+          "sourceAuthor": "Stack Overflow Blog",
+          "sourceDate": "2025-12-29",
+          "sourceUrl": "https://stackoverflow.blog/2025/12/29/developers-remain-willing-but-reluctant-to-use-ai-the-2025-developer-survey-results-are-here/",
+          "tier": "C",
+          "role": "supporting",
+          "annotation": "developers trust AI for boilerplate but distrust it for complex logic; quality depends on task clarity",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-3/stackoverflow-2025-blog-developers-ai.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Survey analysis showing developers trust AI for boilerplate but distrust it for complex logic, with output quality directly correlating with task clarity. Reflects practitioner awareness of the vagueness penalty.",
+          "captureNotes": "Blog editorial analysis of 2025 survey. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Putting Spec Kit Through Its Paces… Radical Idea or Reinvented Waterfall?",
+          "sourceAuthor": "Scott Logic",
+          "sourceDate": "2025-11-26",
+          "sourceUrl": "https://blog.scottlogic.com/2025/11/26/putting-spec-kit-through-its-paces-radical-idea-or-reinvented-waterfall.html",
+          "tier": "C",
+          "role": "challenging",
+          "annotation": "specs can become documentation debt if not maintained; vagueness penalty may be offset by spec staleness penalty",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/cross-cutting/scott-logic-2025-spec-kit-critique.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-4"
+          ],
+          "summary": "Critical evaluation finding that spec-kit specifications can become stale documentation debt if not continuously maintained. Provides a counter-signal: the vagueness penalty may be partially offset by a spec-staleness penalty where over-specified but outdated constraints also produce misaligned output.",
+          "captureNotes": "Critical evaluation of spec-kit. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Demystifying evals for AI agents",
+          "sourceAuthor": "Anthropic",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "task spec quality is first-class variable in agent evals; ambiguous specs yield brittle or failing agents",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-3/anthropic-2025-demystifying-evals.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Anthropic's eval guidance treats task specification quality as the primary variable determining agent success. Ambiguous specs yield brittle or failing agents, and 0% pass rates on frontier models often indicate broken tasks rather than model incapacity.",
+          "captureNotes": "Treats task specification quality as a first-class variable. Ambiguous specs yield brittle or failing agents. Recommends precise task specs, explicit graders, and deterministic tests. 0% pass rates on frontier models often indicate broken tasks, not model incapacity."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Building Effective AI Agents",
+          "sourceAuthor": "Anthropic",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.anthropic.com/research/building-effective-agents",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "under-specified tasks are leading cause of systematic agent failures; recommends precise specs and deterministic tests",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/cross-cutting/anthropic-2025-building-effective-agents.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-6"
+          ],
+          "summary": "Anthropic's agent architecture guidance identifies under-specified tasks as a leading cause of systematic agent failures, recommending precise task specs, explicit graders, and deterministic tests. Validates the vagueness-penalty claim at the agent-design layer.",
+          "captureNotes": "Primary Anthropic guidance on agent architecture. Agents must verify work against ground truth (tests, tools, environment outputs). Autonomous agents need HITL checkpoints, sandboxing, and stopping conditions. Ambiguous or under-specified tasks are a leading cause of systematic agent failures. Recommends precise task specs, explicit graders, and deterministic tests."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "A Survey on Hallucination in Large Language Models: Principles, Taxonomy, Challenges, and Open Questions",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "taxonomy of how LLMs produce plausible-but-wrong outputs; mechanistic support for vagueness amplification",
+          "summary": "Comprehensive taxonomy of LLM hallucination: intrinsic (contradicts source) and extrinsic (unverifiable). Documents how LLMs produce fluent, confident outputs that are factually incorrect or unfaithful to context. Mechanistic support for why AI amplifies ambiguity into high-velocity wrongness.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "Comprehensive taxonomy of LLM hallucination. Documents how LLMs produce plausible but factually incorrect or unfaithful outputs. Mechanistic support for 'AI amplifies ambiguity' — models optimize plausibility under uncertainty.",
+          "archivePath": "src/evidence/claim-3/huang-2023-hallucination-survey.md",
+          "sourceAuthor": "Huang et al.",
+          "sourceDate": "2023-11",
+          "sourceUrl": "https://arxiv.org/abs/2311.05232"
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Underspecification Presents Challenges for Credibility in Modern Machine Learning",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "formalizes why unclear objectives yield models that pass validation but diverge in deployment",
+          "summary": "Foundational JMLR paper showing that underspecified ML pipelines yield many \"equally good\" models that behave divergently in deployment. Formalizes why unclear objectives and incomplete evaluation criteria produce systems that pass validation but fail in the real world.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "JMLR. Foundational paper on underspecification. Underspecified ML pipelines yield many 'equally good' models that behave differently in deployment. Formalizes why unclear objectives produce unpredictable behavior — directly supports vagueness-penalty mechanism.",
+          "archivePath": "src/evidence/claim-3/damour-2022-underspecification.md",
+          "sourceAuthor": "D'Amour et al.",
+          "sourceDate": "2022",
+          "sourceUrl": "https://jmlr.org/papers/volume23/20-1335/20-1335.pdf"
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Evaluating Large Language Models Trained on Code",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "natural-language specs underconstrain code correctness; code that looks right often isn't",
+          "summary": "Introduces the HumanEval benchmark (164 functional correctness problems) for evaluating code generation. Shows that natural-language specifications underconstrain correctness — generated code can pass surface-level checks while failing on edge cases. Repeated sampling helps but does not close the gap.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "Codex/HumanEval paper. Introduces functional correctness benchmark (164 problems). Documents that natural-language specifications underconstrain correctness — code that looks right often isn't. Repeated sampling helps but doesn't eliminate the gap.",
+          "archivePath": "src/evidence/claim-3/chen-2021-codex-humaneval.md",
+          "sourceAuthor": "Chen et al. (OpenAI)",
+          "sourceDate": "2021-07",
+          "sourceUrl": "https://arxiv.org/abs/2107.03374"
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "From Code to Correctness: Closing the Last Mile of Code Generation with Hierarchical Debugging",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "generation easier than validation; last-mile debugging requires human intervention",
+          "summary": "Research on the \"last mile\" from generated code to correct code using hierarchical debugging. Demonstrates that code generation is substantially easier than code validation — subtle errors often require human intervention to resolve, reinforcing that specification clarity is the bottleneck.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "Research on the 'last mile' from generated code to correct code. Generation is easier than validation and debugging. Subtle errors often need human intervention. Reinforces that clarity + validation are the constraint, not code production.",
+          "archivePath": "src/evidence/claim-3/zhong-2024-code-to-correctness.md",
+          "sourceAuthor": "Zhong et al.",
+          "sourceDate": "2024-10",
+          "sourceUrl": "https://arxiv.org/html/2410.01215v3"
+        }
+      ],
       "observations": [
         {
           "@type": "Observation",
@@ -219,20 +766,6 @@
             "Spec-driven development adoption expanded (Thoughtworks, Fowler, multiple tool vendors). The pattern is moving from emerging to conventional.",
             "No demotion signals. Status remains appropriate at highest level."
           ]
-        }
-      ],
-      "references": [
-        {
-          "label": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
-          "url": "https://www.swebench.com/"
-        },
-        {
-          "label": "Thoughtworks Technology Radar: Spec-Driven Development",
-          "url": "https://www.thoughtworks.com/radar/techniques/spec-driven-development"
-        },
-        {
-          "label": "Martin Fowler: Specification by Example",
-          "url": "https://martinfowler.com/bliki/SpecificationByExample.html"
         }
       ]
     },
@@ -258,6 +791,230 @@
         "Who defines constraints vs who executes",
         "How conflicts are resolved"
       ],
+      "evidence": [
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Spec-driven development: Unpacking one of 2025's key new AI-assisted engineering practices",
+          "sourceAuthor": "Thoughtworks",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.thoughtworks.com/insights/blog/agile-engineering-practices/spec-driven-development-unpacking-2025-new-engineering-practices",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "upfront specification becomes the primary artifact; spec authors become key decision-makers",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-4/thoughtworks-2025-spec-driven-development.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Thoughtworks analysis of spec-driven development showing that upfront specification becomes the primary artifact and spec authors become key decision-makers who control what gets built. Directly supports authority accruing to harness authors.",
+          "captureNotes": "Thoughtworks analysis of spec-driven development. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl",
+          "sourceAuthor": "Martin Fowler",
+          "sourceDate": "2025",
+          "sourceUrl": "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "those who define specs and validation criteria shape what gets built",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-4/fowler-2025-sdd-tools.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Martin Fowler's review of Kiro, spec-kit, and Tessl finds these tools structurally separate the role defining specifications from the role executing code, routing AI agents through spec artifacts. Those who define specs and validation criteria shape what gets built.",
+          "captureNotes": "Martin Fowler's exploration of spec-driven tools. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "AI writes code faster. Your job is still to prove it works.",
+          "sourceAuthor": "Addy Osmani",
+          "sourceDate": "2026-01-07",
+          "sourceUrl": "https://addyosmani.com/blog/code-review-ai/",
+          "tier": "C",
+          "role": "supporting",
+          "annotation": "authority flows to those who define correctness criteria, not those who produce code",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-3/osmani-2026-ai-code-review.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-3",
+            "claim-6"
+          ],
+          "summary": "Argues that authority flows to those who define correctness criteria, not those who produce code. As AI generates code at scale, the ability to specify and validate becomes the scarce, high-value activity.",
+          "captureNotes": "Chrome DevRel lead blog post. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Handbook for New Employees",
+          "sourceAuthor": "Valve",
+          "sourceDate": "2012",
+          "sourceUrl": "https://www.valvesoftware.com/company/Valve_Handbook.pdf",
+          "tier": "C",
+          "role": "contextual",
+          "annotation": "historical precedent for spec clarity and autonomy coexisting in flat orgs",
+          "captureStatus": "placeholder",
+          "archivePath": "src/evidence/cross-cutting/valve-2012-handbook.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Historical precedent showing how Valve operationalizes flat hierarchy with project self-selection and peer accountability. Demonstrates that spec clarity and autonomy can coexist without traditional positional hierarchy.",
+          "captureNotes": "Primary source document. PDF — requires manual download."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Valve Corporation: Strategy tipping points and thresholds",
+          "sourceAuthor": "Teppo Felin",
+          "sourceDate": "2015",
+          "sourceUrl": "https://www.jorgdesign.net/article/view/20157",
+          "tier": "B",
+          "role": "contextual",
+          "annotation": "peer-based authority works at scale when roles are defined by contribution, not hierarchy",
+          "captureStatus": "placeholder",
+          "archivePath": "src/evidence/cross-cutting/felin-2015-valve-strategy.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Academic study analyzing how Valve's peer-based authority works at scale when roles are defined by contribution rather than position. Provides organizational theory grounding for the claim that authority can shift to those who define constraints and outcomes.",
+          "captureNotes": "Academic study. Journal article — requires manual capture."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Spec-Driven Development: The Waterfall Strikes Back",
+          "sourceAuthor": "marmelab",
+          "sourceDate": "2025-11-12",
+          "sourceUrl": "https://marmelab.com/blog/2025/11/12/spec-driven-development-waterfall-strikes-back.html",
+          "tier": "C",
+          "role": "challenging",
+          "annotation": "over-specification recreates waterfall pathologies; authority via specs risks rigidity",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/cross-cutting/marmelab-2025-sdd-waterfall.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Counter-signal arguing that over-specification recreates waterfall pathologies: slow iteration, delayed feedback, and false certainty. Warns that authority via specs risks rigidity if specifications are not treated as living artifacts.",
+          "captureNotes": "Critique of SDD. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Putting Spec Kit Through Its Paces… Radical Idea or Reinvented Waterfall?",
+          "sourceAuthor": "Scott Logic",
+          "sourceDate": "2025-11-26",
+          "sourceUrl": "https://blog.scottlogic.com/2025/11/26/putting-spec-kit-through-its-paces-radical-idea-or-reinvented-waterfall.html",
+          "tier": "C",
+          "role": "challenging",
+          "annotation": "spec-first workflows can ossify without continuous maintenance",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/cross-cutting/scott-logic-2025-spec-kit-critique.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-3"
+          ],
+          "summary": "Finds that spec-first workflows can ossify without continuous maintenance, challenging the durability of spec-based authority. If specs become stale, harness authorship may lose its leverage over execution.",
+          "captureNotes": "Critical evaluation of spec-kit. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Spec-Driven Development: From Code to Contract in the Age of AI",
+          "sourceAuthor": "arXiv authors",
+          "sourceDate": "2025",
+          "sourceUrl": "https://arxiv.org/html/2602.00180v1",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "academic formalization that spec authors control the system; code is a compiled by-product of their contracts",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-2/arxiv-2025-spec-driven-development.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-2"
+          ],
+          "summary": "Academic formalization showing that spec authors control the system because code is a compiled by-product of their contracts. Provides Tier A theoretical grounding for the authority-shift mechanism.",
+          "captureNotes": "Academic paper formalizing spec-as-source workflows. Connects to Design by Contract. Positions vocabularies, invariants, and constraints as the 'real' system with code as a compiled by-product. First Tier A source for claim 2. LLM coding agents benefit immensely from SDD because structured specs reduce ambiguity."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Spec-driven development | Technology Radar",
+          "sourceAuthor": "Thoughtworks",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.thoughtworks.com/en-us/radar/techniques/spec-driven-development",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "Radar adoption signal: spec-defining roles structurally separated from execution",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-2/thoughtworks-2025-radar-sdd.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-2"
+          ],
+          "summary": "Technology Radar adoption signal confirming that spec-defining roles are being structurally separated from execution roles across the industry.",
+          "captureNotes": "Thoughtworks Technology Radar entry for SDD as an emerging technique. Different from the blog post — the Radar carries broader adoption signal. Teams maintain specifications, constitutions, and schemas as primary artifacts."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "These human capabilities complement AI's shortcomings",
+          "sourceAuthor": "MIT Sloan",
+          "sourceDate": "2025",
+          "sourceUrl": "https://mitsloan.mit.edu/ideas-made-to-matter/these-human-capabilities-complement-ais-shortcomings",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "tasks involving judgment, creativity, and stakeholder influence growing relative to routine tasks; authority links to framing and governance",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-4/mitsloan-2025-epoch-capabilities.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-5a",
+            "claim-5b"
+          ],
+          "summary": "MIT's EPOCH framework finds that tasks involving judgment, ethics, creativity, and stakeholder influence are growing relative to routine tasks. Authority increasingly links to the ability to frame problems and govern automation, aligning with the harness-authorship thesis.",
+          "captureNotes": "MIT EPOCH framework. Tasks involving judgment, ethics, creativity, and stakeholder influence are growing relative to purely technical or routine analytical tasks. Authority increasingly linked to ability to frame problems and govern automation. Suggests new mid-skill job categories, not only polarization."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Building agents with the Claude Agent SDK",
+          "sourceAuthor": "Anthropic",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "agent design patterns where humans author specs and guardrails, then delegate bounded implementation",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/cross-cutting/anthropic-2025-agent-sdk.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-6"
+          ],
+          "summary": "Agent SDK design patterns where humans author specs and guardrails, then delegate bounded implementation to agents. Embeds the harness-authorship pattern directly into production tooling.",
+          "captureNotes": "Agent SDK guidance emphasizing verification loops, sandboxed testing, and HITL checkpoints. Coding-agent examples rely on automated tests and deterministic checks as main verification mechanism, with human review for broader system goals."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Mapping Global Dynamics of Benchmark Creation and Saturation in Artificial Intelligence",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "Nature Comms; 3,765 benchmarks; evals don't just measure — they steer what counts as progress",
+          "summary": "Nature Communications empirical analysis of 3,765 AI benchmarks. Finds that benchmarks do not merely measure progress — they steer it by defining what \"winning\" looks like. Direct analog to harness authorship: whoever defines the evaluation criteria shapes what gets optimized.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "Nature Communications. Empirical analysis of 3,765 AI benchmarks. Benchmarks don't just measure progress — they steer it. Direct analog to harness authorship: whoever defines the evaluation criteria shapes what 'winning' looks like.",
+          "archivePath": "src/evidence/claim-4/ott-2022-benchmarks-steer-progress.md",
+          "sourceAuthor": "Ott et al.",
+          "sourceDate": "2022",
+          "sourceUrl": "https://www.nature.com/articles/s41467-022-34591-0"
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Improving ratings': audit in the British University system",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "Goodhart/Strathern: \"when a measure becomes a target, it ceases to be a good measure\"; governance backbone",
+          "summary": "Classic essay originating the insight behind Goodhart's Law: \"When a measure becomes a target, it ceases to be a good measure.\" Auditing produces its own logic and reshapes what it measures. Governance backbone for understanding why harness/eval authorship confers authority — the definer of success criteria shapes all downstream behavior.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "Classic essay behind Goodhart/Strathern's Law: 'When a measure becomes a target, it ceases to be a good measure.' Governance backbone for claims about evaluation harnesses and authority. Auditing produces its own logic and reshapes what it measures.",
+          "archivePath": "src/evidence/claim-4/strathern-1997-improving-ratings.md",
+          "sourceAuthor": "Marilyn Strathern",
+          "sourceDate": "1997",
+          "sourceUrl": "https://gwern.net/doc/statistics/decision/1997-strathern.pdf"
+        }
+      ],
       "observations": [
         {
           "@type": "Observation",
@@ -268,16 +1025,6 @@
             "Promotion to Supported still requires Tier A evidence on the authority mechanism specifically. Existing sources remain Tier B/C."
           ]
         }
-      ],
-      "references": [
-        {
-          "label": "Anthropic: Building Effective Agents",
-          "url": "https://www.anthropic.com/research/building-effective-agents"
-        },
-        {
-          "label": "Cognition AI: Introducing Devin",
-          "url": "https://www.cognition.ai/blog/introducing-devin"
-        }
       ]
     },
     {
@@ -287,13 +1034,13 @@
       "shortName": "role-convergence",
       "title": "Roles converge upward in greenfield and small-team contexts",
       "statement": "In greenfield, startup, and small-team contexts, AI makes narrowly defined execution functions economically obsolete faster than it creates new narrow roles, increasing demand for generalists with architectural judgment.",
-      "rationale": "Small teams already reward breadth. AI amplifies this by collapsing the cost of tasks that previously justified specialists. The result is fewer, broader roles, not a hollowed middle.",
+      "rationale": "Small teams already reward breadth. AI amplifies this by collapsing the cost of tasks that previously justified specialists. The result is fewer, broader roles—not a hollowed middle.",
       "status": "Emerging",
       "statusLastChanged": "v1.0.0",
       "splitFrom": "claim-5",
       "splitVersion": "v1.0.0",
       "supportingSignals": [
-        "Brynjolfsson et al. (NBER/QJE): AI tools compress skill differentials, enabling faster upward mobility, most pronounced in smaller, less hierarchical settings.",
+        "Brynjolfsson et al. (NBER/QJE): AI tools compress skill differentials, enabling faster upward mobility—most pronounced in smaller, less hierarchical settings.",
         "Practitioner reports from startups and small product teams consistently describe broadening role scopes.",
         "LinkedIn data on lattice career paths replacing ladders (Aneesh Raman)."
       ],
@@ -306,6 +1053,111 @@
         "Time-to-impact for new generalist contributors",
         "Ratio of specialist vs generalist hires in sub-50-person orgs"
       ],
+      "evidence": [
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Generative AI at Work",
+          "sourceAuthor": "Erik Brynjolfsson, Danielle Li, Lindsey R. Raymond",
+          "sourceDate": "2023",
+          "sourceUrl": "https://www.nber.org/papers/w31161",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "AI tools compress skill differentials; productivity gains strongest for novices in less hierarchical settings",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-5a/brynjolfsson-2023-generative-ai-at-work.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "NBER study of 5,000+ customer service agents showing AI tools boost productivity ~14% on average, with gains concentrated among lower-skill workers, compressing the skill distribution toward the top. Supports role convergence by showing AI helps broader contributors operate closer to expert levels.",
+          "captureNotes": "NBER working paper. Web page returned 403 on automated fetch."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Generative AI at Work (QJE Journal Version)",
+          "sourceAuthor": "Erik Brynjolfsson, Danielle Li, Lindsey R. Raymond",
+          "sourceDate": "2024",
+          "sourceUrl": "https://academic.oup.com/qje/article/140/2/889/7990658",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "peer-reviewed replication with additional rigor confirming skill compression effects",
+          "captureStatus": "placeholder",
+          "archivePath": "src/evidence/claim-5a/brynjolfsson-2024-qje-journal.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Peer-reviewed replication in the Quarterly Journal of Economics confirming the skill-compression effects with additional statistical rigor. The fact that AI's largest benefits accrue to less-experienced workers supports convergence in settings where broad capability is rewarded.",
+          "captureNotes": "Peer-reviewed journal version. Paywalled — requires manual capture."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "LinkedIn's Aneesh Raman says the career ladder is disappearing…",
+          "sourceAuthor": "Fast Company",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.fastcompany.com/91375183/linkedin-aneesh-raman-ai-career-ladders",
+          "tier": "C",
+          "role": "supporting",
+          "annotation": "LinkedIn VP argues career ladders are becoming lattices; generalist agility matters more than specialist depth",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-5a/fast-company-2025-raman-career-ladders.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "LinkedIn VP Aneesh Raman argues traditional career ladders are being replaced by 'lattices' where generalist agility matters more than specialist depth, especially in smaller and entrepreneurial settings.",
+          "captureNotes": "Interview/article. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "How artificial intelligence impacts the US labor market",
+          "sourceAuthor": "MIT Sloan",
+          "sourceDate": "2025",
+          "sourceUrl": "https://mitsloan.mit.edu/ideas-made-to-matter/how-artificial-intelligence-impacts-us-labor-market",
+          "tier": "B",
+          "role": "challenging",
+          "annotation": "AI effects are gradual, task-specific, and often complementary; cautions against deterministic convergence narratives",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-5a/mit-sloan-2025-ai-labor-market.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-5b"
+          ],
+          "summary": "MIT analysis cautioning that AI effects are gradual, task-specific, and often complementary rather than deterministic. Provides a counter-signal: convergence may not happen as fast or completely as the claim implies.",
+          "captureNotes": "MIT analysis. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "These human capabilities complement AI's shortcomings",
+          "sourceAuthor": "MIT Sloan",
+          "sourceDate": "2025",
+          "sourceUrl": "https://mitsloan.mit.edu/ideas-made-to-matter/these-human-capabilities-complement-ais-shortcomings",
+          "tier": "B",
+          "role": "contextual",
+          "annotation": "new mid-skill job categories possible, not only polarization; suggests convergence pathway via EPOCH-style capabilities",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-4/mitsloan-2025-epoch-capabilities.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-4",
+            "claim-5b"
+          ],
+          "summary": "Suggests new mid-skill job categories may emerge rather than only polarization. EPOCH-style capabilities (empathy, persuasion, original thought, collaboration, hands-on work) provide a convergence pathway where generalists combining AI leverage with human judgment thrive.",
+          "captureNotes": "MIT EPOCH framework. Tasks involving judgment, ethics, creativity, and stakeholder influence are growing relative to purely technical or routine analytical tasks. Authority increasingly linked to ability to frame problems and govern automation. Suggests new mid-skill job categories, not only polarization."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "The Effects of Generative AI on High-Skilled Work: Evidence from Three Field Experiments with Software Developers",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "bigger productivity gains for less experienced devs; AI compresses skill differential in professional dev work",
+          "summary": "Three randomized field experiments at Microsoft, Accenture, and a Fortune 100 firm with 4,867 developers found a pooled +26.08% increase in completed tasks with AI assistance. Gains were significantly larger for less experienced developers, implying AI compresses skill differentials while shifting senior work toward oversight.",
+          "sharedWith": [
+            "claim-1"
+          ],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "Three randomized field experiments across real companies. Pooled estimate: +26.08% completed tasks. Bigger gains for less experienced developers. 4,867 developers total. Strongest multi-company field evidence to date.",
+          "archivePath": "src/evidence/claim-1/cui-2025-three-company-field-experiments.md",
+          "sourceAuthor": "Cui et al. (Microsoft, Accenture, Fortune 100)",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.microsoft.com/en-us/research/publication/the-effects-of-generative-ai-on-high-skilled-work-evidence-from-three-field-experiments-with-software-developers/"
+        }
+      ],
       "observations": [
         {
           "@type": "Observation",
@@ -314,16 +1166,6 @@
             "The pattern of one person + AI doing the work of a small team became a widespread narrative in Q1 2026 (indie developers, solo founders, small product teams). Directionally supportive, but largely Tier C/D evidence.",
             "No Tier A study yet isolates the causal mechanism in this specific context."
           ]
-        }
-      ],
-      "references": [
-        {
-          "label": "Brynjolfsson et al., Generative AI at Work (NBER Working Paper / QJE)",
-          "url": "https://www.nber.org/papers/w31161"
-        },
-        {
-          "label": "LinkedIn Economic Graph: The New Era of Career Development (Aneesh Raman)",
-          "url": "https://economicgraph.linkedin.com/research/the-new-era-of-career-development"
         }
       ]
     },
@@ -340,10 +1182,10 @@
       "splitFrom": "claim-5",
       "splitVersion": "v1.0.0",
       "supportingSignals": [
-        "Reports of reduced junior developer hiring at some large tech companies (Q4 2025 to Q1 2026).",
+        "Reports of reduced junior developer hiring at some large tech companies (Q4 2025–Q1 2026).",
         "ADP payroll data showing routine cognitive tasks declining faster than manual ones.",
         "The broken bottom rung concern: if AI handles entry-level tasks, how do juniors develop the judgment to become seniors?",
-        "Stanford Canaries in the Coal Mine paper: specific task categories declining while orchestration roles grow, but growth is concentrated at senior levels."
+        "Stanford Canaries in the Coal Mine paper: specific task categories declining while orchestration roles grow—but growth is concentrated at senior levels."
       ],
       "challenges": [
         "NY Fed research: aggregate employment stable so far; macro data does not yet show bifurcation.",
@@ -356,6 +1198,207 @@
         "Wage distribution shifts (compression vs polarization)",
         "Broken bottom rung indicator: time-to-senior for new hires over time"
       ],
+      "evidence": [
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Canaries in the Coal Mine? Six Facts…",
+          "sourceAuthor": "Erik Brynjolfsson et al.",
+          "sourceDate": "2025-08",
+          "sourceUrl": "https://digitaleconomy.stanford.edu/wp-content/uploads/2025/08/Canaries_BrynjolfssonChandarChen.pdf",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "specific task categories declining while orchestration roles grow, but growth concentrated at senior levels in larger orgs",
+          "captureStatus": "placeholder",
+          "archivePath": "src/evidence/claim-5b/brynjolfsson-2025-canaries-stanford.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Stanford Digital Economy Lab analysis of ADP payroll data finds 13-16% relative employment declines for early-career workers (age 22-25) in the most AI-exposed occupations, while older workers in the same roles remain stable or grow. Declines are driven by employment reductions rather than wage cuts, consistent with a bifurcation pattern.",
+          "captureNotes": "Stanford Digital Economy Lab paper. PDF — requires manual download."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Yes, AI is affecting employment. Here's the data.",
+          "sourceAuthor": "ADP Research",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.adpresearch.com/yes-ai-is-affecting-employment-heres-the-data/",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "routine cognitive tasks declining faster than manual ones, with larger effects in bigger firms",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-5b/adp-2025-ai-employment.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "ADP payroll data analysis showing routine cognitive tasks declining faster than manual ones, with larger effects in bigger firms. Supports the bifurcation claim specifically in the large-enterprise context where AI absorbs entry-level cognitive work.",
+          "captureNotes": "ADP payroll data analysis. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "How artificial intelligence impacts the US labor market",
+          "sourceAuthor": "MIT Sloan",
+          "sourceDate": "2025",
+          "sourceUrl": "https://mitsloan.mit.edu/ideas-made-to-matter/how-artificial-intelligence-impacts-us-labor-market",
+          "tier": "B",
+          "role": "challenging",
+          "annotation": "aggregate employment stable; macro data doesn't yet show bifurcation; effects are gradual and complementary",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-5a/mit-sloan-2025-ai-labor-market.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-5a"
+          ],
+          "summary": "Counter-evidence: aggregate employment remains stable and AI effects are complementary in many settings. Macro data doesn't yet show the bifurcation pattern at economy-wide scale, tempering the claim's scope.",
+          "captureNotes": "MIT analysis. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Is AI Creating a New Code Review Bottleneck for Senior Engineers?",
+          "sourceAuthor": "The New Stack",
+          "sourceDate": "2025",
+          "sourceUrl": "https://thenewstack.io/is-ai-creating-a-new-code-review-bottleneck-for-senior-engineers/",
+          "tier": "C",
+          "role": "supporting",
+          "annotation": "senior engineers absorbing disproportionate review burden from AI-augmented junior output; emergent stratification",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/cross-cutting/thenewstack-2025-review-bottleneck.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-1"
+          ],
+          "summary": "Reports that senior engineers are absorbing disproportionate review burden from AI-augmented junior output, suggesting emergent stratification where seniors handle verification while junior execution becomes increasingly AI-mediated.",
+          "captureNotes": "Industry reporting. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Are Businesses Scaling Back Hiring Due to AI?",
+          "sourceAuthor": "New York Fed (Liberty Street Economics)",
+          "sourceDate": "2025-09",
+          "sourceUrl": "https://libertystreeteconomics.newyorkfed.org/2025/09/are-businesses-scaling-back-hiring-due-to-ai/",
+          "tier": "B",
+          "role": "challenging",
+          "annotation": "aggregate impact modest and mixed; firms reallocating workers rather than mass layoffs",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-5b/nyfed-2025-ai-job-market.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Federal Reserve analysis finding aggregate AI employment impact is modest and mixed: some firms reduce hiring while others increase complementary positions. Tempers the bifurcation narrative with data showing overall labor market resilience.",
+          "captureNotes": "NY Fed analysis of present and future AI effects on employment. Aggregate impact modest and mixed: some firms reduce hiring, others increase for complementary positions. Overall economy-wide job losses from AI not yet large. Tempers bifurcation narrative."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Speech by Governor Barr on artificial intelligence and the labor market",
+          "sourceAuthor": "Federal Reserve (Governor Barr)",
+          "sourceDate": "2026-02-17",
+          "sourceUrl": "https://www.federalreserve.gov/newsevents/speech/barr20260217a.htm",
+          "tier": "B",
+          "role": "challenging",
+          "annotation": "AI causing task reallocation more than outright job loss; tempers bifurcation scope",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-5b/fedbarr-2026-ai-labor-speech.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Federal Reserve Governor's assessment that AI is causing task reallocation more than outright job loss. Challenges the bifurcation claim by framing the pattern as task reshuffling rather than structural stratification.",
+          "captureNotes": "Federal Reserve Governor speech on AI labor market effects. Indicates AI is causing internal task reallocation more than outright job loss. Fits doctrine's framing of shifting constraints rather than simple automation."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Demand for junior developers softens as AI takes over",
+          "sourceAuthor": "CIO",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.cio.com/article/4062024/demand-for-junior-developers-softens-as-ai-takes-over.html",
+          "tier": "C",
+          "role": "supporting",
+          "annotation": "softening job market for junior developers as AI handles entry-level tasks",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-5b/cio-2025-junior-dev-softening.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Industry reporting on softening job market for junior developers as AI handles entry-level coding tasks. Hiring slowdowns documented across multiple firms, consistent with bifurcation in large-enterprise settings.",
+          "captureNotes": "Industry reporting on softening job market for developers, particularly junior coders. Hiring slowdowns attributed to AI capabilities handling entry-level tasks."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Junior Developer Hiring Crisis: Where Will Seniors Come From?",
+          "sourceAuthor": "ByteIota",
+          "sourceDate": "2025",
+          "sourceUrl": "https://byteiota.com/junior-developer-hiring-crisis-where-will-seniors-come-from/",
+          "tier": "C",
+          "role": "supporting",
+          "annotation": "54% of engineering leaders plan to hire fewer juniors; seniors absorbing junior work with AI; broken-bottom-rung signal",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-5b/byteiota-2025-junior-dev-crisis.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "LeadDev survey finding 54% of engineering leaders plan to hire fewer juniors. Senior staff absorbing work that previously went to juniors using AI assistance, raising the 'broken bottom rung' concern about future talent pipelines.",
+          "captureNotes": "LeadDev survey: 54% of engineering leaders plan to hire fewer juniors. Senior staff absorbing work that used to go to juniors with AI assistance. Raises broken-bottom-rung concerns about talent pipeline."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Companies replaced entry-level workers with AI. Now they are...",
+          "sourceAuthor": "Fast Company",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.fastcompany.com/91483431/companies-replaced-entry-level-workers-with-ai",
+          "tier": "C",
+          "role": "supporting",
+          "annotation": "2/5 of global leaders report entry-level roles already reduced or cut due to AI",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-5b/fastcompany-2025-entry-level-replaced.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Reports that two-fifths of global leaders say entry-level roles have already been reduced or cut due to AI, documenting the pattern of frozen entry-level hiring while retaining or adding senior staff.",
+          "captureNotes": "Two-fifths of global leaders report entry-level roles already reduced or cut due to AI. Documents the emerging pattern of frozen entry-level hiring while retaining senior staff."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "These human capabilities complement AI's shortcomings",
+          "sourceAuthor": "MIT Sloan",
+          "sourceDate": "2025",
+          "sourceUrl": "https://mitsloan.mit.edu/ideas-made-to-matter/these-human-capabilities-complement-ais-shortcomings",
+          "tier": "B",
+          "role": "challenging",
+          "annotation": "many new tasks require hard-to-automate human capabilities; long-run equilibrium may include new mid-skill jobs, not only polarization",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-4/mitsloan-2025-epoch-capabilities.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-4",
+            "claim-5a"
+          ],
+          "summary": "Counter-evidence: many new and modified tasks require hard-to-automate human capabilities, and the long-run equilibrium may include new mid-skill jobs rather than only polarization. Tempers the bifurcation thesis with evidence of complementarity.",
+          "captureNotes": "MIT EPOCH framework. Tasks involving judgment, ethics, creativity, and stakeholder influence are growing relative to purely technical or routine analytical tasks. Authority increasingly linked to ability to frame problems and govern automation. Suggests new mid-skill job categories, not only polarization."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Is AI responsible for the rise in entry-level unemployment?",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "10pp AI exposure → ~11% entry-level demand drop, ~7% non-entry increase",
+          "summary": "Revelio Labs job-posting analysis finds that a 10 percentage point increase in AI exposure correlates with approximately 11% decline in entry-level job demand and 7% increase in non-entry-level demand, with controls applied. Directly supports the junior-senior wedge in AI-exposed occupations.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "Job-posting regression analysis. 10pp AI exposure correlates with ~11% drop in entry-level demand and ~7% increase in non-entry demand. Directly supports junior-senior wedge in AI-exposed occupations.",
+          "archivePath": "src/evidence/claim-5b/reveliolabs-2025-entry-level-unemployment.md",
+          "sourceAuthor": "Revelio Labs",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.reveliolabs.com/news/macro/is-ai-responsible-for-the-rise-in-entry-level-unemployment/"
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "AI at Work Report 2025: How GenAI is Rewiring the DNA of Jobs",
+          "tier": "B",
+          "role": "contextual",
+          "annotation": "53.5M US postings mapped for GenAI transformation potential; task-level unevenness",
+          "summary": "Indeed Hiring Lab maps GenAI transformation potential across 53.5 million US job postings, noting variation in how problem-solving vs. knowledge tasks are affected. Supports the premise that task-level transformation is uneven, though represents potential rather than realized effects.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "Maps GenAI transformation potential to 53.5M US job postings. Notes variation in problem-solving vs knowledge tasks. Supports task-level transformation unevenness premise. Context rather than definitive causal proof.",
+          "archivePath": "src/evidence/claim-5b/indeed-2025-ai-at-work.md",
+          "sourceAuthor": "Indeed Hiring Lab",
+          "sourceDate": "2025-09",
+          "sourceUrl": "https://www.hiringlab.org/2025/09/23/ai-at-work-report-2025-how-genai-is-rewiring-the-dna-of-jobs/"
+        }
+      ],
       "observations": [
         {
           "@type": "Observation",
@@ -365,24 +1408,6 @@
             "No longitudinal labor dataset yet confirms or refutes bifurcation in enterprise contexts specifically.",
             "This claim is deliberately positioned as Proposed to flag it for rigorous tracking without overstating confidence."
           ]
-        }
-      ],
-      "references": [
-        {
-          "label": "Stanford HAI: Canaries in the Coal Mine, AI and the Future of Work",
-          "url": "https://hai.stanford.edu/news/canaries-coal-mine-ai-future-work"
-        },
-        {
-          "label": "NY Fed: Artificial Intelligence and the Labor Market",
-          "url": "https://www.newyorkfed.org/research/staff_reports/sr1116"
-        },
-        {
-          "label": "MIT Sloan Management Review: AI Is Not Going to Automate Everything",
-          "url": "https://sloanreview.mit.edu/article/ai-is-not-going-to-automate-everything/"
-        },
-        {
-          "label": "ADP Research Institute: Workforce Vitality Report",
-          "url": "https://adpri.org/research/workforce-vitality-report/"
         }
       ]
     },
@@ -408,6 +1433,209 @@
         "Error rates in autonomous vs supervised runs",
         "Quality of post-hoc review"
       ],
+      "evidence": [
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "2025 GenAI Code Security Report",
+          "sourceAuthor": "Veracode",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.veracode.com/resources/analyst-reports/2025-genai-code-security-report/",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "48% of AI-assisted development tasks introduce vulnerabilities without strong validation gates",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-6/veracode-2025-genai-code-security.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Evaluation of 100+ models on 80 code-completion tasks found AI-generated code introduces security vulnerabilities in ~45% of cases and chooses insecure implementations ~45% of the time. Demonstrates that autonomous code generation without explicit validation gates produces systematically unsafe output.",
+          "captureNotes": "Security analysis of AI-generated code. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "OWASP Top 10:2025",
+          "sourceAuthor": "OWASP",
+          "sourceDate": "2025",
+          "sourceUrl": "https://owasp.org/Top10/2025/",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "AI-specific attack surfaces increasingly listed; validation emphasized as primary defense",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-6/owasp-2025-top-10.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Updated web security risk list increasingly includes AI-specific attack surfaces and emphasizes validation as the primary defense. Provides a standards-body perspective on why autonomous AI execution requires explicit validation.",
+          "captureNotes": "Updated web security risks. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+          "sourceAuthor": "SWE-bench authors",
+          "sourceDate": "2024",
+          "sourceUrl": "https://github.com/swe-bench/SWE-bench",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "vague specifications yield incorrect/insecure output; spec quality predicts solve rates",
+          "captureStatus": "captured",
+          "archivePath": "src/evidence/claim-3/swe-bench-repo.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-3"
+          ],
+          "summary": "Benchmark results show that specification quality predicts both solve rates and code safety: vague specs yield not just incorrect but potentially insecure output. Validates that safe autonomy depends on well-specified intent.",
+          "captureNotes": "GitHub repository README. Captured via automated fetch."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "AI writes code faster. Your job is still to prove it works.",
+          "sourceAuthor": "Addy Osmani",
+          "sourceDate": "2026-01-07",
+          "sourceUrl": "https://addyosmani.com/blog/code-review-ai/",
+          "tier": "C",
+          "role": "supporting",
+          "annotation": "review and validation are security-critical when AI produces code at scale",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-3/osmani-2026-ai-code-review.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-3",
+            "claim-4"
+          ],
+          "summary": "Argues that review and validation are security-critical when AI produces code at scale. Without explicit validation harnesses, 'plausible garbage' ships to production.",
+          "captureNotes": "Chrome DevRel lead blog post. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "AI-Generated Code Poses Major Security Risks in Nearly Half of All Development Tasks, Veracode Research Reveals",
+          "sourceAuthor": "BusinessWire / Veracode",
+          "sourceDate": "2025-07-30",
+          "sourceUrl": "https://www.businesswire.com/news/home/20250730694951/en/",
+          "tier": "C",
+          "role": "contextual",
+          "annotation": "accessible summary of the 48% vulnerability finding",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/cross-cutting/veracode-2025-press-release.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Accessible press summary of the Veracode study's ~48% vulnerability finding. Emphasizes the 'vibe coding' risk where developers rely on AI without specifying security constraints.",
+          "captureNotes": "Press release for the Veracode study. Web page — requires manual capture (403 on automated fetch)."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Claude Code auto mode: a safer way to skip permissions",
+          "sourceAuthor": "Anthropic",
+          "sourceDate": "2026-03",
+          "sourceUrl": "https://www.anthropic.com/engineering/claude-code-auto-mode",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "autonomy gated by classifiers; hard stops and escalation to humans; 93% of permission prompts approved",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-6/anthropic-2026-claude-code-auto-mode.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Claude Code's auto mode gates autonomy via classifiers that approve or block actions based on safety criteria, with hard stops and escalation to humans on repeated denials. Users approve 93% of permission prompts, validating that bounded autonomy is both practical and necessary.",
+          "captureNotes": "Primary source on bounded autonomy with classifiers. Users approve 93% of permission prompts. Auto mode gates autonomy via classifiers that approve or block actions based on safety criteria, with hard stops and escalation to humans on repeated denials. Frames autonomy as something that must be gated."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Klarna AI Assistant: From AI-First to Human-Hybrid Balance",
+          "sourceAuthor": "Multiple sources (Klarna, PromptLayer, PitchGrade, LinkedIn)",
+          "sourceDate": "2024-2026",
+          "sourceUrl": "https://pitchgrade.com/research/ai-vs-customer-service",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "canonical failure: optimized local metrics (cost, speed) while degrading service quality; reversed to human-hybrid model",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/claim-6/klarna-2024-ai-assistant-trajectory.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [],
+          "summary": "Initially replaced 700 human agents with AI, cutting resolution time from 11min to <2min and projecting $40M savings. Subsequently reversed to human-hybrid model after over-indexing on cost and speed degraded service quality and caused customer churn. Canonical cautionary example of autonomy without adequate validation.",
+          "captureNotes": "Consolidated arc of the Klarna AI assistant trajectory. Initial deployment: AI handled 2/3 of chats, replaced equivalent of 700 agents, cut resolution from 11min to <2min, projected $40M savings. Subsequent reversal: over-indexing on cost/speed led to service-quality issues and customer churn, prompting shift to human-hybrid model. Canonical example of autonomy without seasoned intent optimizing local metrics while degrading real outcomes."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Building Effective AI Agents",
+          "sourceAuthor": "Anthropic",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.anthropic.com/research/building-effective-agents",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "HITL checkpoints, sandboxing, stopping conditions as best practice; verification against ground truth",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/cross-cutting/anthropic-2025-building-effective-agents.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-3"
+          ],
+          "summary": "Recommends HITL checkpoints, sandboxing, and stopping conditions as agent best practices. Agents must verify work against ground truth (tests, tools, environment outputs), framing fully autonomous agents as brittle and risky without these safeguards.",
+          "captureNotes": "Primary Anthropic guidance on agent architecture. Agents must verify work against ground truth (tests, tools, environment outputs). Autonomous agents need HITL checkpoints, sandboxing, and stopping conditions. Ambiguous or under-specified tasks are a leading cause of systematic agent failures. Recommends precise task specs, explicit graders, and deterministic tests."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Building agents with the Claude Agent SDK",
+          "sourceAuthor": "Anthropic",
+          "sourceDate": "2025",
+          "sourceUrl": "https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "verification loops and deterministic checks as main mechanism; human review for broader system goals",
+          "captureStatus": "pending",
+          "archivePath": "src/evidence/cross-cutting/anthropic-2025-agent-sdk.md",
+          "captureDate": "2026-03-30",
+          "sharedWith": [
+            "claim-4"
+          ],
+          "summary": "Agent SDK implements verification loops and deterministic checks as the main safety mechanism, with human review required for alignment with broader system goals. Embeds the safe-autonomy pattern into production tooling.",
+          "captureNotes": "Agent SDK guidance emphasizing verification loops, sandboxed testing, and HITL checkpoints. Coding-agent examples rely on automated tests and deterministic checks as main verification mechanism, with human review for broader system goals."
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Security Vulnerabilities in AI-Generated Code: A Large-Scale Analysis of Public GitHub Repositories",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "7,703 AI files, 4,241 CWEs across 77 types; strongest independent empirical security evidence",
+          "summary": "Large-scale empirical analysis of 7,703 AI-attributed files on GitHub using CodeQL static analysis. Found 4,241 CWE instances across 77 vulnerability types, with rates varying by programming language and AI tool. The strongest independent empirical evidence that AI-generated code carries systematic security risk requiring validation gates.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "Large-scale empirical analysis. 7,703 AI-attributed files analyzed with CodeQL. Found 4,241 CWE instances across 77 vulnerability types. Vulnerability rates vary by language and tool. Strongest independent empirical security evidence for AI-generated code risk.",
+          "archivePath": "src/evidence/claim-6/schreiber-2025-ai-code-vulnerabilities.md",
+          "sourceAuthor": "Schreiber, Tippe",
+          "sourceDate": "2025",
+          "sourceUrl": "https://arxiv.org/abs/2510.26103"
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Secure Software Development Framework (SSDF) Version 1.1",
+          "tier": "A",
+          "role": "supporting",
+          "annotation": "core secure dev practices; AI-assisted work still needs disciplined verification and testing",
+          "summary": "NIST SP 800-218 recommends core secure software development practices (prepare, protect, produce, respond) for integration across the SDLC. While not AI-specific, establishes the baseline that AI-assisted development still requires disciplined verification, testing, and secure-development controls.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "NIST SP 800-218. Recommends core secure development practices for integration across SDLC. Not AI-specific but establishes the baseline that AI-assisted development still requires disciplined verification, testing, and secure-development controls.",
+          "archivePath": "src/evidence/claim-6/nist-2022-ssdf.md",
+          "sourceAuthor": "NIST",
+          "sourceDate": "2022-02",
+          "sourceUrl": "https://csrc.nist.gov/pubs/sp/800/218/final"
+        },
+        {
+          "@type": "EvidenceReference",
+          "sourceTitle": "Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile",
+          "tier": "B",
+          "role": "supporting",
+          "annotation": "GenAI-specific risk profile; governance + TEVV mindset for AI systems",
+          "summary": "NIST AI 600-1 provides a GenAI-specific risk management profile aligned with the broader AI Risk Management Framework. Addresses GenAI-specific risks and recommends a governance mindset centered on Testing, Evaluation, Verification, and Validation (TEVV) for trustworthy AI systems.",
+          "sharedWith": [],
+          "captureDate": "2026-03-30",
+          "captureStatus": "pending",
+          "captureNotes": "NIST AI 600-1. GenAI-specific risk profile aligned with AI RMF. Addresses GenAI-specific risks and recommends governance + TEVV (Testing, Evaluation, Verification, Validation) mindset. Grounds claims about structured validation for GenAI systems.",
+          "archivePath": "src/evidence/claim-6/nist-2024-genai-profile.md",
+          "sourceAuthor": "NIST",
+          "sourceDate": "2024-07",
+          "sourceUrl": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+        }
+      ],
       "observations": [
         {
           "@type": "Observation",
@@ -420,24 +1648,9 @@
             "Status promoted from Early validation to Emerging based on: 1 Tier A/B source (Veracode) + 2+ Tier B sources on the mechanism; counter-evidence reviewed."
           ]
         }
-      ],
-      "references": [
-        {
-          "label": "Veracode: State of Software Security, AI-Generated Code and Security Risk",
-          "url": "https://www.veracode.com/state-of-software-security-report"
-        },
-        {
-          "label": "Anthropic: Building Effective Agents",
-          "url": "https://www.anthropic.com/research/building-effective-agents"
-        },
-        {
-          "label": "Bloomberg: Klarna Says AI Does the Job of 700 Workers. Now It Regrets Cutting Too Deep",
-          "url": "https://www.bloomberg.com/news/articles/2024-08-28/klarna-ceo-says-ai-is-doing-the-work-of-700-customer-service-agents"
-        }
       ]
     }
   ],
-
   "statusRules": {
     "@type": "StatusRule",
     "statusDefinitions": {
@@ -454,7 +1667,6 @@
     "demotionThreshold": "A Tier A result contradicts the claim in the doctrine's stated scope and cannot be re-scoped without gutting the claim. OR internal measures consistently move opposite the prediction for 2 consecutive quarters. OR the claim cannot be translated into observable predictions.",
     "splitRule": "If both support and counter-evidence remain strong, split the claim by context rather than averaging them into mush."
   },
-
   "evidenceQualityRubric": [
     {
       "@type": "EvidenceTier",

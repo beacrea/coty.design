@@ -59,7 +59,11 @@
           <p class="claim-preview">{claim.statement}</p>
           <div class="card-footer">
             <div class="evidence-summary">
-              <span class="evidence-label">{claim.supportingSignals.length} supporting</span>
+              {#if claim.evidence.length > 0}
+                <span class="evidence-label">{claim.evidence.length} {claim.evidence.length === 1 ? 'source' : 'sources'}</span>
+                <span class="evidence-sep">·</span>
+              {/if}
+              <span class="evidence-label">{claim.supportingSignals.length} signals</span>
               {#if claim.challenges.length > 0}
                 <span class="evidence-sep">·</span>
                 <span class="evidence-label">{claim.challenges.length} {claim.challenges.length === 1 ? 'challenge' : 'challenges'}</span>

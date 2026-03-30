@@ -24,9 +24,15 @@ export interface Observation {
   notes: string[];
 }
 
-export interface Reference {
-  label: string;
-  url: string;
+export interface EvidenceReference {
+  sourceTitle: string;
+  sourceAuthor?: string;
+  sourceDate?: string;
+  sourceUrl?: string;
+  tier: string;
+  role: string;
+  annotation?: string;
+  summary?: string;
 }
 
 export interface Claim {
@@ -42,7 +48,7 @@ export interface Claim {
   challenges: string[];
   evaluationCriteria: string[];
   observations: Observation[];
-  references: Reference[];
+  evidence: EvidenceReference[];
   splitFrom?: string;
   splitVersion?: string;
 }
@@ -99,9 +105,15 @@ export async function fetchDoctrine(): Promise<DoctrineData> {
         period: o.period,
         notes: o.notes ?? [],
       })),
-      references: (c.references ?? []).map((r: any) => ({
-        label: r.label,
-        url: r.url,
+      evidence: (c.evidence ?? []).map((e: any) => ({
+        sourceTitle: e.sourceTitle ?? "",
+        sourceAuthor: e.sourceAuthor,
+        sourceDate: e.sourceDate,
+        sourceUrl: e.sourceUrl,
+        tier: e.tier ?? "",
+        role: e.role ?? "supporting",
+        annotation: e.annotation,
+        summary: e.summary,
       })),
       splitFrom: c.splitFrom,
       splitVersion: c.splitVersion,
@@ -244,4 +256,54 @@ export function confidenceLevel(status: string): number {
     Retired: 0,
   };
   return map[status] ?? 0;
+}
+
+const ROLE_ORDER: Record<string, number> = {
+  supporting: 0,
+  contextual: 1,
+  challenging: 2,
+};
+
+export function sortEvidenceByRole(evidence: EvidenceReference[]): EvidenceReference[] {
+  return [...evidence].sort(
+    (a, b) => (ROLE_ORDER[a.role] ?? 1) - (ROLE_ORDER[b.role] ?? 1)
+  );
+}
+
+export function getTierColor(tier: string): { bg: string; fg: string } {
+  const light: Record<string, { bg: string; fg: string }> = {
+    A: { bg: "oklch(0.90 0.06 132)", fg: "oklch(0.30 0.12 132)" },
+    B: { bg: "oklch(0.92 0.03 200)", fg: "oklch(0.35 0.10 200)" },
+    C: { bg: "oklch(0.92 0.04 45)", fg: "oklch(0.35 0.12 45)" },
+    D: { bg: "oklch(0.92 0.02 250)", fg: "oklch(0.35 0.08 250)" },
+  };
+  return light[tier] ?? light["D"];
+}
+
+export function getTierColorDark(tier: string): { bg: string; fg: string } {
+  const dark: Record<string, { bg: string; fg: string }> = {
+    A: { bg: "oklch(0.20 0.06 130)", fg: "oklch(0.80 0.14 130)" },
+    B: { bg: "oklch(0.22 0.04 200)", fg: "oklch(0.78 0.12 200)" },
+    C: { bg: "oklch(0.22 0.05 45)", fg: "oklch(0.78 0.14 45)" },
+    D: { bg: "oklch(0.22 0.03 250)", fg: "oklch(0.78 0.10 250)" },
+  };
+  return dark[tier] ?? dark["D"];
+}
+
+export function getRoleColor(role: string): { fg: string } {
+  const colors: Record<string, { fg: string }> = {
+    supporting: { fg: "oklch(0.55 0.18 145)" },
+    contextual: { fg: "oklch(0.55 0.10 200)" },
+    challenging: { fg: "oklch(0.55 0.18 25)" },
+  };
+  return colors[role] ?? colors["contextual"];
+}
+
+export function getRoleColorDark(role: string): { fg: string } {
+  const colors: Record<string, { fg: string }> = {
+    supporting: { fg: "oklch(0.70 0.16 145)" },
+    contextual: { fg: "oklch(0.70 0.10 200)" },
+    challenging: { fg: "oklch(0.70 0.16 25)" },
+  };
+  return colors[role] ?? colors["contextual"];
 }
