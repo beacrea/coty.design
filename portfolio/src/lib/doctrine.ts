@@ -260,8 +260,8 @@ export function confidenceLevel(status: string): number {
 
 const ROLE_ORDER: Record<string, number> = {
   supporting: 0,
-  contextual: 1,
-  challenging: 2,
+  challenging: 1,
+  contextual: 2,
 };
 
 export function sortEvidenceByRole(evidence: EvidenceReference[]): EvidenceReference[] {
