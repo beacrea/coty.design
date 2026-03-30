@@ -142,12 +142,6 @@
     margin-bottom: var(--section-spacing);
   }
 
-  @media (max-width: 639px) {
-    .header {
-      padding-right: calc(var(--toggle-size) + 12px);
-    }
-  }
-
   .opener-wrapper {
     width: 100%;
   }
@@ -213,6 +207,12 @@
     gap: 8px;
     align-items: center;
     z-index: 100;
+  }
+
+  @media (max-width: 639px) {
+    .toggle-wrapper {
+      position: absolute;
+    }
   }
 
   .observe-mode .page {

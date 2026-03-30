@@ -32,6 +32,13 @@
     text-wrap: balance;
   }
 
+  @media (max-width: 639px) {
+    .name,
+    .role {
+      padding-right: calc(var(--toggle-size) + 12px);
+    }
+  }
+
   .summary {
     font-size: var(--text-size-body);
     font-weight: 400;
