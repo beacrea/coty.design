@@ -263,9 +263,11 @@ const TIER_ORDER: Record<string, number> = { A: 0, B: 1, C: 2, D: 3 };
 function parseDate(s: string | undefined): Date | null {
   if (!s) return null;
   const parts = s.split("-").map(Number);
-  if (parts.length === 1) return new Date(parts[0], 0, 1);
-  if (parts.length === 2) return new Date(parts[0], parts[1] - 1, 1);
-  return new Date(parts[0], parts[1] - 1, parts[2]);
+  let d: Date;
+  if (parts.length === 1) d = new Date(parts[0], 0, 1);
+  else if (parts.length === 2) d = new Date(parts[0], parts[1] - 1, 1);
+  else d = new Date(parts[0], parts[1] - 1, parts[2]);
+  return isNaN(d.getTime()) ? null : d;
 }
 
 function monthsDiff(a: Date, b: Date): number {
