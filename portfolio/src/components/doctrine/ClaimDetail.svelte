@@ -2,7 +2,7 @@
   import { theme } from '../../stores/theme';
   import { navigateTo } from '../../stores/router';
   import type { Claim } from '../../lib/doctrine';
-  import { sortEvidenceByRole, getTierColor, getTierColorDark, getRoleColor, getRoleColorDark } from '../../lib/doctrine';
+  import { sortEvidence, getTierColor, getTierColorDark, getRoleColor, getRoleColorDark } from '../../lib/doctrine';
   import StatusBadge from './StatusBadge.svelte';
   import ConfidenceBar from './ConfidenceBar.svelte';
 
@@ -10,7 +10,7 @@
   export let statusDefinitions: Record<string, string> = {};
 
   $: isDark = $theme === 'dark';
-  $: sortedEvidence = sortEvidenceByRole(claim.evidence);
+  $: sortedEvidence = sortEvidence(claim.evidence);
   $: supportingCount = claim.evidence.filter(e => e.role === 'supporting').length;
   $: challengingCount = claim.evidence.filter(e => e.role === 'challenging').length;
   $: contextualCount = claim.evidence.filter(e => e.role === 'contextual').length;

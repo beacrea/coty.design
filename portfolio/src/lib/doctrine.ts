@@ -258,16 +258,23 @@ export function confidenceLevel(status: string): number {
   return map[status] ?? 0;
 }
 
-const ROLE_ORDER: Record<string, number> = {
-  supporting: 0,
-  challenging: 1,
-  contextual: 2,
-};
+const TIER_ORDER: Record<string, number> = { A: 0, B: 1, C: 2, D: 3 };
 
-export function sortEvidenceByRole(evidence: EvidenceReference[]): EvidenceReference[] {
-  return [...evidence].sort(
-    (a, b) => (ROLE_ORDER[a.role] ?? 1) - (ROLE_ORDER[b.role] ?? 1)
-  );
+export function sortEvidence(evidence: EvidenceReference[]): EvidenceReference[] {
+  return [...evidence].sort((a, b) => {
+    const tierDiff = (TIER_ORDER[a.tier] ?? 99) - (TIER_ORDER[b.tier] ?? 99);
+    if (tierDiff !== 0) return tierDiff;
+
+    const dateA = a.sourceDate ?? "";
+    const dateB = b.sourceDate ?? "";
+    if (dateA !== dateB) {
+      if (!dateA) return 1;
+      if (!dateB) return -1;
+      return dateB.localeCompare(dateA);
+    }
+
+    return (a.sourceTitle ?? "").localeCompare(b.sourceTitle ?? "");
+  });
 }
 
 export function getTierColor(tier: string): { bg: string; fg: string } {
