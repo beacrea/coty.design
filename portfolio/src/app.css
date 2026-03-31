@@ -30,10 +30,10 @@
   --surface-cta-text: oklch(1 0 0);
   
   --text-size-title: 28px;
-  --text-size-subtitle: 21px;
-  --text-size-header: 21px;
+  --text-size-subtitle: 20px;
+  --text-size-header: 20px;
   --text-size-body: 16px;
-  --text-size-caption: 12px;
+  --text-size-caption: 14px;
   
   --page-padding-x: 27.65px;
   --page-padding-right: 27.65px;
@@ -87,11 +87,11 @@
 
 @media (min-width: 640px) {
   :root, .dark {
-    --text-size-title: 30px;
-    --text-size-subtitle: 23px;
-    --text-size-header: 23px;
+    --text-size-title: 32px;
+    --text-size-subtitle: 21px;
+    --text-size-header: 21px;
     --text-size-body: 17px;
-    --text-size-caption: 13px;
+    --text-size-caption: 15px;
     
     --page-padding-x: 48px;
     --page-padding-right: 48px;
@@ -103,11 +103,11 @@
 
 @media (min-width: 1024px) {
   :root, .dark {
-    --text-size-title: 32px;
-    --text-size-subtitle: 24px;
-    --text-size-header: 24px;
+    --text-size-title: 36px;
+    --text-size-subtitle: 22px;
+    --text-size-header: 22px;
     --text-size-body: 18px;
-    --text-size-caption: 14px;
+    --text-size-caption: 16px;
     
     --page-padding-x: 64px;
     --page-padding-right: 64px;
