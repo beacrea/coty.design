@@ -260,21 +260,36 @@ export function confidenceLevel(status: string): number {
 
 const TIER_ORDER: Record<string, number> = { A: 0, B: 1, C: 2, D: 3 };
 
+function parseDate(s: string | undefined): Date | null {
+  if (!s) return null;
+  const parts = s.split("-").map(Number);
+  if (parts.length === 1) return new Date(parts[0], 0, 1);
+  if (parts.length === 2) return new Date(parts[0], parts[1] - 1, 1);
+  return new Date(parts[0], parts[1] - 1, parts[2]);
+}
+
+function monthsDiff(a: Date, b: Date): number {
+  return (a.getFullYear() - b.getFullYear()) * 12 + (a.getMonth() - b.getMonth());
+}
+
 export function sortEvidence(evidence: EvidenceReference[]): EvidenceReference[] {
-  return [...evidence].sort((a, b) => {
-    const tierDiff = (TIER_ORDER[a.tier] ?? 99) - (TIER_ORDER[b.tier] ?? 99);
+  const parsed = evidence.map(e => ({ item: e, date: parseDate(e.sourceDate) }));
+  const dates = parsed.map(p => p.date).filter((d): d is Date => d !== null);
+  const maxDate = dates.length > 0 ? new Date(Math.max(...dates.map(d => d.getTime()))) : null;
+
+  const withBlock = parsed.map(p => ({
+    item: p.item,
+    block: p.date && maxDate ? Math.floor(monthsDiff(maxDate, p.date) / 3) : Infinity,
+  }));
+
+  withBlock.sort((a, b) => {
+    if (a.block !== b.block) return a.block - b.block;
+    const tierDiff = (TIER_ORDER[a.item.tier] ?? 99) - (TIER_ORDER[b.item.tier] ?? 99);
     if (tierDiff !== 0) return tierDiff;
-
-    const dateA = a.sourceDate ?? "";
-    const dateB = b.sourceDate ?? "";
-    if (dateA !== dateB) {
-      if (!dateA) return 1;
-      if (!dateB) return -1;
-      return dateB.localeCompare(dateA);
-    }
-
-    return (a.sourceTitle ?? "").localeCompare(b.sourceTitle ?? "");
+    return (a.item.sourceTitle ?? "").localeCompare(b.item.sourceTitle ?? "");
   });
+
+  return withBlock.map(w => w.item);
 }
 
 export function getTierColor(tier: string): { bg: string; fg: string } {
