@@ -228,10 +228,10 @@
   }
 
   .claim-title {
-    font-size: var(--text-size-body);
-    font-weight: 600;
+    font-size: var(--text-size-subtitle);
+    font-weight: 700;
     color: var(--semantic-body);
-    line-height: 1.4;
+    line-height: 1.25;
     text-wrap: pretty;
   }
 

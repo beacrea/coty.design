@@ -23,17 +23,28 @@
     gap: 6px;
     padding: 3px 10px;
     border-radius: 100px;
-    font-size: var(--text-size-caption);
+    font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
     white-space: nowrap;
     line-height: 1.4;
   }
 
   .dot {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    .badge {
+      font-size: 14px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+    }
   }
 </style>
