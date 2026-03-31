@@ -104,7 +104,7 @@
 
         <DoctrinePromo
           heading="Doctrine"
-          description="Predictions I've established about how AI‑assisted development is changing the nature of work, tracked with explicit evidence standards, periodic observations, and confidence levels."
+          description="Positions I've taken on how AI‑assisted development is changing the nature of work, tracked with explicit evidence standards, periodic observations, and confidence levels."
           buttonText="View Doctrine →"
           buttonUrl="/doctrine"
           internal

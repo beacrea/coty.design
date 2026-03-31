@@ -22,7 +22,7 @@
   <header class="doctrine-header">
     <h1 class="doctrine-title">Doctrine</h1>
     <p class="doctrine-subtitle">{data.name.replace('Doctrine: ', '')}</p>
-    <p class="doctrine-attribution">Coty Beasley's predicted evolutions in AI-assisted development: positions he has taken and is actively tracking against real-world evidence.</p>
+    <p class="doctrine-attribution">Positions I've taken on how AI-assisted development is evolving, tracked against real-world evidence.</p>
     <div class="doctrine-meta">
       <span>v{data.version.replace('v', '')}</span>
       <span>·</span>
