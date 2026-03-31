@@ -14,24 +14,24 @@
     "size": {
       "sm": {
         "title": { "$value": "28px" },
-        "subtitle": { "$value": "18px" },
-        "header": { "$value": "18px" },
+        "subtitle": { "$value": "21px" },
+        "header": { "$value": "21px" },
         "body": { "$value": "16px" },
-        "caption": { "$value": "14px" }
+        "caption": { "$value": "12px" }
       },
       "md": {
-        "title": { "$value": "32px" },
-        "subtitle": { "$value": "20px" },
-        "header": { "$value": "20px" },
+        "title": { "$value": "30px" },
+        "subtitle": { "$value": "23px" },
+        "header": { "$value": "23px" },
         "body": { "$value": "17px" },
-        "caption": { "$value": "14px" }
+        "caption": { "$value": "13px" }
       },
       "lg": {
-        "title": { "$value": "36px" },
-        "subtitle": { "$value": "22px" },
-        "header": { "$value": "22px" },
+        "title": { "$value": "32px" },
+        "subtitle": { "$value": "24px" },
+        "header": { "$value": "24px" },
         "body": { "$value": "18px" },
-        "caption": { "$value": "15px" }
+        "caption": { "$value": "14px" }
       }
     }
   }

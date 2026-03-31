@@ -33,6 +33,10 @@
   }
 
   @media (max-width: 639px) {
+    .name {
+      line-height: 1.25;
+    }
+
     .name,
     .role {
       padding-right: calc(var(--toggle-size) + 12px);

@@ -124,7 +124,7 @@
   }
 
   .segment-label {
-    font-size: calc(var(--text-size-caption) * 0.72);
+    font-size: max(12px, calc(var(--text-size-caption) * 0.72));
     color: var(--semantic-caption);
     text-align: center;
     line-height: 1.2;
@@ -177,7 +177,7 @@
     padding: 8px 12px;
     background: var(--foreground);
     color: var(--background);
-    font-size: calc(var(--text-size-caption) * 0.86);
+    font-size: max(12px, calc(var(--text-size-caption) * 0.86));
     font-weight: 400;
     line-height: 1.5;
     border-radius: 6px;
@@ -212,7 +212,7 @@
 
   @media (max-width: 639px) {
     .segment-label {
-      font-size: calc(var(--text-size-caption) * 0.72);
+      font-size: max(12px, calc(var(--text-size-caption) * 0.72));
     }
 
     .tooltip {

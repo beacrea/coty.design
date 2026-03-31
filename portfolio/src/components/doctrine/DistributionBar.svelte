@@ -195,7 +195,7 @@
   }
 
   .legend-label {
-    font-size: 11px;
+    font-size: var(--text-size-caption);
     color: var(--semantic-caption);
   }
 
@@ -206,7 +206,7 @@
     flex-shrink: 0;
   }
 
-  /* 44×44 invisible tap target that wraps the 13×13 visual icon */
+  /* 44×44 invisible tap target that wraps the 15×15 visual icon */
   .info-tap-target {
     display: inline-flex;
     align-items: center;
@@ -226,12 +226,12 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 13px;
-    height: 13px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     background: var(--semantic-caption);
     color: var(--surface-card-bg);
-    font-size: 9px;
+    font-size: max(12px, calc(var(--text-size-caption) * 0.75));
     font-weight: 700;
     flex-shrink: 0;
     opacity: 0.65;
@@ -254,7 +254,7 @@
     border: 1px solid var(--border-subtle, #ccc);
     border-radius: 6px;
     padding: 8px 10px;
-    font-size: 11px;
+    font-size: var(--text-size-caption);
     line-height: 1.4;
     white-space: normal;
     overflow-wrap: break-word;

@@ -23,7 +23,7 @@
     gap: 6px;
     padding: 3px 10px;
     border-radius: 100px;
-    font-size: 11px;
+    font-size: var(--text-size-caption);
     font-weight: 600;
     letter-spacing: 0.02em;
     white-space: nowrap;
