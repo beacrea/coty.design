@@ -13,25 +13,25 @@
     },
     "size": {
       "sm": {
-        "title": { "$value": "28px" },
-        "subtitle": { "$value": "20px" },
-        "header": { "$value": "20px" },
-        "body": { "$value": "16px" },
-        "caption": { "$value": "14px" }
-      },
-      "md": {
-        "title": { "$value": "32px" },
-        "subtitle": { "$value": "21px" },
-        "header": { "$value": "21px" },
-        "body": { "$value": "17px" },
-        "caption": { "$value": "15px" }
-      },
-      "lg": {
-        "title": { "$value": "36px" },
+        "title": { "$value": "30px" },
         "subtitle": { "$value": "22px" },
         "header": { "$value": "22px" },
         "body": { "$value": "18px" },
         "caption": { "$value": "16px" }
+      },
+      "md": {
+        "title": { "$value": "34px" },
+        "subtitle": { "$value": "24px" },
+        "header": { "$value": "24px" },
+        "body": { "$value": "19px" },
+        "caption": { "$value": "17px" }
+      },
+      "lg": {
+        "title": { "$value": "40px" },
+        "subtitle": { "$value": "26px" },
+        "header": { "$value": "26px" },
+        "body": { "$value": "20px" },
+        "caption": { "$value": "18px" }
       }
     }
   }
