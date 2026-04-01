@@ -10,6 +10,7 @@ import { agentPreview } from './routes/agent-preview.js';
 import { agentInsights, agentInsightsData } from './routes/agent-insights.js';
 import { serveLlmsTxt, serveLlmsFullTxt } from './routes/llms-txt.js';
 import { serveSitemap } from './routes/sitemap.js';
+import { syncDoctrine } from './routes/sync-doctrine.js';
 import { logAgentVisit, initAnalyticsDb } from './middleware/analytics.js';
 import { registerRoute, mountRegisteredRoutes } from './lib/routes.js';
 import { resolvePageMeta, injectMetaTags, getIndexHtml } from './lib/og-meta.js';
@@ -26,6 +27,12 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 await initAnalyticsDb();
+
+app.post('/api/sync-doctrine', express.json({
+  verify: (req, _res, buf) => {
+    (req as typeof req & { rawBody?: string }).rawBody = buf.toString('utf-8');
+  },
+}), syncDoctrine);
 
 registerRoute({ path: '/', method: 'get', handlers: [], noindex: false, changefreq: 'monthly', priority: 1.0, mountManually: true });
 registerRoute({ path: '/agent-preview', method: 'use', handlers: [agentPreview], noindex: false, changefreq: 'monthly', priority: 0.5 });

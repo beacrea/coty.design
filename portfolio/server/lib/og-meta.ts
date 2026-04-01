@@ -37,6 +37,10 @@ const HOME_META: PageMeta = {
 
 let doctrineCache: RawDoctrine | null = null;
 
+export function invalidateDoctrineCache(): void {
+  doctrineCache = null;
+}
+
 function loadDoctrine(): RawDoctrine {
   if (doctrineCache) return doctrineCache;
   const docPath = path.resolve(__dirname, '../../public/doctrine.jsonld');

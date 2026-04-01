@@ -114,6 +114,7 @@ The portfolio features a subtle canvas-based generative background (`GenerativeB
 - `/agent-preview` — Diagnostic view of what AI agents see
 - `/agent-insights` — Analytics dashboard for agent visit tracking
 - `/api/dossier-preview` — API for rendered dossier content
+- `POST /api/sync-doctrine` — Syncs `doctrine.jsonld` from GitHub (`nrfta/product-docs`); supports GitHub webhook push events (HMAC-SHA256 verified) and manual triggers via `X-Sync-Secret` header
 - Professional ontology corpus: `portfolio/content/agent-corpus.json`
 - Corpus validation: `npm run validate-corpus`
 - Agent endpoint validation: `npm run validate-agent` (tests all agent-facing endpoints against corpus, 29 checks)
