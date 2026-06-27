@@ -116,6 +116,7 @@ The portfolio features a subtle canvas-based generative background (`GenerativeB
 - `/agent-insights` — Analytics dashboard for agent visit tracking
 - `/api/dossier-preview` — API for rendered dossier content
 - `POST /api/sync-doctrine` — Syncs `doctrine.jsonld` from GitHub (`nrfta/product-docs`); supports GitHub webhook push events (HMAC-SHA256 verified) and manual triggers via `X-Sync-Secret` header
+  - **Status: intentionally dormant.** `doctrine.jsonld` is maintained manually in `portfolio/public/` and the served copy only changes by hand. Auto-sync from `nrfta/product-docs` is deliberately not wired up to avoid coupling this personal site to a company private repo's access credentials. The sync code remains in place so it can be re-enabled later by supplying a `GITHUB_TOKEN` with read access to that repo.
 - Professional ontology corpus: `portfolio/content/agent-corpus.json`
 - Corpus validation: `npm run validate-corpus`
 - Agent endpoint validation: `npm run validate-agent` (tests all agent-facing endpoints against corpus, 29 checks)
@@ -175,4 +176,4 @@ The Express server handles both AI agent and human traffic. Deployment target is
 
 ---
 
-_Last updated: 2026-03-16_
+_Last updated: 2026-06-27_

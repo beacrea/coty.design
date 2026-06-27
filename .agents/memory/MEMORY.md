@@ -1,0 +1,1 @@
+- [Doctrine sync dormant by design](doctrine-sync-dormant.md) — auto-sync from nrfta/product-docs is intentionally off; doctrine.jsonld is maintained by hand.
