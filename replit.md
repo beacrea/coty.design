@@ -53,6 +53,7 @@ docs/
 - Iterative development approach
 - Ask before making major architectural changes
 - Detailed explanations welcomed
+- Use Oxford (serial) commas in all copy and written content
 
 ## Current Version
 
