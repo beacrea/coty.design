@@ -9,6 +9,8 @@ export interface ProofRow {
   items: string[];
 }
 
+const currentYear = new Date().getFullYear();
+
 export const siteContent = {
   opener: {
     name: "Coty Beasley",
@@ -121,7 +123,7 @@ export const siteContent = {
   },
 
   metadata: {
-    legal: "\u00A9 Coty Beasley 2025",
+    legal: `\u00A9 Coty Beasley ${currentYear}`,
     version: `v${__APP_VERSION__}`,
     versionUrl: `https://github.com/beacrea/coty.design/releases/tag/portfolio-v${__APP_VERSION__}`,
   },
