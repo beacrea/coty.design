@@ -24,7 +24,7 @@
 
   $: currentClaim = (() => {
     if (!data || $route.page !== 'claim-detail' || !$route.claimId) return null;
-    return data.claims.find(c => c.id === $route.claimId) ?? null;
+    return data.claims.find(c => c.id === $route.claimId || c.shortName === $route.claimId) ?? null;
   })();
 </script>
 

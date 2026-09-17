@@ -1,6 +1,5 @@
 <script lang="ts">
   import { theme } from '../../stores/theme';
-  import { navigateTo } from '../../stores/router';
   import type { DoctrineData } from '../../lib/doctrine';
   import StatusBadge from './StatusBadge.svelte';
   import DistributionBar from './DistributionBar.svelte';
@@ -9,9 +8,6 @@
 
   $: isDark = $theme === 'dark';
 
-  function goToClaim(claimId: string) {
-    navigateTo(`/doctrine/${claimId}`);
-  }
 </script>
 
 <div class="doctrine-dashboard" class:dark={isDark}>
@@ -46,9 +42,10 @@
     <h2 class="section-label">Claims ({data.claims.length})</h2>
     <div class="claims-grid">
       {#each data.claims as claim}
-        <button
+        <a
           class="claim-card"
-          on:click={() => goToClaim(claim.id)}
+          href="/doctrine/{claim.shortName}"
+          data-route
           aria-label="View claim {claim.claimNumber}: {claim.title}"
         >
           <div class="card-header">
@@ -71,7 +68,7 @@
             </div>
             <span class="view-details">View details →</span>
           </div>
-        </button>
+        </a>
       {/each}
     </div>
   </section>

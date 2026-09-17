@@ -7,6 +7,7 @@
     "dev": "tsx server/index.ts",
     "dev:vite": "vite --host 0.0.0.0 --port 5001",
     "build": "vite build",
+    "test:doctrine-seo": "tsx --test server/lib/og-meta.test.ts",
     "start": "NODE_ENV=production tsx server/index.ts",
     "preview": "vite preview",
     "migrate-sqlite-to-pg": "tsx scripts/migrate-sqlite-to-pg.ts",

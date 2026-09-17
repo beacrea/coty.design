@@ -1,12 +1,20 @@
 import type { Request, Response } from 'express';
 import { loadCorpus } from '../lib/corpus.js';
 import { getIndexableRoutes } from '../lib/routes.js';
+import { getDoctrineClaimSlugs } from '../lib/og-meta.js';
 
 export function serveSitemap(_req: Request, res: Response) {
   const corpus = loadCorpus();
   const baseUrl = corpus.canonicalUrl || 'https://coty.design';
   const lastmod = corpus.lastUpdated || new Date().toISOString().split('T')[0];
-  const entries = getIndexableRoutes();
+  const entries = [
+    ...getIndexableRoutes(),
+    ...getDoctrineClaimSlugs().map((slug) => ({
+      path: `/doctrine/${encodeURIComponent(slug)}`,
+      changefreq: 'monthly' as const,
+      priority: 0.7,
+    })),
+  ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

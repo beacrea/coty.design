@@ -13,7 +13,7 @@ import { serveSitemap } from './routes/sitemap.js';
 import { syncDoctrine } from './routes/sync-doctrine.js';
 import { logAgentVisit, initAnalyticsDb } from './middleware/analytics.js';
 import { registerRoute, mountRegisteredRoutes } from './lib/routes.js';
-import { resolvePageMeta, injectMetaTags, getIndexHtml, HOME_META } from './lib/og-meta.js';
+import { resolvePageMeta, injectMetaTags, injectDoctrinePage, getIndexHtml, HOME_META } from './lib/og-meta.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -72,7 +72,7 @@ if (process.env.NODE_ENV === 'production') {
     res.setHeader('Cache-Control', 'no-cache, must-revalidate');
     const meta = resolvePageMeta('/');
     const html = getIndexHtml(distPath);
-    const injected = injectMetaTags(html, meta);
+    const injected = injectDoctrinePage(injectMetaTags(html, meta), req.path);
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.send(injected);
   });
@@ -103,7 +103,7 @@ if (process.env.NODE_ENV === 'production') {
       res.setHeader('Content-Type', 'text/html; charset=utf-8');
       return res.send(injected);
     }
-    const injected = injectMetaTags(html, meta);
+    const injected = injectDoctrinePage(injectMetaTags(html, meta), req.path);
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.send(injected);
   });
@@ -150,7 +150,7 @@ if (process.env.NODE_ENV === 'production') {
           res.status(404).setHeader('X-Robots-Tag', 'noindex, nofollow');
           return res.send(injectMetaTags(html, HOME_META));
         }
-        res.send(injectMetaTags(html, meta));
+        res.send(injectDoctrinePage(injectMetaTags(html, meta), req.path));
       })
       .catch(next);
   });
