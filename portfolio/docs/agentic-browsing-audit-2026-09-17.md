@@ -48,6 +48,18 @@ The component wraps each definition group in a direct `<div class="row">`, which
 
 This is an actionable semantic HTML defect. The smallest correction should preserve the current appearance while making each definition-list group valid.
 
+### Remediation validation
+
+The Track Record markup was corrected on 2026-09-17 by keeping each `<dt>` and `<dd>` pair directly inside its permitted definition-group `<div>` and moving the decorative bullet to CSS.
+
+Local Lighthouse 12.8.2 validation now reports:
+
+- Accessibility score: `1.0`
+- `definition-list`: pass, zero failing elements
+- `dlitem`: pass, zero failing elements
+
+A tall viewport snapshot confirms the existing bullets, labels, values, wrapping, spacing, and responsive presentation remain intact. The production Agentic Browsing audit cannot reflect this change until it is deployed. Its final 3/3 verification also depends on the separate `/llms.txt` correction in Task #26.
+
 ## Failure 2: llms.txt
 
 Lighthouse reports:
