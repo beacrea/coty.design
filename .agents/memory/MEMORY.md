@@ -1,1 +1,2 @@
 - [Doctrine sync dormant by design](doctrine-sync-dormant.md) — auto-sync from nrfta/product-docs is intentionally off; doctrine.jsonld is maintained by hand.
+- [Portfolio dossier neutrality](portfolio-dossier-neutrality.md) — keep agent-facing evidence employer-neutral and leave the public homepage unchanged unless explicitly requested.

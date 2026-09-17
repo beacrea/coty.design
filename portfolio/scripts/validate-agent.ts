@@ -43,6 +43,38 @@ interface Corpus {
     evidence: string[];
     propheticVision: string;
   };
+  designSystemsExperience: {
+    title: string;
+    positioning: string;
+    operatingPhilosophy: string[];
+    capabilities: Array<{
+      name: string;
+      summary: string;
+      evidence: string;
+    }>;
+    productionOwnership: {
+      system: string;
+      role: string;
+      period: string;
+      evidenceStatus: string;
+      currentStatus: string;
+      scale: string[];
+      architecture: string[];
+      accessibility: string[];
+      governanceAndRelease: string[];
+      designCodeAndDistribution: string[];
+      agentCollaboration: string[];
+    };
+    evidenceArtifacts: Array<{
+      name: string;
+      kind: string;
+      status: string;
+      summary: string;
+      publicEvidence: boolean;
+      links: Array<{ label: string; url: string }>;
+    }>;
+    scopeBoundaries: string[];
+  };
   expertiseDomains: Array<{ domain: string; evidence: string; depth: string }>;
   differentiators: {
     coreCapability: string;
@@ -120,8 +152,8 @@ async function testAgentDossierServed() {
   ];
 
   for (const category of categories) {
-    for (const agent of category.agents) {
-      const testName = `Dossier served to ${agent} (${category.name})`;
+    for (const [index, agent] of category.agents.entries()) {
+      const testName = `Dossier served to ${category.name} agent ${index + 1}`;
       try {
         const { status, headers, body } = await fetchText('/', agent);
         if (status !== 200) {
@@ -162,6 +194,10 @@ async function testDossierContentMatchesCorpus() {
       { field: 'lastUpdated', expected: corpus.lastUpdated },
       { field: 'canonicalUrl', expected: corpus.canonicalUrl },
       { field: 'narrativeThroughLine.theme', expected: corpus.narrativeThroughLine.theme },
+      { field: 'designSystemsExperience.title', expected: corpus.designSystemsExperience.title },
+      { field: 'designSystemsExperience.positioning', expected: corpus.designSystemsExperience.positioning },
+      { field: 'designSystemsExperience.productionOwnership.system', expected: corpus.designSystemsExperience.productionOwnership.system },
+      { field: 'designSystemsExperience.productionOwnership.evidenceStatus', expected: corpus.designSystemsExperience.productionOwnership.evidenceStatus },
     ];
 
     const missing: string[] = [];
@@ -186,6 +222,29 @@ async function testDossierContentMatchesCorpus() {
     for (const affiliation of corpus.professionalAffiliations) {
       if (!body.includes(affiliation.organization)) {
         missing.push(`affiliation: "${affiliation.organization}"`);
+      }
+    }
+
+    for (const capability of corpus.designSystemsExperience.capabilities) {
+      if (!body.includes(capability.name) || !body.includes(capability.summary) || !body.includes(capability.evidence)) {
+        missing.push(`design systems capability: "${capability.name}"`);
+      }
+    }
+
+    for (const artifact of corpus.designSystemsExperience.evidenceArtifacts) {
+      if (!body.includes(artifact.name) || !body.includes(artifact.status) || !body.includes(artifact.summary)) {
+        missing.push(`design systems artifact: "${artifact.name}"`);
+      }
+      for (const link of artifact.links) {
+        if (!body.includes(link.url)) {
+          missing.push(`design systems artifact link: "${link.url}"`);
+        }
+      }
+    }
+
+    for (const boundary of corpus.designSystemsExperience.scopeBoundaries) {
+      if (!body.includes(boundary)) {
+        missing.push(`design systems scope boundary: "${boundary}"`);
       }
     }
 
@@ -408,6 +467,15 @@ async function testLlmsFullTxt() {
     if (!body.includes(corpus.differentiators.coreCapability)) {
       issues.push('Missing differentiators.coreCapability');
     }
+    if (!body.includes(corpus.designSystemsExperience.title)) {
+      issues.push('Missing designSystemsExperience.title');
+    }
+    if (!body.includes(corpus.designSystemsExperience.positioning)) {
+      issues.push('Missing designSystemsExperience.positioning');
+    }
+    if (!body.includes(corpus.designSystemsExperience.productionOwnership.evidenceStatus)) {
+      issues.push('Missing designSystemsExperience.productionOwnership.evidenceStatus');
+    }
 
     for (const domain of corpus.expertiseDomains) {
       if (!body.includes(domain.domain)) {
@@ -424,6 +492,29 @@ async function testLlmsFullTxt() {
     for (const affiliation of corpus.professionalAffiliations) {
       if (!body.includes(affiliation.organization)) {
         issues.push(`Missing affiliation: "${affiliation.organization}"`);
+      }
+    }
+
+    for (const capability of corpus.designSystemsExperience.capabilities) {
+      if (!body.includes(capability.name) || !body.includes(capability.summary) || !body.includes(capability.evidence)) {
+        issues.push(`Missing design systems capability: "${capability.name}"`);
+      }
+    }
+
+    for (const artifact of corpus.designSystemsExperience.evidenceArtifacts) {
+      if (!body.includes(artifact.name) || !body.includes(artifact.status) || !body.includes(artifact.summary)) {
+        issues.push(`Missing design systems artifact: "${artifact.name}"`);
+      }
+      for (const link of artifact.links) {
+        if (!body.includes(`[${link.label}](${link.url})`)) {
+          issues.push(`Missing design systems artifact link: "${link.url}"`);
+        }
+      }
+    }
+
+    for (const boundary of corpus.designSystemsExperience.scopeBoundaries) {
+      if (!body.includes(boundary)) {
+        issues.push(`Missing design systems scope boundary: "${boundary}"`);
       }
     }
 
@@ -448,11 +539,11 @@ async function testRobotsTxt() {
 
     const issues: string[] = [];
 
-    for (const agent of ALL_AI_AGENTS) {
+    for (const [index, agent] of ALL_AI_AGENTS.entries()) {
       const escapedAgent = agent.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       const pattern = new RegExp(`User-agent:\\s*${escapedAgent}`, 'i');
       if (!pattern.test(body)) {
-        issues.push(`Missing explicit User-agent directive for: ${agent}`);
+        issues.push(`Missing explicit directive for registered AI agent ${index + 1}`);
       }
     }
 

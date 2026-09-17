@@ -39,6 +39,64 @@ ${corpus.narrativeThroughLine.description} This summary is generated from the ca
 `;
 }
 
+function renderDesignSystemsMarkdown(experience: any): string {
+  const production = experience.productionOwnership;
+
+  return `## ${experience.title}
+
+${experience.positioning}
+
+### Operating Philosophy
+${experience.operatingPhilosophy.map((principle: string) => `- ${principle}`).join('\n')}
+
+### Demonstrated Capabilities
+${experience.capabilities.map((capability: any) => `#### ${capability.name}
+${capability.summary}
+
+Evidence: ${capability.evidence}`).join('\n\n')}
+
+### Production Ownership: ${production.system}
+
+**Role:** ${production.role}
+**Period:** ${production.period}
+**Evidence status:** ${production.evidenceStatus}
+**Current status:** ${production.currentStatus}
+
+#### Scale
+${production.scale.map((item: string) => `- ${item}`).join('\n')}
+
+#### Architecture and Migration
+${production.architecture.map((item: string) => `- ${item}`).join('\n')}
+
+#### Accessibility
+${production.accessibility.map((item: string) => `- ${item}`).join('\n')}
+
+#### Governance and Release Engineering
+${production.governanceAndRelease.map((item: string) => `- ${item}`).join('\n')}
+
+#### Design-to-Code and Distribution
+${production.designCodeAndDistribution.map((item: string) => `- ${item}`).join('\n')}
+
+#### Agent Collaboration
+${production.agentCollaboration.map((item: string) => `- ${item}`).join('\n')}
+
+### Evidence Artifacts
+${experience.evidenceArtifacts.map((artifact: any) => {
+    const links = artifact.links
+      .map((link: any) => `- [${link.label}](${link.url})`)
+      .join('\n');
+    return `#### ${artifact.name}
+**Kind:** ${artifact.kind}
+**Status:** ${artifact.status}
+**Evidence visibility:** ${artifact.publicEvidence ? 'Publicly inspectable' : 'Private or archived evidence summarized in this dossier'}
+
+${artifact.summary}${links ? `\n\n${links}` : ''}`;
+  }).join('\n\n')}
+
+### Scope Boundaries
+${experience.scopeBoundaries.map((boundary: string) => `- ${boundary}`).join('\n')}`;
+}
+
 function generateLlmsFullTxt(corpus: any): string {
   let content = `# ${corpus.identity.name} — Full Professional Dossier
 
@@ -163,7 +221,11 @@ ${corpus.geographicJourney.map((g: any) => `- **${g.location} (${g.period}):** $
     content += '---\n\n';
   }
 
-  content += `## Expertise Domains
+  content += `${renderDesignSystemsMarkdown(corpus.designSystemsExperience)}
+
+---
+
+## Expertise Domains
 
 ${corpus.expertiseDomains.map((d: any) => `### ${d.domain}\n${d.depth}\nEvidence: ${d.evidence}\n`).join('\n')}
 

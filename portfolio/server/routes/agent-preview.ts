@@ -116,6 +116,7 @@ agentPreview.get('/', (_req: Request, res: Response) => {
       <div class="stats">
         <div class="stat"><div class="num">${corpus.careerTimeline.length}</div><div class="label">Career Phases</div></div>
         <div class="stat"><div class="num">${corpus.expertiseDomains.length}</div><div class="label">Expertise Domains</div></div>
+        <div class="stat"><div class="num">${corpus.designSystemsExperience.evidenceArtifacts.length}</div><div class="label">Systems Artifacts</div></div>
         <div class="stat"><div class="num">${corpus.pressCoverage.length}</div><div class="label">Press Citations</div></div>
         <div class="stat"><div class="num">${corpus.professionalAffiliations.length}</div><div class="label">Affiliations</div></div>
         <div class="stat"><div class="num">${corpus.speakingTopics.length}</div><div class="label">Speaking Topics</div></div>

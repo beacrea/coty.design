@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.org",
-  "lastUpdated": "2026-03-15",
+  "lastUpdated": "2026-09-17",
   "canonicalUrl": "https://coty.design",
   "canonicalBio": "Coty Beasley is a product architect, technologist, and co-founder of Underline, where he leads product strategy, AI innovation, and design engineering across community infrastructure systems. Based in Manhattan, Kansas, his career spans creative technology, civic product leadership, and infrastructure innovation — from building AI products with IBM Watson in 2015 to leading the first privately funded open-access fiber network in the United States. His work is unified by a commitment to democratizing access to critical systems and making technology genuinely useful for communities.",
 
@@ -247,6 +247,155 @@
     }
   ],
 
+  "designSystemsExperience": {
+    "title": "Design Systems & Design Technology",
+    "positioning": "Beasley treats design systems as product infrastructure rather than a component library: semantic vocabulary, token architecture, accessibility computation, component contracts, governance, documentation, distribution, and adoption are designed as one versioned system.",
+    "operatingPhilosophy": [
+      "Fix the vocabulary and resolution model before building the implementation, so authors, consumers, and tools share the same system language.",
+      "Design explicit swap points and separate independent axes such as brand, scheme, density, and screen rather than combining them for convenience.",
+      "Generate and validate values from documented rules instead of hand-tuning outputs; preserve derivation provenance and register justified exceptions.",
+      "Make components consume semantic meaning rather than raw materials, and define eligibility through explicit contracts rather than taste.",
+      "Encode governance in machine-checkable rules, CI, release workflows, and decision records so coherence does not depend on continuous manual review.",
+      "Prefer owner-maintainable, interoperable systems with clean boundaries, opt-in adapters, reversible decisions, and honest status documentation."
+    ],
+    "capabilities": [
+      {
+        "name": "Semantic and token architecture",
+        "summary": "Designs DTCG-aligned token systems with fixed resolution order, swappable sets, multi-dimensional resolvers, semantic role families, component-scoped contracts, and scheme-aware behavior.",
+        "evidence": "Underline's production token system, the Beacon clean-slate rearchitecture, and the public dtcg-formulas specifications."
+      },
+      {
+        "name": "Computed accessibility and color systems",
+        "summary": "Treats accessibility as generated and testable system behavior through APCA and WCAG contrast checks, alpha-composited background calculations, contrast-selected foregrounds, and registered exceptions.",
+        "evidence": "Underline contrast tooling and CI, Beacon dual-scheme role generation, and the optimal-foreground and composite formula designs."
+      },
+      {
+        "name": "Governance and change management",
+        "summary": "Builds written constitutions, machine-readable rules, architecture decision records, contribution contracts, protected release workflows, migration guidance, and validation that turns undocumented drift into a build failure.",
+        "evidence": "Four years of Underline design-system governance, more than 30 decision records, 20 tagged releases, and breaking-change-managed migrations."
+      },
+      {
+        "name": "Figma-to-code coherence",
+        "summary": "Separates design-tool authorship from repository authority, validates synchronization, preserves variable identity through renames, and builds targeted tooling when vendor behavior blocks a reliable workflow.",
+        "evidence": "Figma and Supernova authoring pipelines, repository-side DTCG resolvers, sync checks, Code Connect, and a purpose-built Figma utility."
+      },
+      {
+        "name": "Distribution and release engineering",
+        "summary": "Transforms one canonical resolved token source into consumer formats with independent versioning, selective imports, runtime scheme selection, generated changelogs, and automated validation and releases.",
+        "evidence": "Underline packages for DTCG, CSS, JavaScript, Tailwind, and a shadcn/ui adapter, supported by six CI and release workflows."
+      },
+      {
+        "name": "Specification and open-source engineering",
+        "summary": "Authors narrow, compatibility-first specifications and TypeScript tooling with explicit non-goals, stable diagnostics, typed contracts, test suites, release automation, and education-first documentation.",
+        "evidence": "The public dtcg-formulas specification, parser, and registry packages."
+      },
+      {
+        "name": "Agent-readable systems",
+        "summary": "Makes rules, schemas, manifests, documentation, and contribution constraints legible to both human and AI collaborators, with agent-authored work held to the same validation and review model.",
+        "evidence": "Machine-readable governance and agent workflows in Underline, Beacon's agent consumption manifest, and typed dtcg-formulas definitions."
+      },
+      {
+        "name": "Evidence and systems research",
+        "summary": "Models capabilities through explicit prerequisites, keeps distinct measurements separate, publishes methodological limitations, and removes findings that do not survive self-audit.",
+        "evidence": "The Design System Capability Map covering 44 capabilities, a 147-respondent field survey, and an evidence review of 22 publicly documented systems."
+      }
+    ],
+    "productionOwnership": {
+      "system": "Underline Design System",
+      "role": "Primary architect and maintainer across the system's production history while serving in product-design and innovation leadership at Underline.",
+      "period": "November 14, 2022 through July 23, 2026",
+      "evidenceStatus": "Evidence summarized from a private repository-history snapshot prepared in September 2026; repository internals are not presented as independently public evidence.",
+      "currentStatus": "The repository is unmaintained after Beasley's transition into an innovation role and a subsequent change in design-system leadership. Its final architecture emphasized external authorship, contract enforcement, generated distribution, and reduced dependence on a single steward.",
+      "scale": [
+        "1,412 commits in the repository-history snapshot, with approximately 92% of human commits attributed to Beasley's author identities.",
+        "20 tagged releases from v0.5.0 through v8.0.0.",
+        "More than 30 architecture decision records.",
+        "An eight-article governance constitution with machine-checked anti-drift rules.",
+        "A production semantic model of nine roles with 18 intents per role.",
+        "Five independently versioned distribution packages generated from a canonical DTCG source."
+      ],
+      "architecture": [
+        "Modelled tokens as a fixed resolution chain across core, brand, sub-brand, scheme, and density, with resolvers generated from declarative intent rather than hand-written file paths.",
+        "Kept resolved DTCG output canonical while preserving derivation provenance and platform transformations as separate concerns.",
+        "Defined component specifications as framework-independent behavioral contracts whose styling and platform mappings remain optional adapters.",
+        "Managed deliberate clean breaks, including expansion from four to eight semantic intensity levels, removal of an inverse role, consolidation of 30 text tokens into five, and a large dark-theme palette migration."
+      ],
+      "accessibility": [
+        "Computed contrast for semantic backgrounds and foregrounds across schemes instead of relying only on visual review.",
+        "Migrated the default contrast model to APCA, changing 21 foreground selections and adding formula provenance to 99 foreground palette tokens.",
+        "Corrected contrast calculations for alpha-composited backgrounds so checks evaluate the color users actually see.",
+        "Maintained a bidirectionally validated exception register: every hand-tuned override required a matching record, and every record had to match a real override."
+      ],
+      "governanceAndRelease": [
+        "Authored governance rules once and projected them into human and machine guidance, with drift treated as a CI failure.",
+        "Separated repository governance from design-system governance using a documented boundary test.",
+        "Enforced conventional commits, contribution metadata, review criteria, protected-branch controls, generated changelogs, and explicit breaking-change documentation.",
+        "Automated validation, distribution ownership, releases, back-merges, and post-merge operations through six CI workflows."
+      ],
+      "designCodeAndDistribution": [
+        "Used Figma and Supernova as authoring surfaces while retaining repository-side resolvers as structural authority where the vendor model could not express all system dimensions.",
+        "Added synchronization checks, Code Connect, CSS token injection, UUID-preserving renames, and a custom Figma utility to work around an upstream alias-editing limitation.",
+        "Distributed DTCG, CSS, JavaScript, Tailwind, and shadcn/ui packages with independent semantic versioning and documented build-time and runtime selection."
+      ],
+      "agentCollaboration": [
+        "Made navigability for humans and agents an explicit governance objective.",
+        "Represented rules, filing maps, manifests, schemas, workstream history, and documentation indexes in machine-readable forms.",
+        "Applied the same branch, review, validation, and contribution requirements to agent-assisted changes as to human-authored changes."
+      ]
+    },
+    "evidenceArtifacts": [
+      {
+        "name": "Underline Design System",
+        "kind": "Private production system",
+        "status": "Unmaintained; repository-history snapshot through July 23, 2026",
+        "summary": "The production-history layer: four years of end-to-end ownership spanning semantic architecture, governance, accessibility, releases, migrations, distribution, Figma integration, and agent-readable operations.",
+        "publicEvidence": false,
+        "links": []
+      },
+      {
+        "name": "Beacon Design System",
+        "kind": "Archived clean-slate design-system rearchitecture",
+        "status": "Beacon resolver v1.0.0, archived September 1, 2026",
+        "summary": "A self-contained system archive with 46 source files, 31 rendered specimen cards, independently resolved light and dark schemes, a 201-token role vocabulary, governance documentation, a complete token reference, and an agent consumption manifest.",
+        "publicEvidence": false,
+        "links": []
+      },
+      {
+        "name": "dtcg-formulas",
+        "kind": "Public open-source specification and TypeScript tooling",
+        "status": "Specification, parser, and registry packages shipped at 0.1.0 in the supplied September 2026 snapshot; resolver, built-ins, CLI, adapters, and ecosystem integrations remained roadmap work.",
+        "summary": "A documentation-first, pluggable formula-provenance layer for DTCG design tokens that keeps resolved values portable while preserving how values were derived.",
+        "publicEvidence": true,
+        "links": [
+          {
+            "label": "Project documentation",
+            "url": "https://dtcg-formulas.org"
+          },
+          {
+            "label": "GitHub repository",
+            "url": "https://github.com/beacrea/dtcg-formulas"
+          }
+        ]
+      },
+      {
+        "name": "Design System Capability Map",
+        "kind": "Evidence-based field analysis",
+        "status": "Research snapshot prepared in 2026",
+        "summary": "A 44-capability prerequisite graph comparing a 147-respondent practitioner survey with an evidence review of 22 public design systems. The analysis keeps field and frontier adoption separate and documents sampling, estimation, and evidence limitations.",
+        "publicEvidence": false,
+        "links": []
+      }
+    ],
+    "scopeBoundaries": [
+      "The strongest shipped evidence is web-oriented token, specification, governance, accessibility, and distribution infrastructure; it is not presented as ownership of production native iOS or Android token pipelines.",
+      "The governance architecture was designed for multi-team contribution, but the core systems were operated substantially by Beasley; architecture and contribution throughput are not treated as the same claim.",
+      "Documentation and specimen tooling used Supernova, custom self-contained archives, and VitePress rather than production Storybook.",
+      "The record demonstrates framework-independent component contracts and token adapters, not a broad publicly shipped React component library.",
+      "Private production metrics are date-qualified summaries from repository history; public artifacts are linked separately where they can be inspected.",
+      "Roadmap items, open proposals, and field hypotheses are identified as such rather than described as shipped capabilities."
+    ]
+  },
+
   "expertiseDomains": [
     {
       "domain": "Product Design & UX Strategy",
@@ -270,8 +419,8 @@
     },
     {
       "domain": "Design Systems & Design Tokens",
-      "evidence": "Current projects, design infrastructure architecture",
-      "depth": "Design token architecture (DTCG-aligned), color science (OKLCH), semantic control through canonical rules and schemas"
+      "evidence": "Four years of Underline production-system ownership; Beacon; dtcg-formulas; Design System Capability Map",
+      "depth": "End-to-end design-system infrastructure spanning DTCG-aligned token architecture, semantic systems, computed accessibility, governance, release engineering, Figma-to-code coherence, multi-format distribution, and agent-readable operations"
     },
     {
       "domain": "Civic Tech / Fintech",

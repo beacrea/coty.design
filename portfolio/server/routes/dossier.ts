@@ -130,6 +130,8 @@ function buildDossierHtml(corpus: any, jsonLd: any): string {
       ${renderCurrentRole(corpus)}
     </section>
 
+    ${renderDesignSystemsExperience(corpus.designSystemsExperience)}
+
     <section>
       <h2>Expertise Domains</h2>
       <dl>
@@ -202,6 +204,53 @@ const contactLabelMap: Record<string, string> = {
 
 function formatContactLabel(key: string): string {
   return contactLabelMap[key] || key.charAt(0).toUpperCase() + key.slice(1);
+}
+
+function renderDesignSystemsExperience(experience: any): string {
+  const production = experience.productionOwnership;
+
+  return `<section>
+      <h2>${experience.title}</h2>
+      <p>${experience.positioning}</p>
+
+      <h3>Operating Philosophy</h3>
+      <ul>${experience.operatingPhilosophy.map((principle: string) => `<li>${principle}</li>`).join('\n        ')}</ul>
+
+      <h3>Demonstrated Capabilities</h3>
+      ${experience.capabilities.map((capability: any) => `<h4>${capability.name}</h4>
+      <p>${capability.summary}</p>
+      <p><strong>Evidence:</strong> ${capability.evidence}</p>`).join('\n      ')}
+
+      <h3>Production Ownership: ${production.system}</h3>
+      <p><strong>Role:</strong> ${production.role}</p>
+      <p><strong>Period:</strong> ${production.period}</p>
+      <p><strong>Evidence status:</strong> ${production.evidenceStatus}</p>
+      <p><strong>Current status:</strong> ${production.currentStatus}</p>
+
+      <h4>Scale</h4>
+      <ul>${production.scale.map((item: string) => `<li>${item}</li>`).join('\n        ')}</ul>
+      <h4>Architecture and Migration</h4>
+      <ul>${production.architecture.map((item: string) => `<li>${item}</li>`).join('\n        ')}</ul>
+      <h4>Accessibility</h4>
+      <ul>${production.accessibility.map((item: string) => `<li>${item}</li>`).join('\n        ')}</ul>
+      <h4>Governance and Release Engineering</h4>
+      <ul>${production.governanceAndRelease.map((item: string) => `<li>${item}</li>`).join('\n        ')}</ul>
+      <h4>Design-to-Code and Distribution</h4>
+      <ul>${production.designCodeAndDistribution.map((item: string) => `<li>${item}</li>`).join('\n        ')}</ul>
+      <h4>Agent Collaboration</h4>
+      <ul>${production.agentCollaboration.map((item: string) => `<li>${item}</li>`).join('\n        ')}</ul>
+
+      <h3>Evidence Artifacts</h3>
+      ${experience.evidenceArtifacts.map((artifact: any) => `<h4>${artifact.name}</h4>
+      <p><strong>Kind:</strong> ${artifact.kind}<br>
+      <strong>Status:</strong> ${artifact.status}<br>
+      <strong>Evidence visibility:</strong> ${artifact.publicEvidence ? 'Publicly inspectable' : 'Private or archived evidence summarized in this dossier'}</p>
+      <p>${artifact.summary}</p>
+      ${artifact.links.length > 0 ? `<ul>${artifact.links.map((link: any) => `<li><a href="${link.url}">${link.label}</a></li>`).join('')}</ul>` : ''}`).join('\n      ')}
+
+      <h3>Scope Boundaries</h3>
+      <ul>${experience.scopeBoundaries.map((boundary: string) => `<li>${boundary}</li>`).join('\n        ')}</ul>
+    </section>`;
 }
 
 function renderCurrentRole(corpus: any): string {

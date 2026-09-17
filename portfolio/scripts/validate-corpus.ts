@@ -67,6 +67,24 @@ function run() {
     }
   }
 
+  const systems = corpus.designSystemsExperience;
+  check('Has designSystemsExperience', !!systems?.title && !!systems?.positioning, 'design systems title and positioning exist');
+  check('Has design systems philosophy', Array.isArray(systems?.operatingPhilosophy) && systems.operatingPhilosophy.length > 0, `${systems?.operatingPhilosophy?.length || 0} principles`);
+  check('Has design systems capabilities', Array.isArray(systems?.capabilities) && systems.capabilities.length > 0, `${systems?.capabilities?.length || 0} capabilities`);
+  if (Array.isArray(systems?.capabilities)) {
+    for (const capability of systems.capabilities) {
+      check(`design systems capability: ${capability.name}`, !!capability.name && !!capability.summary && !!capability.evidence, 'has name, summary, and evidence');
+    }
+  }
+  check('Has production ownership evidence', !!systems?.productionOwnership?.system && !!systems?.productionOwnership?.evidenceStatus && !!systems?.productionOwnership?.currentStatus, 'system, evidence status, and current status exist');
+  check('Has design systems evidence artifacts', Array.isArray(systems?.evidenceArtifacts) && systems.evidenceArtifacts.length > 0, `${systems?.evidenceArtifacts?.length || 0} artifacts`);
+  if (Array.isArray(systems?.evidenceArtifacts)) {
+    for (const artifact of systems.evidenceArtifacts) {
+      check(`design systems artifact: ${artifact.name}`, !!artifact.name && !!artifact.kind && !!artifact.status && !!artifact.summary && typeof artifact.publicEvidence === 'boolean' && Array.isArray(artifact.links), 'has identity, status, visibility, summary, and links');
+    }
+  }
+  check('Has design systems scope boundaries', Array.isArray(systems?.scopeBoundaries) && systems.scopeBoundaries.length > 0, `${systems?.scopeBoundaries?.length || 0} boundaries`);
+
   check('Has expertiseDomains', Array.isArray(corpus.expertiseDomains) && corpus.expertiseDomains.length >= 5, `${corpus.expertiseDomains?.length || 0} domains`);
   if (corpus.expertiseDomains) {
     for (const domain of corpus.expertiseDomains) {
