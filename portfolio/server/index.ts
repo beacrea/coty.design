@@ -13,7 +13,7 @@ import { serveSitemap } from './routes/sitemap.js';
 import { syncDoctrine } from './routes/sync-doctrine.js';
 import { logAgentVisit, initAnalyticsDb } from './middleware/analytics.js';
 import { registerRoute, mountRegisteredRoutes } from './lib/routes.js';
-import { resolvePageMeta, injectMetaTags, getIndexHtml } from './lib/og-meta.js';
+import { resolvePageMeta, injectMetaTags, getIndexHtml, HOME_META } from './lib/og-meta.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,7 +35,7 @@ app.post('/api/sync-doctrine', express.json({
 }), syncDoctrine);
 
 registerRoute({ path: '/', method: 'get', handlers: [], noindex: false, changefreq: 'monthly', priority: 1.0, mountManually: true });
-registerRoute({ path: '/agent-preview', method: 'use', handlers: [agentPreview], noindex: false, changefreq: 'monthly', priority: 0.5 });
+registerRoute({ path: '/agent-preview', method: 'use', handlers: [agentPreview], noindex: true, changefreq: 'monthly', priority: 0.0 });
 registerRoute({ path: '/agent-insights', method: 'get', handlers: [agentInsights], noindex: true, changefreq: 'weekly', priority: 0.0 });
 registerRoute({ path: '/api/agent-insights', method: 'get', handlers: [agentInsightsData], noindex: true, changefreq: 'weekly', priority: 0.0 });
 registerRoute({ path: '/doctrine', method: 'get', handlers: [], noindex: false, changefreq: 'monthly', priority: 0.8, mountManually: true });
@@ -46,7 +46,10 @@ mountRegisteredRoutes(app);
 
 app.get('/sitemap.xml', serveSitemap);
 
-app.get('/api/dossier-preview', (req, res) => serveDossier(req, res));
+app.get('/api/dossier-preview', (req, res) => {
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  serveDossier(req, res);
+});
 
 app.use('/.well-known', express.static(path.resolve(__dirname, '../public/.well-known'), {
   dotfiles: 'allow',
@@ -94,6 +97,12 @@ if (process.env.NODE_ENV === 'production') {
     res.setHeader('Cache-Control', 'no-cache, must-revalidate');
     const meta = resolvePageMeta(req.path);
     const html = getIndexHtml(distPath);
+    if (!meta) {
+      res.status(404).setHeader('X-Robots-Tag', 'noindex, nofollow');
+      const injected = injectMetaTags(html, HOME_META);
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      return res.send(injected);
+    }
     const injected = injectMetaTags(html, meta);
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.send(injected);
@@ -137,6 +146,10 @@ if (process.env.NODE_ENV === 'production') {
     vite.transformIndexHtml(req.url, sourceHtml)
       .then((html) => {
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        if (!meta) {
+          res.status(404).setHeader('X-Robots-Tag', 'noindex, nofollow');
+          return res.send(injectMetaTags(html, HOME_META));
+        }
         res.send(injectMetaTags(html, meta));
       })
       .catch(next);

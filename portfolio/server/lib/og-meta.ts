@@ -28,7 +28,7 @@ interface RawDoctrine {
   claims?: RawClaim[];
 }
 
-const HOME_META: PageMeta = {
+export const HOME_META: PageMeta = {
   title: 'Coty Beasley - Design and Product Leader',
   description: 'Good design brings clarity to complexity and makes technology actually useful. Design and product leadership portfolio.',
   twitterDescription: 'Good design brings clarity to complexity and makes technology actually useful.',
@@ -76,7 +76,7 @@ function getClaimMeta(claimId: string): PageMeta | null {
   };
 }
 
-export function resolvePageMeta(urlPath: string): PageMeta {
+export function resolvePageMeta(urlPath: string): PageMeta | null {
   const normalized = urlPath.replace(/\/$/, '') || '/';
 
   if (normalized === '/') return HOME_META;
@@ -86,12 +86,10 @@ export function resolvePageMeta(urlPath: string): PageMeta {
   const claimMatch = normalized.match(/^\/doctrine\/(.+)$/);
   if (claimMatch) {
     const claimId = claimMatch[1];
-    const meta = getClaimMeta(claimId);
-    if (meta) return meta;
-    return { ...getDoctrineMeta(), url: `${BASE_URL}${normalized}` };
+    return getClaimMeta(claimId);
   }
 
-  return { ...HOME_META, url: `${BASE_URL}${normalized}` };
+  return null;
 }
 
 export function injectMetaTags(html: string, meta: PageMeta): string {
