@@ -204,7 +204,7 @@ async function testJsonLdMatchesCorpus() {
   try {
     const { body } = await fetchText('/', 'GPTBot');
 
-    const jsonLdMatch = body.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    const jsonLdMatch = body.match(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/);
     if (!jsonLdMatch) {
       fail(testName, 'No JSON-LD script tag found in dossier HTML');
       return;
@@ -293,9 +293,9 @@ async function testJsonLdMatchesCorpus() {
 }
 
 async function testLlmsTxt() {
-  const testName = '/llms.txt content matches corpus';
+  const testName = '/llms.txt follows the v2 structure and matches corpus';
   try {
-    const { status, body } = await fetchText('/llms.txt');
+    const { status, headers, body } = await fetchText('/llms.txt');
     if (status !== 200) {
       fail(testName, `Expected status 200, got ${status}`);
       return;
@@ -303,8 +303,19 @@ async function testLlmsTxt() {
 
     const issues: string[] = [];
 
-    if (!body.startsWith('---')) {
-      issues.push('Expected to start with YAML frontmatter delimiter "---"');
+    const lines = body.split('\n');
+    if (lines[0] !== `# ${corpus.identity.name}`) {
+      issues.push(`First line must be exactly "# ${corpus.identity.name}"`);
+    }
+    if (body.startsWith('---') || /^---\n[\s\S]*?\n---/.test(body)) {
+      issues.push('YAML frontmatter must not precede the required H1');
+    }
+    if (!lines.some(line => line.startsWith('> '))) {
+      issues.push('Missing blockquote summary after the H1');
+    }
+    const contentType = headers.get('content-type') ?? '';
+    if (!contentType.includes('text/markdown')) {
+      issues.push(`Expected text/markdown content type, got ${contentType}`);
     }
     if (!body.includes(`# ${corpus.identity.name}`)) {
       issues.push(`Expected to contain heading "# ${corpus.identity.name}"`);
@@ -325,16 +336,27 @@ async function testLlmsTxt() {
       issues.push(`Missing lastUpdated: ${corpus.lastUpdated}`);
     }
 
-    for (const domain of corpus.expertiseDomains) {
-      if (!body.includes(domain.domain)) {
-        issues.push(`Missing expertise domain: "${domain.domain}"`);
+    const h2Sections = [...body.matchAll(/^## (.+)$/gm)];
+    if (h2Sections.length === 0) {
+      issues.push('Expected at least one H2 file-list section');
+    }
+    const markdownLinks = [...body.matchAll(/^- \[([^\]]+)\]\((https?:\/\/[^)]+)\): (.+)$/gm)];
+    if (markdownLinks.length < 2) {
+      issues.push('Expected H2 sections to contain Markdown links with descriptions');
+    }
+    for (const section of h2Sections) {
+      const sectionStart = (section.index ?? 0) + section[0].length;
+      const nextSection = body.indexOf('\n## ', sectionStart);
+      const sectionBody = body.slice(sectionStart, nextSection === -1 ? undefined : nextSection);
+      if (!/^- \[[^\]]+\]\(https?:\/\/[^)]+\): .+$/m.test(sectionBody)) {
+        issues.push(`Section "${section[1]}" has no described Markdown links`);
       }
     }
-
-    for (const edu of corpus.identity.education) {
-      if (!body.includes(edu.institution)) {
-        issues.push(`Missing education institution: "${edu.institution}"`);
-      }
+    if (!body.includes(`[Full professional dossier](${corpus.canonicalUrl}/llms-full.txt)`)) {
+      issues.push('Missing documented /llms-full.txt portfolio extension');
+    }
+    if (!body.includes('not part of the llms.txt proposal')) {
+      issues.push('Plugin manifest extension is not distinguished from the proposal');
     }
 
     if (issues.length > 0) {
@@ -350,13 +372,17 @@ async function testLlmsTxt() {
 async function testLlmsFullTxt() {
   const testName = '/llms-full.txt content matches corpus';
   try {
-    const { status, body } = await fetchText('/llms-full.txt');
+    const { status, headers, body } = await fetchText('/llms-full.txt');
     if (status !== 200) {
       fail(testName, `Expected status 200, got ${status}`);
       return;
     }
 
     const issues: string[] = [];
+    const contentType = headers.get('content-type') ?? '';
+    if (!contentType.includes('text/markdown')) {
+      issues.push(`Expected text/markdown content type, got ${contentType}`);
+    }
 
     if (!body.includes(corpus.identity.name)) {
       issues.push('Missing identity.name');
@@ -619,8 +645,8 @@ async function testContentTypes() {
   const testName = 'Endpoints return correct Content-Type headers';
   const endpoints = [
     { path: '/', expectedType: 'text/html', ua: 'GPTBot' },
-    { path: '/llms.txt', expectedType: 'text/plain', ua: undefined },
-    { path: '/llms-full.txt', expectedType: 'text/plain', ua: undefined },
+    { path: '/llms.txt', expectedType: 'text/markdown', ua: undefined },
+    { path: '/llms-full.txt', expectedType: 'text/markdown', ua: undefined },
     { path: '/sitemap.xml', expectedType: 'application/xml', ua: undefined },
   ];
 
@@ -660,24 +686,24 @@ async function testNoUserAgentDoesNotGetDossier() {
 }
 
 async function testHttpLinkHeaders() {
-  const testName = 'Root response includes Link headers for LLM content';
+  const testName = 'HTML responses advertise their covering llms.txt';
   try {
-    const { headers } = await fetchText('/', BROWSER_UA);
-    const linkHeader = headers.get('link') ?? '';
-
     const issues: string[] = [];
-
-    if (!linkHeader.includes('/llms.txt')) {
-      issues.push('Missing Link header entry for /llms.txt');
-    }
-    if (!linkHeader.includes('/llms-full.txt')) {
-      issues.push('Missing Link header entry for /llms-full.txt');
-    }
-    if (!linkHeader.includes('rel="alternate"')) {
-      issues.push('Link header missing rel="alternate"');
-    }
-    if (!linkHeader.includes('type="text/plain"')) {
-      issues.push('Link header missing type="text/plain"');
+    for (const path of ['/', '/doctrine']) {
+      const { headers } = await fetchText(path, BROWSER_UA);
+      const linkHeader = headers.get('link') ?? '';
+      if (!linkHeader.includes('</llms.txt>')) {
+        issues.push(`${path}: missing Link entry for /llms.txt`);
+      }
+      if (!linkHeader.includes('rel="describedby"')) {
+        issues.push(`${path}: missing rel="describedby"`);
+      }
+      if (!linkHeader.includes('type="text/markdown"')) {
+        issues.push(`${path}: missing type="text/markdown"`);
+      }
+      if (linkHeader.includes('rel="alternate"')) {
+        issues.push(`${path}: llms resources must not be advertised as page alternates`);
+      }
     }
 
     if (issues.length > 0) {
@@ -690,21 +716,20 @@ async function testHttpLinkHeaders() {
   }
 }
 
-async function testHtmlLinkAlternateTags() {
-  const testName = 'SPA HTML contains <link rel="alternate"> tags for LLM content';
+async function testHtmlLlmsDiscoveryTags() {
+  const testName = 'SPA HTML advertises llms.txt with rel="describedby"';
   try {
     const { body } = await fetchText('/', BROWSER_UA);
 
     const issues: string[] = [];
 
-    const llmsTxtPattern = /<link[^>]+rel="alternate"[^>]+href="\/llms\.txt"[^>]*>/;
-    const llmsFullTxtPattern = /<link[^>]+rel="alternate"[^>]+href="\/llms-full\.txt"[^>]*>/;
+    const llmsTxtPattern = /<link[^>]+rel="describedby"[^>]+type="text\/markdown"[^>]+href="\/llms\.txt"[^>]*>/;
 
     if (!llmsTxtPattern.test(body)) {
-      issues.push('Missing <link rel="alternate" href="/llms.txt"> tag');
+      issues.push('Missing <link rel="describedby" type="text/markdown" href="/llms.txt"> tag');
     }
-    if (!llmsFullTxtPattern.test(body)) {
-      issues.push('Missing <link rel="alternate" href="/llms-full.txt"> tag');
+    if (/<link[^>]+rel="alternate"[^>]+href="\/llms(?:-full)?\.txt"[^>]*>/.test(body)) {
+      issues.push('llms resources are incorrectly advertised as page alternates');
     }
 
     if (issues.length > 0) {
@@ -722,7 +747,7 @@ async function testJsonLdSubjectOf() {
   try {
     const { body } = await fetchText('/', BROWSER_UA);
 
-    const jsonLdMatch = body.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    const jsonLdMatch = body.match(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/);
     if (!jsonLdMatch) {
       fail(testName, 'No JSON-LD script tag found in SPA HTML');
       return;
@@ -738,7 +763,14 @@ async function testJsonLdSubjectOf() {
 
     const issues: string[] = [];
 
-    const subjectOf = jsonLd.subjectOf as Record<string, unknown> | undefined;
+    const subjectOfValues = Array.isArray(jsonLd.subjectOf)
+      ? jsonLd.subjectOf as Array<Record<string, unknown>>
+      : jsonLd.subjectOf
+        ? [jsonLd.subjectOf as Record<string, unknown>]
+        : [];
+    const subjectOf = subjectOfValues.find(value =>
+      typeof value.url === 'string' && value.url.includes('/llms.txt')
+    );
     if (!subjectOf) {
       fail(testName, 'JSON-LD missing subjectOf property');
       return;
@@ -750,8 +782,8 @@ async function testJsonLdSubjectOf() {
     if (typeof subjectOf.url !== 'string' || !subjectOf.url.includes('/llms.txt')) {
       issues.push(`Expected subjectOf.url to contain "/llms.txt", got "${subjectOf.url}"`);
     }
-    if (subjectOf.encodingFormat !== 'text/plain') {
-      issues.push(`Expected subjectOf.encodingFormat "text/plain", got "${subjectOf.encodingFormat}"`);
+    if (subjectOf.encodingFormat !== 'text/markdown') {
+      issues.push(`Expected subjectOf.encodingFormat "text/markdown", got "${subjectOf.encodingFormat}"`);
     }
 
     if (issues.length > 0) {
@@ -823,43 +855,38 @@ async function testWellKnownAiPlugin() {
   }
 }
 
-async function testLlmsTxtFrontmatter() {
-  const testName = 'llms.txt contains YAML frontmatter with full URL and updated date';
+async function testLlmsTxtLinkIntegrity() {
+  const testName = 'llms.txt links are valid and local resources resolve';
   try {
     const { body } = await fetchText('/llms.txt');
-
     const issues: string[] = [];
-
-    if (!body.startsWith('---')) {
-      issues.push('Does not start with YAML frontmatter delimiter "---"');
+    const urls = [...body.matchAll(/\[[^\]]+\]\((https?:\/\/[^)]+)\)/g)].map(match => match[1]);
+    if (urls.length === 0) {
+      issues.push('No Markdown links found');
     }
-
-    const frontmatterMatch = body.match(/^---\n([\s\S]*?)\n---/);
-    if (!frontmatterMatch) {
-      fail(testName, 'No valid YAML frontmatter block found (expected --- ... ---)');
-      return;
-    }
-
-    const frontmatter = frontmatterMatch[1];
-
-    const fullMatch = frontmatter.match(/^full:\s*(.+)$/m);
-    if (!fullMatch) {
-      issues.push('Missing "full:" field in frontmatter');
-    } else if (!fullMatch[1].includes('/llms-full.txt')) {
-      issues.push(`"full:" should point to /llms-full.txt, got: "${fullMatch[1]}"`);
-    }
-
-    const updatedMatch = frontmatter.match(/^updated:\s*(.+)$/m);
-    if (!updatedMatch) {
-      issues.push('Missing "updated:" field in frontmatter');
-    } else if (updatedMatch[1].trim() !== corpus.lastUpdated) {
-      issues.push(`"updated:" should be "${corpus.lastUpdated}", got: "${updatedMatch[1].trim()}"`);
+    for (const value of urls) {
+      let url: URL;
+      try {
+        url = new URL(value);
+      } catch {
+        issues.push(`Invalid URL: ${value}`);
+        continue;
+      }
+      if (url.protocol !== 'https:') {
+        issues.push(`Link must use HTTPS: ${value}`);
+      }
+      if (url.origin === corpus.canonicalUrl) {
+        const { status } = await fetchText(`${url.pathname}${url.search}`);
+        if (status < 200 || status >= 400) {
+          issues.push(`${url.pathname}: expected a successful response, got ${status}`);
+        }
+      }
     }
 
     if (issues.length > 0) {
-      fail(testName, `Frontmatter issues:\n    - ${issues.join('\n    - ')}`);
+      fail(testName, `Link integrity issues:\n    - ${issues.join('\n    - ')}`);
     } else {
-      pass(testName);
+      pass(testName, `${urls.length} Markdown links checked`);
     }
   } catch (err: unknown) {
     fail(testName, `Request failed: ${getErrorMessage(err)}`);
@@ -926,13 +953,13 @@ async function main() {
   await testJsonLdMatchesCorpus();
   await testLlmsTxt();
   await testLlmsFullTxt();
-  await testLlmsTxtFrontmatter();
+  await testLlmsTxtLinkIntegrity();
   await testRobotsTxt();
   await testSitemapXml();
   await testDossierPreviewEndpoint();
   await testContentTypes();
   await testHttpLinkHeaders();
-  await testHtmlLinkAlternateTags();
+  await testHtmlLlmsDiscoveryTags();
   await testJsonLdSubjectOf();
   await testWellKnownAiPlugin();
   await testBrowserDoesNotGetDossier();

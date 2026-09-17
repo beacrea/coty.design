@@ -28,6 +28,17 @@ if (process.env.NODE_ENV === 'production') {
 
 await initAnalyticsDb();
 
+app.use((req, res, next) => {
+  const acceptsHtml = (req.headers.accept ?? '').includes('text/html');
+  const isPageRequest = req.method === 'GET'
+    && !req.path.startsWith('/api/')
+    && !/\.\w+$/.test(req.path);
+  if (acceptsHtml || isPageRequest) {
+    res.setHeader('Link', '</llms.txt>; rel="describedby"; type="text/markdown"; title="LLM-readable site description"');
+  }
+  next();
+});
+
 app.post('/api/sync-doctrine', express.json({
   verify: (req, _res, buf) => {
     (req as typeof req & { rawBody?: string }).rawBody = buf.toString('utf-8');
@@ -62,10 +73,6 @@ if (process.env.NODE_ENV === 'production') {
   const distPath = path.resolve(__dirname, '../dist');
 
   app.get('/', (req, res, next) => {
-    res.setHeader('Link', [
-      '</llms.txt>; rel="alternate"; type="text/plain"; title="LLM-optimized content"',
-      '</llms-full.txt>; rel="alternate"; type="text/plain"; title="Full LLM dossier"',
-    ].join(', '));
     if (res.locals.isAIAgent) {
       return serveDossier(req, res);
     }
@@ -119,10 +126,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 
   app.get('/', (req, res, next) => {
-    res.setHeader('Link', [
-      '</llms.txt>; rel="alternate"; type="text/plain"; title="LLM-optimized content"',
-      '</llms-full.txt>; rel="alternate"; type="text/plain"; title="Full LLM dossier"',
-    ].join(', '));
     if (res.locals.isAIAgent) {
       return serveDossier(req, res);
     }

@@ -98,3 +98,14 @@ They each have weight `0` in this report. Adding WebMCP would not repair either 
 2. Correct the ProofStrip definition-list semantics in a focused accessibility change.
 3. Re-run PageSpeed with Lighthouse 13.4.1 or newer after both changes.
 4. Keep WebMCP evaluation separate and require a useful agent action before adding tools.
+
+
+## llms.txt v2 compliance baseline
+
+The August 2026 llms.txt v2 proposal remains an emerging convention, not a W3C or IETF standard. Its document format starts with an H1 site name, followed by an optional blockquote summary and concise context, then H2 sections containing described Markdown links to canonical resources. YAML frontmatter before the H1 is not part of that format.
+
+V2 adds discovery through `rel="describedby"` in HTML and/or HTTP `Link` headers. `rel="alternate" type="text/markdown"` is reserved for a page's actual Markdown representation, not for a site-level summary or full dossier.
+
+This portfolio treats `/llms-full.txt`, JSON-LD `subjectOf`, and `/.well-known/ai-plugin.json` as useful extensions. They are retained but are not requirements of the llms.txt proposal.
+
+The installed Lighthouse 12.8.2 and Chromium 138 cannot run the Agentic Browsing category. The closest current check is therefore the structural and endpoint validation in `npm run validate-agent`, combined with the production PageSpeed audit documented above. The official JavaScript parser package is not available from this environment's package registry, so the local validator directly enforces the proposal's published grammar. A current Lighthouse 13.4.1+ production re-run remains necessary after deployment.

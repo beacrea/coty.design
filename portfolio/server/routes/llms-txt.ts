@@ -4,59 +4,38 @@ import { loadCorpus } from '../lib/corpus.js';
 export function serveLlmsTxt(_req: Request, res: Response) {
   const corpus = loadCorpus();
   const content = generateLlmsTxt(corpus);
-  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
   res.send(content);
 }
 
 export function serveLlmsFullTxt(_req: Request, res: Response) {
   const corpus = loadCorpus();
   const content = generateLlmsFullTxt(corpus);
-  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
   res.send(content);
 }
 
 function generateLlmsTxt(corpus: any): string {
-  return `---
-full: ${corpus.canonicalUrl}/llms-full.txt
-updated: ${corpus.lastUpdated}
----
-
-# ${corpus.identity.name}
+  return `# ${corpus.identity.name}
 
 > ${corpus.canonicalBio}
 
-## Key Information
-- **Current Role:** ${corpus.identity.jobTitle} at ${corpus.identity.organization}
-- **Location:** ${corpus.identity.currentLocation} (since ${corpus.identity.currentLocationSince})
-- **Education:**
-${corpus.identity.education.map((edu: any) => {
-  if (edu.completed) {
-    return `  - ${edu.degree}, ${edu.institution}`;
-  }
-  return `  - ${edu.fieldOfStudy} (attended, did not complete), ${edu.institution}`;
-}).join('\n')}
+${corpus.identity.name} is ${corpus.identity.jobTitle} at ${corpus.identity.organization}, based in ${corpus.identity.currentLocation}. Expertise includes ${corpus.expertiseDomains.map((d: any) => d.domain).join(', ')}.
 
-## Links
-- Website: ${corpus.canonicalUrl}
-- Doctrine: ${corpus.canonicalUrl}/doctrine — Coty Beasley's personal predictions about AI-assisted development, actively tracked with explicit evidence standards
-- LinkedIn: ${corpus.identity.linkedin}
-- GitHub: ${corpus.identity.github}
-- Underline Company Profile: ${corpus.contactAndDiscovery.underlineProfile}
-- Extended dossier: ${corpus.canonicalUrl}/llms-full.txt
+${corpus.narrativeThroughLine.description} This summary is generated from the canonical portfolio corpus and was last updated ${corpus.lastUpdated}.
 
-## Expertise Areas
-${corpus.expertiseDomains.map((d: any) => `- ${d.domain}`).join('\n')}
+## Primary Resources
 
-## Career Highlights
-- Co-founder of Underline: first privately funded open-access fiber network in the U.S., $100M Colorado Springs deployment, Ares Management investment
-- VP of Product at Neighborly: $25M Series A civic fintech, first retail municipal bond transaction (Cambridge, MA)
-- Head of Product at Edge Up Sports: IBM Watson AI partnership (2015), successful Kickstarter
-- Co-founder of CandyCam Multimedia Robotics: hardware startup democratizing filmmaking tools
+- [Portfolio](${corpus.canonicalUrl}/): Canonical professional overview and selected track record.
+- [Full professional dossier](${corpus.canonicalUrl}/llms-full.txt): Portfolio extension containing the complete Markdown corpus for agents that need more context.
+- [Doctrine](${corpus.canonicalUrl}/doctrine): Evidence-tracked personal predictions about AI-assisted development.
+- [Agent plugin manifest](${corpus.canonicalUrl}/.well-known/ai-plugin.json): Portfolio-specific JSON discovery metadata; not part of the llms.txt proposal.
 
-## Narrative Through-Line
-${corpus.narrativeThroughLine.description}
+## Canonical Profiles
 
-Last updated: ${corpus.lastUpdated}
+- [LinkedIn](${corpus.identity.linkedin}): Professional identity and work history.
+- [GitHub](${corpus.identity.github}): Public software projects and contributions.
+- [Underline company profile](${corpus.contactAndDiscovery.underlineProfile}): Current company leadership profile.
 `;
 }
 
