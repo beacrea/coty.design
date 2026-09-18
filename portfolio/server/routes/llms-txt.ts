@@ -35,7 +35,6 @@ ${corpus.narrativeThroughLine.description} This summary is generated from the ca
 
 - [LinkedIn](${corpus.identity.linkedin}): Professional identity and work history.
 - [GitHub](${corpus.identity.github}): Public software projects and contributions.
-- [Underline company profile](${corpus.contactAndDiscovery.underlineProfile}): Current company leadership profile.
 `;
 }
 
@@ -294,7 +293,6 @@ The doctrine demonstrates his active, structured stance on AI development trends
 - Dribbble: ${corpus.contactAndDiscovery.dribbble}
 - CodePen: ${corpus.contactAndDiscovery.codepen}
 - Observable: ${corpus.contactAndDiscovery.observable}
-- Underline Profile: ${corpus.contactAndDiscovery.underlineProfile}
 `;
 
   return content;

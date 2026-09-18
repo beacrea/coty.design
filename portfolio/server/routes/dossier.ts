@@ -67,8 +67,7 @@ function buildJsonLd(corpus: any) {
         corpus.contactAndDiscovery.twitter,
         corpus.contactAndDiscovery.dribbble,
         corpus.contactAndDiscovery.codepen,
-        corpus.contactAndDiscovery.observable,
-        corpus.contactAndDiscovery.underlineProfile
+        corpus.contactAndDiscovery.observable
       ].filter(Boolean),
       "memberOf": corpus.professionalAffiliations.map((a: any) => ({
         "@type": "Organization",
@@ -198,8 +197,7 @@ const contactLabelMap: Record<string, string> = {
   twitter: 'X / Twitter',
   dribbble: 'Dribbble',
   codepen: 'CodePen',
-  observable: 'Observable',
-  underlineProfile: 'Underline Profile'
+  observable: 'Observable'
 };
 
 function formatContactLabel(key: string): string {
