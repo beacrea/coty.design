@@ -21,8 +21,8 @@ Anything platform-specific is injected into `server/app.ts`, never imported by i
 
 `build:worker` copies `worker/_headers` into `dist/` so hashed bundles get a 1-year immutable cache, matching the Node server.
 
-## Before the first deploy
+## Analytics database
 
-1. `npx wrangler d1 create coty-design-analytics`, then put its id in `wrangler.jsonc` (currently a placeholder).
-2. `npx wrangler d1 migrations apply DB --remote`.
-3. Optional: import history from Replit Postgres, converting `timestamp` to ISO-8601 UTC text (`2026-11-05T15:24:27.000Z`).
+D1 `coty-design-analytics` (ENAM) was created 2026-11-05 with migration `0001_agent_visits.sql` applied and recorded in `d1_migrations`. New migrations: add a file under `migrations/`, then `npx wrangler d1 migrations apply DB --remote`.
+
+History from Replit Postgres can be imported before cutover; convert `timestamp` to ISO-8601 UTC text (`2026-11-05T15:24:27.000Z`).

@@ -25,8 +25,7 @@
     {
       "binding": "DB",
       "database_name": "coty-design-analytics",
-      // Placeholder until the database is created on the account (needs Coty's yes).
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "5da5cea4-18fd-4246-b88a-cc8af894f8c4",
       "migrations_dir": "migrations"
     }
   ]
