@@ -4,115 +4,58 @@ import fs from 'fs';
 import http from 'http';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { agentDetectionMiddleware } from './middleware/agent-detection.js';
+import { createCoreApp, mountSpa } from './app.js';
 import { serveDossier } from './routes/dossier.js';
-import { agentPreview } from './routes/agent-preview.js';
-import { agentInsights, agentInsightsData } from './routes/agent-insights.js';
-import { serveLlmsTxt, serveLlmsFullTxt } from './routes/llms-txt.js';
-import { serveSitemap } from './routes/sitemap.js';
 import { syncDoctrine } from './routes/sync-doctrine.js';
-import { logAgentVisit, initAnalyticsDb } from './middleware/analytics.js';
-import { registerRoute, mountRegisteredRoutes } from './lib/routes.js';
+import { setAnalyticsStore } from './lib/analytics-store.js';
 import { resolvePageMeta, injectMetaTags, injectDoctrinePage, getIndexHtml, HOME_META } from './lib/og-meta.js';
+
+// Node entry (Replit). The Cloudflare Worker entry is worker/index.ts; both
+// share server/app.ts.
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-const app = express();
-const server = http.createServer(app);
 const PORT = parseInt(process.env.PORT || '5000', 10);
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(compression());
+if (process.env.DATABASE_URL) {
+  try {
+    const { createPgStore } = await import('./lib/analytics-pg.js');
+    setAnalyticsStore(await createPgStore(process.env.DATABASE_URL));
+  } catch (err) {
+    console.error('Analytics DB init failed (non-fatal):', err);
+  }
+} else {
+  console.warn('DATABASE_URL not set — analytics disabled');
 }
 
-await initAnalyticsDb();
-
-app.use((req, res, next) => {
-  const acceptsHtml = (req.headers.accept ?? '').includes('text/html');
-  const isPageRequest = req.method === 'GET'
-    && !req.path.startsWith('/api/')
-    && !/\.\w+$/.test(req.path);
-  if (acceptsHtml || isPageRequest) {
-    res.setHeader('Link', '</llms.txt>; rel="describedby"; type="text/markdown"; title="LLM-readable site description"');
-  }
-  next();
+const app = createCoreApp({
+  before: process.env.NODE_ENV === 'production' ? [compression()] : [],
+  syncDoctrine,
+  wellKnown: express.static(path.resolve(__dirname, '../public/.well-known'), { dotfiles: 'allow' }),
 });
-
-app.post('/api/sync-doctrine', express.json({
-  verify: (req, _res, buf) => {
-    (req as typeof req & { rawBody?: string }).rawBody = buf.toString('utf-8');
-  },
-}), syncDoctrine);
-
-registerRoute({ path: '/', method: 'get', handlers: [], noindex: false, changefreq: 'monthly', priority: 1.0, mountManually: true });
-registerRoute({ path: '/agent-preview', method: 'use', handlers: [agentPreview], noindex: true, changefreq: 'monthly', priority: 0.0 });
-registerRoute({ path: '/agent-insights', method: 'get', handlers: [agentInsights], noindex: true, changefreq: 'weekly', priority: 0.0 });
-registerRoute({ path: '/api/agent-insights', method: 'get', handlers: [agentInsightsData], noindex: true, changefreq: 'weekly', priority: 0.0 });
-registerRoute({ path: '/doctrine', method: 'get', handlers: [], noindex: false, changefreq: 'monthly', priority: 0.8, mountManually: true });
-registerRoute({ path: '/llms.txt', method: 'get', handlers: [serveLlmsTxt], noindex: false, changefreq: 'monthly', priority: 0.8 });
-registerRoute({ path: '/llms-full.txt', method: 'get', handlers: [serveLlmsFullTxt], noindex: false, changefreq: 'monthly', priority: 0.7 });
-
-mountRegisteredRoutes(app);
-
-app.get('/sitemap.xml', serveSitemap);
-
-app.get('/api/dossier-preview', (req, res) => {
-  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
-  serveDossier(req, res);
-});
-
-app.use('/.well-known', express.static(path.resolve(__dirname, '../public/.well-known'), {
-  dotfiles: 'allow',
-}));
-
-app.use(logAgentVisit);
-app.use(agentDetectionMiddleware);
+const server = http.createServer(app);
 
 if (process.env.NODE_ENV === 'production') {
   const distPath = path.resolve(__dirname, '../dist');
 
-  app.get('/', (req, res, next) => {
-    if (res.locals.isAIAgent) {
-      return serveDossier(req, res);
-    }
-    res.setHeader('Cache-Control', 'no-cache, must-revalidate');
-    const meta = resolvePageMeta('/');
-    const html = getIndexHtml(distPath);
-    const injected = injectDoctrinePage(injectMetaTags(html, meta), req.path);
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.send(injected);
-  });
-
-  app.use('/assets', express.static(path.join(distPath, 'assets'), {
-    maxAge: '1y',
-    immutable: true,
-  }));
-
-  app.use(express.static(distPath, {
-    maxAge: '1h',
-    setHeaders: (res, filePath) => {
-      if (filePath.endsWith('.html')) {
-        res.setHeader('Cache-Control', 'no-cache, must-revalidate');
-      } else {
-        res.setHeader('Cache-Control', 'public, max-age=3600, must-revalidate');
-      }
-    },
-  }));
-
-  app.get('/{*splat}', (req, res) => {
-    res.setHeader('Cache-Control', 'no-cache, must-revalidate');
-    const meta = resolvePageMeta(req.path);
-    const html = getIndexHtml(distPath);
-    if (!meta) {
-      res.status(404).setHeader('X-Robots-Tag', 'noindex, nofollow');
-      const injected = injectMetaTags(html, HOME_META);
-      res.setHeader('Content-Type', 'text/html; charset=utf-8');
-      return res.send(injected);
-    }
-    const injected = injectDoctrinePage(injectMetaTags(html, meta), req.path);
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.send(injected);
+  mountSpa(app, {
+    getIndexHtml: () => getIndexHtml(distPath),
+    staticHandlers: [
+      express.Router().use('/assets', express.static(path.join(distPath, 'assets'), {
+        maxAge: '1y',
+        immutable: true,
+      })),
+      express.static(distPath, {
+        maxAge: '1h',
+        setHeaders: (res, filePath) => {
+          if (filePath.endsWith('.html')) {
+            res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+          } else {
+            res.setHeader('Cache-Control', 'public, max-age=3600, must-revalidate');
+          }
+        },
+      }),
+    ],
   });
 } else {
   const { createServer } = await import('vite');

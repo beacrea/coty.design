@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // ADR-005: coty.design on Workers + Static Assets, account "Personal Site (coty.design)".
+  "name": "coty-design",
+  "account_id": "0ed988062db16e9b295dfa620f6c29eb",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "preview_urls": true,
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "html_handling": "none",
+    "not_found_handling": "none",
+    // Worker handles pages, agent detection and machine-readable routes;
+    // hashed bundles and fonts go straight to the asset layer (free, unmetered).
+    "run_worker_first": ["/*", "!/assets/*", "!/fonts/*"]
+  },
+  "rules": [
+    { "type": "Text", "globs": ["**/*.jsonld", "**/*.html"], "fallthrough": true }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "coty-design-analytics",
+      // Placeholder until the database is created on the account (needs Coty's yes).
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

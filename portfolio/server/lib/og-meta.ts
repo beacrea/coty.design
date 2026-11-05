@@ -2,9 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const BASE_URL = 'https://coty.design';
 
 export interface PageMeta {
@@ -56,9 +53,14 @@ export function invalidateDoctrineCache(): void {
   doctrineCache = null;
 }
 
+/** Workers entry passes the bundled doctrine here; Node reads it from disk. */
+export function setBundledDoctrine(doctrine: unknown): void {
+  doctrineCache = doctrine as RawDoctrine;
+}
+
 export function loadDoctrine(): RawDoctrine {
   if (doctrineCache) return doctrineCache;
-  const docPath = path.resolve(__dirname, '../../public/doctrine.jsonld');
+  const docPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../public/doctrine.jsonld');
   const raw = fs.readFileSync(docPath, 'utf-8');
   doctrineCache = JSON.parse(raw) as RawDoctrine;
   return doctrineCache;
@@ -303,6 +305,11 @@ function escapeHtml(str: string): string {
 }
 
 let cachedIndexHtml: string | null = null;
+
+/** Workers entry passes the built dist/index.html here. */
+export function setIndexHtml(html: string): void {
+  cachedIndexHtml = html;
+}
 
 export function getIndexHtml(distPath: string): string {
   if (cachedIndexHtml) return cachedIndexHtml;

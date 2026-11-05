@@ -1,89 +1,18 @@
 import type { Request, Response } from 'express';
-import { getPool } from '../middleware/analytics.js';
-
-const EMPTY_RESPONSE = {
-  summary: { total: 0, last24h: 0, last7d: 0 },
-  byAgent: [],
-  byRole: [],
-  topPaths: [],
-  referrers: [],
-  recentVisits: [],
-  dailyTrend: []
-};
+import { getAnalyticsStore, EMPTY_INSIGHTS } from '../lib/analytics-store.js';
 
 export async function agentInsightsData(_req: Request, res: Response) {
-  const pool = getPool();
+  const store = getAnalyticsStore();
 
-  if (!pool) {
-    return res.json(EMPTY_RESPONSE);
+  if (!store) {
+    return res.json(EMPTY_INSIGHTS);
   }
 
   try {
-    const [totalVisits, last24h, last7d, byAgent, byRole, topPaths, referrers, recentVisits, dailyTrend] = await Promise.all([
-      pool.query('SELECT COUNT(*) as count FROM agent_visits'),
-      pool.query("SELECT COUNT(*) as count FROM agent_visits WHERE timestamp > NOW() - INTERVAL '1 day'"),
-      pool.query("SELECT COUNT(*) as count FROM agent_visits WHERE timestamp > NOW() - INTERVAL '7 days'"),
-      pool.query(`
-        SELECT agent_name, COUNT(*) as count
-        FROM agent_visits
-        GROUP BY agent_name
-        ORDER BY count DESC
-      `),
-      pool.query(`
-        SELECT crawler_role, COUNT(*) as count
-        FROM agent_visits
-        GROUP BY crawler_role
-        ORDER BY count DESC
-      `),
-      pool.query(`
-        SELECT request_path, COUNT(*) as count
-        FROM agent_visits
-        GROUP BY request_path
-        ORDER BY count DESC
-        LIMIT 10
-      `),
-      pool.query(`
-        SELECT referrer, COUNT(*) as count
-        FROM agent_visits
-        WHERE referrer IS NOT NULL AND referrer != ''
-        GROUP BY referrer
-        ORDER BY count DESC
-        LIMIT 10
-      `),
-      pool.query(`
-        SELECT timestamp, agent_name, crawler_role, request_path, referrer
-        FROM agent_visits
-        ORDER BY timestamp DESC
-        LIMIT 50
-      `),
-      pool.query(`
-        SELECT DATE(timestamp) as day, COUNT(*) as count
-        FROM agent_visits
-        WHERE timestamp > NOW() - INTERVAL '30 days'
-        GROUP BY DATE(timestamp)
-        ORDER BY day
-      `),
-    ]);
-
-    interface CountRow { count: string; [key: string]: string }
-    const castCount = (rows: CountRow[]) => rows.map(r => ({ ...r, count: parseInt(r.count) }));
-
-    res.json({
-      summary: {
-        total: parseInt(totalVisits.rows[0].count),
-        last24h: parseInt(last24h.rows[0].count),
-        last7d: parseInt(last7d.rows[0].count),
-      },
-      byAgent: castCount(byAgent.rows),
-      byRole: castCount(byRole.rows),
-      topPaths: castCount(topPaths.rows),
-      referrers: castCount(referrers.rows),
-      recentVisits: recentVisits.rows,
-      dailyTrend: castCount(dailyTrend.rows),
-    });
+    res.json(await store.getInsights());
   } catch (err) {
     console.error('Failed to fetch agent insights:', err);
-    res.json(EMPTY_RESPONSE);
+    res.json(EMPTY_INSIGHTS);
   }
 }
 

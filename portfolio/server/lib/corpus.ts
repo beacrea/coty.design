@@ -2,25 +2,33 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const CORPUS_PATH = path.resolve(__dirname, '../../content/agent-corpus.json');
-
+let bundledCorpus: any = null;
 let cachedCorpus: any = null;
 let cachedMtime: number = 0;
 
-export function loadCorpus(): any {
-  const stat = fs.statSync(CORPUS_PATH);
-  if (cachedCorpus && stat.mtimeMs === cachedMtime) {
-    return cachedCorpus;
-  }
-  const raw = fs.readFileSync(CORPUS_PATH, 'utf-8');
-  cachedCorpus = JSON.parse(raw);
-  cachedMtime = stat.mtimeMs;
-  return cachedCorpus;
+/**
+ * Workers have no filesystem: the Worker entry imports the corpus at build
+ * time and hands it over here. Node keeps reading from disk (with mtime-based
+ * reload) so editing the corpus in dev needs no restart.
+ */
+export function setBundledCorpus(corpus: unknown): void {
+  bundledCorpus = corpus;
 }
 
 export function getCorpusPath(): string {
-  return CORPUS_PATH;
+  const dir = path.dirname(fileURLToPath(import.meta.url));
+  return path.resolve(dir, '../../content/agent-corpus.json');
+}
+
+export function loadCorpus(): any {
+  if (bundledCorpus) return bundledCorpus;
+  const corpusPath = getCorpusPath();
+  const stat = fs.statSync(corpusPath);
+  if (cachedCorpus && stat.mtimeMs === cachedMtime) {
+    return cachedCorpus;
+  }
+  const raw = fs.readFileSync(corpusPath, 'utf-8');
+  cachedCorpus = JSON.parse(raw);
+  cachedMtime = stat.mtimeMs;
+  return cachedCorpus;
 }
